@@ -561,7 +561,7 @@ Supporting Keywords: temporizador online aesthetic, temporizador online 10 minut
 on home page write 600 words about the tool for SEO
 
 
-like this do for other Page
+like this do for other Page in there specific pages
 
 Main Keyword: cronômetro online
 Supporting Keywords: cronometro online, cronômetro online tela cheia, cronômetro online regressivo, cronometro online google, cronometro online para estudo, cronômetro online aesthetic, cronômetro online estudos, cronômetro online grátis, cronometro online regressivo
@@ -581,9 +581,7 @@ Supporting Keywords: Sequências Temporizador, (add here other suitable keywords
 
 
 
-add seo friendly FAQ section for these below questions:
-
-
+add seo friendly FAQ section which you think people would search on the google, this should be for specific pages:
 
 NOTE: Use JSON-LD for FAQ SEO
 example: ```
@@ -609,3 +607,17 @@ example: ```
  }
  </script>
 ```
+
+
+https://docs.astro.build/en/recipes/i18n/  use this to provide multi lang support to this website so that it ranks on other languages keywords.
+
+provide support for:
+English
+Español
+日本語
+Français
+Deutsch
+한국어
+Italiano
+
+note: Add hreflang markup for each language.
