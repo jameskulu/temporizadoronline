@@ -1,5 +1,5 @@
 /** Application controller: wires engine, display, controls, presets, dialogs, persistence. */
-import type { Initial, Mode, Preferences, RunState, SoundKind, TimerConfig } from './types';
+import type { Initial, Mode, Preferences, SoundKind, TimerConfig } from './types';
 import { THEMES } from './types';
 import { defaultConfig } from './types';
 import { formatClock, clamp } from './format';
@@ -37,6 +37,7 @@ import {
 	qrDataUrl,
 	decodeBase64Json,
 } from './share';
+import * as live from './rt';
 import type { PresetItem } from './types';
 
 export interface AppOptions {
@@ -105,6 +106,18 @@ export class App {
 	private pendingSequence: SequenceStep[] | null = null;
 	private lastPhaseHtml = '';
 	private laps: { total: number; delta: number }[] = [];
+	private live: live.LiveRoom | null = null;
+	private liveRole: live.LiveRole = 'viewer';
+	private livePkg: live.RoomStatePkg | null = null;
+	private liveMembers = 0;
+	private liveStatus: live.LiveStatus = 'idle';
+	private liveAlertedEnd = 0;
+	private livePrevRemaining: number | null = null;
+	private lastSentPkg = '';
+	private liveLost = false;
+	private liveLostHandled = false;
+	private liveReloadCountdown = 3;
+	private liveReloadTimer: number | null = null;
 
 	constructor(root: HTMLElement, opts: AppOptions = {}) {
 		this.root = root;
@@ -124,8 +137,11 @@ export class App {
 		this.createCard(initial);
 
 		this.install();
+		const liveParam = new URLSearchParams(location.search).get('live');
+		if (liveParam) this.joinLive(liveParam);
 		this.renderAll();
 		this.requestLoop();
+		this.checkPostReloadNotice();
 	}
 
 	/* ------------------------------ bootstrap ------------------------------ */
@@ -211,7 +227,23 @@ export class App {
 				const ph = eng.machine.initial(cfg);
 				if (session.round && ph.totalRounds) ph.round = session.round;
 				if (session.stepIndex >= 0) ph.stepIndex = session.stepIndex;
-				eng.restore(ph, session.state as RunState, session.remainingSec);
+				const wasRunning = session.state === 'running';
+				const elapsedPhase = ph.isElapsed;
+				const saved = Math.max(0, session.remainingSec);
+				if (wasRunning) {
+					// The snapshot may be stale (saved at last start/pause event), so
+					// recompute what's actually left on the wall clock since then.
+					const wallDelta = (Date.now() - session.savedAt) / 1000;
+					const remaining = elapsedPhase
+						? Math.floor(saved + wallDelta)
+						: Math.max(0, Math.ceil(saved - wallDelta));
+					if (elapsedPhase) ph.elapsedBase = remaining;
+					eng.restore(ph, 'paused', remaining);
+					eng.start();
+				} else {
+					if (elapsedPhase) ph.elapsedBase = saved;
+					eng.restore(ph, 'paused', saved);
+				}
 			}
 			this.addCard(eng, this.labelFor(cfg));
 			return;
@@ -273,6 +305,7 @@ export class App {
 		if (initial.autoStart) eng.start();
 		if (!initial.autoStart) this.saveSession();
 		this.renderAll();
+		this.publishLive();
 	}
 
 	private resetActiveWith(cfg: TimerConfig): void {
@@ -286,11 +319,13 @@ export class App {
 		eng.on((e) => this.onEngine(card, e));
 		this.saveSession();
 		this.renderAll();
+		this.publishLive();
 	}
 
 	/* ------------------------------ engine events ------------------------------ */
 
 	private onEngine(card: Card, e: { type: string; totalSec: number }): void {
+		if (this.live?.role === 'host') this.publishLive();
 		switch (e.type) {
 			case 'state':
 				this.saveSessionNow();
@@ -357,6 +392,14 @@ export class App {
 	private timeText(): string {
 		const card = this.card();
 		if (!card) return '00:00';
+		if (this.isLiveViewer()) {
+			const v = this.liveView();
+			if (v.elapsed !== null) {
+				const t = formatClock(v.elapsed);
+				return v.overtime && v.running && v.elapsed > 0 ? `+${t}` : t;
+			}
+			return formatClock(v.remaining ?? 0);
+		}
 		const eng = card.engine;
 		const sec = eng.totalSec();
 		if (eng.config.mode === 'stopwatch') return formatClock(sec);
@@ -368,6 +411,14 @@ export class App {
 	private fraction(): number | null {
 		const card = this.card();
 		if (!card) return 0;
+		if (this.isLiveViewer()) {
+			const m = this.livePkg?.mirror;
+			const v = this.liveView();
+			if (v.elapsed !== null) return null;
+			const duration = m && (m.t === 'tick' || m.t === 'idle') ? m.duration : 0;
+			if (duration <= 0) return 0;
+			return clamp((v.remaining ?? 0) / duration, 0, 1);
+		}
 		const ph = card.engine.phase;
 		if (ph.isElapsed) return null;
 		if (ph.durationSec <= 0) return 0;
@@ -377,6 +428,19 @@ export class App {
 	private renderDisplay(): void {
 		const card = this.card();
 		if (!card) return;
+		const viewer = this.isLiveViewer();
+		if (viewer) {
+			const v = this.liveView();
+			const zero = (v.elapsed ?? v.remaining ?? 0) === 0;
+			this.display.render({
+				timeText: this.timeText(),
+				fraction: this.fraction(),
+				finished: v.finished,
+				running: v.running,
+				initial: !v.running && zero,
+			});
+			return;
+		}
 		this.display.render({
 			timeText: this.timeText(),
 			fraction: this.fraction(),
@@ -391,6 +455,21 @@ export class App {
 		if (!el) return;
 		const card = this.card();
 		if (!card) return;
+		if (this.isLiveViewer() && this.livePkg) {
+			const ph = this.livePkg.phase;
+			const roundTxt =
+				ph.totalRounds > 0
+					? ` · ${STR.roundOf(ph.round, ph.totalRounds)}`
+					: ph.stepCount > 0
+						? ` · ${STR.stepOf(Math.min(ph.stepIndex + 1, ph.stepCount), ph.stepCount)}`
+						: '';
+			const name = card.label ? `${esc(card.label)}` : '';
+			const html = `<span class="chip">${esc(ph.label)}${roundTxt}</span>${name ? `<span class="text-sm text-muted">${name}</span>` : ''}`;
+			if (html === this.lastPhaseHtml) return;
+			this.lastPhaseHtml = html;
+			el.innerHTML = html;
+			return;
+		}
 		const ph = card.engine.phase;
 		const roundTxt =
 			ph.totalRounds > 0
@@ -410,6 +489,10 @@ export class App {
 		if (!el) return;
 		const card = this.card();
 		if (!card) return;
+		if (this.isLiveViewer()) {
+			el.innerHTML = `<span class="chip chip-inactive" title="${esc(STR.liveRoleViewer)}">${I.live}<span class="flex-1">${esc(STR.liveRoleViewer)}</span></span>`;
+			return;
+		}
 		const eng = card.engine;
 		const st = eng.state;
 		const canAdvance = !!eng.machine.onSkip(eng.config, eng.phase);
@@ -662,6 +745,7 @@ export class App {
 		el.innerHTML = `<div class="flex items-center justify-between gap-2">
 			<a href="/" class="text-sm font-semibold no-underline" style="color:var(--color-ink)">${esc(STR.appName)}</a>
 			<div class="flex items-center gap-1">
+				<button type="button" class="icon-btn" data-act="live" aria-label="${STR.live}" title="${STR.live}" aria-pressed="${this.live ? 'true' : 'false'}" ${this.live ? 'style="color:var(--color-accent)"' : ''}>${I.live}</button>
 				<button type="button" class="icon-btn" data-act="help" aria-label="${STR.help}" title="${STR.keyboardHint}">${I.help}</button>
 				<button type="button" class="icon-btn" data-act="mute" aria-label="${muted ? STR.unmute : STR.mute}">${muted ? I.muted : I.volume}</button>
 				<button type="button" class="icon-btn" data-act="theme" aria-label="Mudar tema" title="${STR.themeSetting}: ${THEME_NAMES[theme]}">${isDark ? I.sun : I.moon}</button>
@@ -685,7 +769,8 @@ export class App {
 	/* ------------------------------ loop ------------------------------ */
 
 	private requestLoop(): void {
-		const anyRunning = this.cards.some((c) => c.engine.state === 'running');
+		const liveTicking = this.liveIsTicking();
+		const anyRunning = this.cards.some((c) => c.engine.state === 'running') || liveTicking;
 		if (anyRunning && !this.raf) {
 			const loop = (): void => {
 				this.raf = 0;
@@ -702,6 +787,10 @@ export class App {
 						updated = true;
 					}
 				}
+				if (liveTicking) {
+					running++;
+					this.tickLiveViewer();
+				}
 				if (updated) {
 					this.renderDisplay();
 					this.renderPhase();
@@ -713,9 +802,51 @@ export class App {
 		}
 	}
 
+	/** True while the remote mirror is actively counting (tick or tock). */
+	private liveIsTicking(): boolean {
+		if (!this.isLiveViewer()) return false;
+		const m = this.livePkg?.mirror;
+		return m?.t === 'tick' || m?.t === 'tock';
+	}
+
+	/** Viewers derive their countdown from the authoritative target timestamp. */
+	private tickLiveViewer(): void {
+		const m = this.livePkg?.mirror;
+		if (!m || m.t !== 'tick') {
+			this.livePrevRemaining = null;
+			return;
+		}
+		const v = this.liveView();
+		const prev = this.livePrevRemaining;
+		this.livePrevRemaining = v.remaining;
+		if (typeof prev === 'number' && prev > 0 && v.remaining === 0 && m.end !== this.liveAlertedEnd) {
+			this.liveAlertedEnd = m.end;
+			this.playCue(this.prefs.sound);
+			notify.vibrate();
+			if (this.prefs.notifyEnabled && document.hidden) {
+				notify.notifyWhenHidden({
+					title: STR.appName,
+					body: this.refreshedPhaseLabel(),
+				});
+			}
+		}
+	}
+
 	private renderTabTitles(): void {
 		const card = this.card();
 		if (!card) return;
+		if (this.isLiveViewer()) {
+			const v = this.liveView();
+			const sec = v.elapsed ?? v.remaining ?? 0;
+			if (sec <= 0) {
+				tabLib.updateTitle(null);
+				tabLib.updateFavicon(null);
+				return;
+			}
+			tabLib.updateTitle(sec);
+			tabLib.updateFavicon(v.running ? sec : null);
+			return;
+		}
 		const eng = card.engine;
 		if (eng.config.mode === 'stopwatch') {
 			tabLib.updateTitle(null);
@@ -1053,6 +1184,39 @@ case 'theme': {
 				});
 				break;
 			}
+			case 'live':
+				this.openLiveDialog();
+				break;
+			case 'live-start':
+				this.startLiveRoom();
+				break;
+			case 'live-copy': {
+				if (!this.live) return;
+				const ok = await copyToClipboard(this.liveRoomUrl());
+				this.liveToast(ok ? STR.copied : 'Não foi possível copiar.');
+				break;
+			}
+			case 'live-qr': {
+				if (!this.live) return;
+				const img = byId<HTMLImageElement>('live-qr-img');
+				if (!img) return;
+				img.classList.remove('hidden');
+				img.src = '';
+				img.setAttribute('alt', 'Carregando QR…');
+				void qrDataUrl(this.liveRoomUrl()).then((u) => {
+					img.src = u;
+					byId('live-qr-hint')?.removeAttribute('hidden');
+				}).catch(() => {
+					this.liveToast('QR indisponível.');
+				});
+				break;
+			}
+			case 'live-end':
+				this.leaveLive();
+				break;
+			case 'live-reload':
+				location.reload();
+				break;
 			case 'notif':
 				void notify.askPermission().then((ok) => {
 					if (ok) this.prefs.notifyEnabled = true;
@@ -1105,6 +1269,468 @@ case 'theme': {
 				stateEl.textContent = '';
 			}, 2500);
 		}
+	}
+
+	/* ------------------------------ live rooms ------------------------------ */
+
+	private isLiveViewer(): boolean {
+		return !!this.live && this.liveRole === 'viewer';
+	}
+
+	/** URL others open to join this live room (keeps the current language path). */
+	private liveRoomUrl(): string {
+		if (!this.live) return '';
+		return `${location.origin}${currentPagePath()}?live=${this.live.roomId}`;
+	}
+
+	/** Authoritative numbers derived from the mirror for viewers. */
+	private liveView(): {
+		remaining: number | null;
+		elapsed: number | null;
+		running: boolean;
+		overtime: boolean;
+		finished: boolean;
+	} {
+		const empty = { remaining: null, elapsed: null, running: false, overtime: false, finished: false };
+		const m = this.livePkg?.mirror;
+		if (!m || this.liveRole !== 'viewer') return empty;
+		const now = Date.now();
+		if (m.t === 'tick') {
+			const remaining = Math.max(0, Math.ceil((m.end - now) / 1000));
+			return {
+				remaining,
+				elapsed: null,
+				running: true,
+				overtime: false,
+				finished: remaining <= 0 && m.duration > 0,
+			};
+		}
+		if (m.t === 'tock') {
+			return {
+				remaining: null,
+				elapsed: Math.max(0, Math.floor((now - m.start) / 1000) + m.base),
+				running: true,
+				overtime: this.livePkg?.phase.overtime ?? false,
+				finished: false,
+			};
+		}
+		if (m.t === 'idle') return { remaining: m.rem, elapsed: null, running: false, overtime: false, finished: false };
+		return { remaining: null, elapsed: m.base, running: false, overtime: this.livePkg?.phase.overtime ?? false, finished: false };
+	}
+
+	private updateLiveUrl(roomId: string | null): void {
+		try {
+			const url = new URL(location.href);
+			if (roomId) {
+				url.searchParams.set('live', roomId);
+			} else {
+				url.searchParams.delete('live');
+			}
+			window.history.replaceState({}, '', url.toString());
+		} catch {
+			/* ignore */
+		}
+	}
+
+	private joinLive(roomId: string): void {
+		if (this.live) return;
+		this.liveLostHandled = false;
+		if (this.liveReloadTimer !== null) {
+			clearInterval(this.liveReloadTimer);
+			this.liveReloadTimer = null;
+		}
+		this.updateLiveUrl(roomId);
+		this.livePkg = null;
+		this.liveMembers = 0;
+		this.liveAlertedEnd = 0;
+		this.livePrevRemaining = null;
+		const room = new live.LiveRoom(roomId, {
+			onState: (pkg, role) => {
+				this.livePkg = pkg;
+				this.liveRole = role;
+				this.livePrevRemaining = null;
+				if (pkg?.mirror.t === 'tick' && pkg.mirror.end <= Date.now() + 1000) {
+					this.liveAlertedEnd = pkg.mirror.end;
+				}
+				if (role === 'host') this.onBecomeHost();
+				else this.pauseLocalForLive();
+				this.refreshLiveUi();
+			},
+			onRole: (role) => {
+				const promoted = role === 'host' && this.liveRole !== 'host';
+				this.liveRole = role;
+				if (promoted) this.onBecomeHost();
+				this.refreshLiveUi();
+			},
+			onMembers: (n) => {
+				this.liveMembers = n;
+				this.renderLiveDialog();
+				this.renderChrome();
+			},
+			onStatus: (s) => {
+				this.liveStatus = s;
+				if (s === 'lost') {
+					this.handleTimerLost('connectionlost');
+				} else if (s !== 'closed' && s !== 'idle') {
+					this.liveLost = false;
+				}
+				this.renderLiveDialog();
+				this.renderChrome();
+				this.renderLiveLost();
+			},
+			onHostLost: () => {
+				this.handleTimerLost('hostlost');
+			},
+		});
+		this.live = room;
+		room.connect();
+		this.renderChrome();
+	}
+
+	private startLiveRoom(): void {
+		if (this.live) {
+			this.openLiveDialog();
+			return;
+		}
+		this.joinLive(live.genRoomId());
+		this.openLiveDialog();
+	}
+
+	private leaveLive(): void {
+		this.live?.leave();
+		this.live = null;
+		this.updateLiveUrl(null);
+		this.liveRole = 'viewer';
+		this.livePkg = null;
+		this.liveMembers = 0;
+		this.liveStatus = 'idle';
+		this.liveAlertedEnd = 0;
+		this.livePrevRemaining = null;
+		this.lastSentPkg = '';
+		this.liveLost = false;
+		this.liveLostHandled = false;
+		if (this.liveReloadTimer !== null) {
+			clearInterval(this.liveReloadTimer);
+			this.liveReloadTimer = null;
+		}
+		this.renderChrome();
+		this.renderLiveLost();
+		this.renderAll();
+		this.renderLiveDialog();
+		this.requestLoop();
+	}
+
+	/** A viewer was promoted to host: adopt the room mirror into the local engine. */
+	private onBecomeHost(): void {
+		if (this.livePkg) this.adoptRemoteState(this.livePkg);
+		else this.publishLive();
+		this.renderAll();
+		this.requestLoop();
+	}
+
+	private adoptRemoteState(pkg: live.RoomStatePkg): void {
+		const card = this.card();
+		if (!card) return;
+		const cfg = configFromInitial(pkg.cfg as Initial);
+		const eng = new TimerEngine(cfg);
+		eng.autoAdvance = this.prefs.autoAdvance;
+		eng.autoRestart = this.prefs.autoRestart;
+		const m = pkg.mirror;
+		const current =
+			m.t === 'tick'
+				? Math.max(0, Math.ceil((m.end - Date.now()) / 1000))
+				: m.t === 'tock'
+					? Math.max(0, Math.floor((Date.now() - m.start) / 1000) + m.base)
+					: m.t === 'idle'
+						? m.rem
+						: m.base;
+		let ph = eng.phase;
+		if (pkg.phase.totalRounds > 0) ph.round = Math.max(1, pkg.phase.round);
+		if (pkg.phase.stepCount > 0 && pkg.phase.stepIndex >= 0) {
+			ph.stepIndex = Math.min(pkg.phase.stepIndex, eng.config.steps.length - 1);
+			const st = eng.config.steps[ph.stepIndex];
+			if (st) {
+				ph.label = st.name;
+				ph.stepName = st.name;
+				ph.stepSound = st.sound;
+				ph.durationSec = st.seconds;
+			}
+		} else if (pkg.phase.label) {
+			ph.label = pkg.phase.label;
+		}
+		if (ph.isElapsed) ph.elapsedBase = current;
+		eng.restore(ph, 'paused', current);
+		card.engine = eng;
+		card.lastRender = 0;
+		this.laps = [];
+		eng.on((e) => this.onEngine(card, e));
+		if (m.t === 'tick' || m.t === 'tock') eng.start();
+		this.saveSession();
+	}
+
+	/** Viewers must not let a stale local timer keep running on their device. */
+	private pauseLocalForLive(): void {
+		const card = this.card();
+		if (!card || card.engine.state !== 'running') return;
+		card.engine.pause();
+		this.saveSession();
+	}
+
+	private refreshLiveUi(): void {
+		this.renderLiveDialog();
+		this.renderChrome();
+		this.renderControls();
+		this.renderDisplay();
+		this.renderPhase();
+		this.renderTabs();
+		this.requestLoop();
+	}
+
+	private renderLiveDialog(): void {
+		const dlg = byId('dlg-live');
+		if (!dlg) return;
+		if (!this.live) {
+			dlg.innerHTML = `<div class="dialog-content">
+				<div class="flex items-center justify-between gap-4 mb-4">
+					<h2 class="text-lg font-semibold">${I.live}${esc(STR.live)}</h2>
+					<button type="button" class="icon-btn" data-act="dlg-close" aria-label="${STR.close}">${I.close}</button>
+				</div>
+				<p class="text-sm text-muted mb-3">${esc(STR.liveShareHint)}</p>
+				<button type="button" class="btn-primary w-full" data-act="live-start">${I.live}${esc(STR.liveCreate)}</button>
+			</div>`;
+			return;
+		}
+		const badge = this.liveRole === 'host' ? STR.liveHostBadge : STR.liveViewerBadge;
+		const roleTxt = this.liveRole === 'host' ? STR.liveRoleHost : STR.liveRoleViewer;
+		const status =
+			this.liveStatus === 'reconnecting'
+				? STR.liveReconnecting
+				: this.liveStatus === 'open'
+					? STR.liveParticipants(this.liveMembers)
+					: STR.liveConnecting;
+		dlg.innerHTML = `<div class="dialog-content">
+			<div class="flex items-center justify-between gap-4 mb-4">
+				<h2 class="text-lg font-semibold">${I.live}${esc(STR.live)}</h2>
+				<button type="button" class="icon-btn" data-act="dlg-close" aria-label="${STR.close}">${I.close}</button>
+			</div>
+			<div class="flex flex-col gap-3">
+				<div class="flex items-center gap-2">
+					<span class="chip ${this.liveRole === 'host' ? 'chip-active' : 'chip-inactive'}">${esc(badge)}</span>
+					<span class="text-sm text-muted">${esc(roleTxt)}</span>
+				</div>
+				<div class="flex items-center gap-2 text-sm text-muted">${I.live}<span>${esc(status)}</span></div>
+				<label class="flex flex-col gap-1 text-sm font-medium text-muted"><span>${esc(STR.liveLinkLabel)}</span>
+					<input class="field-input w-full text-sm" readonly value="${esc(this.liveRoomUrl())}" aria-label="${esc(STR.liveLinkLabel)}"/>
+				</label>
+				<div class="flex flex-wrap gap-2">
+					<button type="button" class="btn-primary" data-act="live-copy">${I.link}${esc(STR.copyLink)}</button>
+					<button type="button" class="btn-chip" data-act="live-qr">${I.qr}${esc(STR.qrCode)}</button>
+					<button type="button" class="btn-chip ml-auto" data-act="live-end">${I.close}${esc(STR.liveEnd)}</button>
+				</div>
+				<div class="flex flex-col items-center gap-2">
+					<img id="live-qr-img" alt="" width="220" height="220" class="rounded-xl hidden"/>
+					<span id="live-qr-hint" class="text-xs text-muted" hidden>${STR.qrHint}</span>
+				</div>
+				<p class="text-xs text-muted" data-live-state></p>
+			</div>
+		</div>`;
+	}
+
+	private openLiveDialog(): void {
+		const dlg = byId('dlg-live');
+		if (!dlg) return;
+		this.renderLiveDialog();
+		this.openDialog('dlg-live');
+	}
+
+	private liveToast(msg: string): void {
+		const stateEl = byId('dlg-live')?.querySelector('[data-live-state]');
+		if (stateEl) {
+			stateEl.textContent = msg;
+			setTimeout(() => {
+				stateEl.textContent = '';
+			}, 2500);
+		}
+	}
+
+	private handleTimerLost(_reason: 'hostlost' | 'connectionlost'): void {
+		if (this.liveLostHandled) return;
+		this.liveLostHandled = true;
+		this.liveLost = true;
+
+		this.closeDialogs();
+
+		try {
+			sound.play('beep');
+			sound.playCue('down');
+		} catch {
+			/* sound failed / muted */
+		}
+
+		notify.vibrate([300, 150, 300]);
+
+		notify.notifyWhenHidden({
+			title: STR.liveLost,
+			body: STR.liveLostHint,
+		});
+
+		if (notify.notificationsGranted() && !document.hidden) {
+			try {
+				new Notification(STR.liveLost, {
+					body: STR.liveLostHint,
+					icon: '/icons/icon-192.png',
+					tag: 'temporizador-lost',
+				});
+			} catch {
+				/* ignore */
+			}
+		}
+
+		this.live?.close();
+
+		try {
+			sessionStorage.setItem('temporizador_lost_notice', '1');
+		} catch {
+			/* ignore */
+		}
+
+		this.liveReloadCountdown = 3;
+		this.renderLiveLost();
+
+		if (this.liveReloadTimer !== null) {
+			clearInterval(this.liveReloadTimer);
+		}
+		this.liveReloadTimer = window.setInterval(() => {
+			this.liveReloadCountdown--;
+			if (this.liveReloadCountdown <= 0) {
+				if (this.liveReloadTimer !== null) {
+					clearInterval(this.liveReloadTimer);
+					this.liveReloadTimer = null;
+				}
+				location.reload();
+			} else {
+				this.renderLiveLost();
+			}
+		}, 1000);
+	}
+
+	private renderLiveLost(): void {
+		const el = byId('t-live-lost');
+		if (!el) return;
+		el.hidden = !this.liveLost;
+		if (this.liveLost) {
+			el.innerHTML = `<div class="fixed top-0 inset-x-0 z-[100] bg-[var(--color-surface)] border-b px-4 py-3 shadow-xl flex items-center justify-between gap-4 animate-in fade-in slide-in-from-top duration-300" style="border-color:var(--color-hairline)">
+				<div class="flex items-center gap-3 min-w-0">
+					<div class="flex items-center justify-center w-9 h-9 rounded-full bg-red-500/15 text-red-500 shrink-0 font-bold">
+						${I.live}
+					</div>
+					<div class="min-w-0">
+						<p class="font-semibold text-sm sm:text-base text-[var(--color-text)] flex items-center gap-2">
+							<span>${esc(STR.liveLost)}</span>
+							<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-red-500/10 text-red-500 border border-red-500/20">${this.liveReloadCountdown}s</span>
+						</p>
+						<p class="text-xs sm:text-sm text-muted truncate sm:whitespace-normal">${esc(STR.liveLostHint)}</p>
+					</div>
+				</div>
+				<button type="button" class="btn-primary whitespace-nowrap text-xs sm:text-sm shrink-0 flex items-center gap-1.5 px-3 py-2" data-act="live-reload">
+					${I.reset}<span>${esc(STR.liveReload)} (${this.liveReloadCountdown}s)</span>
+				</button>
+			</div>`;
+		}
+	}
+
+	private checkPostReloadNotice(): void {
+		try {
+			if (sessionStorage.getItem('temporizador_lost_notice') === '1') {
+				sessionStorage.removeItem('temporizador_lost_notice');
+				this.showToastNotice(`${STR.liveLost}. ${STR.liveLostHint}`);
+			}
+		} catch {
+			/* ignore */
+		}
+	}
+
+	private showToastNotice(msg: string): void {
+		let toast = byId('t-toast-notice');
+		if (!toast) {
+			toast = document.createElement('div');
+			toast.id = 't-toast-notice';
+			document.body.appendChild(toast);
+		}
+		toast.className = 'fixed bottom-6 inset-x-4 max-w-md mx-auto z-[100] bg-[var(--color-surface)] border border-[var(--color-hairline)] shadow-2xl rounded-2xl p-4 flex items-center gap-3 text-sm text-[var(--color-text)] transition-opacity duration-300';
+		toast.innerHTML = `
+			<div class="w-8 h-8 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0">
+				${I.info}
+			</div>
+			<p class="flex-1 text-xs sm:text-sm text-muted leading-tight">${esc(msg)}</p>
+			<button type="button" class="icon-btn text-muted hover:text-[var(--color-text)] shrink-0" aria-label="${esc(STR.close)}" onclick="this.parentElement?.remove()">
+				${I.close}
+			</button>
+		`;
+		setTimeout(() => {
+			if (toast?.parentElement) {
+				toast.style.opacity = '0';
+				setTimeout(() => toast?.remove(), 350);
+			}
+		}, 6000);
+	}
+
+	private refreshedPhaseLabel(): string {
+		return this.livePkg?.phase.label || STR.appName;
+	}
+
+	/** Host only: broadcast the current authoritative snapshot (deduplicated). */
+	private publishLive(): void {
+		if (!this.live || this.liveRole !== 'host' || !this.live.connected) return;
+		const pkg = this.buildLivePkg();
+		const m = pkg.mirror;
+		const ms = (n: number): number => Math.round(n / 1000) * 1000;
+		const mirrorKey =
+			m.t === 'tick'
+				? `${m.t}:${ms(m.end)}:${m.duration}`
+				: m.t === 'tock'
+					? `${m.t}:${ms(m.start)}:${m.base}`
+					: `${m.t}:${m.t === 'idle' ? m.rem : m.base}:${'duration' in m ? m.duration : 0}`;
+		const key = [mirrorKey, JSON.stringify(pkg.cfg), JSON.stringify(pkg.phase)].join('|');
+		if (key === this.lastSentPkg) return;
+		this.lastSentPkg = key;
+		this.live.publishState({ ...pkg, at: Date.now() });
+	}
+
+	private buildLivePkg(): live.RoomStatePkg {
+		let eng = this.card()?.engine;
+		if (!eng) eng = new TimerEngine(defaultConfig('timer'));
+		const ph = eng.phase;
+		const mode = eng.config.mode;
+		const sec = Math.max(0, Math.round(eng.totalSec()));
+		const elapsed = ph.isElapsed;
+		const overtime = elapsed && mode !== 'stopwatch';
+		const duration = Math.max(Math.round(ph.durationSec), sec, 1);
+		let mirror: live.LiveMirror;
+		if (eng.state === 'running') {
+			mirror = elapsed
+				? { t: 'tock', start: Date.now() - sec * 1000, base: 0 }
+				: { t: 'tick', end: Date.now() + sec * 1000, duration };
+		} else if (elapsed) {
+			mirror = { t: 'stop', base: sec };
+		} else {
+			mirror = { t: 'idle', rem: eng.state === 'finished' ? 0 : sec, duration };
+		}
+		const phase: live.LivePhase = {
+			label: ph.label,
+			kind: ph.kind,
+			round: ph.round,
+			totalRounds: ph.totalRounds,
+			stepIndex: ph.stepIndex,
+			stepCount: mode === 'sequence' ? (eng.config.steps.length ?? 0) : 0,
+			overtime,
+		};
+		return {
+			cfg: this.initialForActive() as unknown as Record<string, unknown>,
+			phase,
+			mirror,
+			at: Date.now(),
+		};
 	}
 
 	private recentItem(key: string): { label: string; initial: Initial } | null {
@@ -1181,6 +1807,7 @@ case 'theme': {
 	}
 
 	private toggleActive(): void {
+		if (this.isLiveViewer()) return;
 		const card = this.card();
 		if (!card) return;
 		const eng = card.engine;
@@ -1193,6 +1820,7 @@ case 'theme': {
 	}
 
 	private addTimeActive(delta: number): void {
+		if (this.isLiveViewer()) return;
 		const card = this.card();
 		if (!card) return;
 		card.engine.addTime(delta);
@@ -1375,6 +2003,7 @@ case 'theme': {
 		${dialogShell('dlg-settings')}
 		${dialogShell('dlg-help')}
 		${dialogShell('dlg-share')}
+		${dialogShell('dlg-live')}
 		${dialogShell('dlg-seq')}`;
 	}
 
@@ -1435,11 +2064,27 @@ case 'theme': {
 		document.addEventListener('visibilitychange', () => {
 			if (this.prefs.keepScreenOn) wakelock.onVisibility(document.hidden);
 		});
+		window.addEventListener('beforeunload', () => {
+			if (this.live && this.liveRole === 'host') {
+				this.live.leave();
+			}
+		});
+		window.addEventListener('pagehide', () => {
+			this.saveSessionNow();
+			if (this.live && this.liveRole === 'host') {
+				this.live.leave();
+			}
+		});
 		fs.onNativeChange((on) => {
 			if (!on && fs.isPresenting()) void fs.exit();
 			this.renderControls();
 		});
 		window.addEventListener('resize', () => this.renderDisplay());
+
+		const lost = document.createElement('div');
+		lost.id = 't-live-lost';
+		lost.hidden = true;
+		document.body.appendChild(lost);
 	}
 
 	private onKey(e: KeyboardEvent): void {
@@ -1465,6 +2110,7 @@ case 'theme': {
 			e.preventDefault();
 			this.toggleActive();
 		} else if (k === 'r') {
+			if (this.isLiveViewer()) return;
 			this.card()?.engine.reset();
 			this.saveSession();
 			this.renderAll();

@@ -10,7 +10,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "pages:deploy": "npx wrangler pages deploy dist --project-name temporizadoronline --branch main",
+    "deploy": "npm run build && npm run pages:deploy",
+    "rt:dev": "node node_modules/wrangler/bin/wrangler.js dev --local --port 8787 --ip 127.0.0.1 --config workers/rt/wrangler.jsonc",
+    "rt:deploy": "node node_modules/wrangler/bin/wrangler.js deploy --config workers/rt/wrangler.jsonc",
+    "rt:types": "node node_modules/wrangler/bin/wrangler.js types --config workers/rt/wrangler.jsonc workers/rt/worker-configuration.d.ts",
+    "rt:check": "tsc -p workers/rt",
+    "rt:test": "node workers/rt/test/smoke.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -20,11 +27,13 @@
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
-    "esbuild": true
+    "esbuild": true,
+    "workerd@1.20260911.1": true
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@types/qrcode-generator": "^0.0.16",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.131.1"
   }
 }

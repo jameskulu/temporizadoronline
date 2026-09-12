@@ -70,4 +70,7 @@ export const I = {
 	flag: S('<path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/>'),
 	skip: S('<path d="M6 5v14l9-7z"/><path d="M18 5v14"/>'),
 	timer: S('<rect x="9" y="2.5" width="6" height="4" rx="1.2"/><path d="M12 13.5V9"/><circle cx="12" cy="15.5" r="6"/>'),
+	live: S('<path d="M4.5 8.5a11 11 0 0 1 15 0M7 12a6.5 6.5 0 0 1 10 0"/><circle cx="12" cy="16.5" r="1.6"/>'),
+	broadcast: S('<circle cx="12" cy="12" r="1.7"/><path d="M8.6 8.6a4.8 4.8 0 0 0 0 6.8M15.4 8.6a4.8 4.8 0 0 1 0 6.8M6 6a9 9 0 0 0 0 12M18 6a9 9 0 0 1 0 12"/>'),
+	info: S('<circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/>'),
 };
