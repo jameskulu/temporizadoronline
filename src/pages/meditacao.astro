@@ -1,0 +1,99 @@
+---
+import ToolPage from '../components/ToolPage.astro';
+import { faqJsonLd } from '../data/site';
+
+const faqs = [
+	{
+		q: 'Como meditar usando um temporizador?',
+		a: 'Defina 5 ou 10 minutos, sente-se ereto e confortável, pressione Iniciar e mantenha a atenção na respiração. Ao tocar o alarme — que pode ser o som suave “zen” — encerre com calma, respirando mais três vezes antes de abrir os olhos.',
+	},
+	{
+		q: 'Qual o melhor tempo para meditar?',
+		a: 'Para iniciantes, de 5 a 10 minutos já fazem diferença. Com prática, 15 a 20 minutos. Você ajusta o tempo nas configurações e pode usar os temporizadores prontos de 5, 10 e 20 minutos.',
+	},
+	{
+		q: 'Qual som de alarme usar para meditar?',
+		a: 'O som “zen” foi desenhado para ser suave e não assustar no fim da prática. O “chime” também funciona bem: um toque único e tranquilo. Você também pode usar a vibração do celular em vez do som.',
+	},
+	{
+		q: 'O que é meditação guiada?',
+		a: 'Meditação guiada é praticar seguindo orientações por etapas — respiração, corpo, som — em vez de decisões na hora. Aqui você monta uma sequência guiada com etapas próprias no modo sequências, com avisos suaves a cada troca.',
+	},
+	{
+		q: 'Como meditar sozinho em casa?',
+		a: 'Escolha um lugar silencioso, sente-se com a coluna alongada, mãos apoiadas e olhos fechados. Configure 10 minutos neste timer de meditação, escolha o som zen e observe a respiração até o toque suave. Sem pressa: o timer cuida do tempo por você.',
+	},
+	{
+		q: 'O timer de meditação funciona com o celular bloqueado?',
+		a: 'Sim. O tempo é calculado pelo relógio do sistema, então o mostrador continua correto mesmo com a tela bloqueada. Se preferir acompanhar, ative o modo foco em tela cheia com o relógio grande e tranquilo.',
+	},
+];
+---
+<ToolPage
+	title="Meditação Online — Timer com Sons Suaves (5, 10 e 20 min)"
+	description="Timer de meditação online com sons suaves: medite 5, 10 ou 20 minutos sem vigiar o tempo. Grátis, funciona offline e com tela cheia tranquila."
+	path="/meditacao/"
+	heading="Meditação"
+	sub="Um tempo só para você. Defina a duração, sente-se e deixe o alarme suave avisar o fim."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Meditação' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Meditar exige não vigiar o relógio. Este timer de meditação cuida disso: você escolhe a duração, aperta
+		<strong>Iniciar</strong> e se concentra na respiração. Ao final, um som calmo — recomendamos o som
+		<strong>“zen”</strong> — anuncia o fim, e a tela também pode vibrar suavemente.
+	</p>
+	<h2>Como meditar com o timer</h2>
+	<ul>
+		<li>Escolha <strong><a href="/temporizador/10-minutos/">10 minutos</a></strong> (ou configure entre 1 e 20 minutos).</li>
+		<li>Aperte <strong>Iniciar</strong> e feche os olhos.</li>
+		<li>Escolha o som <strong>zen</strong> nas configurações para um toque mais suave.</li>
+		<li>Use o <strong>modo foco</strong> (“Tela cheia”) para um mostrador maior e sem distrações.</li>
+	</ul>
+	<h2>Meditação com temporizador no dia a dia</h2>
+	<p>
+		Um <strong>temporizador de meditação</strong> (ou <strong>meditação Temporizador</strong>, como muita gente
+		busca) transforma o ato de meditar em algo simples: escolha <a href="/temporizador/5-minutos/">5 minutos</a>,
+		<a href="/temporizador/10-minutos/">10</a> ou <a href="/temporizador/15-minutos/">15</a> e deixe o tempo correr.
+		Funciona como um <strong>relógio zen</strong>: silencioso durante a prática, gentil na hora de voltar. Este timer
+		de meditação online é grátis, funciona offline e tem um mostrador bonito e tranquilo — perfeito para meditar no
+		celular, em casa ou no escritório.
+	</p>
+	<h2>Dicas para iniciantes</h2>
+	<p>
+		Não se cobre: começar com <a href="/temporizador/5-minutos/">5 minutos</a> silenciosos já conta. Quer uma leitura
+		mais completa sobre como praticar? Veja a <a href="/temporizador-para-meditacao/">página dedicada à meditação</a>.
+		Prefere uma prática guiada? Monte uma <a href="/sequencias/">sequência</a> com etapas de respiração e pausas curtas.
+	</p>
+	<h2>Meditação guiada e sons para meditar</h2>
+	<p>
+		Nem toda prática é silenciosa: a <strong>meditação guiada</strong> leva você por etapas — corpo, respiração, som —
+		e ajuda quem está começando a não se perder nos pensamentos. Neste site, a forma guiada é o modo
+		<a href="/sequencias/">sequências</a>: monte etapas de respiração ou relaxamento com os tempos que preferir e o
+		app avisa com suavidade a cada troca. Já o timer de meditação desta página cuida da prática livre: você escolhe
+		entre os <strong>sons de meditação</strong> zen, sineta e campainha, define o volume e medita de olhos fechados até
+		o toque.
+	</p>
+	<h2>Meditar com o celular sem se distrair</h2>
+	<p>
+		Quando a meditação acontece no celular, o segredo é não deixar a tela roubar a atenção. Use o <strong>modo
+		foco</strong> (tela cheia) para ver só o relógio grande e tranquilo, ou bloqueie o aparelho: o tempo continua
+		correto porque é calculado pelo relógio do sistema, e no fim o alarme zen toca na hora certa. Vale também silenciar
+		as notificações antes de começar. Assim, uma <strong>meditação online</strong> de poucos minutos rende como uma
+		pausa completa — sem relógio na cabeça, sem pressa para voltar.
+	</p>
+	<h2>Perguntas frequentes</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

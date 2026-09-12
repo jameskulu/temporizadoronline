@@ -1,0 +1,51 @@
+---
+import ToolPage from '../components/ToolPage.astro';
+import { faqJsonLd } from '../data/site';
+
+const faqs = [
+	{
+		q: 'Qual o melhor temporizador para cozinha?',
+		a: 'Qualquer tempo funcione: o importante é ter aviso claro e poder deixar contando em segundo plano. Este timer toca, vibra e ainda pode continuar contando os minutos extras após o zero.',
+	},
+	{
+		q: 'Dá para usar vários timers na cozinha?',
+		a: 'Sim. Com “Novo timer” você cria timers separados para cada refeição ao mesmo tempo — bom quando arroz, forno e chá terminam em minutos diferentes.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador para cozinha — receitas no ponto"
+	description="Timer de cozinha online: ovo, arroz, forno e chá. Aviso sonoro, tempo extra e vários timers ao mesmo tempo. Grátis e funciona offline."
+	path="/temporizador-para-cozinha/"
+	heading="Temporizador para cozinha"
+	sub="Imóvel para o arroz, essencial para o forno e ovo. Sem colar no fogão."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Cozinha' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Cozinhar é cronometrar: <strong>um minuto</strong> para o chá, <strong>5</strong> para vegetais, <strong>10</strong>
+		para massas, <strong>15</strong> para assados pequenos. Configure, deixe o celular na bancada e receba o aviso na
+		hora. Marque “Continuar após o zero” para também medir o repouso da massa.
+	</p>
+	<h2>Tempos mais usados</h2>
+	<ul>
+		<li><strong><a href="/temporizador/1-minuto/">1 min</a></strong> — ovo de colher, molho no fogão, chá coado.</li>
+		<li><strong><a href="/temporizador/5-minutos/">5 min</a></strong> — arroz branco curto, legumes no vapor, café passado.</li>
+		<li><strong><a href="/temporizador/10-minutos/">10 min</a></strong> — massas frescas, ovo mulet, leguminosas.</li>
+		<li><strong><a href="/temporizador/15-minutos/">15</a>–<a href="/temporizador/30-minutos/">30 min</a></strong> — assados, risotos e sobremesas em bloco.</li>
+	</ul>
+	<p>
+		Use o <strong>modo foco</strong> (tela cheia) para ver o relógio grande e também quer <a href="/cronometro/">cronômetro</a>
+		para registrar o tempo das suas receitas.
+	</p>
+	<h2>Perguntas frequentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

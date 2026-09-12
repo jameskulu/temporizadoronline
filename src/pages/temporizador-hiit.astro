@@ -1,0 +1,50 @@
+---
+import ToolPage from '../components/ToolPage.astro';
+import { faqJsonLd } from '../data/site';
+
+const faqs = [
+	{
+		q: 'O que é HIIT?',
+		a: 'HIIT (treinamento intervalado de alta intensidade) alterna rajadas curtas de esforço máximo com descanso. Exemplo comum: 40 segundos de esforço e 20 de descanso, repetidos em rodadas.',
+	},
+	{
+		q: 'Quanto tempo dura uma sessão de HIIT?',
+		a: 'Uma sessão clássica com 8 rodadas de 40×20 dura cerca de 8 minutos, sem contar o preparo. Treinos mais curtos (4 minutos, estilo tabata) também têm ótimo resultado.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador HIIT — 40×20 pronto para treinar"
+	description="Timer HIIT gratuito: 40 segundos de esforço, 20 de descanso, 8 rodadas com preparo. Treine em qualquer lugar sem equipamento e sem app."
+	path="/temporizador-hiit/"
+	heading="Temporizador HIIT"
+	sub="Esforço máximo por 40 segundos, respiro por 20. Oito rodadas com preparo incluído."
+	initial={JSON.stringify({ mode: 'interval', workSec: 40, restSec: 20, rounds: 8, prepareSec: 5, label: 'HIIT' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Este timer HIIT alterna <strong>40 segundos de esforço</strong> e <strong>20 de descanso</strong> por
+		<strong>8 rodadas</strong>, com 5 segundos de preparo antes do primeiro sprint. O ritmo é guiado pelo som a cada
+		troca de fase.
+	</p>
+	<h2>Como seguir</h2>
+	<ul>
+		<li>Na fase de <strong>esforço</strong>, dê o máximo que conseguir manter na rodada.</li>
+		<li>Na fase de <strong>descanso</strong>, caminhe ou recupere a respiração.</li>
+		<li>Use o <strong>modo foco</strong> (tela cheia) para não olhar o tempo o tempo todo.</li>
+	</ul>
+	<p>
+		Tem menos tempo? Experimente o <a href="/temporizador-tabata/">tabata</a> (4 minutos) ou ajuste as rodadas nas
+		configurações.
+	</p>
+	<h2>Perguntas frequentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

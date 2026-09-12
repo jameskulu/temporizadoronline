@@ -1,0 +1,102 @@
+---
+import ToolPage from '../components/ToolPage.astro';
+import { faqJsonLd } from '../data/site';
+
+const faqs = [
+	{
+		q: 'O que é uma sequência de temporizador?',
+		a: 'Uma sequência é uma lista de etapas com durações próprias, cada uma com nome e som. O app toca um aviso sonoro a cada troca de etapa e avança sozinho — ideal para treinos guiados, rotinas ou atividades em blocos.',
+	},
+	{
+		q: 'Para que serve um temporizador de sequências?',
+		a: 'Serve para tudo que tem várias partes: aquecimento + exercício + descanso, blocos de estudo com pausas, rotina de alongamento, prática de meditação guiada ou uma receita em etapas. Cada etapa toca quando termina e a seguinte começa sozinha.',
+	},
+	{
+		q: 'Posso salvar e repetir uma sequência?',
+		a: 'Sim: edite as etapas, ajuste nomes, tempos e sons, e use o botão “Usar sequência”. Enquanto a página estiver no seu dispositivo, sua sequência fica salva para repetir quantas vezes quiser.',
+	},
+	{
+		q: 'Dá para mudar o som de cada etapa?',
+		a: 'Sim. Cada etapa pode ter um som próprio entre os 5 estilos de alarme disponíveis, ou nenhum. Assim você sabe pelo toque qual parte da rotina acabou, sem precisar olhar para a tela.',
+	},
+	{
+		q: 'A sequência ajuda em treinos guiados?',
+		a: 'Ajuda sim. Monte um treino guiado em etapas — aquecimento de 5 minutos, blocos de exercício, descanso e alongamento — e o app rege a rotina inteira, avisando cada troca. É como ter um treinador de tempo na tela.',
+	},
+	{
+		q: 'Como montar uma rotina de estudos em blocos?',
+		a: 'Crie etapas de estudo de 25 minutos alternadas com pausas de 5 e uma pausa longa de 15. O app avisa quando cada bloco termina e já começa o próximo automaticamente — o método pomodoro em formato de sequência.',
+	},
+];
+---
+<ToolPage
+	title="Sequências de Temporizador — Etapas e Avisos Automáticos"
+	description="Monte sequências de temporizador com etapas, nomes e sons próprios. Treino guiado, rotinas de estudo e práticas em blocos com avisos automáticos."
+	path="/sequencias/"
+	heading="Sequências"
+	sub="Combine etapas com durações e sons próprios. O app avança sozinho e avisa a cada mudança."
+	initial={JSON.stringify({ mode: 'sequence' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Uma <strong>sequência de temporizador</strong> é perfeita quando uma rotina tem várias partes: aquecimento +
+		exercício + descanso, blocos de estudo com pausas, ou uma prática guiada. Toque em
+		<strong>“Configurar sequência”</strong>, adicione etapas com nome, tempo e som, e o app toca a sineta a cada
+		troca.
+	</p>
+	<h2>Exemplos de sequências de timer</h2>
+	<ul>
+		<li><strong>Treino completo:</strong> aquecimento (5 min), 2 blocos de exercício (3 min) e relaxamento.</li>
+		<li><strong>Foco por blocos:</strong> estudo (25 min), pausa (5 min), estudo (25 min) e pausa longa (15 min).</li>
+		<li><strong>Respiração guiada:</strong> inspira, segura e solta — em etapas de segundos.</li>
+	</ul>
+	<h2>Temporizador de sequências para rotinas</h2>
+	<p>
+		Um <strong>temporizador de sequências</strong> transforma qualquer rotina em um fluxo automático com
+		<strong>etapas de temporizador</strong> e <strong>alarmes em sequência</strong>: cada etapa termina, toca o seu
+		som e a próxima começa na hora — sem que você precise apertar nada. Quer uma prática de <a
+		href="/temporizador-para-meditacao/">meditação guiada</a>, um <a href="/temporizador-para-exercicios/">treino em
+		blocos</a> ou a rotina de <a href="/temporizador-para-estudos/">estudos</a> com pausas? Monte exemplos de
+		sequência em minutos e repita quando quiser. Para ciclos simples de foco e pausa, o <a href="/pomodoro/">pomodoro</a>
+		já resolve; para várias partes com avisos próprios, a sequência é a ferramenta certa.
+	</p>
+	<h2>Como montar a sua</h2>
+	<ul>
+		<li>Abra <strong>“Configurar sequência”</strong>.</li>
+		<li>Toque em <strong>“Adicionar etapa”</strong> e dê um nome, tempo e som para cada parte.</li>
+		<li>Reordene ou remova etapas com as setinhas e o lixo.</li>
+		<li>Toque em <strong>“Usar sequência”</strong> e inicie.</li>
+	</ul>
+	<h2>Dicas para montar boas sequências</h2>
+	<p>
+		Comece pequeno: três a cinco etapas já resolvem a maioria das rotinas. Dê <strong>nomes claros</strong> a cada
+		parte (“aquecimento”, “série 1”, “descanso”) para acompanhar pelo som e escolha um <strong>alarme de
+		sequência</strong> diferente para as etapas mais importantes — assim você sabe o que mudou sem olhar para a tela.
+		Em <strong>rotinas com timer</strong>, prefira tempos inteiros (5, 10, 15 minutos); em etapas curtas, use segundos.
+	</p>
+	<h2>Sequências para estudo, treino e prática</h2>
+	<p>
+		Este <strong>temporizador de sequências</strong> brilha em três situações. No <a
+		href="/temporizador-para-estudos/">estudo</a>, montar blocos de foco de 25 minutos com pausas de 5 e uma longa de
+		15 transforma a sessão em fluxo contínuo, sem que você mexa no relógio. No <a
+		href="/temporizador-para-exercicios/">treino</a>, uma sequência guiada com aquecimento, exercício e alongamento
+		rege a rotina inteira com avisos. Na prática guiada, é o formato perfeito para <a
+		href="/temporizador-para-meditacao/">meditação</a> em etapas. Em todos os casos, os <strong>alarmes em
+		sequência</strong> mantêm você no ritmo enquanto o app avança sozinho — e o resultado salvo pode ser repetido
+		quando quiser.
+	</p>
+	<h2>Perguntas frequentes</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

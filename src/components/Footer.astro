@@ -1,0 +1,37 @@
+---
+import { SITE_NAME } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+	<div class="mx-auto max-w-5xl px-4 py-8 border-t" style="border-color:var(--color-hairline)">
+		<div class="flex flex-col md:flex-row items-center justify-between gap-3 text-[13px]" style="color:var(--color-body)">
+			<p>© {year} {SITE_NAME} — timer rápido, bonito e que funciona offline.</p>
+			<nav class="flex flex-wrap items-center justify-center gap-4">
+				<a href="/temporizador/" class="f-link">Temporizador online</a>
+				<a href="/pomodoro/" class="f-link">Pomodoro</a>
+				<a href="/cronometro/" class="f-link">Cronômetro</a>
+				<a href="/intervalos/" class="f-link">Intervalos</a>
+				<a href="/meditacao/" class="f-link">Meditação</a>
+				<a href="/sequencias/" class="f-link">Sequências</a>
+			</nav>
+		</div>
+		<div class="mt-4 pt-4 border-t" style="border-color:var(--color-hairline)">
+			<nav class="flex flex-wrap items-center justify-center gap-4 text-[12px]" style="color:var(--color-ink-muted)">
+				<a href="/sobre/" class="f-link">Sobre</a>
+				<a href="/contato/" class="f-link">Contato</a>
+				<a href="/privacidade/" class="f-link">Política de Privacidade</a>
+				<a href="/termos/" class="f-link">Termos de Uso</a>
+			</nav>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.f-link {
+		text-decoration: none;
+		transition: color 0.15s ease;
+	}
+	.f-link:hover {
+		color: var(--color-link-deep);
+	}
+</style>

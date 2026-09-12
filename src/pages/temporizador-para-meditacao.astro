@@ -1,0 +1,51 @@
+---
+import ToolPage from '../components/ToolPage.astro';
+import { faqJsonLd } from '../data/site';
+
+const faqs = [
+	{
+		q: 'Com meditar com um temporizador?',
+		a: 'Defina 5 ou 10 minutos, sente-se ereto e confortável, inicie e mantenha a atenção na respiração. Ao tocar o alarme, encerre fechando o momento — sem pressa de sair da posição.',
+	},
+	{
+		q: 'Qual som de alarme usar para meditação?',
+		a: 'O som “zen” foi desenhado para ser suave e não assustar no fim da prática. O “chime” também funciona bem: um toque único e tranquilo.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador para meditação — preste atenção sem relógio"
+	description="Timer de meditação de 5/10/20 minutos com sons suaves. Medite sem vigiar o tempo e sem se preocupar com a hora."
+	path="/temporizador-para-meditacao/"
+	heading="Temporizador para meditação"
+	sub="Dez minutos respirando, de graça. O som suave te chama na hora certa."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Meditação' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		O maior inimigo da meditação é olhar para o relógio. Este timer resolve: <strong>escolha 10 minutos</strong>,
+		aperte Iniciar e observe a respiração até o som suave avisar. No fim, fique mais um instante sentado e só então
+		abra os olhos.
+	</p>
+	<h2>Ritual rápido</h2>
+	<ul>
+		<li>Sente-se com a coluna alongada, mãos apoiadas.</li>
+		<li>Troque o som para <strong>zen</strong> nas configurações.</li>
+		<li>Inicie e foque em inspirar e expirar com calma.</li>
+		<li>Ao tocar, respire mais três vezes e encerre.</li>
+	</ul>
+	<p>
+		Quer meditar com etapas guiadas? Veja <a href="/meditacao/">a página de meditação</a> e as
+		<a href="/sequencias/">sequências</a>.
+	</p>
+	<h2>Perguntas frequentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

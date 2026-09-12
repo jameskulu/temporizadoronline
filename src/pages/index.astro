@@ -1,11 +1,238 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Base from '../layouts/Base.astro';
+import TimerApp from '../components/TimerApp.astro';
+import ToolsGrid from '../components/ToolsGrid.astro';
+import { SITE_NAME, SITE_TAGLINE, faqJsonLd, webAppJsonLd } from '../data/site';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const faqs = [
+	{
+		q: 'O que é um temporizador online?',
+		a: 'Um temporizador online é uma contagem regressiva que roda direto no navegador, sem precisar baixar ou instalar nada. O Temporizador Online também funciona offline: você abre a página uma vez e ela continua útil mesmo sem internet.',
+	},
+	{
+		q: 'Como usar o temporizador online?',
+		a: 'Escolha os minutos e segundos no mostrador, aperte Iniciar e aguarde o alarme tocar. Para trocar de ferramenta — cronômetro, pomodoro, intervalos, meditação ou sequências — basta tocar na aba no topo do mostrador, sem recarregar a página.',
+	},
+	{
+		q: 'Como fazer uma contagem regressiva de 10, 5 ou 15 minutos?',
+		a: 'Há versões prontas com um clique: temporizador online de 10 minutos, de 5 minutos e de 15 minutos, além de durações de 1 a 60 minutos. Ajuste a duração no mostrador ou use os atalhos de duração para começar mais rápido.',
+	},
+	{
+		q: 'Posso usar o temporizador online para pomodoro?',
+		a: 'Sim. O modo pomodoro vem configurado com o método clássico: 25 minutos de foco, pausa curta de 5 e pausa longa de 15 (a cada 4 ciclos). O app toca um som a cada troca de fase e avança os ciclos sozinho.',
+	},
+	{
+		q: 'Dá para usar vários temporizadores ao mesmo tempo?',
+		a: 'Sim. Toque em “Novo timer” para adicionar quantos precisar — cada um com configuração, tempo e som próprios, alternando pelas abas no topo. É o que chamamos de multi temporizador online.',
+	},
+	{
+		q: 'O timer continua contando se eu trocar de aba ou bloquear a tela?',
+		a: 'Sim. O temporizador e o cronômetro se baseiam no relógio do sistema, não em frames animados: mesmo em segundo plano ou com o celular bloqueado, o tempo é calculado corretamente quando você volta.',
+	},
+	{
+		q: 'O temporizador online é grátis? Precisa de cadastro?',
+		a: 'É 100% grátis e sem cadastro. Todos os recursos — contagem regressiva, cronômetro, pomodoro, intervalos, meditação e sequências — estão liberados e sem limites de uso.',
+	},
+	{
+		q: 'O temporizador online funciona no celular?',
+		a: 'Funciona em qualquer navegador, no celular e no computador. Ele é instalável (PWA): dá para adicionar à tela inicial e abrir como um app, sempre sem instalar nada pela loja.',
+	},
+];
 ---
+<Base
+	title="Temporizador Online — Timer Regressivo, Pomodoro e Cronômetro grátis"
+	description="Temporizador online grátis: contagem regressiva de 5, 10 e 15 minutos, pomodoro, cronômetro e intervalos. Bonito, rápido, funciona offline e sem cadastro."
+	path="/"
+	jsonLd={[webAppJsonLd(), faqJsonLd(faqs)]}
+>
+	<div class="mx-auto max-w-5xl px-4 pt-10 pb-20">
+		<section class="text-center mb-8 hero-mesh">
+			<p class="eyebrow mb-3">Temporizador Online</p>
+			<h1 class="text-4xl md:text-5xl font-semibold tracking-tight">{SITE_NAME}</h1>
+			<p class="mt-3 text-lg" style="color:var(--color-body)">
+				{SITE_TAGLINE}
+			</p>
+			<div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-[13px]" style="color:var(--color-body)">
+				<span class="chip">100% grátis</span>
+				<span class="chip">Sem cadastro</span>
+				<span class="chip">Funciona offline</span>
+				<span class="chip">Instalável (PWA)</span>
+			</div>
+		</section>
 
-<Layout>
-	<Welcome />
-</Layout>
+		<section class="app-card rounded-[16px] p-4 md:p-8 mb-14">
+			<TimerApp scope="full" />
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Ferramentas</p>
+			<h2 class="text-2xl font-semibold mb-3">Temporizador online para o que você precisar</h2>
+			<p class="lead">
+				Contagem regressiva para estudos, exercícios, cozinha, reuniões e meditação — tudo em uma página só, com
+				design limpo e rápido. Escolha um tipo de timer abaixo ou configure o seu logo acima.
+			</p>
+			<p class="lead">
+				Precisa de um uso específico? Tem versões prontas para <a href="/temporizador-para-estudos/">estudos</a>,
+				<a href="/temporizador-para-exercicios/">exercícios</a>, <a href="/temporizador-para-cozinha/">cozinha</a>,
+				<a href="/temporizador-para-meditacao/">meditação</a>, <a href="/temporizador-hiit/">HIIT</a> e
+				<a href="/temporizador-tabata/">tabata</a>.
+			</p>
+			<ToolsGrid />
+			<h2 class="text-2xl font-semibold mt-12 mb-3">O que é o temporizador online</h2>
+			<p>
+				O <strong>temporizador online</strong> é um <strong>timer temporizador online</strong> que roda direto no
+				navegador: uma contagem regressiva com alarme sonoro, mantida pelo relógio do sistema. Você escolhe a
+				duração em minutos e segundos, aperta Iniciar e o app faz o resto — toca, vibra e pode continuar contando
+				os minutos extras depois do zero. Como tudo acontece no navegador, basta digitar “temporizador online” no
+				Google ou abrir o atalho salvo para começar; não há download, cadastro nem instalação.
+			</p>
+			<p>
+				Diferente de um relógio comum, ele serve como um <strong>relógio temporizador online</strong> para o seu
+				dia a dia: ovo na cozinha, descanso no treino, prova de concurso, reunião de 15 minutos ou o alarme do
+				intervalo de estudo. A precisão vem do relógio do sistema, então nada de atrasos ou “piscadas” de tela —
+				o tempo continua correto mesmo trocando de aba ou bloqueando o celular.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Contagem regressiva para todas as durações</h2>
+			<p>
+				O modo padrão é o <strong>temporizador online regressivo</strong>: o relógio começa no valor escolhido e
+				conta até zero. Para ir mais rápido, use os atalhos prontos — <a href="/temporizador/5-minutos/">5
+				minutos</a>, <a href="/temporizador/10-minutos/">10 minutos</a>, <a
+				href="/temporizador/15-minutos/">15 minutos</a>, <a href="/temporizador/25-minutos/">25 minutos</a>, <a
+				href="/temporizador/30-minutos/">30 minutos</a> e <a href="/temporizador/60-minutos/">60 minutos</a> —
+				ou ajuste o mostrador para qualquer segundo, de 1 segundo a horas. Para esforços curtos, como os
+				<strong>40 segundos</strong> do treino intervalado, o <a href="/temporizador-hiit/">HIIT</a> já vem
+				pronto.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Pomodoro, cronômetro e intervalos no mesmo lugar</h2>
+			<p>
+				Este é um <strong>temporizador online pomodoro</strong> completo: o método pomodoro organiza foco e pausas
+				em ciclos e este app avança automaticamente entre foco, pausa curta e pausa longa. Também funciona como
+				<strong>cronometro temporizador online</strong>: basta trocar a aba para o cronômetro e medir o tempo de
+				qualquer atividade, com marcação de voltas. E para treinos, os <a href="/intervalos/">intervalos</a>
+				alternam esforço e descanso sozinhos, com presets de <a href="/temporizador-tabata/">tabata</a> e
+				HIIT.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Um temporizador online bonito e simples</h2>
+			<p>
+				Procuramos deixar este <strong>temporizador online bonito</strong> e com visual
+				<strong>aesthetic</strong>: números grandes, fonte elegante, modo escuro automático e nada de
+				poluição visual — só o relógio e o que importa. No <strong>modo foco</strong> (tela cheia), o mostrador
+				fica ainda maior, ideal para estudar, meditar ou acompanhar séries sem distração. Enquanto outras opções
+				disputam atenção, aqui você olha para o tempo e pronto.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Multi temporizador online: vários timers por vez</h2>
+			<p>
+				Precisa acompanhar o arroz, o forno e o chá ao mesmo tempo? O recurso <strong>“Novo timer”</strong>
+				transforma esta página em um <strong>multi temporizador online</strong>: cada timer tem sua própria aba,
+				configuração e som, e todos rodam em paralelo. É perfeito para cozinhas, salas de aula e qualquer rotina
+				com mais de uma contagem ao mesmo tempo.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Recursos que fazem diferença</h2>
+			<ul class="list list-checks">
+				<li><strong>Preciso entre abas:</strong> o timer usa o relógio do sistema — você não perde segundos ao trocar de aba ou bloquear a tela.</li>
+				<li><strong>Modo foco:</strong> tela cheia com o relógio grande para não se distrair.</li>
+				<li><strong>Sons e vibração:</strong> alarme em 5 estilos, com volume ajustável e vibração no celular.</li>
+				<li><strong>Compartilhe seu timer:</strong> envie um link já configurado ou um QR code para abrir no celular.</li>
+				<li><strong>Pomodoro:</strong> <a href="/pomodoro/">ciclos de foco e pausa</a> que avançam sozinhos.</li>
+				<li><strong>Cronômetro:</strong> <a href="/cronometro/">conte o tempo que passa e marque voltas</a>.</li>
+				<li><strong>Intervalos e treino:</strong> <a href="/intervalos/">HIIT</a>, <a href="/temporizador-tabata/">tabata</a> e <a href="/temporizador-hiit/">40×20</a> prontos.</li>
+				<li><strong>Atalhos de teclado:</strong> Espaço inicia/pausa, R redefine, F tela cheia, M silencia.</li>
+				<li><strong>Modo escuro automático:</strong> acompanha o tema do seu sistema.</li>
+			</ul>
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Dúvidas</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Perguntas frequentes</h2>
+			<div class="faq">
+				{faqs.map((f) => (
+					<div class="faq-item">
+						<h3 class="faq-q">{f.q}</h3>
+						<p class="faq-a">{f.a}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.app-card {
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.article h2 {
+		line-height: 1.25;
+	}
+	.lead {
+		font-size: 16px;
+		color: var(--color-body);
+		margin-bottom: 1rem;
+	}
+	.article p {
+		color: var(--color-body);
+		margin-bottom: 0.8rem;
+		line-height: 1.6;
+	}
+	.article a {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.article a:hover {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		list-style: none;
+		padding-left: 0;
+	}
+	.list-checks li {
+		position: relative;
+		padding-left: 28px;
+		color: var(--color-body);
+	}
+	.list-checks li strong {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+	.list-checks li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 5px;
+		width: 17px;
+		height: 15px;
+		border-radius: 4px;
+		background:
+			linear-gradient(135deg, transparent 55%, var(--color-link) 50%) -1px 5px no-repeat,
+			linear-gradient(45deg, transparent 45%, var(--color-link) 45%) 5px -2px no-repeat;
+		background-size: 9px 9px;
+		width: 18px;
+		height: 18px;
+	}
+	.faq {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+	.faq-item {
+		padding: 14px 16px;
+		border-radius: 12px;
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.faq-q {
+		font-size: 15px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+	.faq-a {
+		font-size: 14px;
+		color: var(--color-body);
+	}
+</style>

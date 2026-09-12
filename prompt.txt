@@ -1,0 +1,611 @@
+
+I have initialized a new AstroJS project. Use the Astro docs MCP, Tailwind CSS v4 docs, and web-design-guidelines skills for creating the website. Also use the @DESIGN.md file and follow a clean, minimal design inspired by Apple.
+
+Name: Temporizador Online
+Domain: meutemporizadoronline.com
+
+Create a simple, fast, modern online timer website where users can instantly create and use countdown timers directly in the browser. The primary experience should be extremely simple: users should be able to set a duration and start the timer within seconds, without registration or unnecessary configuration.
+
+The website should be optimized primarily for Brazilian Portuguese users and use natural Brazilian Portuguese throughout the UI, page titles, labels, buttons, metadata, and SEO content.
+
+### Core Timer
+
+Build a highly polished countdown timer with:
+
+* Large, highly readable timer display
+* Hours, minutes, and seconds
+* Start / pause / resume
+* Reset
+* Add time while running
+* Subtract time while running
+* Quick duration presets
+* Custom duration input
+* Countdown accuracy based on timestamps rather than interval accumulation
+* Continue accurately when the browser tab is inactive
+* Overtime mode after reaching zero
+* Optional automatic stop or continue counting after zero
+* Visual completion animation
+* Sound notification when the timer finishes
+* Test sound button
+* Multiple sound options
+* Mute/unmute
+* Browser notification support where available
+* Mobile vibration where supported
+
+### Quick Presets
+
+Provide convenient one-click presets such as:
+
+* 1 minuto
+* 5 minutos
+* 10 minutos
+* 15 minutos
+* 20 minutos
+* 25 minutos
+* 30 minutos
+* 45 minutos
+* 60 minutos
+
+Also allow users to create their own custom presets.
+
+### Timer Modes
+
+Support multiple timer modes:
+
+1. Temporizador
+2. Cronômetro
+3. Pomodoro
+4. Temporizador de Intervalos
+5. Temporizador de Meditação
+
+The mode selector should remain simple and unobtrusive.
+
+### Pomodoro
+
+Create a dedicated Pomodoro mode with:
+
+* Focus duration
+* Short break
+* Long break
+* Number of rounds
+* Automatic transition between focus and break
+* Current round indicator
+* Pause / resume
+* Skip current phase
+* Reset session
+* Optional sound notifications
+
+Use sensible defaults such as 25 minutes focus and 5 minutes break while allowing customization.
+
+### Interval Timer
+
+Create an easy-to-use interval timer for workouts, HIIT, Tabata, boxing, stretching, and other activities.
+
+Support:
+
+* Work duration
+* Rest duration
+* Number of rounds
+* Countdown before starting
+* Automatic work/rest transitions
+* Current round / total rounds
+* Skip phase
+* Pause / resume
+* Reset
+* Sound alerts
+* Optional final countdown
+
+Make the configuration significantly simpler and more polished than traditional interval timer interfaces.
+
+### Timer Sequences
+
+Add support for multi-step timer sequences.
+
+Users should be able to create a sequence such as:
+
+Warm-up — 5:00
+Exercise — 3:00
+Rest — 1:00
+Exercise — 3:00
+Rest — 1:00
+Cool down — 5:00
+
+Allow users to:
+
+* Add steps
+* Remove steps
+* Reorder steps
+* Give each step a name
+* Set duration for each step
+* Choose optional sounds
+* Save sequences locally
+* Start the complete sequence
+* Skip a step
+* Pause/resume
+* Reset
+
+This should be one of the website's useful differentiating features.
+
+### Preset Use Cases
+
+Create useful preset categories for common use cases:
+
+Study:
+
+* Pomodoro
+* Deep Work
+* Study Break
+* Exam Timer
+
+Exercise:
+
+* HIIT
+* Tabata
+* Boxing
+* Workout
+* Rest Timer
+
+Cooking:
+
+* 1 Minute
+* 5 Minutes
+* 10 Minutes
+* 15 Minutes
+* 30 Minutes
+
+Other:
+
+* Meditation
+* Classroom
+* Presentation
+* Meeting
+* Power Nap
+
+Users should be able to launch these presets instantly.
+
+### Fullscreen Mode
+
+Create a dedicated fullscreen timer experience optimized for:
+
+* Classrooms
+* Presentations
+* Gyms
+* Workouts
+* Kitchens
+* Study sessions
+* Projectors and TVs
+
+When fullscreen is active, prioritize the timer and remove unnecessary interface elements.
+
+Use extremely large digits, high contrast, and minimal controls.
+
+Allow users to exit fullscreen easily with Escape.
+
+### Display Styles
+
+Provide a small number of polished timer display styles:
+
+* Digital
+* Circular progress
+* Progress bar
+* Minimal
+
+Do not create excessive customization options. Keep the experience simple and visually consistent.
+
+### Themes
+
+Support:
+
+* Light mode
+* Dark mode
+* System preference
+
+Optionally provide a small number of carefully designed visual themes, but avoid turning the timer into an overly customizable dashboard.
+
+The default design should be minimal, premium, and professional.
+
+### Keyboard Shortcuts
+
+Support keyboard controls such as:
+
+* Space — Start / Pause
+* R — Reset
+* F — Fullscreen
+* M — Mute
+* * — Add time
+* * — Subtract time
+* Escape — Exit fullscreen
+
+Show a small keyboard-shortcuts/help panel without cluttering the main interface.
+
+### Browser Tab Experience
+
+While a timer is running:
+
+* Update the browser tab title with the remaining time
+* Update the favicon where practical
+* Make it easy for users to monitor the timer while using another browser tab
+
+Example:
+
+"09:32 — Temporizador Online"
+
+When the timer finishes, clearly indicate that the timer has ended.
+
+### Screen Wake Lock
+
+Support the browser Screen Wake Lock API where available.
+
+Add an option such as:
+
+"Manter tela ligada"
+
+This should help prevent the device screen from turning off while a timer is running.
+
+Gracefully handle browsers that do not support this feature.
+
+### Local Storage
+
+Do not require user accounts for the core experience.
+
+Use localStorage or IndexedDB to save:
+
+* Last used timer
+* User preferences
+* Favorite presets
+* Custom presets
+* Timer sequences
+* Theme preference
+* Sound preference
+* Recent timers
+
+The website should work immediately without registration.
+
+### Multiple Timers
+
+Consider supporting multiple independent timers.
+
+Users should be able to create and run multiple timers when useful, especially for cooking, classroom activities, workouts, or productivity.
+
+Keep this feature optional and ensure it does not complicate the primary single-timer experience.
+
+### Sharing
+
+Create shareable timer URLs.
+
+For example:
+
+/temporizador/5-minutos/
+/temporizador/10-minutos/
+/temporizador/15-minutos/
+/temporizador/25-minutos/
+/temporizador/30-minutos/
+/temporizador/60-minutos/
+
+Opening a shared timer URL should automatically load the specified duration.
+
+Also allow users to copy/share a configured timer link using the browser's Web Share API where supported.
+
+### QR Sharing
+
+For useful preset or custom timers, provide an optional QR code that users can scan with another device.
+
+This can be particularly useful for:
+
+* Classrooms
+* Presentations
+* Gyms
+* Events
+
+Do not make QR functionality prominent in the main interface.
+
+### Offline / PWA
+
+Build the website as a Progressive Web App where appropriate.
+
+Support:
+
+* Offline loading
+* Service worker caching
+* Installability
+* Standalone mode
+* Local timer functionality without an internet connection
+
+The core timer must continue working without a network connection after the application has been loaded.
+
+### Accessibility
+
+Follow accessibility best practices.
+
+Support:
+
+* Keyboard navigation
+* Visible focus states
+* ARIA labels where appropriate
+* High contrast
+* Large touch targets
+* Screen-reader-friendly controls
+* Reduced-motion preference
+* Accessible timer announcements where appropriate
+
+Do not rely only on color to communicate timer states.
+
+### Responsive Design
+
+The website must be designed mobile-first and work extremely well on:
+
+* Mobile phones
+* Tablets
+* Laptops
+* Desktop monitors
+* Large displays
+* Projectors
+
+Controls should be large and comfortable for touch input.
+
+The timer should remain the visual focus on every screen size.
+
+### SEO Structure
+
+Build the website around the primary Brazilian Portuguese keyword:
+
+"temporizador online"
+
+Create useful SEO-focused pages for:
+
+* Temporizador Online
+* Temporizador de 1 minuto
+* Temporizador de 5 minutos
+* Temporizador de 10 minutos
+* Temporizador de 15 minutos
+* Temporizador de 20 minutos
+* Temporizador de 25 minutos
+* Temporizador de 30 minutos
+* Temporizador de 45 minutos
+* Temporizador de 60 minutos
+* Temporizador Pomodoro
+* Temporizador para Estudos
+* Temporizador para Exercícios
+* Temporizador HIIT
+* Temporizador Tabata
+* Temporizador para Cozinha
+* Temporizador para Meditação
+* Cronômetro Online
+
+Each SEO page should provide a genuinely useful, working timer rather than being a thin keyword page.
+
+Use proper:
+
+* Title tags
+* Meta descriptions
+* Canonical URLs
+* Open Graph metadata
+* Structured data where appropriate
+* Semantic HTML
+* Internal linking
+* Breadcrumbs where useful
+
+Avoid keyword stuffing and automatically generated low-value pages.
+
+### Homepage Structure
+
+The homepage should prioritize the timer itself.
+
+Suggested structure:
+
+1. Minimal header
+2. Main timer
+3. Quick presets
+4. Timer mode selector
+5. Optional advanced settings
+6. Popular timers
+7. Use-case categories
+8. Helpful SEO content
+9. FAQ
+10. Footer
+
+The user should be able to start a timer without scrolling.
+
+### Main UI Direction
+
+Use a clean, minimal, premium interface inspired by Apple.
+
+Do NOT copy their UI.
+
+Use:
+
+* Generous whitespace
+* Strong typography
+* Neutral background
+* Subtle borders
+* Very restrained shadows
+* One primary accent color
+* Rounded but not excessively pill-shaped controls
+* Large timer typography
+* Clear visual hierarchy
+* Minimal navigation
+* Smooth but subtle animations
+
+The timer itself should be the hero element rather than a marketing banner.
+
+Avoid:
+
+* Excessive gradients
+* Excessive glassmorphism
+* Large decorative illustrations
+* Cluttered dashboards
+* Too many colors
+* Excessive cards
+* Unnecessary animations
+* Complicated configuration panels
+
+The overall feeling should be:
+
+"Open the website → understand it immediately → set a timer → start."
+
+### Competitive Research
+
+Research existing online timer websites before implementation, especially:
+
+* https://digitalclock.live/pt/timer/
+* https://relogioonline.com.br/temporizador/
+* https://tallycount.app/
+* Other major online timer, countdown, Pomodoro, interval timer, and stopwatch websites
+
+Study their:
+
+* Features
+* Timer behavior
+* Presets
+* Fullscreen functionality
+* Sound controls
+* Keyboard shortcuts
+* Mobile UX
+* Interval timers
+* Pomodoro functionality
+* SEO structure
+* Navigation
+* Accessibility
+* Sharing
+* PWA/offline behavior
+* Visual hierarchy
+
+Use the research to understand what users expect, but do NOT copy their visual design, layouts, wording, branding, or UI patterns.
+
+The goal is to build an original product that improves upon the existing experience.
+
+### Important Differentiators
+
+Prioritize features that can make this website better than existing basic timer websites:
+
+* Extremely fast startup
+* Accurate background timing
+* Excellent fullscreen mode
+* Timer sequences
+* Easy interval timer
+* One-click presets
+* Keyboard controls
+* Tab-title countdown
+* Screen wake lock
+* Local saving without accounts
+* Shareable timer URLs
+* Multiple timers
+* PWA/offline support
+* Mobile-first UX
+* Excellent Brazilian Portuguese localization
+* Specialized timers for study, exercise, cooking, meditation, and productivity
+
+Do not implement every advanced feature at the expense of simplicity.
+
+The default experience should remain extremely simple.
+
+### Technical Requirements
+
+Use AstroJS for the application.
+
+Use Tailwind CSS v4.
+
+Prefer client-side functionality and browser APIs wherever possible.
+
+Avoid unnecessary backend infrastructure for features that can work locally.
+
+Use TypeScript with clean, maintainable component architecture.
+
+Keep JavaScript lightweight.
+
+Optimize for:
+
+* Fast initial load
+* Minimal JavaScript
+* Excellent Core Web Vitals
+* Mobile performance
+* Accessibility
+* SEO
+* Offline functionality
+
+The timer must remain accurate and reliable.
+
+Use timestamp-based calculations rather than relying on setInterval alone for elapsed-time accuracy.
+
+Keep the codebase modular so additional timer modes and features can be added later.
+
+### Final Design Goal
+
+The final website should feel like a premium, modern utility rather than an old-fashioned timer website.
+
+It should be:
+
+Fast.
+Minimal.
+Accurate.
+Easy to understand.
+Beautiful.
+Mobile-friendly.
+Accessible.
+SEO-friendly.
+
+The primary success metric is simple:
+
+A user searching for "temporizador online" should land on the page and be able to start a timer almost immediately.
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+Do the On Page SEO of this Website for
+
+Main Keyword: temporizador online
+Supporting Keywords: temporizador online aesthetic, temporizador online 10 minutos, temporizador online regressivo, temporizador online 40 segundos, temporizador online 15 minutos, multi temporizador online, timer temporizador online, temporizador online 5 minutos, temporizador online pomodoro, cronometro temporizador online, temporizador online bonito, relógio temporizador online, temporizador online 10 minutos, temporizador online google
+on home page write 600 words about the tool for SEO
+
+
+like this do for other Page
+
+Main Keyword: cronômetro online
+Supporting Keywords: cronometro online, cronômetro online tela cheia, cronômetro online regressivo, cronometro online google, cronometro online para estudo, cronômetro online aesthetic, cronômetro online estudos, cronômetro online grátis, cronometro online regressivo
+
+Main Keyword: pomodoro online
+Supporting Keywords: timer pomodoro online, cronometro pomodoro online, relógio pomodoro online, pomodoro online gratis, método pomodoro online, pomodoro online timer, temporizador pomodoro online, pomodoro online com som, focus pomodoro online, técnica pomodoro online
+
+Main Keyword: intervalos 
+Supporting Keywords: real intervals, contador de intervalos online, calcular intervalos online, determinar intervalos online, graficar intervalos online, cronometro intervalos online, cronometro con intervalos online
+
+Main Keyword: meditação 
+Supporting Keywords: meditação Temporizador, (here other suitable keywords)
+
+Main Keyword: Sequências 
+Supporting Keywords: Sequências Temporizador, (add here other suitable keywords)
+
+
+
+
+add seo friendly FAQ section for these below questions:
+
+
+
+NOTE: Use JSON-LD for FAQ SEO
+example: ```
+ <script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [{
+ "@type": "Question",
+ "name": "How to find an apprenticeship?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "<p>We provide an official service to search through available apprenticeships. To get started, create an account here, specify the desired region, and your preferences. You will be able to search through all officially registered open apprenticeships.</p>"
+ }
+ }, {
+ "@type": "Question",
+ "name": "Whom to contact?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "You can contact the apprenticeship office through our official phone hotline above, or with the web-form below. We generally respond to written requests within 7-10 days."
+ }
+ }]
+ }
+ </script>
+```

@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	/** Canonical path beginning with "/" */
+	path: string;
+	heading: string;
+	sub: string;
+	/** ISO date (YYYY-MM-DD) shown as "última atualização" */
+	updated?: string;
+}
+
+const { heading, sub, updated } = Astro.props;
+
+const formattedUpdated = updated
+	? new Date(`${updated}T00:00:00`).toLocaleDateString('pt-BR', {
+			day: 'numeric',
+			month: 'long',
+			year: 'numeric',
+		})
+	: undefined;
+---
+
+<Base
+	title={Astro.props.title}
+	description={Astro.props.description}
+	path={Astro.props.path}
+>
+	<article class="mx-auto max-w-2xl px-4 pt-10 pb-20">
+		<header class="text-center mb-8 hero-mesh">
+			<h1 class="text-4xl font-semibold tracking-tight">{heading}</h1>
+			<p class="mt-3 text-lg" style="color: var(--color-body)">{sub}</p>
+			{
+				formattedUpdated && (
+					<p class="mt-3 text-[13px]" style="color: var(--color-ink-muted)">
+						Última atualização:{' '}
+						<time datetime={updated}>{formattedUpdated}</time>
+					</p>
+				)
+			}
+		</header>
+
+		<section class="article">
+			<slot />
+		</section>
+	</article>
+</Base>
+
+<style>
+	.article :global(h2) {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin-top: 2.5rem;
+		margin-bottom: 0.75rem;
+		line-height: 1.25;
+	}
+	.article :global(h3) {
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin-top: 1.5rem;
+		margin-bottom: 0.4rem;
+	}
+	.article :global(p) {
+		color: var(--color-body);
+		margin-bottom: 0.8rem;
+		line-height: 1.6;
+	}
+	.article :global(ul) {
+		list-style: none;
+		padding-left: 0;
+		margin-bottom: 1rem;
+	}
+	.article :global(ul li) {
+		position: relative;
+		padding-left: 20px;
+		color: var(--color-body);
+		margin-bottom: 0.35rem;
+		line-height: 1.6;
+	}
+	.article :global(ul li::before) {
+		content: '';
+		position: absolute;
+		left: 2px;
+		top: 9px;
+		width: 7px;
+		height: 7px;
+		border-radius: 2px;
+		background: var(--color-link);
+	}
+	.article :global(code) {
+		font-family: var(--font-mono);
+		font-size: 0.875em;
+		padding: 2px 6px;
+		border-radius: 6px;
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+	}
+	.article :global(strong) {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+</style>

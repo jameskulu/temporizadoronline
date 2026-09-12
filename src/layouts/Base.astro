@@ -1,0 +1,71 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_NAME, canonical } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	/** Canonical path beginning with "/" */
+	path: string;
+	ogImage?: string;
+	robots?: string;
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, path, jsonLd } = Astro.props;
+const url = canonical(path);
+const robots = Astro.props.robots ?? 'index, follow';
+const ogImage = Astro.props.ogImage ?? '/icons/icon-512.png';
+const imageUrl = ogImage.startsWith('http') ? ogImage : canonical(ogImage);
+---
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={url} />
+		<meta name="robots" content={robots} />
+		<meta name="theme-color" content="#171717" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="pt_BR" />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={url} />
+		<meta property="og:image" content={imageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.webmanifest" />
+		{Array.isArray(jsonLd)
+			? jsonLd.map((o) => <script is:inline type="application/ld+json" set:html={JSON.stringify(o)} />)
+			: jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+		<script is:inline>
+			(function () {
+				try {
+					var t = localStorage.getItem('to:theme');
+					var sys = matchMedia('(prefers-color-scheme: dark)').matches;
+					var dark = t === 'dark' || ((!t || t === 'system') && sys);
+					document.documentElement.classList.toggle('dark', dark);
+				} catch (e) {}
+			})();
+		</script>
+	</head>
+	<body>
+		<Header />
+		<main class="min-h-[70vh]">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

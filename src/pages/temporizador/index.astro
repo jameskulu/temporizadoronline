@@ -1,0 +1,55 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { MINUTE_PAGES, faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Como criar um temporizador personalizado?',
+		a: 'Use o campo de configuração da página: indicador de horas, minutos e segundos no seu timer — de alguns segundos até 24 horas.',
+	},
+	{
+		q: 'O que acontece quando o tempo acaba?',
+		a: 'Toca um alarme (você escolhe entre 5 sons e o volume), a tela dá um sinal, o celular vibra e, se você quiser, o timer continua contando o tempo extra.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador online — contagem regressiva grátis"
+	description="Temporizador online com contagem regressiva de 1 a 60 minutos ou tempo personalizado. Preciso, gratuito, funciona offline e sem cadastro."
+	path="/temporizador/"
+	heading="Temporizador"
+	sub="Contagem regressiva simples e precisa. Configure o tempo, inicie e fique tranquilo: o aviso chega na hora certa."
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Use o temporizador acima para qualquer contagem regressiva: <strong>estudos, receitas, reuniões, sonecas,
+		exercícios</strong> — tudo que precisa de um alarme fino. Escolha um tempo pronto abaixo ou configure o seu.
+	</p>
+	<h2>Temporizadores prontos por duração</h2>
+	<div class="grid-cols flex flex-wrap gap-2 mb-8" style="margin-bottom:2rem">
+		{
+			MINUTE_PAGES.map((m) => (
+				<a href={`/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} minutos</a>
+			))
+		}
+	</div>
+	<h2>Dicas de uso</h2>
+	<ul>
+		<li><strong>Modo foco:</strong> aperte <kbd>F</kbd> para esconder tudo e só ver o relógio.</li>
+		<li><strong>Continuar após o zero:</strong> marque “Continuar após o zero” para medir também o tempo extra (útil na cozinha).</li>
+		<li><strong>Sem perder tempo:</strong> o timer usa o relógio do sistema — funciona mesmo em segundo plano.</li>
+	</ul>
+	<h2>Perguntas frequentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>
