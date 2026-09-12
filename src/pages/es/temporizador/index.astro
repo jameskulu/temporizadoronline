@@ -1,0 +1,58 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { faqJsonLd } from '../../../data/site';
+import { getMinutePages } from '../../../i18n/utils';
+
+const pages = getMinutePages('es');
+
+const faqs = [
+	{
+		q: '¿Cómo crear un temporizador personalizado?',
+		a: 'Usa el campo de configuración de la página: indicador de horas, minutos y segundos para tu timer — desde algunos segundos hasta 24 horas.',
+	},
+	{
+		q: '¿Qué pasa cuando se acaba el tiempo?',
+		a: 'Suena una alarma (eliges entre 5 sonidos y el volumen), la pantalla da una señal, el móvil vibra y, si quieres, el timer sigue contando el tiempo extra.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador online — cuenta regresiva gratis"
+	description="Temporizador online con cuenta regresiva de 1 a 60 minutos o tiempo personalizado. Preciso, gratuito, funciona sin conexión y sin registro."
+	path="/temporizador/"
+	heading="Temporizador"
+	sub="Cuenta regresiva simple y precisa. Configura el tiempo, inicia y quédate tranquilo: el aviso llega a tiempo."
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Usa el temporizador de arriba para cualquier cuenta regresiva: <strong>estudios, recetas, reuniones, siestas,
+		ejercicios</strong> — todo lo que necesita una alarma precisa. Elige un tiempo listo abajo o configura el tuyo.
+	</p>
+	<h2>Temporizadores listos por duración</h2>
+	<div class="grid-cols flex flex-wrap gap-2 mb-8" style="margin-bottom:2rem">
+		{
+			pages.map((m) => (
+				<a href={`/es/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} minutos</a>
+			))
+		}
+	</div>
+	<h2>Consejos de uso</h2>
+	<ul>
+		<li><strong>Modo enfoque:</strong> pulsa <kbd>F</kbd> para ocultar todo y ver solo el reloj.</li>
+		<li><strong>Continuar después del cero:</strong> marca "Continuar después del cero" para medir también el tiempo extra (útil en la cocina).</li>
+		<li><strong>Sin perder tiempo:</strong> el timer usa el reloj del sistema — funciona incluso en segundo plano.</li>
+	</ul>
+	<h2>Preguntas frecuentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

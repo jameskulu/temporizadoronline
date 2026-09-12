@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Was ist HIIT?',
+		a: 'HIIT (hochintensives Intervalltraining) wechselt kurze Phasen maximaler Belastung mit Erholung. Ein gängiges Beispiel: 40 Sekunden Belastung und 20 Sekunden Pause, in Runden wiederholt.',
+	},
+	{
+		q: 'Wie lange dauert eine HIIT-Einheit?',
+		a: 'Eine klassische Einheit mit 8 Runden à 40×20 dauert etwa 8 Minuten, ohne die Vorbereitung. Kürzere Einheiten (4 Minuten im Tabata-Stil) erzielen ebenfalls gute Ergebnisse.',
+	},
+];
+---
+<ToolPage
+	title="HIIT-Timer – 40×20 fertig zum Training"
+	description="Kostenloser HIIT-Timer: 40 Sekunden Belastung, 20 Sekunden Pause, 8 Runden mit Vorbereitung. Trainieren Sie überall ohne Ausrüstung und ohne App."
+	path="/temporizador-hiit/"
+	heading="HIIT-Timer"
+	sub="Maximale Belastung für 40 Sekunden, atmen für 20. Acht Runden inklusive Vorbereitung."
+	initial={JSON.stringify({ mode: 'interval', workSec: 40, restSec: 20, rounds: 8, prepareSec: 5, label: 'HIIT' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Dieser HIIT-Timer wechselt <strong>40 Sekunden Belastung</strong> und <strong>20 Sekunden Pause</strong> über
+		<strong>8 Runden</strong>, mit 5 Sekunden Vorbereitung vor dem ersten Sprint. Den Rhythmus gibt der Ton bei
+		jedem Phasenwechsel vor.
+	</p>
+	<h2>So folgen Sie</h2>
+	<ul>
+		<li>In der <strong>Belastungsphase</strong> geben Sie so viel, wie Sie über die Runde halten können.</li>
+		<li>In der <strong>Erholungsphase</strong> gehen Sie oder bringen Sie den Atem zur Ruhe.</li>
+		<li>Nutzen Sie den <strong>Fokus-Modus</strong> (Vollbild), um nicht ständig auf die Zeit zu schauen.</li>
+	</ul>
+	<p>
+		Weniger Zeit? Probieren Sie <a href="/de/temporizador-tabata/">Tabata</a> (4 Minuten) oder passen Sie die
+		Runden in den Einstellungen an.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

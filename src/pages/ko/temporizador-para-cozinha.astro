@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '요리에 가장 좋은 타이머는 무엇인가요?',
+		a: '어떤 시간이든 상관없습니다. 중요한 것은 또렷한 알림과 백그라운드에서도 계속 세는 기능입니다. 이 타이머는 소리와 진동이 울리고 0 이후에도 추가 시간을 계속 셀 수 있습니다.',
+	},
+	{
+		q: '주방에서 여러 타이머를 쓸 수 있나요?',
+		a: '네. "새 타이머"로 각 요리마다 별도의 타이머를 만들 수 있습니다. 밥·오븐·차가 서로 다른 시간에 끝날 때 유용합니다.',
+	},
+];
+---
+<ToolPage
+	title="요리용 타이머 — 레시피를 제때"
+	description="온라인 요리 타이머: 계란, 밥, 오븐, 차까지. 소리 알림, 추가 시간, 동시에 여러 타이머. 무료이며 오프라인 작동."
+	path="/temporizador-para-cozinha/"
+	heading="요리용 타이머"
+	sub="밥을 위한 필수품, 오븐과 계란의 핵심. 가스레인지에 달라붙지 마세요."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: '요리' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		요리는 시간재기입니다. <strong>1분</strong>은 차, <strong>5분</strong>은 야채, <strong>10분</strong>은
+		파스타, <strong>15분</strong>은 작은 구이. 설정하고 휴대폰을 조리대에 두면 정확한 때에 알림이 옵니다.
+		"0 이후에도 계속 측정"을 체크하면 반죽을 쉬게 하는 시간도 잴 수 있습니다.
+	</p>
+	<h2>가장 많이 쓰는 시간</h2>
+	<ul>
+		<li><strong><a href="/ko/temporizador/1-minuto/">1분</a></strong> — 수란, 가스레인지 소스, 걸러 낸 차.</li>
+		<li><strong><a href="/ko/temporizador/5-minutos/">5분</a></strong> — 짧은 백미, 찐 야채, 드립 커피.</li>
+		<li><strong><a href="/ko/temporizador/10-minutos/">10분</a></strong> — 신선한 파스타, 반숙 계란, 콩류.</li>
+		<li><strong><a href="/ko/temporizador/15-minutos/">15분</a>–<a href="/ko/temporizador/30-minutos/">30분</a></strong> — 구이, 리소토, 묶어 굽는 디저트.</li>
+	</ul>
+	<p>
+		큰 시계를 보고 싶다면 <strong>집중 모드</strong>(전체 화면)를 쓰고, 레시피 시간을 기록하려면
+		<a href="/ko/cronometro/">스톱워치</a>도 있습니다.
+	</p>
+	<h2>자주 묻는 질문</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

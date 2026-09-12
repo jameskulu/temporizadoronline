@@ -1,0 +1,97 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: "Qu'est-ce que la méthode pomodoro ?",
+		a: "La méthode pomodoro est une technique de gestion du temps créée par Francesco Cirillo : travaillez par blocs de concentration de 25 minutes, faites une pause courte de 5 minutes et, tous les 4 blocs, une pause longue de 15 minutes. L'objectif est de rester concentré sur une seule tâche, puis de se reposer.",
+	},
+	{
+		q: 'Comment fonctionne le minuteur pomodoro en ligne ?',
+		a: "Le pomodoro en ligne ci-dessus est déjà configuré selon le schéma classique : 25 minutes de concentration, 5 de pause courte et 15 de pause longue tous les 4 cycles. L'application joue un son à chaque changement de phase et fait avancer les cycles toute seule — vous n'avez qu'à vous concentrer.",
+	},
+	{
+		q: 'Le pomodoro en ligne est-il gratuit ?',
+		a: "Oui, 100 % gratuit et sans inscription. Toutes les fonctions sont disponibles : durées réglables, sons, vibrations, mode focus plein écran et progression des cycles sur le cadran.",
+	},
+	{
+		q: 'Le pomodoro en ligne joue-t-il un son à chaque phase ?',
+		a: "Oui. Choisissez parmi 5 sons d'alarme et activez les vibrations sur mobile. À chaque changement de phase — fin de la concentration, fin de la pause, pause longue — le pomodoro en ligne avec son prévient immédiatement.",
+	},
+	{
+		q: 'Puis-je changer les durées du pomodoro ?',
+		a: "Oui : modifiez la concentration, la pause courte, la pause longue et le nombre de cycles dans les paramètres. Vous pouvez aussi avancer les phases automatiquement ou les passer manuellement. Certains préfèrent 50 minutes de concentration pour un travail en profondeur.",
+	},
+	{
+		q: 'Le pomodoro en ligne fonctionne-t-il sur mobile ?',
+		a: "Il fonctionne dans tous les navigateurs, sans installation. Enregistrez le raccourci sur l'écran d'accueil pour ouvrir le minuteur pomodoro en ligne comme une application — il continue aussi de tourner avec le téléphone verrouillé.",
+	},
+	{
+		q: 'À quoi sert le pomodoro de concentration ?',
+		a: "Le pomodoro en ligne aide à étudier et travailler en pleine attention : quand vous savez que le bloc dure 25 minutes, le cerveau se détend et se consacre à la tâche. Il est utilisé par les étudiants, les développeurs, les écrivains et toute personne qui a besoin de concentration.",
+	},
+	{
+		q: 'Combien de cycles avant la pause longue ?',
+		a: "Le schéma standard de la technique pomodoro est une pause longue de 15 minutes tous les 4 cycles. Dans les paramètres, vous pouvez le régler sur 2, 3 ou plus de cycles selon votre rythme et la taille de votre séance.",
+	},
+];
+---
+<ToolPage
+	title="Pomodoro en ligne gratuit — minuteur avec son et mode focus"
+	description="Pomodoro en ligne gratuit : minuteur de 25 minutes avec pauses courtes et longues, son à chaque phase et mode focus. La technique pomodoro dans le navigateur, sans installation."
+	path="/pomodoro/"
+	heading="Pomodoro en ligne"
+	sub="25 minutes de concentration, pause courte et pause longue — avec alertes sonores et suivi des cycles."
+	initial={JSON.stringify({ mode: 'pomodoro' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		La méthode pomodoro est l'une des techniques les plus utilisées pour <a href="/fr/temporizador-para-estudos/">étudier</a>
+		et travailler en profondeur. Le minuteur ci-dessus est déjà réglé sur le schéma classique :
+		<strong>25 minutes de concentration</strong>, <strong>pause courte</strong> et <strong>pause longue</strong>.
+		Appuyez sur Démarrer et concentrez-vous sur une seule tâche jusqu'à ce que l'alarme sonne.
+	</p>
+	<h2>Comment utiliser le minuteur pomodoro</h2>
+	<ul>
+		<li><strong>Concentration :</strong> travaillez sans interruption jusqu'à la fin du bloc (réglé sur <a href="/fr/temporizador/25-minutos/">25 min</a>).</li>
+		<li><strong>Pause courte :</strong> <a href="/fr/temporizador/5-minutos/">5 minutes</a> pour vous étirer, boire de l'eau et reposer vos yeux.</li>
+		<li><strong>Pause longue :</strong> tous les 4 cycles, <a href="/fr/temporizador/15-minutos/">15 minutes</a> de plus long repos.</li>
+		<li><strong>Cycles :</strong> définissez le nombre de blocs avant une pause longue.</li>
+	</ul>
+	<h2>Pourquoi utiliser un pomodoro en ligne</h2>
+	<p>
+		Un <strong>minuteur pomodoro en ligne</strong> rend la technique pomodoro automatique : plus besoin de
+		chronométrer dans votre tête, de noter les horaires ni de retenir quand finit la pause. Ce <strong>pomodoro en
+		ligne</strong> gère le rythme et affiche la progression des cycles sur le cadran. Il fait office de
+		<strong>chronomètre pomodoro</strong> de poche — sur ordinateur, sur mobile ou en plein écran.
+	</p>
+	<p>
+		La <strong>technique pomodoro en ligne</strong> s'accorde parfaitement à une routine d'étude : bloc de
+		concentration, pause courte, on répète. Quand le cycle de quatre est terminé, profitez de la pause longue pour
+		vous reposer vraiment. Ceux qui préfèrent un <strong>minuteur pomodoro</strong> plus simple trouveront aussi sur ce
+		site l'<a href="/fr/cronometro/">chronomètre</a> et les <a href="/fr/temporizador/">minuteurs de 5, 10 et 15
+		minutes</a> — tout en une seule page.
+	</p>
+	<h2>Pomodoro avec son et mode focus</h2>
+	<p>
+		Le <strong>pomodoro en ligne avec son</strong> prévient à chaque changement de phase parmi 5 styles d'alarme, avec
+		volume réglable et vibrations sur mobile. Pour maximiser la concentration, activez le <strong>mode focus</strong>
+		(plein écran) : le cadran devient grand, le reste de la page disparaît et rien ne détourne votre attention du bloc
+		en cours.
+	</p>
+	<h2>Questions fréquentes</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

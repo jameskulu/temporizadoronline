@@ -1,0 +1,52 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Was ist der beste Küchen-Timer?',
+		a: 'Jede Dauer funktioniert: Wichtig sind ein klarer Hinweis und die Möglichkeit, im Hintergrund weiterlaufen zu lassen. Dieser Timer spielt einen Ton, vibriert und kann sogar nach dem Nullpunkt die zusätzlichen Minuten weiterzählen.',
+	},
+	{
+		q: 'Kann ich in der Küche mehrere Timer nutzen?',
+		a: 'Ja. Mit „Neuer Timer“ erstellen Sie gleichzeitig separate Timer für jedes Gericht – praktisch, wenn Reis, Ofen und Tee zu unterschiedlichen Zeiten fertig sind.',
+	},
+];
+---
+<ToolPage
+	title="Küchen-Timer – Rezepte immer al dente"
+	description="Küchen-Timer online: Ei, Reis, Ofen und Tee. Ton, Zusatzzeit und mehrere Timer gleichzeitig. Kostenlos und offline."
+	path="/temporizador-para-cozinha/"
+	heading="Küchen-Timer"
+	sub="Treu zum Reis, essenziell für Ofen und Ei – ganz ohne am Herd zu hängen."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Kochen' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Kochen ist Timing: <strong>eine Minute</strong> für den Tee, <strong>5</strong> für Gemüse, <strong>10</strong>
+		für Pasta, <strong>15</strong> für kleine Braten. Einrichten, das Handy auf die Arbeitsfläche legen und den
+		Hinweis pünktlich bekommen. Haken Sie „Nach Null weiterzählen“ an, um auch die Ruhezeit von Teig oder Fleisch
+		zu messen.
+	</p>
+	<h2>Die häufigsten Zeiten</h2>
+	<ul>
+		<li><strong><a href="/de/temporizador/1-minuto/">1 Min.</a></strong> – pochierte Eier, Soße auf dem Herd, aufgegossener Tee.</li>
+		<li><strong><a href="/de/temporizador/5-minutos/">5 Min.</a></strong> – kurzer weißer Reis, gedämpftes Gemüse, Filterkaffee.</li>
+		<li><strong><a href="/de/temporizador/10-minutos/">10 Min.</a></strong> – frische Pasta, weiche Eier, Hülsenfrüchte.</li>
+		<li><strong><a href="/de/temporizador/15-minutos/">15</a>–<a href="/de/temporizador/30-minutos/">30 Min.</a></strong> – Braten, Risotto und Desserts.</li>
+	</ul>
+	<p>
+		Nutzen Sie den <strong>Fokus-Modus</strong> (Vollbild), um die große Uhr zu sehen, und nehmen Sie die
+		<a href="/de/cronometro/">Stoppuhr</a>, um die Zeiten Ihrer Rezepte festzuhalten.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

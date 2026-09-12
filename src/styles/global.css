@@ -223,6 +223,12 @@ body {
 		background-color: var(--color-hairline-soft);
 		padding: 3px;
 		gap: 2px;
+		max-width: 100%;
+		overflow-x: auto;
+		scrollbar-width: none;
+	}
+	.seg::-webkit-scrollbar {
+		display: none;
 	}
 	.seg-item {
 		@apply inline-flex items-center justify-center rounded-full;

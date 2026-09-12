@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Cos\'è il tabata?',
+		a: 'Il tabata è un allenamento a intervalli breve: 20 secondi di sforzo massimo e 10 di riposo, ripetuti 8 volte — 4 minuti in totale. Nonostante la brevità, è intenso.',
+	},
+	{
+		q: 'Serve un\'attrezzatura per il tabata?',
+		a: 'No. Esercizi a corpo libero (squat, jumping jack, corda, mountain climber) funzionano benissimo. Scegli un movimento, segui il ritmo e riposa negli intervalli.',
+	},
+];
+---
+<ToolPage
+	title="Timer Tabata — 20×10 in 4 minuti"
+	description="Timer tabata gratuito: 20 secondi di sforzo, 10 di riposo, 8 round = 4 minuti. Allenamento veloce da fare ovunque."
+	path="/temporizador-tabata/"
+	heading="Timer Tabata"
+	sub="20 s di sforzo, 10 s di riposo, 8 round. Quattro minuti esatti."
+	initial={JSON.stringify({ mode: 'interval', workSec: 20, restSec: 10, rounds: 8, prepareSec: 3, label: 'Tabata' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Il tabata dura <strong>4 minuti</strong> con 8 round da <strong>20 secondi di sforzo</strong> e
+		<strong>10 di riposo</strong>. Questo timer include già 3 secondi di preparazione per posizionarti prima del
+		primo sprint. Ogni cambio riproduce un suono.
+	</p>
+	<h2>Come fare</h2>
+	<ul>
+		<li>Scegli un movimento a corpo libero prima di iniziare.</li>
+		<li>Nei 20 s di sforzo, mantieni il massimo ritmo che riesci a sostenere.</li>
+		<li>Nei 10 s di riposo, resta attivo e riprendi fiato.</li>
+		<li>Hai finito? Riposa bene — la sessione è breve, ma intensa.</li>
+	</ul>
+	<p>
+		Vuoi serie più lunghe? Guarda il <a href="/it/temporizador-hiit/">timer HIIT 40×20</a> o costruisci il tuo
+		intervallo in <a href="/it/intervalos/">intervalli</a>.
+	</p>
+	<h2>Domande frequenti</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

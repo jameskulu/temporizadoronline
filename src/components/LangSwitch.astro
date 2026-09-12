@@ -1,0 +1,76 @@
+---
+import { getLangFromUrl, stripLang, localPath } from '../i18n/utils';
+import { languages, LANGS } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const current = stripLang(Astro.url.pathname);
+---
+<details class="lang-switch" title={languages[lang]}>
+	<summary class="lang-trigger" aria-label="Language / Idioma">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+		<span>{lang}</span>
+	</summary>
+	<div class="lang-menu">
+		{LANGS.map((l) => (
+			<a
+				href={localPath(l, current)}
+				lang={l === 'pt' ? 'pt-BR' : l}
+				class:list={['lang-link', { 'lang-active': l === lang }]}
+			>
+				{languages[l]}
+			</a>
+		))}
+	</div>
+</details>
+
+<style>
+	.lang-switch {
+		position: relative;
+	}
+	.lang-trigger {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 5px 10px;
+		border-radius: 999px;
+		border: 1px solid var(--color-hairline);
+		background: var(--color-canvas-elevated);
+		color: var(--color-ink);
+		font-size: 12px;
+		line-height: 1;
+		cursor: pointer;
+		text-transform: uppercase;
+	}
+	.lang-switch[open] .lang-menu {
+		display: flex;
+	}
+	.lang-menu {
+		display: none;
+		position: absolute;
+		right: 0;
+		top: calc(100% + 6px);
+		flex-direction: column;
+		min-width: 150px;
+		padding: 4px;
+		border-radius: 12px;
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-floating);
+		z-index: 50;
+	}
+	.lang-link {
+		padding: 7px 10px;
+		border-radius: 8px;
+		font-size: 13px;
+		color: var(--color-body);
+		text-decoration: none;
+	}
+	.lang-link:hover {
+		background: var(--color-canvas-muted);
+		color: var(--color-ink);
+	}
+	.lang-active {
+		color: var(--color-link);
+		font-weight: 600;
+	}
+</style>

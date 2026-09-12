@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+
+interface Props {
+	error: unknown;
+}
+
+const { error } = Astro.props as Props;
+const safeMessage =
+	error instanceof Error && typeof error.message === 'string'
+		? error.message.slice(0, 200)
+		: '';
+---
+
+<Base
+	title="Errore del server — Timer Online"
+	description="Si è verificato un errore inaspettato su Timer Online. Riprova tra qualche istante o continua a usare il timer, il cronometro o il pomodoro."
+	path="/500/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			500
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			Qualcosa è andato storto sul server
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			Un errore inaspettato si è verificato durante il caricamento di questa pagina. Ricaricala tra qualche istante o usa
+			uno degli strumenti qui sotto per non perdere il ritmo.
+		</p>
+
+		{
+			safeMessage && (
+				<div
+					class="mt-4 max-w-lg rounded-xl border px-4 py-3 text-sm break-words"
+					style="border-color: var(--color-border); color: var(--color-ink-muted)"
+				>
+					{safeMessage}
+				</div>
+			)
+		}
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/it/" class="chip chip-link">Home</a>
+			<a href="/it/temporizador/" class="chip chip-link">Timer</a>
+			<a href="/it/cronometro/" class="chip chip-link">Cronometro</a>
+			<a href="/it/pomodoro/" class="chip chip-link">Pomodoro</a>
+			<a href="/it/intervalos/" class="chip chip-link">Intervalli</a>
+			<a href="/it/sequencias/" class="chip chip-link">Sequenze</a>
+		</div>
+
+		<a
+			href="/it/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			Usa il timer ora
+		</a>
+	</main>
+</Base>

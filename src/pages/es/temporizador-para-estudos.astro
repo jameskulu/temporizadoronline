@@ -1,0 +1,49 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '¿Cuál es el mejor tiempo para estudiar?',
+		a: 'La técnica pomodoro usa bloques de 25 minutos con pausas de 5. Muchos prefieren 50 minutos para lecturas más largas. Empieza con 25 y ajusta según tu concentración.',
+	},
+	{
+		q: '¿Cómo usar el timer en los estudios?',
+		a: 'Elige un tiempo, define una única tarea e inicia. Cuando suene la alarma, anota el progreso y haz la pausa. No cambies de tarea dentro del mismo bloque.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador para estudiar — técnicas de enfoque"
+	description="Temporizador de estudios con la técnica pomodoro y bloques de enfoque. Aprende a usar el tiempo a tu favor y aumenta la concentración."
+	path="/temporizador-para-estudos/"
+	heading="Temporizador para estudiar"
+	sub="Enfoque dividido en bloques con pausas: la forma más simple de estudiar sin cansarte."
+	initial={JSON.stringify({ seconds: 1500, mode: 'timer', label: 'Estudios' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Estudiar con un timer trae dos ventajas: <strong>sabes que hay un final</strong> (el cerebro se relaja) y creas
+		un <strong>ritmo de pausas</strong>. El bloque de 25 minutos ya está configurado — pulsa Iniciar.
+	</p>
+	<h2>Sugerencias de rutina</h2>
+	<ul>
+		<li><strong><a href="/es/temporizador/25-minutos/">Enfoque total (25 min):</a></strong> un bloque de atención solo para la materia actual.</li>
+		<li><strong><a href="/es/temporizador/5-minutos/">Pausa de 5 min:</a></strong> levántate, hidrátate, estírate.</li>
+		<li><strong><a href="/es/temporizador/15-minutos/">Repaso (15 min):</a></strong> repasa tus apuntes con un timer corto, del final hacia el principio.</li>
+	</ul>
+	<p>
+		¿Prefieres bloquear todo el tiempo? Usa el <a href="/es/pomodoro/">pomodoro online</a> para ciclos completos
+		con pausas largas automáticas.
+	</p>
+	<h2>Preguntas frecuentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

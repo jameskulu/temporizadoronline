@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+	title="Página no encontrada — Temporizador Online"
+	description="Esta página no existe en el Temporizador Online. Sigue usando el temporizador, el cronómetro, el pomodoro o los intervalos regresivos."
+	path="/404/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			404
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			Página no encontrada
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			La dirección ingresada no existe o fue movida. ¿Qué tal volver al trabajo con una de las
+			herramientas de abajo?
+		</p>
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/es/" class="chip chip-link">Inicio</a>
+			<a href="/es/temporizador/" class="chip chip-link">Temporizador</a>
+			<a href="/es/cronometro/" class="chip chip-link">Cronómetro</a>
+			<a href="/es/pomodoro/" class="chip chip-link">Pomodoro</a>
+			<a href="/es/intervalos/" class="chip chip-link">Intervalos</a>
+			<a href="/es/meditacao/" class="chip chip-link">Meditación</a>
+			<a href="/es/sequencias/" class="chip chip-link">Secuencias</a>
+		</div>
+
+		<a
+			href="/es/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			Usar el temporizador ahora
+		</a>
+	</main>
+</Base>

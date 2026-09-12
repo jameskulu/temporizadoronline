@@ -1,20 +1,19 @@
 ---
-/**
- * Interactive timer island. Props:
+/** Interactive timer island. Props:
  *  - `initial`: JSON string of an `Initial` payload (from SEO pages / presets)
  *  - `scope`: 'full' shows categories too (homepage), 'compact' hides extras
  */
-interface Props {
-	initial?: string;
-	scope?: 'full' | 'compact';
-}
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
-const { initial, scope = 'full' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const initial = Astro.props.initial;
+const scope = Astro.props.scope ?? 'full';
 ---
-<div id="t-app" data-scope={scope} data-initial={initial ?? ''} class="relative">
+<div id="t-app" data-scope={scope} data-lang={lang} data-initial={initial ?? ''} class="relative">
 	<noscript>
 		<div class="text-center text-sm rounded-[18px] p-4" style="background:var(--color-canvas-muted);color:var(--color-ink-secondary)">
-			Ative o JavaScript para usar o temporizador. Enquanto isso, veja as sugestões de tempo abaixo.
+			{t.noscript}
 		</div>
 	</noscript>
 </div>

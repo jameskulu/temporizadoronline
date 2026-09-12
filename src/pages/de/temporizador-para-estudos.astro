@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Wie lange sollte man am Stück lernen?',
+		a: 'Die Pomodoro-Technik nutzt 25-Minuten-Blöcke mit 5-Minuten-Pausen. Viele bevorzugen 50 Minuten für längere Lektüre. Starten Sie mit 25 und passen Sie es an Ihre Konzentration an.',
+	},
+	{
+		q: 'Wie nutze ich den Timer beim Lernen?',
+		a: 'Wählen Sie eine Zeit, legen Sie genau eine Aufgabe fest und starten Sie. Wenn der Alarm ertönt, notieren Sie den Fortschritt und machen die Pause. Wechseln Sie die Aufgabe nicht innerhalb desselben Blocks.',
+	},
+];
+---
+<ToolPage
+	title="Timer zum Lernen – Fokus-Techniken"
+	description="Timer zum Lernen mit der Pomodoro-Technik und Fokus-Blocken. Erfahren Sie, wie Sie die Zeit für sich nutzen und die Konzentration steigern."
+	path="/temporizador-para-estudos/"
+	heading="Timer zum Lernen"
+	sub="Fokus in Blöcken mit Pausen: der einfachste Weg, zu lernen, ohne zu ermüden."
+	initial={JSON.stringify({ seconds: 1500, mode: 'timer', label: 'Lernen' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Lernen mit einem Timer bringt zwei Vorteile: Sie <strong>wissen, dass es ein Ende gibt</strong> (das Gehirn
+		entspannt) und schaffen einen <strong>Rhythmus aus Pausen</strong>. Der 25-Minuten-Block ist bereits
+		eingestellt – drücken Sie auf Start.
+	</p>
+	<h2>Vorschläge für die Routine</h2>
+	<ul>
+		<li><strong><a href="/de/temporizador/25-minutos/">Voller Fokus (25 Min.):</a></strong> ein Block Aufmerksamkeit allein für den aktuellen Stoff.</li>
+		<li><strong><a href="/de/temporizador/5-minutos/">Pause von 5 Min.:</a></strong> aufstehen, trinken, strecken.</li>
+		<li><strong><a href="/de/temporizador/15-minutos/">Wiederholen (15 Min.):</a></strong> Notizen mit kurzem Timer von hinten nach vorn durchgehen.</li>
+	</ul>
+	<p>
+		Lernen Sie lieber in einem Stück? Nutzen Sie den <a href="/de/pomodoro/">Online-Pomodoro</a> für komplette
+		Zyklen mit automatischen langen Pausen.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

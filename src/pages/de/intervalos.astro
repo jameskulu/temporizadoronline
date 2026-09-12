@@ -1,0 +1,99 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Was ist ein Intervall-Zähler?',
+		a: 'Ein Intervall-Zähler ist ein Timer, der automatisch zwischen Belastungs- und Erholungsphasen wechselt und sich über mehrere Runden wiederholt. Er dient für HIIT-Training, Tabata, Boxrunden und jede Aktivität, die präzise Zeiten braucht.',
+	},
+	{
+		q: 'Wie stelle ich ein Intervalltraining zusammen?',
+		a: 'Legen Sie die Sekunden der Belastung (z. B. 30), die der Erholung (z. B. 15) und die Anzahl der Runden fest. Das Feld „Vorbereitung“ zählt vorab ein Aufwärmen herunter. Die App wechselt die Phasen selbstständig und signalisiert das mit einem Ton.',
+	},
+	{
+		q: 'Was ist der Unterschied zwischen HIIT und Tabata?',
+		a: 'Tabata ist ein festes HIIT-Format: 20 Sekunden maximale Belastung und 10 Sekunden Pause, in 8 Runden (insgesamt 4 Minuten). Allgemeines HIIT kann freie Zeiten nutzen, etwa 40×20. Beides ist in den Presets der App verfügbar.',
+	},
+	{
+		q: 'Wie berechne ich die Gesamtdauer meines Intervalltrainings?',
+		a: 'Addieren Sie Belastung plus Erholung und multiplizieren Sie das mit der Rundenanzahl. Beispiel: 8 Runden à 40×20 ergeben 8 Minuten Training. Passen Sie Belastung, Erholung und Runden in den Einstellungen an, um Intervalle zu bestimmen, die in Ihre Zeit passen.',
+	},
+	{
+		q: 'Kann ich den Rundenfortschritt während des Trainings sehen?',
+		a: 'Ja. Das Zifferblatt zeigt die aktuelle Runde und die Phase (Belastung, Erholung oder Vorbereitung), aktualisiert jede Sekunde – eine einfache Darstellung, die dem Diagramm Ihrer Trainingsintervalle entspricht. Bei jedem Phasenwechsel ertönt ein Ton.',
+	},
+	{
+		q: 'Funktionieren Intervalle als Trainings-Stoppuhr?',
+		a: 'Ja. Neben den wechselnden Phasen erfasst der Timer jede Runde präzise und funktioniert wie eine Intervall-Stoppuhr online: Sie wissen genau, wie lange jede Belastung und jede Erholung gedauert hat, ohne etwas zu notieren.',
+	},
+];
+---
+<ToolPage
+	title="Intervall-Timer Online – HIIT- und Tabata-Trainingszähler"
+	description="Intervall-Timer online: Belastung, Erholung und Runden mit Vorbereitung und Ton. Berechnen und bestimmen Sie Ihre HIIT- und Tabata-Trainingsintervalle kostenlos."
+	path="/intervalos/"
+	heading="Intervalle"
+	sub="Wechselt automatisch zwischen Belastung und Erholung. Bauen Sie Ihr HIIT, Tabata oder Rundentraining."
+	initial={JSON.stringify({ mode: 'interval' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Intervalltraining funktioniert mit präzisen Zeiten. Stellen Sie <strong>Belastung</strong>, <strong>Erholung</strong>,
+		<strong>Runden</strong> und optional eine <strong>Vorbereitung</strong> ein – der Timer wechselt die Phasen
+		selbstständig, spielt bei jedem Wechsel einen Ton und zeigt die aktuelle Runde.
+	</p>
+	<h2>Fertige Presets</h2>
+	<ul>
+		<li><strong><a href="/de/temporizador-tabata/">Tabata:</a></strong> 20 s Belastung + 10 s Pause, 8 Runden.</li>
+		<li><strong><a href="/de/temporizador-hiit/">HIIT:</a></strong> 40 s Belastung + 20 s Pause, 8 Runden.</li>
+		<li><strong>Boxen:</strong> 3-Minuten-Runden mit 1 Minute Pause.</li>
+		<li><strong>Training:</strong> 45 s Belastung + 15 s Pause, 20 Runden.</li>
+	</ul>
+	<h2>Intervalle berechnen und bestimmen</h2>
+	<p>
+		Es ist leicht, <strong>Intervalle online zu berechnen</strong>: Wählen Sie, wie viele Sekunden Belastung und
+		Erholung Sie durchhalten, addieren Sie sie und multiplizieren Sie mit den Runden, um die Gesamtdauer zu kennen.
+		Um <strong>Intervalle online zu bestimmen</strong>, die zu Ihrem Zeitplan passen, ändern Sie Belastung, Erholung
+		und Rundenanzahl, bis die Gesamtzeit stimmt – die App zeigt Runde und Phase in Echtzeit an und funktioniert
+		zugleich als <strong>Intervall-Stoppuhr online</strong>, um jeden Trainingsteil zu messen.
+	</p>
+	<h2>Tipps</h2>
+	<ul>
+		<li>Starten Sie mit einer <strong>Vorbereitung</strong> von 5 bis 10 Sekunden, um sich vor der ersten Belastung zu positionieren.</li>
+		<li>Nutzen Sie den <strong>Fokus-Modus</strong> (Vollbild), um während der Serie den Blick nicht abzuwenden.</li>
+		<li>Lassen Sie das Handy in den Einstellungen mit <strong>eingeschaltetem Bildschirm</strong>, damit es mitten im Training nicht dunkel wird.</li>
+	</ul>
+	<h2>Intervalle für jedes Training</h2>
+	<p>
+		Egal, ob Sie im Studio, zu Hause oder draußen trainieren: Ein <strong>Intervall-Zähler online</strong>
+		respektiert Ihren Plan. Für Kraftserien nutzen Sie Erholungsphasen von <strong>60 bis 90 Sekunden</strong>; für
+		Kondition Belastungen von <strong>30 bis 45 Sekunden</strong> mit kurzen Pausen von <strong>15 und 20 Sekunden</strong>.
+		Die App zeigt die Zeit jeder Phase in Echtzeit, sodass Sie <strong>Intervalle online bestimmen</strong>, ohne im
+		Kopf zu stoppen – einfach dem Zifferblatt und dem Ton folgen. Wenn Sie freie Abschnitte messen oder Runden
+		vergleichen möchten, funktioniert sie auch wie eine <strong>Stoppuhr mit Intervallen online</strong>: starten,
+		stoppen, aufzeichnen und beliebig oft wiederholen.
+	</p>
+	<h2>Fortschritt jeder Runde sichtbar</h2>
+	<p>
+		In der Praxis ist das Zifferblatt bereits Ihr Diagramm: Jede Sekunde bewegt sich die Uhr mit der aktuellen
+		Runde und zeigt, ob Sie sich in Belastung, Erholung oder Vorbereitung befinden. Das ist der einfachste Weg,
+		<strong>Intervalle online darzustellen</strong> – ganz ohne Papier und Tabelle. Und weil jeder Phasenwechsel
+		einen Ton meldet, müssen Sie nicht einmal auf den Bildschirm schauen, um zu wissen, wann es losgeht und wann es
+		aufhört.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

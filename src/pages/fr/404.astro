@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+	title="Page introuvable — Temporizador Online"
+	description="Cette page n'existe pas sur le Temporizador Online. Continuez à utiliser le minuteur, le chronomètre, le pomodoro ou les comptes à rebours."
+	path="/404/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			404
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			Page introuvable
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			L'adresse saisie n'existe pas ou a été déplacée. Que diriez-vous de retourner au travail avec
+			l'un des outils ci-dessous ?
+		</p>
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/fr/" class="chip chip-link">Accueil</a>
+			<a href="/fr/temporizador/" class="chip chip-link">Minuteur</a>
+			<a href="/fr/cronometro/" class="chip chip-link">Chronomètre</a>
+			<a href="/fr/pomodoro/" class="chip chip-link">Pomodoro</a>
+			<a href="/fr/intervalos/" class="chip chip-link">Intervalles</a>
+			<a href="/fr/meditacao/" class="chip chip-link">Méditation</a>
+			<a href="/fr/sequencias/" class="chip chip-link">Séquences</a>
+		</div>
+
+		<a
+			href="/fr/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			Utiliser le minuteur maintenant
+		</a>
+	</main>
+</Base>

@@ -1,0 +1,100 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is a timer sequence?',
+		a: 'A sequence is a list of steps with their own durations, each with a name and a sound. The app plays an alert at every step change and advances on its own — ideal for guided workouts, routines or block activities.',
+	},
+	{
+		q: 'What is a sequence timer for?',
+		a: 'It is for anything with several parts: warm-up + exercise + rest, study blocks with breaks, a stretching routine, a guided meditation practice or a step-by-step recipe. Each step plays when it ends and the next one starts on its own.',
+	},
+	{
+		q: 'Can I save and repeat a sequence?',
+		a: 'Yes: edit the steps, adjust names, times and sounds, and use the "Use sequence" button. As long as the page is on your device, your sequence stays saved to repeat as many times as you want.',
+	},
+	{
+		q: 'Can I change the sound of each step?',
+		a: 'Yes. Each step can have its own sound among the 5 alarm styles available, or none. That way you know by the ring which part of the routine ended, without looking at the screen.',
+	},
+	{
+		q: 'Does the sequence help with guided workouts?',
+		a: 'It does. Build a guided workout in steps — a 5 minute warm-up, exercise blocks, rest and cool-down — and the app conducts the whole routine, alerting every change. It is like having a time coach on screen.',
+	},
+	{
+		q: 'How do I build a block study routine?',
+		a: 'Create 25 minute study steps alternating with 5 minute breaks and one 15 minute long break. The app alerts you when each block ends and already starts the next one automatically — the pomodoro method in sequence format.',
+	},
+];
+---
+<ToolPage
+	title="Timer Sequences — Steps and Automatic Alerts"
+	description="Build timer sequences with custom steps, names and sounds. Guided workouts, study routines and block practices with automatic alerts."
+	path="/sequencias/"
+	heading="Sequences"
+	sub="Combine steps with custom durations and sounds. The app advances on its own and alerts you at every change."
+	initial={JSON.stringify({ mode: 'sequence' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		A <strong>timer sequence</strong> is perfect when a routine has several parts: warm-up + exercise + rest, study
+		blocks with breaks, or a guided practice. Tap <strong>"Configure sequence"</strong>, add steps with a name, time
+		and sound, and the app rings a chime at every change.
+	</p>
+	<h2>Examples of timer sequences</h2>
+	<ul>
+		<li><strong>Full workout:</strong> warm-up (5 min), 2 exercise blocks (3 min) and cool-down.</li>
+		<li><strong>Block focus:</strong> study (25 min), break (5 min), study (25 min) and long break (15 min).</li>
+		<li><strong>Guided breathing:</strong> inhale, hold and release — in second-long steps.</li>
+	</ul>
+	<h2>Sequence timer for routines</h2>
+	<p>
+		A <strong>sequence timer</strong> turns any routine into an automatic flow with <strong>timer steps</strong> and
+		<strong>sequential alarms</strong>: each step ends, its sound plays and the next one starts right on time — without
+		you pressing anything. Want a <a href="/en/temporizador-para-meditacao/">guided meditation</a> practice, a
+		<a href="/en/temporizador-para-exercicios/">block workout</a> or the <a href="/en/temporizador-para-estudos/">study</a>
+		routine with breaks? Build example sequences in minutes and repeat them whenever you like. For simple focus and
+		break cycles, the <a href="/en/pomodoro/">pomodoro</a> already handles it; for several parts with their own
+		alerts, the sequence is the right tool.
+	</p>
+	<h2>How to build yours</h2>
+	<ul>
+		<li>Open <strong>"Configure sequence"</strong>.</li>
+		<li>Tap <strong>"Add step"</strong> and give each part a name, time and sound.</li>
+		<li>Reorder or remove steps with the arrows and the trash.</li>
+		<li>Tap <strong>"Use sequence"</strong> and start.</li>
+	</ul>
+	<h2>Tips for building good sequences</h2>
+	<p>
+		Start small: three to five steps solve most routines. Give each part <strong>clear names</strong> ("warm-up",
+		"set 1", "rest") so you can follow by sound, and pick a different <strong>sequence alarm</strong> for the most
+		important steps — that way you know what changed without looking at the screen. In <strong>timer routines</strong>,
+		prefer whole times (5, 10, 15 minutes); in short steps, use seconds.
+	</p>
+	<h2>Sequences for study, training and practice</h2>
+	<p>
+		This <strong>sequence timer</strong> shines in three situations. In <a href="/en/temporizador-para-estudos/">study</a>,
+		building 25 minute focus blocks with 5 minute breaks and one 15 minute long break turns the session into a
+		continuous flow, without you touching the clock. In <a href="/en/temporizador-para-exercicios/">training</a>, a
+		guided sequence with warm-up, exercise and cool-down conducts the whole routine with alerts. In guided practice, it
+		is the perfect format for <a href="/en/temporizador-para-meditacao/">meditation</a> in stages. In every case, the
+		<strong>sequential alarms</strong> keep you in rhythm while the app advances on its own — and the saved result can
+		be repeated whenever you want.
+	</p>
+	<h2>Frequently asked questions</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

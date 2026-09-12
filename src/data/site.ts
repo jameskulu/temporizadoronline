@@ -1,13 +1,28 @@
 import { SITE_URL } from '../lib/share';
+import { defaultLang } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
 
 export const SITE_NAME = 'Temporizador Online';
 export const SITE_TAGLINE = 'Cronômetro, pomodoro, intervalos e contagem regressiva sem instalar nada.';
 
-export function canonical(path: string): string {
-	return `${SITE_URL}${path}`;
+/** Absolute URL of a page; the pt (default) language lives at the root. */
+export function canonical(path: string, lang: Lang = defaultLang): string {
+	const prefixed = lang === defaultLang ? path : `/${lang}${path}`;
+	return `${SITE_URL}${prefixed}`;
 }
 
-export function webAppJsonLd(): Record<string, unknown> {
+const BCP47: Record<Lang, string> = {
+	pt: 'pt-BR',
+	en: 'en',
+	es: 'es',
+	ja: 'ja',
+	fr: 'fr',
+	de: 'de',
+	ko: 'ko-KR',
+	it: 'it',
+};
+
+export function webAppJsonLd(lang: Lang = defaultLang): Record<string, unknown> {
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'WebApplication',
@@ -15,7 +30,7 @@ export function webAppJsonLd(): Record<string, unknown> {
 		url: SITE_URL,
 		applicationCategory: 'UtilitiesApplication',
 		operatingSystem: 'Any',
-		inLanguage: 'pt-BR',
+		inLanguage: BCP47[lang],
 		offers: { '@type': 'Offer', price: '0', priceCurrency: 'BRL' },
 	};
 }

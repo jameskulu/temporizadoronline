@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'タイマーを使って瞑想するには？',
+		a: '5分か10分を設定し、背筋を伸ばして心地よく座ります。スタートを押し、呼吸に注意を向けます。アラームが鳴ったら、ゆっくりその場を閉じて——急いで座を立たずに。',
+	},
+	{
+		q: '瞑想に適したアラーム音は？',
+		a: '「禅」は実践の終わりを驚かせないよう穏やかにデザインされています。「チャイム」もおすすめ——1回だけの静かな音です。',
+	},
+];
+---
+<ToolPage
+	title="瞑想用タイマー — 時間を気にせず瞑想"
+	description="5分・10分・20分の瞑想用タイマー（オンライン）、穏やかな音付き。時間を見張らず、時刻を心配せずに瞑想できます。"
+	path="/temporizador-para-meditacao/"
+	heading="瞑想用タイマー"
+	sub="息を吸う10分間、無料です。穏やかな音がちょうどいい時に呼んでくれます。"
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: '瞑想' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		瞑想の最大の敵は時計を見ることです。このタイマーが解決します：<strong>10分を選んで</strong>スタートを押し、
+		穏やかな音が知らせるまで呼吸を観察してください。終わったら、少しだけ座ったままで、それから目を開けましょう。
+	</p>
+	<h2>クイックな手順</h2>
+	<ul>
+		<li>背筋を伸ばし、手を置いて座ります。</li>
+		<li>設定で音を<strong>「禅」</strong>に変えます。</li>
+		<li>スタートし、ゆっくり吸う・吐くに集中します。</li>
+		<li>音が鳴ったら、あと3回呼吸してから終わります。</li>
+	</ul>
+	<p>
+		ガイド付きのステップで瞑想したい場合は、<a href="/ja/meditacao/">瞑想ページ</a>と
+		<a href="/ja/sequencias/">シーケンス</a>をご覧ください。
+	</p>
+	<h2>よくある質問</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

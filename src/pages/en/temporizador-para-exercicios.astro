@@ -1,0 +1,49 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'How do I use a timer while exercising?',
+		a: 'Use it to measure the rest between sets (30 to 90 seconds), control the time of each exercise or time the whole workout. During the breaks, keeping your phone in hand helps you not stretch the rest.',
+	},
+	{
+		q: 'What is focus mode during a workout?',
+		a: 'Focus mode takes the clock to fullscreen, hides the rest of the page and leaves the time really big — ideal for watching your set without distraction.',
+	},
+];
+---
+<ToolPage
+	title="Workout Timer — Sets and Rests"
+	description="Training timer to control sets and rests: rest from 30 to 90 seconds, intervals and full workouts. Free and works offline."
+	path="/temporizador-para-exercicios/"
+	heading="Workout Timer"
+	sub="Control the rest between sets and keep your workout from going cold."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Workout' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		The secret to a good workout is often the <strong>rest</strong>: too long a set kills momentum and too short one
+		does not recover. A 30 or 60 second timer guarantees each pause is the same.
+	</p>
+	<h2>Time suggestions</h2>
+	<ul>
+		<li><strong>Light rest (30 s)</strong> — endurance and mobility sets.</li>
+		<li><strong>Standard rest (60 s)</strong> — conventional strength training.</li>
+		<li><strong>Longer rest (90 s)</strong> — heavy loads and compound lifts.</li>
+	</ul>
+	<p>
+		For workouts that alternate effort and rest automatically, use the <a href="/en/intervalos/">interval timer</a>
+		with <a href="/en/temporizador-hiit/">HIIT</a> and <a href="/en/temporizador-tabata/">tabata</a> presets.
+	</p>
+	<h2>Frequently asked questions</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

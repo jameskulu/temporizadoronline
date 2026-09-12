@@ -1,0 +1,100 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'How do I meditate using a timer?',
+		a: 'Set 5 or 10 minutes, sit upright and comfortable, press Start and keep your attention on your breath. When the alarm plays — which can be the soft "zen" sound — finish calmly, breathing three more times before you open your eyes.',
+	},
+	{
+		q: 'What is the best time to meditate?',
+		a: 'For beginners, 5 to 10 minutes already make a difference. With practice, 15 to 20 minutes. You adjust the time in the settings and can use the ready-made 5, 10 and 20 minute timers.',
+	},
+	{
+		q: 'Which alarm sound should I use to meditate?',
+		a: 'The "zen" sound was designed to be soft and not startle you at the end of the practice. The "chime" also works well: a single, calm ring. You can also use the phone vibration instead of the sound.',
+	},
+	{
+		q: 'What is guided meditation?',
+		a: 'Guided meditation is practicing by following step-by-step instructions — breath, body, sound — instead of making decisions in the moment. Here you can build a guided sequence with your own steps in the sequences mode, with soft alerts at every change.',
+	},
+	{
+		q: 'How do I meditate alone at home?',
+		a: 'Pick a quiet place, sit with an elongated spine, hands resting and eyes closed. Set 10 minutes on this meditation timer, choose the zen sound and watch your breath until the soft ring. No rush: the timer handles the time for you.',
+	},
+	{
+		q: 'Does the meditation timer work with the phone locked?',
+		a: 'Yes. The time is calculated by the system clock, so the dial stays correct even with the screen locked. If you prefer to follow along, turn on fullscreen focus mode with the big, calm clock.',
+	},
+];
+---
+<ToolPage
+	title="Online Meditation — Timer with Soft Sounds (5, 10 and 20 min)"
+	description="Online meditation timer with soft sounds: meditate 5, 10 or 20 minutes without watching the time. Free, works offline and with a calm fullscreen."
+	path="/meditacao/"
+	heading="Meditation"
+	sub="Time just for you. Set the duration, sit down and let the soft alarm tell you when it is over."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Meditation' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Meditation demands not watching the clock. This meditation timer handles that: you pick the duration, press
+		<strong>Start</strong> and focus on your breath. At the end, a calm sound — we recommend the
+		<strong>"zen"</strong> sound — announces the finish, and the screen can also vibrate gently.
+	</p>
+	<h2>How to meditate with the timer</h2>
+	<ul>
+		<li>Pick <strong><a href="/en/temporizador/10-minutos/">10 minutes</a></strong> (or configure between 1 and 20 minutes).</li>
+		<li>Press <strong>Start</strong> and close your eyes.</li>
+		<li>Choose the <strong>zen</strong> sound in the settings for a softer ring.</li>
+		<li>Use <strong>focus mode</strong> ("Fullscreen") for a bigger dial and no distractions.</li>
+	</ul>
+	<h2>Meditation with a timer in daily life</h2>
+	<p>
+		A <strong>meditation timer</strong> (or <strong>meditation clock</strong>, as many people search for it) turns the
+		act of meditating into something simple: pick <a href="/en/temporizador/5-minutos/">5 minutes</a>,
+		<a href="/en/temporizador/10-minutos/">10</a> or <a href="/en/temporizador/15-minutos/">15</a> and let the time run.
+		It works like a <strong>zen clock</strong>: silent during the practice, gentle when it is time to come back. This
+		online meditation timer is free, works offline and has a beautiful, calm dial — perfect for meditating on your
+		phone, at home or at the office.
+	</p>
+	<h2>Tips for beginners</h2>
+	<p>
+		Do not pressure yourself: starting with <a href="/en/temporizador/5-minutos/">5 minutes</a> of quiet already
+		counts. Want a fuller read on how to practice? See the <a href="/en/temporizador-para-meditacao/">page dedicated to
+		meditation</a>. Prefer a guided practice? Build a <a href="/en/sequencias/">sequence</a> with breathing steps and
+		short pauses.
+	</p>
+	<h2>Guided meditation and sounds for meditation</h2>
+	<p>
+		Not every practice is silent: <strong>guided meditation</strong> takes you through steps — body, breath, sound —
+		and helps beginners not get lost in their thoughts. On this site, the guided form is the
+		<a href="/en/sequencias/">sequences</a> mode: build breathing or relaxation steps with the times you prefer and the
+		app alerts you gently at every change. The meditation timer on this page handles the free practice: you choose
+		among the <strong>meditation sounds</strong> zen, chime and bell, set the volume and meditate with your eyes closed
+		until the ring.
+	</p>
+	<h2>Meditate on your phone without distraction</h2>
+	<p>
+		When meditation happens on your phone, the secret is not letting the screen steal your attention. Use
+		<strong>focus mode</strong> (fullscreen) to see only the big, calm clock, or lock the device: the time stays correct
+		because it is calculated by the system clock, and at the end the zen alarm rings right on time. It is also worth
+		silencing your notifications before you start. That way, an <strong>online meditation</strong> of a few minutes
+		pays off like a full break — no clock in your head, no rush to get back.
+	</p>
+	<h2>Frequently asked questions</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

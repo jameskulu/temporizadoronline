@@ -2,6 +2,9 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_NAME, canonical } from '../data/site';
+import { getLangFromUrl } from '../i18n/utils';
+import { LANGS, langTags, ogLocales, defaultLang } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
 import '../styles/global.css';
 
 interface Props {
@@ -15,13 +18,15 @@ interface Props {
 }
 
 const { title, description, path, jsonLd } = Astro.props;
-const url = canonical(path);
+const lang: Lang = getLangFromUrl(Astro.url);
+const url = canonical(path, lang);
 const robots = Astro.props.robots ?? 'index, follow';
+const noindex = robots === 'noindex, follow' || robots === 'noindex';
 const ogImage = Astro.props.ogImage ?? '/icons/icon-512.png';
 const imageUrl = ogImage.startsWith('http') ? ogImage : canonical(ogImage);
 ---
 <!doctype html>
-<html lang="pt-BR">
+<html lang={langTags[lang]}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,17 +41,40 @@ const imageUrl = ogImage.startsWith('http') ? ogImage : canonical(ogImage);
 			href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
 			rel="stylesheet"
 		/>
+		{
+			!noindex && (
+				<>
+					{LANGS.map((l) => (
+						<link rel="alternate" hreflang={langTags[l]} href={canonical(path, l)} />
+					))}
+					<link rel="alternate" hreflang="x-default" href={canonical(path, defaultLang)} />
+				</>
+			)
+		}
 		<meta property="og:type" content="website" />
-		<meta property="og:locale" content="pt_BR" />
+		<meta property="og:locale" content={ogLocales[lang]} />
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={url} />
 		<meta property="og:image" content={imageUrl} />
 		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-		<link rel="manifest" href="/manifest.webmanifest" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="Temporizador" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-LNZTFNGE7J"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+
+			gtag('config', 'G-LNZTFNGE7J');
+		</script>
 		{Array.isArray(jsonLd)
 			? jsonLd.map((o) => <script is:inline type="application/ld+json" set:html={JSON.stringify(o)} />)
 			: jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

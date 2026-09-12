@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: "Quel est le meilleur temps pour étudier ?",
+		a: "La technique pomodoro utilise des blocs de 25 minutes avec des pauses de 5. Beaucoup préfèrent 50 minutes pour des lectures plus longues. Commencez avec 25 et ajustez selon votre concentration.",
+	},
+	{
+		q: 'Comment utiliser le minuteur dans les études ?',
+		a: "Choisissez une durée, définissez une seule tâche et lancez. Quand l'alarme sonne, notez votre progression et faites la pause. Ne changez pas de tâche au milieu d'un même bloc.",
+	},
+];
+---
+<ToolPage
+	title="Minuteur pour étudier — techniques de concentration"
+	description="Minuteur pour étudier avec la technique pomodoro et des blocs de concentration. Apprenez à utiliser le temps à votre avantage et augmentez votre concentration."
+	path="/temporizador-para-estudos/"
+	heading="Minuteur pour étudier"
+	sub="De la concentration découpée en blocs avec pauses : la façon la plus simple d'étudier sans se fatiguer."
+	initial={JSON.stringify({ seconds: 1500, mode: 'timer', label: 'Études' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Étudier avec un minuteur présente deux avantages : vous <strong>savez qu'il y a une fin</strong> (le cerveau se
+		détend) et vous créez un <strong>rythme de pauses</strong>. Le bloc de 25 minutes est déjà réglé — appuyez sur
+		Démarrer.
+	</p>
+	<h2>Suggestions de routine</h2>
+	<ul>
+		<li><strong><a href="/fr/temporizador/25-minutos/">Concentration totale (25 min) :</a></strong> un bloc d'attention dédié à la matière en cours.</li>
+		<li><strong><a href="/fr/temporizador/5-minutos/">Pause de 5 min :</a></strong> levez-vous, hydratez-vous, étirez-vous.</li>
+		<li><strong><a href="/fr/temporizador/15-minutos/">Révision (15 min) :</a></strong> revoyez vos notes avec un minuteur court, de la fin vers le début.</li>
+	</ul>
+	<p>
+		Vous préférez bloquer tout le temps ? Utilisez le <a href="/fr/pomodoro/">pomodoro en ligne</a> pour des cycles
+		complets avec pauses longues automatiques.
+	</p>
+	<h2>Questions fréquentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

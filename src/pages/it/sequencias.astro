@@ -1,0 +1,102 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Cos\'è una sequenza di timer?',
+		a: 'Una sequenza è una lista di fasi con durate proprie, ciascuna con nome e suono. L\'app emette un avviso sonoro a ogni cambio di fase e avanza da sola — ideale per allenamenti guidati, routine o attività in blocchi.',
+	},
+	{
+		q: 'A cosa serve un timer a sequenze?',
+		a: 'Serve per tutto ciò che ha più parti: riscaldamento + esercizio + riposo, blocchi di studio con pause, routine di stretching, pratica di meditazione guidata o una ricetta in fasi. Ogni fase suona quando termina e la successiva inizia da sola.',
+	},
+	{
+		q: 'Posso salvare e ripetere una sequenza?',
+		a: 'Sì: modifica le fasi, regola nomi, tempi e suoni, e usa il pulsante "Usa sequenza". Finché la pagina resta sul tuo dispositivo, la sequenza rimane salvata per ripeterla quante volte vuoi.',
+	},
+	{
+		q: 'Si può cambiare il suono di ogni fase?',
+		a: 'Sì. Ogni fase può avere un suono proprio tra i 5 stili di allarme disponibili, oppure nessuno. Così capisci dal tocco quale parte della routine è finita, senza dover guardare lo schermo.',
+	},
+	{
+		q: 'La sequenza aiuta negli allenamenti guidati?',
+		a: 'Sì, eccome. Crei un allenamento guidato in fasi — riscaldamento da 5 minuti, blocchi di esercizio, riposo e stretching — e l\'app dirige l\'intera routine, avvisando a ogni cambio. È come avere un trainer del tempo sullo schermo.',
+	},
+	{
+		q: 'Come impostare una routine di studio in blocchi?',
+		a: 'Crea fasi di studio da 25 minuti alternate a pause da 5 e una pausa lunga da 15. L\'app segnala quando ogni blocco termina e avvia automaticamente il successivo — il metodo pomodoro in formato sequenza.',
+	},
+];
+---
+<ToolPage
+	title="Sequenze di Timer — Fasi e Avvisi Automatici"
+	description="Crea sequenze di timer con fasi, nomi e suoni propri. Allenamento guidato, routine di studio e pratiche in blocchi con avvisi automatici."
+	path="/sequencias/"
+	heading="Sequenze"
+	sub="Combina fasi con durate e suoni propri. L'app avanza da sola e avvisa a ogni cambio."
+	initial={JSON.stringify({ mode: 'sequence' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Una <strong>sequenza di timer</strong> è perfetta quando una routine ha più parti: riscaldamento +
+		esercizio + riposo, blocchi di studio con pause, o una pratica guidata. Tocca
+		<strong>"Configura sequenza"</strong>, aggiungi fasi con nome, tempo e suono, e l'app suona il campanello a ogni
+		cambio.
+	</p>
+	<h2>Esempi di sequenze di timer</h2>
+	<ul>
+		<li><strong>Allenamento completo:</strong> riscaldamento (5 min), 2 blocchi di esercizio (3 min) e defaticamento.</li>
+		<li><strong>Concentrazione a blocchi:</strong> studio (25 min), pausa (5 min), studio (25 min) e pausa lunga (15 min).</li>
+		<li><strong>Respirazione guidata:</strong> inspira, trattieni e rilascia — in fasi di secondi.</li>
+	</ul>
+	<h2>Timer a sequenze per le routine</h2>
+	<p>
+		Un <strong>timer a sequenze</strong> trasforma qualsiasi routine in un flusso automatico con
+		<strong>fasi di timer</strong> e <strong>allarmi in sequenza</strong>: ogni fase termina, suona il suo
+		suono e la successiva inizia subito — senza che tu debba premere nulla. Vuoi una pratica di <a
+		href="/it/temporizador-para-meditacao/">meditazione guidata</a>, un <a href="/it/temporizador-para-exercicios/">allenamento a
+		blocchi</a> o la routine di <a href="/it/temporizador-para-estudos/">studio</a> con pause? Imposta esempi di
+		sequenza in pochi minuti e ripetili quando vuoi. Per semplici cicli di concentrazione e pausa, il <a href="/it/pomodoro/">pomodoro</a>
+		basta; per più parti con avvisi propri, la sequenza è lo strumento giusto.
+	</p>
+	<h2>Come costruire la tua</h2>
+	<ul>
+		<li>Apri <strong>"Configura sequenza"</strong>.</li>
+		<li>Tocca <strong>"Aggiungi passo"</strong> e dai un nome, un tempo e un suono a ogni parte.</li>
+		<li>Riordina o rimuovi le fasi con le frecce e il cestino.</li>
+		<li>Tocca <strong>"Usa sequenza"</strong> e avvia.</li>
+	</ul>
+	<h2>Consigli per creare buone sequenze</h2>
+	<p>
+		Inizia in piccolo: da tre a cinque fasi risolvono la maggior parte delle routine. Dai <strong>nomi chiari</strong> a ogni
+		parte ("riscaldamento", "serie 1", "riposo") per seguire anche tramite il suono e scegli un <strong>allarme di
+		sequenza</strong> diverso per le fasi più importanti — così sai cosa è cambiato senza guardare lo schermo.
+		Nelle <strong>routine con timer</strong>, preferisci tempi interi (5, 10, 15 minuti); nelle fasi brevi, usa i secondi.
+	</p>
+	<h2>Sequenze per studio, allenamento e pratica</h2>
+	<p>
+		Questo <strong>timer a sequenze</strong> brilla in tre situazioni. Nello <a
+		href="/it/temporizador-para-estudos/">studio</a>, impostare blocchi di concentrazione da 25 minuti con pause da 5 e una lunga da
+		15 trasforma la sessione in un flusso continuo, senza toccare l'orologio. Nell'<a
+		href="/it/temporizador-para-exercicios/">allenamento</a>, una sequenza guidata con riscaldamento, esercizio e stretching
+		dirige l'intera routine con avvisi. Nella pratica guidata, è il formato perfetto per la <a
+		href="/it/temporizador-para-meditacao/">meditazione</a> in fasi. In tutti i casi, gli <strong>allarmi in
+		sequenza</strong> ti mantengono nel ritmo mentre l'app avanza da sola — e il risultato salvato può essere ripetuto
+		quando vuoi.
+	</p>
+	<h2>Domande frequenti</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

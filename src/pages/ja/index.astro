@@ -1,0 +1,236 @@
+---
+import Base from '../../layouts/Base.astro';
+import TimerApp from '../../components/TimerApp.astro';
+import ToolsGrid from '../../components/ToolsGrid.astro';
+import { faqJsonLd, webAppJsonLd } from '../../data/site';
+
+const tagline =
+	'ストップウォッチ、ポモドーロ、インターバル、カウントダウンなどを、インストール不要ですぐに使える時間ツール。';
+
+const faqs = [
+	{
+		q: 'オンラインタイマーとは何ですか？',
+		a: 'オンラインタイマーとは、ブラウザ上で直接動作するカウントダウンタイマーのことです。ダウンロードやインストールは一切不要。このサイトはオフラインでも動作するので、一度ページを開けば、インターネットに接続していなくても使い続けられます。',
+	},
+	{
+		q: 'オンラインタイマーの使い方は？',
+		a: 'ダイヤルで分と秒を選び、スタートを押してアラームが鳴るのを待つだけです。ストップウォッチ、ポモドーロ、インターバル、瞑想、シーケンスに切り替えるには、画面上部のタブをタップするだけで、ページを再読み込みする必要はありません。',
+	},
+	{
+		q: '10分・5分・15分のカウントダウンを作るには？',
+		a: 'ワンクリックですぐ使える完成済みタイマーがあります：10分、5分、15分のオンラインタイマーに加え、1分〜60分まで。ダイヤルで調整するか、時間のショートカットを使って素早く開始できます。',
+	},
+	{
+		q: 'オンラインタイマーをポモドーロに使えますか？',
+		a: 'はい。ポモドーロモードはクラシックな方法で初期設定されています：25分の集中、5分の短い休憩、そして4サイクルごとに15分の長い休憩。フェーズが切り替わるたびに音が鳴り、サイクルは自動で進行します。',
+	},
+	{
+		q: '複数のタイマーを同時に使えますか？',
+		a: 'はい。「新しいタイマー」をタップすれば、必要な数だけタイマーを追加できます。それぞれに設定、時間、音が独立していて、画面上部のタブで切り替えられます。これが当サイトのマルチオンラインタイマーの魅力です。',
+	},
+	{
+		q: 'タブを切り替えたり、画面をロックしても計測は続きますか？',
+		a: 'はい。タイマーとストップウォッチはアニメーションのフレームではなくシステム時計に基づいて計算されるため、バックグラウンドや画面ロック中でも、戻ったときに正しい時間が表示されます。',
+	},
+	{
+		q: 'オンラインタイマーは無料ですか？登録は必要ですか？',
+		a: '100%無料で、登録も必要ありません。カウントダウン、ストップウォッチ、ポモドーロ、インターバル、瞑想、シーケンスの全機能が、回数制限なく使えます。',
+	},
+	{
+		q: 'スマートフォンでも使えますか？',
+		a: 'スマートフォンでもパソコンでも、あらゆるブラウザで動作します。PWAに対応しているので、ホーム画面に追加してアプリのように開けます。ストアからのインストールは必要ありません。',
+	},
+];
+---
+<Base
+	title="オンラインタイマー — カウントダウン・ポモドーロ・ストップウォッチ 無料"
+	description="無料のオンラインタイマー：5分・10分・15分のカウントダウン、ポモドーロタイマー、ストップウォッチ、インターバルタイマー。美しく、速く、オフライン対応、登録不要。"
+	path="/"
+	jsonLd={[webAppJsonLd('ja'), faqJsonLd(faqs)]}
+>
+	<div class="mx-auto max-w-5xl px-4 pt-10 pb-20">
+		<section class="text-center mb-8 hero-mesh">
+			<p class="eyebrow mb-3">オンラインタイマー</p>
+			<h1 class="text-4xl md:text-5xl font-semibold tracking-tight">オンラインタイマー</h1>
+			<p class="mt-3 text-lg" style="color:var(--color-body)">
+				{tagline}
+			</p>
+			<div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-[13px]" style="color:var(--color-body)">
+				<span class="chip">100%無料</span>
+				<span class="chip">登録不要</span>
+				<span class="chip">オフライン対応</span>
+				<span class="chip">PWA・インストール可能</span>
+			</div>
+		</section>
+
+		<section class="app-card rounded-[16px] p-4 md:p-8 mb-14">
+			<TimerApp scope="full" />
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">ツール</p>
+			<h2 class="text-2xl font-semibold mb-3">あらゆる用途に対応するオンラインタイマー</h2>
+			<p class="lead">
+				勉強、トレーニング、料理、会議、瞑想に使えるカウントダウンを、1つのページにまとめました。デザインは
+				クリーンで、動作は高速です。下のツールから選ぶか、上のダイヤルで直接設定してください。
+			</p>
+			<p class="lead">
+				用途に特化したページも用意しています：<a href="/ja/temporizador-para-estudos/">勉強</a>、
+				<a href="/ja/temporizador-para-exercicios/">トレーニング</a>、<a href="/ja/temporizador-para-cozinha/">料理</a>、
+				<a href="/ja/temporizador-para-meditacao/">瞑想</a>、<a href="/ja/temporizador-hiit/">HIIT</a>、
+				<a href="/ja/temporizador-tabata/">タバタ</a>。
+			</p>
+			<ToolsGrid />
+			<h2 class="text-2xl font-semibold mt-12 mb-3">オンラインタイマーとは</h2>
+			<p>
+				<strong>オンラインタイマー</strong>とは、ブラウザ上で直接動作する<strong>カウントダウンタイマー</strong>です。分と秒の
+				長さを選んでスタートを押せば、音付きアラームが終了を教えてくれます。計算はシステム時計に基づくため正確で、
+				ゼロを過ぎた後も延長分を数え続けることができます。すべてブラウザ上で完結するので、ダウンロードも登録も
+				インストールも必要ありません。「オンラインタイマー」で検索するか、保存しておいたショートカットを開くだけで
+				すぐに始められます。
+			</p>
+			<p>
+				普通の時計とは違い、日常生活のさまざまな場面で使える<strong>時計付きオンラインタイマー</strong>として活躍します：
+				キッチンのゆで卵、トレーニングの休憩、試験対策、15分の会議、勉強のインターバルなど。精度はシステム時計に
+				依存するので、遅延や画面のちらつきは発生しません。タブを切り替えてもスマートフォンをロックしても、時間は
+				正確に保たれます。
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">あらゆる時間に対応するカウントダウンタイマー</h2>
+			<p>
+				標準モードは<strong>カウントダウン方式</strong>で、選んだ時間からゼロに向かって数えます。すぐに使えるショートカットも
+				充実しています——<a href="/ja/temporizador/5-minutos/">5分</a>、<a href="/ja/temporizador/10-minutos/">10分</a>、
+				<a href="/ja/temporizador/15-minutos/">15分</a>、<a href="/ja/temporizador/25-minutos/">25分</a>、
+				<a href="/ja/temporizador/30-minutos/">30分</a>、<a href="/ja/temporizador/60-minutos/">60分</a>の
+				オンラインタイマー。さらに1秒から数時間まで、ダイヤルで自由に調整できます。短い高強度の種目には、
+				<strong>40秒</strong>で回すHIITタイマーもそのまま使えます。
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">ポモドーロタイマー・ストップウォッチ・インターバルを同じ場所で</h2>
+			<p>
+				このサイトはフル装備の<strong>ポモドーロタイマー</strong>でもあります。ポモドーロ・テクニックは集中と休憩をサイクルとして
+				整理し、このアプリは集中、短い休憩、長い休憩を自動で切り替えます。タブを切り替えるだけで
+				<strong>ストップウォッチ</strong>にもなり、ラップ付きで何かにかかった時間を測れます。トレーニングには
+				<a href="/ja/intervalos/">インターバルタイマー</a>が活躍し、<a href="/ja/temporizador-tabata/">タバタ</a>や
+				HIITのプリセットも内蔵。努力と休憩を自動で交互に繰り返してくれます。
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">美しくシンプルなオンラインタイマー</h2>
+			<p>
+				この<strong>オンラインタイマー</strong>は、余計なものを削ぎ落とした美しいデザインを目指しました：大きな数字、
+				洗練されたフォント、自動で切り替わるダークモード。表示されるのは時計と、本当に必要な情報だけです。
+				<strong>フォーカスモード</strong>（全画面）では数字がさらに大きくなり、勉強や瞑想、シリーズを観ながらの調理にもぴったり。
+				他のタイマーが広告や通知で気を散らす一方で、ここでは時間だけに集中できます。
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">マルチオンラインタイマー：複数のタイマーを同時に</h2>
+			<p>
+				ご飯とオーブンとお茶を同時に管理したい？<strong>「新しいタイマー」</strong>機能を使えば、このページが
+				<strong>マルチオンラインタイマー</strong>に変わります。タイマーごとにタブ、設定、音を個別に持ち、すべて並行して動作します。
+				キッチン、教室、複数のカウントを同時に管理したいあらゆる場面に最適です。
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">便利な機能</h2>
+			<ul class="list list-checks">
+				<li><strong>タブ間でも正確：</strong>システム時計を使用しているので、タブを切り替えたり画面をロックしても時間を失いません。</li>
+				<li><strong>フォーカスモード：</strong>大きな時計の全画面表示で、集中を妨げられません。</li>
+				<li><strong>音とバイブレーション：</strong>5種類のアラーム、音量調整、スマホのバイブレーションに対応。</li>
+				<li><strong>タイマーの共有：</strong>設定済みリンクやQRコードを送って、スマホですぐ開けます。</li>
+				<li><strong>ポモドーロ：</strong><a href="/ja/pomodoro/">集中と休憩のサイクル</a>を自動で進めます。</li>
+				<li><strong>ストップウォッチ：</strong><a href="/ja/cronometro/">経過時間を測り、ラップを記録</a>できます。</li>
+				<li><strong>インターバルとトレーニング：</strong><a href="/ja/intervalos/">HIIT</a>、<a href="/ja/temporizador-tabata/">タバタ</a>、<a href="/ja/temporizador-hiit/">40×20</a>のプリセット完備。</li>
+				<li><strong>キーボードショートカット：</strong>スペースで開始・一時停止、Rでリセット、Fで全画面、Mでミュート。</li>
+				<li><strong>自動ダークモード：</strong>システムのテーマに合わせて自動で切り替わります。</li>
+			</ul>
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Q&A</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">よくある質問</h2>
+			<div class="faq">
+				{faqs.map((f) => (
+					<div class="faq-item">
+						<h3 class="faq-q">{f.q}</h3>
+						<p class="faq-a">{f.a}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.app-card {
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.article h2 {
+		line-height: 1.25;
+	}
+	.lead {
+		font-size: 16px;
+		color: var(--color-body);
+		margin-bottom: 1rem;
+	}
+	.article p {
+		color: var(--color-body);
+		margin-bottom: 0.8rem;
+		line-height: 1.6;
+	}
+	.article a {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.article a:hover {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		list-style: none;
+		padding-left: 0;
+	}
+	.list-checks li {
+		position: relative;
+		padding-left: 28px;
+		color: var(--color-body);
+	}
+	.list-checks li strong {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+	.list-checks li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 5px;
+		width: 17px;
+		height: 15px;
+		border-radius: 4px;
+		background:
+			linear-gradient(135deg, transparent 55%, var(--color-link) 50%) -1px 5px no-repeat,
+			linear-gradient(45deg, transparent 45%, var(--color-link) 45%) 5px -2px no-repeat;
+		background-size: 9px 9px;
+		width: 18px;
+		height: 18px;
+	}
+	.faq {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+	.faq-item {
+		padding: 14px 16px;
+		border-radius: 12px;
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.faq-q {
+		font-size: 15px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+	.faq-a {
+		font-size: 14px;
+		color: var(--color-body);
+	}
+</style>

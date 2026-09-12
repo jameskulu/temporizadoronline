@@ -1,0 +1,96 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Cos\'è il metodo pomodoro?',
+		a: 'Il metodo pomodoro è una tecnica di gestione del tempo creata da Francesco Cirillo: lavora in blocchi di concentrazione da 25 minuti, fai una pausa breve di 5 minuti e, ogni 4 blocchi, una pausa lunga di 15 minuti. L\'obiettivo è mantenere la concentrazione su un\'unica attività e poi riposare.',
+	},
+	{
+		q: 'Come funziona il timer pomodoro online?',
+		a: 'Il pomodoro online qui sopra è già configurato con lo standard classico: 25 minuti di concentrazione, 5 di pausa breve e 15 di pausa lunga ogni 4 cicli. L\'app suona a ogni cambio di fase e fa avanzare i cicli da sola — tu devi solo concentrarti.',
+	},
+	{
+		q: 'Il pomodoro online è gratuito?',
+		a: 'Sì, al 100% gratuito e senza registrazione. Tutte le funzioni sono sbloccate: tempi regolabili, suoni, vibrazione, modalità concentrazione a schermo intero e avanzamento dei cicli sul quadrante.',
+	},
+	{
+		q: 'Il pomodoro online suona a ogni fase?',
+		a: 'Sì. Puoi scegliere tra 5 suoni di allarme e attivare la vibrazione sul telefono. A ogni cambio di fase — fine della concentrazione, fine della pausa, pausa lunga — il pomodoro online con suono avvisa immediatamente.',
+	},
+	{
+		q: 'Posso cambiare i tempi del pomodoro?',
+		a: 'Sì: modifica concentrazione, pausa breve, pausa lunga e il numero di cicli nelle impostazioni. Puoi anche far avanzare le fasi da solo o saltarle manualmente. Alcuni preferiscono 50 minuti di concentrazione per il lavoro profondo.',
+	},
+	{
+		q: 'Il pomodoro online funziona sul telefono?',
+		a: 'Funziona in qualsiasi browser, senza installare nulla. Salva il collegamento nella schermata iniziale per aprire il timer pomodoro online come un app — continua inoltre a contare con il telefono bloccato.',
+	},
+	{
+		q: 'A cosa serve il pomodoro a concentrazione?',
+		a: 'Il pomodoro online a concentrazione aiuta a studiare e lavorare con attenzione piena: sapendo che il blocco dura 25 minuti, il cervello si rilassa e si dedica all\'attività. Viene usato da studenti, programmatori, scrittori e chiunque abbia bisogno di concentrazione.',
+	},
+	{
+		q: 'Quanti cicli devo fare prima della pausa lunga?',
+		a: 'Lo standard della tecnica pomodoro è una pausa lunga di 15 minuti ogni 4 cicli. Nelle impostazioni puoi regolarla su 2, 3 o più cicli, in base al tuo ritmo e alla durata della sessione.',
+	},
+];
+---
+<ToolPage
+	title="Pomodoro Online Gratuito — Timer con Suono e Modalità Concentrazione"
+	description="Pomodoro online gratuito: timer da 25 minuti con pause brevi e lunghe, suono in ogni fase e modalità concentrazione. La tecnica pomodoro nel browser, senza installare."
+	path="/pomodoro/"
+	heading="Pomodoro online"
+	sub="25 minuti di concentrazione, pausa breve e pausa lunga — con avvisi sonori e controllo dei cicli."
+	initial={JSON.stringify({ mode: 'pomodoro' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Il metodo pomodoro è una delle tecniche più usate per <a href="/it/temporizador-para-estudos/">studiare</a> e per il
+		lavoro profondo. Il timer qui sopra è già configurato con lo standard classico: <strong>25 minuti di concentrazione</strong>,
+		<strong>pausa breve</strong> e <strong>pausa lunga</strong>. Premi Avvia e concentrati su un'unica attività
+		fino a quando suona l'allarme.
+	</p>
+	<h2>Come usare il timer pomodoro</h2>
+	<ul>
+		<li><strong>Concentrazione:</strong> lavora senza interruzioni fino alla fine del blocco (standard di <a href="/it/temporizador/25-minutos/">25 min</a>).</li>
+		<li><strong>Pausa breve:</strong> <a href="/it/temporizador/5-minutos/">5 minuti</a> per sgranchirti, bere acqua e riposare gli occhi.</li>
+		<li><strong>Pausa lunga:</strong> ogni 4 cicli, <a href="/it/temporizador/15-minutos/">15 minuti</a> di riposo più lungo.</li>
+		<li><strong>Cicli:</strong> definisci quanti blocchi vuoi prima di una pausa lunga.</li>
+	</ul>
+	<h2>Perché usare un pomodoro online</h2>
+	<p>
+		Un <strong>orologio pomodoro online</strong> trasforma la tecnica pomodoro in qualcosa di automatico: non devi
+		cronometrare a mente, annotare gli orari né ricordare quando finisce la pausa. Questo <strong>timer pomodoro online</strong>
+		gestisce il ritmo e mostra anche l'avanzamento dei cicli sul quadrante. Funziona come un
+		<strong>cronometro pomodoro online</strong> da tasca — sul computer, sul telefono o a schermo intero.
+	</p>
+	<p>
+		La <strong>tecnica pomodoro online</strong> si sposa bene con la routine di studio: blocco di concentrazione, pausa breve, ripeti.
+		Quando completi un ciclo di quattro, approfitta della pausa lunga per riposare davvero. Chi preferisce un
+		<strong>timer pomodoro online</strong> ancora più semplice trova su questo sito anche il timer a conto alla rovescia classico, il
+		<a href="/it/cronometro/">cronometro</a> e i <a href="/it/temporizador/">timer da 5, 10 e 15 minuti</a> —
+		tutto in un'unica pagina.
+	</p>
+	<h2>Pomodoro con suono e modalità concentrazione</h2>
+	<p>
+		Il <strong>pomodoro online con suono</strong> avvisa a ogni cambio di fase con 5 stili di allarme, volume
+		regolabile e vibrazione sul telefono. Per massimizzare la concentrazione, attiva la <strong>modalità concentrazione</strong> (schermo intero):
+		l'orologio diventa grande, il resto della pagina scompare e niente toglie l'attenzione dal blocco corrente.
+	</p>
+	<h2>Domande frequenti</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

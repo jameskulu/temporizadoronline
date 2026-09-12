@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+
+interface Props {
+	error: unknown;
+}
+
+const { error } = Astro.props as Props;
+const safeMessage =
+	error instanceof Error && typeof error.message === 'string'
+		? error.message.slice(0, 200)
+		: '';
+---
+
+<Base
+	title="Server error — Online Timer"
+	description="An unexpected error happened on Online Timer. Try again in a moment or keep using the timer, the stopwatch or the pomodoro."
+	path="/500/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			500
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			Something went wrong on the server
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			An unexpected error happened while loading this page. Refresh in a moment or use
+			one of the tools below to keep your rhythm.
+		</p>
+
+		{
+			safeMessage && (
+				<div
+					class="mt-4 max-w-lg rounded-xl border px-4 py-3 text-sm break-words"
+					style="border-color: var(--color-border); color: var(--color-ink-muted)"
+				>
+					{safeMessage}
+				</div>
+			)
+		}
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/en/" class="chip chip-link">Home</a>
+			<a href="/en/temporizador/" class="chip chip-link">Timer</a>
+			<a href="/en/cronometro/" class="chip chip-link">Stopwatch</a>
+			<a href="/en/pomodoro/" class="chip chip-link">Pomodoro</a>
+			<a href="/en/intervalos/" class="chip chip-link">Intervals</a>
+			<a href="/en/sequencias/" class="chip chip-link">Sequences</a>
+		</div>
+
+		<a
+			href="/en/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			Use the timer now
+		</a>
+	</main>
+</Base>

@@ -1,0 +1,243 @@
+---
+import Base from '../../layouts/Base.astro';
+import TimerApp from '../../components/TimerApp.astro';
+import ToolsGrid from '../../components/ToolsGrid.astro';
+import { faqJsonLd, webAppJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is an online timer?',
+		a: 'An online timer is a countdown that runs right in your browser, with nothing to download or install. Online Timer also works offline: you open the page once and it stays useful even without an internet connection.',
+	},
+	{
+		q: 'How do I use the online timer?',
+		a: 'Pick the minutes and seconds on the dial, press Start and wait for the alarm to ring. To switch tools — stopwatch, pomodoro, intervals, meditation or sequences — just tap the tab at the top of the dial, without reloading the page.',
+	},
+	{
+		q: 'How do I run a 10, 5 or 15 minute countdown?',
+		a: 'There are ready-made one-click versions: a 10 minute online timer, a 5 minute one and a 15 minute one, plus durations from 1 to 60 minutes. Adjust the time on the dial or use the duration shortcuts to start faster.',
+	},
+	{
+		q: 'Can I use the online timer for pomodoro?',
+		a: 'Yes. The pomodoro mode comes pre-configured with the classic method: 25 minutes of focus, a 5 minute short break and a 15 minute long break (every 4 cycles). The app plays a sound at each phase change and advances the cycles on its own.',
+	},
+	{
+		q: 'Can I run several timers at the same time?',
+		a: 'Yes. Tap "New timer" to add as many as you need — each with its own settings, time and sound, switching through the tabs at the top. That is what we call a multi online timer.',
+	},
+	{
+		q: 'Does the timer keep counting if I switch tabs or lock the screen?',
+		a: 'Yes. The timer and the stopwatch rely on your system clock, not on animated frames: even in the background or with your phone locked, the time is calculated correctly when you come back.',
+	},
+	{
+		q: 'Is the online timer free? Does it need a sign-up?',
+		a: 'It is 100% free and requires no sign-up. Every feature — countdown, stopwatch, pomodoro, intervals, meditation and sequences — is unlocked with no usage limits.',
+	},
+	{
+		q: 'Does the online timer work on mobile?',
+		a: 'It works in any browser, on your phone and on your computer. It is installable (PWA): you can add it to your home screen and open it like an app, always without installing anything from a store.',
+	},
+];
+---
+<Base
+	title="Online Timer — Free Countdown, Pomodoro and Stopwatch"
+	description="Free online timer: 5, 10 and 15 minute countdowns, pomodoro, stopwatch and intervals. Beautiful, fast, works offline and without sign-up."
+	path="/"
+	jsonLd={[webAppJsonLd('en'), faqJsonLd(faqs)]}
+>
+	<div class="mx-auto max-w-5xl px-4 pt-10 pb-20">
+		<section class="text-center mb-8 hero-mesh">
+			<p class="eyebrow mb-3">Online Timer</p>
+			<h1 class="text-4xl md:text-5xl font-semibold tracking-tight">Online Timer</h1>
+			<p class="mt-3 text-lg" style="color:var(--color-body)">
+				Stopwatch, pomodoro, intervals and countdown without installing anything.
+			</p>
+			<div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-[13px]" style="color:var(--color-body)">
+				<span class="chip">100% free</span>
+				<span class="chip">No sign-up</span>
+				<span class="chip">Works offline</span>
+				<span class="chip">Installable (PWA)</span>
+			</div>
+		</section>
+
+		<section class="app-card rounded-[16px] p-4 md:p-8 mb-14">
+			<TimerApp scope="full" />
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Tools</p>
+			<h2 class="text-2xl font-semibold mb-3">An online timer for whatever you need</h2>
+			<p class="lead">
+				Countdowns for study, workouts, cooking, meetings and meditation — all on a single page, with a clean,
+				fast design. Pick a timer type below or configure your own right above.
+			</p>
+			<p class="lead">
+				Need something specific? There are ready-made versions for
+				<a href="/en/temporizador-para-estudos/">study</a>,
+				<a href="/en/temporizador-para-exercicios/">workouts</a>,
+				<a href="/en/temporizador-para-cozinha/">cooking</a>,
+				<a href="/en/temporizador-para-meditacao/">meditation</a>,
+				<a href="/en/temporizador-hiit/">HIIT</a> and
+				<a href="/en/temporizador-tabata/">tabata</a>.
+			</p>
+			<ToolsGrid />
+			<h2 class="text-2xl font-semibold mt-12 mb-3">What is the online timer</h2>
+			<p>
+				The <strong>online timer</strong> is an <strong>online countdown timer</strong> that runs right in the
+				browser: a countdown with a sound alarm, kept by the system clock. You choose the duration in minutes and
+				seconds, press Start and the app does the rest — it plays, vibrates and can keep counting the extra minutes
+				after zero. Since everything happens in the browser, just type "online timer" into Google or open your saved
+				shortcut to begin; there is no download, sign-up or installation.
+			</p>
+			<p>
+				Unlike an ordinary clock, it works as an <strong>online timer clock</strong> for your daily life: the egg in
+				the kitchen, rest between sets, a test race, a 15 minute meeting or the alarm for a study break. Precision
+				comes from the system clock, so no delays or screen flicker — the time stays correct even when you switch
+				tabs or lock your phone.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Countdown for every duration</h2>
+			<p>
+				The default mode is the <strong>online countdown timer</strong>: the clock starts at the value you chose and
+				counts to zero. To go faster, use the ready shortcuts —
+				<a href="/en/temporizador/5-minutos/">5 minutes</a>,
+				<a href="/en/temporizador/10-minutos/">10 minutes</a>,
+				<a href="/en/temporizador/15-minutos/">15 minutes</a>,
+				<a href="/en/temporizador/25-minutos/">25 minutes</a>,
+				<a href="/en/temporizador/30-minutos/">30 minutes</a> and
+				<a href="/en/temporizador/60-minutos/">60 minutes</a> —
+				or adjust the dial to any time, from 1 second to hours. For short bursts, like the
+				<strong>40 seconds</strong> of interval training, the <a href="/en/temporizador-hiit/">HIIT</a> timer is
+				already set up.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Pomodoro, stopwatch and intervals in the same place</h2>
+			<p>
+				This is a complete <strong>online pomodoro timer</strong>: the pomodoro method organizes focus and breaks
+				into cycles and this app advances automatically between focus, short break and long break. It also works as
+				an <strong>online timer stopwatch</strong>: just switch the tab to the stopwatch and measure the time of any
+				activity, with lap marking. And for workouts, the <a href="/en/intervalos/">intervals</a> alternate effort
+				and rest on their own, with <a href="/en/temporizador-tabata/">tabata</a> and HIIT presets.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">A beautiful, simple online timer</h2>
+			<p>
+				We set out to make this <strong>beautiful online timer</strong> with an <strong>aesthetic</strong> look: big
+				numbers, an elegant font, automatic dark mode and no visual noise — just the clock and what matters. In
+				<strong>focus mode</strong> (fullscreen), the dial gets even bigger, ideal for studying, meditating or
+				following a show without distraction. While other options fight for attention, here you look at the time and
+				that is it.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Multi online timer: several timers at once</h2>
+			<p>
+				Need to keep an eye on the rice, the oven and the tea at the same time? The <strong>"New timer"</strong>
+				feature turns this page into a <strong>multi online timer</strong>: each timer has its own tab, settings and
+				sound, and all of them run in parallel. It is perfect for kitchens, classrooms and any routine with more than
+				one countdown going at once.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Features that make a difference</h2>
+			<ul class="list list-checks">
+				<li><strong>Accurate across tabs:</strong> the timer uses the system clock — you do not lose seconds switching tabs or locking the screen.</li>
+				<li><strong>Focus mode:</strong> fullscreen with a big clock so you do not get distracted.</li>
+				<li><strong>Sounds and vibration:</strong> alarm in 5 styles, with adjustable volume and phone vibration.</li>
+				<li><strong>Share your timer:</strong> send a pre-configured link or a QR code to open on your phone.</li>
+				<li><strong>Pomodoro:</strong> <a href="/en/pomodoro/">focus and break cycles</a> that advance on their own.</li>
+				<li><strong>Stopwatch:</strong> <a href="/en/cronometro/">count the time that passes and mark laps</a>.</li>
+				<li><strong>Intervals and training:</strong> <a href="/en/intervalos/">HIIT</a>, <a href="/en/temporizador-tabata/">tabata</a> and <a href="/en/temporizador-hiit/">40×20</a> ready to go.</li>
+				<li><strong>Keyboard shortcuts:</strong> Space starts/pauses, R resets, F fullscreen, M mutes.</li>
+				<li><strong>Automatic dark mode:</strong> follows your system theme.</li>
+			</ul>
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Questions</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Frequently asked questions</h2>
+			<div class="faq">
+				{faqs.map((f) => (
+					<div class="faq-item">
+						<h3 class="faq-q">{f.q}</h3>
+						<p class="faq-a">{f.a}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.app-card {
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.article h2 {
+		line-height: 1.25;
+	}
+	.lead {
+		font-size: 16px;
+		color: var(--color-body);
+		margin-bottom: 1rem;
+	}
+	.article p {
+		color: var(--color-body);
+		margin-bottom: 0.8rem;
+		line-height: 1.6;
+	}
+	.article a {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.article a:hover {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		list-style: none;
+		padding-left: 0;
+	}
+	.list-checks li {
+		position: relative;
+		padding-left: 28px;
+		color: var(--color-body);
+	}
+	.list-checks li strong {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+	.list-checks li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 5px;
+		width: 17px;
+		height: 15px;
+		border-radius: 4px;
+		background:
+			linear-gradient(135deg, transparent 55%, var(--color-link) 50%) -1px 5px no-repeat,
+			linear-gradient(45deg, transparent 45%, var(--color-link) 45%) 5px -2px no-repeat;
+		background-size: 9px 9px;
+		width: 18px;
+		height: 18px;
+	}
+	.faq {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+	.faq-item {
+		padding: 14px 16px;
+		border-radius: 12px;
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.faq-q {
+		font-size: 15px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+	.faq-a {
+		font-size: 14px;
+		color: var(--color-body);
+	}
+</style>

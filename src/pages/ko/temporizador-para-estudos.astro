@@ -1,0 +1,49 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '공부에 좋은 시간은 얼마인가요?',
+		a: '포모도로 기법은 25분 블록과 5분 휴식을 사용합니다. 긴 독서를 위해 50분을 선호하는 사람도 많습니다. 25분으로 시작해 집중력에 맞춰 조절하세요.',
+	},
+	{
+		q: '공부할 때 타이머는 어떻게 쓰나요?',
+		a: '시간을 정하고 한 가지 과제를 정한 뒤 시작하세요. 알람이 울리면 진행 상황을 기록하고 휴식을 취하세요. 같은 블록 안에서는 과제를 바꾸지 마세요.',
+	},
+];
+---
+<ToolPage
+	title="공부용 타이머 — 집중 기법"
+	description="포모도로 기법과 집중 블록을 제공하는 공부 타이머. 시간을 유리하게 활용하고 집중력을 키우는 법을 배워 보세요."
+	path="/temporizador-para-estudos/"
+	heading="공부용 타이머"
+	sub="휴식이 섞인 집중 블록. 피로 없이 공부하는 가장 간단한 방법."
+	initial={JSON.stringify({ seconds: 1500, mode: 'timer', label: '공부' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		타이머와 함께 공부하면 두 가지 이점이 있습니다. <strong>끝이 있다는 것</strong>을 알게 되어(뇌가
+		편안해짐) <strong>휴식 리듬</strong>이 생깁니다. 25분 블록은 이미 설정되어 있습니다 — 시작을 누르세요.
+	</p>
+	<h2>루틴 제안</h2>
+	<ul>
+		<li><strong><a href="/ko/temporizador/25-minutos/">총집중(25분):</a></strong> 지금 공부에만 집중하는 하나의 블록.</li>
+		<li><strong><a href="/ko/temporizador/5-minutos/">5분 휴식:</a></strong> 일어서서 물을 마시고 스트레칭.</li>
+		<li><strong><a href="/ko/temporizador/15-minutos/">복습(15분):</a></strong> 짧은 타이머로 끝부터 앞으로 메모를 복습.</li>
+	</ul>
+	<p>
+		전체 시간을 블록으로 잠그고 싶다면 <a href="/ko/pomodoro/">온라인 포모도로</a>로 긴 휴식이 자동으로
+		들어간 완전한 사이클을 쓰세요.
+	</p>
+	<h2>자주 묻는 질문</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

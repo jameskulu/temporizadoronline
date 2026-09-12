@@ -1,0 +1,97 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is an interval counter?',
+		a: 'An interval counter is a timer that automatically alternates between effort and rest phases, repeating for a number of rounds. It is for HIIT workouts, tabata, fight rounds and any activity that needs precise timings.',
+	},
+	{
+		q: 'How do I build an interval workout?',
+		a: 'Set the effort seconds (e.g. 30), the rest seconds (e.g. 15) and how many rounds you want to do. The "prep" field counts an initial warm-up before you start. The app alternates the phases on its own and alerts you with a sound.',
+	},
+	{
+		q: 'What is the difference between HIIT and tabata?',
+		a: 'Tabata is a fixed HIIT format: 20 seconds of maximum effort and 10 of rest, in 8 rounds (4 minutes in total). General HIIT can have free timings, like 40×20. Both are available in the app presets.',
+	},
+	{
+		q: 'How do I calculate the total time of my interval workout?',
+		a: 'Add effort + rest and multiply by the number of rounds. Example: 8 rounds of 40×20 make 8 minutes of training. Adjust effort, rest and rounds in the settings to determine intervals that fit your time.',
+	},
+	{
+		q: 'Can I see the round progress during the workout?',
+		a: 'Yes. The dial shows the current round and the phase (effort, rest or prep), updated every second — a simple view that is the equivalent of charting your workout intervals. A sound plays at every phase change.',
+	},
+	{
+		q: 'Do intervals work as a workout stopwatch?',
+		a: 'Yes. Besides the alternating phases, the timer records each round with precision, working as an online interval stopwatch: you know exactly how long each effort and each rest lasted, without writing anything down.',
+	},
+];
+---
+<ToolPage
+	title="Online Intervals — HIIT and Tabata Workout Timer"
+	description="Online interval timer: effort, rest and rounds with preparation and sound alerts. Calculate and set your workout intervals, HIIT and tabata, free."
+	path="/intervalos/"
+	heading="Intervals"
+	sub="Switches effort and rest automatically. Build your HIIT, tabata or rounds workout."
+	initial={JSON.stringify({ mode: 'interval' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Interval training works with precise times. Set the <strong>effort</strong>, <strong>rest</strong>,
+		<strong>rounds</strong> and an optional <strong>prep</strong> — the timer alternates the phases on its own, plays a
+		sound at every change and shows the current round.
+	</p>
+	<h2>Ready-made presets</h2>
+	<ul>
+		<li><strong><a href="/en/temporizador-tabata/">Tabata:</a></strong> 20 s effort + 10 s rest, 8 rounds.</li>
+		<li><strong><a href="/en/temporizador-hiit/">HIIT:</a></strong> 40 s effort + 20 s rest, 8 rounds.</li>
+		<li><strong>Boxing:</strong> 3 minute rounds with 1 minute rest.</li>
+		<li><strong>Training:</strong> 45 s effort + 15 s rest, 20 rounds.</li>
+	</ul>
+	<h2>Calculate and set your intervals</h2>
+	<p>
+		It is easy to <strong>calculate intervals online</strong> for your workout: pick how many seconds of effort and of
+		rest you can hold, add them up and multiply by the rounds to know the total duration. To
+		<strong>determine intervals online</strong> that fit your schedule, tweak the effort, the rest and the number of
+		rounds until the total matches the time available — the app shows the current round and the phase in real time,
+		also working as an <strong>online interval stopwatch</strong> to measure each part of the workout.
+	</p>
+	<h2>Tips</h2>
+	<ul>
+		<li>Start with a <strong>prep</strong> of 5 to 10 seconds to get settled before the first effort.</li>
+		<li>Use <strong>focus mode</strong> (fullscreen) so your eyes do not wander during the round.</li>
+		<li>Keep the phone <strong>screen on</strong> in the settings so it does not turn off mid-workout.</li>
+	</ul>
+	<h2>Intervals for every workout</h2>
+	<p>
+		No matter if you train at the gym, at home or on the street: an <strong>online interval counter</strong> respects
+		your plan. For strength sets, use rests of <strong>60 to 90 seconds</strong>; for conditioning, efforts of
+		<strong>30 to 45 seconds</strong> with short <strong>15 and 20</strong> second rests. The app shows the time of
+		each phase in real time, so you <strong>determine intervals online</strong> without timing them in your head — just
+		follow the dial and the sound. If the goal is to measure free stretches or compare rounds, it also works as an
+		<strong>online stopwatch with intervals</strong>: start, stop, record and repeat as many times as you need.
+	</p>
+	<h2>Visualize the progress of each round</h2>
+	<p>
+		In practice, the dial is already your chart: every second, the clock moves along with the current round, showing
+		whether you are in effort, rest or prep. It is the simplest way to <strong>chart intervals online</strong> during
+		your workout — no paper and no spreadsheet. And since every phase change plays an alert, you do not even need to
+		look at the screen to know when to start and when to stop.
+	</p>
+	<h2>Frequently asked questions</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

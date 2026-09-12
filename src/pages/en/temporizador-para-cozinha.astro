@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is the best timer for cooking?',
+		a: 'Any time works: the important thing is to have a clear alert and be able to leave it counting in the background. This timer rings, vibrates and can even keep counting the extra minutes after zero.',
+	},
+	{
+		q: 'Can I use several timers in the kitchen?',
+		a: 'Yes. With "New timer" you create separate timers for each dish at the same time — great when the rice, the oven and the tea finish at different minutes.',
+	},
+];
+---
+<ToolPage
+	title="Cooking Timer — Recipes on Point"
+	description="Online cooking timer: egg, rice, oven and tea. Sound alert, extra time and several timers at once. Free and works offline."
+	path="/temporizador-para-cozinha/"
+	heading="Cooking Timer"
+	sub="A must for the rice, essential for the oven and the eggs. No hovering over the stove."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Cooking' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Cooking is timing: <strong>one minute</strong> for the tea, <strong>5</strong> for greens, <strong>10</strong> for
+		pasta, <strong>15</strong> for small bakes. Set it, leave your phone on the counter and get the alert right on
+		time. Tick "Continue after zero" to also measure the resting of your dough.
+	</p>
+	<h2>Most-used times</h2>
+	<ul>
+		<li><strong><a href="/en/temporizador/1-minuto/">1 min</a></strong> — soft-boiled egg, sauce on the stove, strained tea.</li>
+		<li><strong><a href="/en/temporizador/5-minutos/">5 min</a></strong> — short-grain white rice, steamed vegetables, brewed coffee.</li>
+		<li><strong><a href="/en/temporizador/10-minutos/">10 min</a></strong> — fresh pasta, soft-poached egg, legumes.</li>
+		<li><strong><a href="/en/temporizador/15-minutos/">15</a>–<a href="/en/temporizador/30-minutos/">30 min</a></strong> — roasts, risottos and desserts in blocks.</li>
+	</ul>
+	<p>
+		Use <strong>focus mode</strong> (fullscreen) to see the big clock, and there is also a <a href="/en/cronometro/">stopwatch</a>
+		to record the timings of your recipes.
+	</p>
+	<h2>Frequently asked questions</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

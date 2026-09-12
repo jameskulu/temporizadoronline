@@ -1,0 +1,98 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Cos\'è un cronometro online?',
+		a: 'Un cronometro online conta il tempo che passa dall\'inizio — a differenza del timer, che fa un conto alla rovescia fino allo zero. Serve per misurare attività, corse, giochi, prove ed esercizi con segnalazione dei giri.',
+	},
+	{
+		q: 'Qual è la differenza tra cronometro e timer?',
+		a: 'Il timer (chiamato anche conto alla rovescia online) fa un conto alla rovescia fino allo zero e avvisa con un allarme. Il cronometro parte da zero e conta verso l\'alto. Per attività con un limite di tempo, usa il timer; per misurare quanto dura qualcosa, usa il cronometro.',
+	},
+	{
+		q: 'Il cronometro online segna i giri?',
+		a: 'Sì. Nella modalità cronometro c\'è il pulsante "Giro": ogni tocco registra il tempo di quel giro nella lista, sempre con il più recente in cima, mentre il cronometro continua a girare in secondo piano. Il pulsante "Azzera" azzera tutto.',
+	},
+	{
+		q: 'Il cronometro continua a contare se cambio scheda?',
+		a: 'Sì. Il cronometro si basa sull\'orologio del sistema, non su fotogrammi di animazione: anche in secondo piano, con la scheda ridotta a icona o il telefono bloccato, il tempo viene conteggiato correttamente quando torni.',
+	},
+	{
+		q: 'Si può usare il cronometro online a schermo intero?',
+		a: 'Sì. Usa la modalità concentrazione (scorciatoia F sulla tastiera): l\'orologio va a schermo intero, diventa molto grande e nasconde il resto della pagina. È ideale per seguire prove, allenamenti e presentazioni senza distrazioni.',
+	},
+	{
+		q: 'Come usare il cronometro online per studiare?',
+		a: 'Usalo per misurare quanto tempo impieghi su ogni domanda o capitolo, cronometrare i giri di ripasso o controllare il tempo delle simulazioni d\'esame. Per blocchi di studio con pause, combinalo con il pomodoro o con i timer pronti.',
+	},
+	{
+		q: 'Il cronometro online è gratuito?',
+		a: 'Sì, al 100% gratuito e senza registrazione, con tutte le funzioni sbloccate: giri, tempo totale, modalità concentrazione, suoni e vibrazione. Funziona anche offline, direttamente nel browser.',
+	},
+];
+---
+<ToolPage
+	title="Cronometro Online Gratuito — con schermo intero e conta alla rovescia"
+	description="Cronometro online gratuito: conta secondi, minuti e ore con precisione, segna i giri e ha la modalità a schermo intero. Funziona offline, senza registrazione e sul telefono."
+	path="/cronometro/"
+	heading="Cronometro"
+	sub="Conta il tempo nel modo giusto: con precisione dopo l'avvio. Premi Avvia e corri verso ciò che stai misurando."
+	initial={JSON.stringify({ mode: 'stopwatch' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Il cronometro qui sopra è gestito dall'orologio del sistema: continua a contare anche se cambi scheda, blocchi
+		lo schermo o apri un'altra applicazione. Quando torni, il tempo è segnato correttamente.
+	</p>
+	<h2>Per cosa usare un cronometro</h2>
+	<ul>
+		<li><strong><a href="/it/temporizador-para-exercicios/">Allenamento:</a></strong> misurare serie, riposo o la corsa di oggi.</li>
+		<li><strong>Esami e test:</strong> controllo esatto del tempo di una domanda o dell'intera prova.</li>
+		<li><strong>Giochi da tavolo:</strong> un turno cronometrato e giusto per tutti.</li>
+		<li><strong>Test e processi:</strong> sapere esattamente quanto tempo richiede qualcosa.</li>
+	</ul>
+	<h2>Qual è la differenza tra cronometro e timer?</h2>
+	<p>
+		Il <a href="/it/temporizador/">timer</a> fa un conto alla rovescia e avvisa quando arriva a zero — alcuni
+		lo chiamano <strong>cronometro online a conto alla rovescia</strong>. Il cronometro fa il contrario: parte da zero e
+		conta verso l'alto. Per attività con un limite di tempo, usa il timer; per misurare quanto dura qualcosa, usa il
+		cronometro.
+	</p>
+	<h2>Come usare il cronometro online</h2>
+	<p>
+		È semplice: apri la pagina, tocca <strong>Avvia</strong> e segui secondi, minuti e ore che si sommano con
+		precisione. Questo <strong>cronometro online gratuito</strong> continua a contare anche se riduci a icona il browser,
+		blocchi il telefono o cambi scheda — il tempo è gestito dall'orologio del sistema. Quando devi misurare due o
+		più tratti della stessa attività, tocca <strong>Giro</strong> quante volte vuoi: ogni segnazione resta
+		registrata in una lista, con la più recente in cima. Hai finito? Tocca <strong>Azzera</strong> per azzerare tutto e
+		ricominciare. Sono pochi pulsanti, esattamente come deve essere un buon cronometro.
+	</p>
+	<h2>Studio, esami e schermo intero</h2>
+	<p>
+		Il <strong>cronometro online per lo studio</strong> è un alleato a casa e in classe: misura il tempo di ogni
+		domanda, controlla le simulazioni e allena la tua distribuzione dei minuti. Attiva la <strong>modalità schermo intero</strong> (F sulla
+		tastiera) per seguire il tempo da lontano, senza avvicinarti al telefono. Il design pulito e il quadrante grande
+		rendono inoltre il <strong>cronometro online</strong> piacevole da usare ogni giorno.
+	</p>
+	<p>
+		Se sei arrivato da Google cercando "cronometro online", questo qui funziona subito: <strong>gratuito</strong>,
+		senza download, senza registrazione, sul computer o sul telefono. Tocca Avvia e il cronometro online è già in
+		corso — con suoni e vibrazione opzionali alla fine di ogni misurazione.
+	</p>
+	<h2>Domande frequenti</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

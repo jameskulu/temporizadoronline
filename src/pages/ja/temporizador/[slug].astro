@@ -1,0 +1,96 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { getMinutePages } from '../../../i18n/utils';
+import { faqJsonLd } from '../../../data/site';
+
+interface Props {
+	minutes: number;
+	label: string;
+	slugLabel: string;
+	initial: string;
+}
+
+export function getStaticPaths() {
+	return getMinutePages('ja').map((p) => {
+		const initial = JSON.stringify({ seconds: p.minutes * 60, mode: 'timer', label: p.label });
+		return {
+			params: { slug: p.slug },
+			props: { minutes: p.minutes, label: p.label, slugLabel: p.slug, initial },
+		};
+	});
+}
+
+const { minutes, label, slugLabel, initial } = Astro.props;
+
+const durationText = minutes === 60 ? '1時間' : `${minutes}分`;
+const faqs = [
+	{
+		q: `${label}はどのような用途に使えますか？`,
+		a: `およそ${durationText}かかる作業なら何にでも使えます：勉強の集中、休憩、体力づくり、料理、短い作業。設定なしで今すぐ始められます。`,
+	},
+	{
+		q: '他の時間も使えますか？',
+		a: 'はい。このアプリなら数秒から24時間まで自由に設定でき、このページの既成タイマー以外の時間にもすべて対応しています。',
+	},
+];
+---
+<ToolPage
+	title={`${label} — オンラインタイマー無料`}
+	description={`${label}：音付きアラーム、秒単位の精度、フォーカスモード付き。高速、無料、オフライン対応——ダウンロード不要。`}
+	path={`/temporizador/${slugLabel}/`}
+	heading={label}
+	sub={`${durationText}で使える完成済みタイマー。スタートを押して、大切なことに集中しましょう。`}
+	initial={initial}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		この<strong>{label}</strong>は最初から<strong>{durationText}</strong>に設定されています。
+		スタートをクリックするか、<kbd>スペース</kbd>キーを押してください。終了するとアラームが鳴り、画面が点滅します。
+		さらに延長して時間を測り続けるかどうかは、あなた次第です。
+	</p>
+	<h2>{label}の仕組み</h2>
+	<ul>
+		<li><strong>正確さ：</strong>システム時計に基づいて計測するので、タブを切り替えても信頼できます。</li>
+		<li><strong>アラーム：</strong>設定からお好みの音と音量を選べます。</li>
+		<li><strong>フォーカスモード：</strong><kbd>F</kbd>キーで、大きな時計の全画面表示に。</li>
+		<li><strong>リンクの共有：</strong>この{label}をリンクやQRコードで共有できます。</li>
+	</ul>
+	<h2>{durationText}の使い方アイデア</h2>
+	<p>
+		<a href="/ja/temporizador-para-estudos/">勉強</a>の短い集中ブロック、<a href="/ja/temporizador-para-exercicios/">トレーニング</a>
+		のウォームアップ、<a href="/ja/temporizador-para-cozinha/">レシピ</a>の待ち時間、<a href="/ja/temporizador-para-meditacao/">瞑想</a>の
+		ショートセッションなどにどうぞ。
+	</p>
+	<h2>他の既成タイマー</h2>
+	<p>
+		同じダイヤルを他の時間に設定済み——お好みの時間を選んで始めましょう：
+	</p>
+	<div class="flex flex-wrap gap-2 mb-4">
+		{
+			getMinutePages('ja')
+				.filter((p) => p.minutes !== minutes)
+				.map((m) => (
+					<a href={`/ja/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes}分</a>
+				))
+		}
+	</div>
+	<p>
+		休憩つきの完全なサイクルには<a href="/ja/pomodoro/">ポモドーロ</a>を、何かにかかった時間を測るなら
+		<a href="/ja/cronometro/">ストップウォッチ</a>を、努力と休憩を交互に繰り返すトレーニングには
+		<a href="/ja/intervalos/">インターバル</a>、<a href="/ja/temporizador-hiit/">HIIT</a>、<a href="/ja/temporizador-tabata/">タバタ</a>を
+		どうぞ。
+	</p>
+	<h2>よくある質問</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

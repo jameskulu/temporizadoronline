@@ -1,0 +1,49 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Come usare un timer durante l\'allenamento?',
+		a: 'Usalo per misurare il riposo tra le serie (da 30 a 90 secondi), controllare il tempo di ogni esercizio o cronometrare l\'intero allenamento. Durante le pause, tenere il telefono in mano aiuta a non allungare il riposo.',
+	},
+	{
+		q: 'Cos\'è la modalità concentrazione durante l\'allenamento?',
+		a: 'La modalità concentrazione porta l\'orologio a schermo intero, nasconde il resto della pagina e rende il tempo molto grande — ideale per seguire la serie senza distrazioni.',
+	},
+];
+---
+<ToolPage
+	title="Timer per allenamento — serie e riposi"
+	description="Timer per allenamento per controllare serie e riposi: riposo da 30 a 90 secondi, intervalli e allenamenti completi. Gratuito e funziona offline."
+	path="/temporizador-para-exercicios/"
+	heading="Timer per allenamento"
+	sub="Controlla il riposo tra le serie e non far raffreddare l'allenamento."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Allenamento' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Il segreto di un buon allenamento sta spesso nel <strong>riposo</strong>: una serie troppo lunga ritarda e troppo
+		breve non recupera. Un timer da 30 o 60 secondi garantisce che ogni pausa sia uguale.
+	</p>
+	<h2>Suggerimenti di tempi</h2>
+	<ul>
+		<li><strong>Riposo breve (30 s)</strong> — serie di resistenza e mobilità.</li>
+		<li><strong>Riposo standard (60 s)</strong> — pesistica convenzionale.</li>
+		<li><strong>Riposo più lungo (90 s)</strong> — carichi pesanti e esercizi composti.</li>
+	</ul>
+	<p>
+		Per allenamenti che alternano sforzo e riposo automaticamente, usa il <a href="/it/intervalos/">timer a intervalli</a>
+		con i preset di <a href="/it/temporizador-hiit/">HIIT</a> e <a href="/it/temporizador-tabata/">tabata</a>.
+	</p>
+	<h2>Domande frequenti</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

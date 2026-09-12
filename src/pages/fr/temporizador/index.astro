@@ -1,0 +1,59 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { faqJsonLd } from '../../../data/site';
+import { getMinutePages } from '../../../i18n/utils';
+
+const minutePages = getMinutePages('fr');
+
+const faqs = [
+	{
+		q: 'Comment créer un minuteur personnalisé ?',
+		a: "Utilisez le champ de configuration de la page : réglez les heures, minutes et secondes de votre minuteur — de quelques secondes à 24 heures.",
+	},
+	{
+		q: 'Que se passe-t-il quand le temps est écoulé ?',
+		a: "Une alarme retentit (choisissez parmi 5 sons et réglez le volume), l'écran fait un signal, le téléphone vibre et, si vous le souhaitez, le minuteur continue de compter le temps supplémentaire.",
+	},
+];
+---
+<ToolPage
+	title="Minuteur en ligne — compte à rebours gratuit"
+	description="Minuteur en ligne avec compte à rebours de 1 à 60 minutes ou durée personnalisée. Précis, gratuit, fonctionne hors ligne et sans inscription."
+	path="/temporizador/"
+	heading="Minuteur"
+	sub="Un compte à rebours simple et précis. Réglez le temps, démarrez et laissez faire : l'alerte arrive au bon moment."
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Utilisez le minuteur ci-dessus pour tous vos comptes à rebours : <strong>études, recettes, réunions, siestes,
+		exercices</strong> — tout ce qui a besoin d'une alarme juste. Choisissez un temps prêt à l'emploi ci-dessous ou
+		configurez le vôtre.
+	</p>
+	<h2>Minuteurs prêts à l'emploi par durée</h2>
+	<div class="grid-cols flex flex-wrap gap-2 mb-8" style="margin-bottom:2rem">
+		{
+			minutePages.map((p) => (
+				<a href={`/fr/temporizador/${p.slug}/`} class="chip chip-link">{p.label}</a>
+			))
+		}
+	</div>
+	<h2>Conseils d'utilisation</h2>
+	<ul>
+		<li><strong>Mode focus :</strong> appuyez sur <kbd>F</kbd> pour tout masquer et ne voir que le cadran.</li>
+		<li><strong>Continuer après zéro :</strong> cochez « Continuer après zéro » pour mesurer aussi le temps supplémentaire (pratique en cuisine).</li>
+		<li><strong>Sans perdre de temps :</strong> le minuteur utilise l'horloge du système — il fonctionne même en arrière-plan.</li>
+	</ul>
+	<h2>Questions fréquentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

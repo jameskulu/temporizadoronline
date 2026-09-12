@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+	title="Page not found — Online Timer"
+	description="This page does not exist on Online Timer. Keep using the countdown timer, the stopwatch, the pomodoro or the intervals."
+	path="/404/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			404
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			Page not found
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			The address you typed does not exist or has moved. How about getting back to work with one of the
+			tools below?
+		</p>
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/en/" class="chip chip-link">Home</a>
+			<a href="/en/temporizador/" class="chip chip-link">Timer</a>
+			<a href="/en/cronometro/" class="chip chip-link">Stopwatch</a>
+			<a href="/en/pomodoro/" class="chip chip-link">Pomodoro</a>
+			<a href="/en/intervalos/" class="chip chip-link">Intervals</a>
+			<a href="/en/meditacao/" class="chip chip-link">Meditation</a>
+			<a href="/en/sequencias/" class="chip chip-link">Sequences</a>
+		</div>
+
+		<a
+			href="/en/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			Use the timer now
+		</a>
+	</main>
+</Base>

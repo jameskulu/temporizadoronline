@@ -1,0 +1,100 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Comment méditer avec un minuteur ?',
+		a: "Réglez 5 ou 10 minutes, asseyez-vous droit et confortablement, appuyez sur Démarrer et gardez l'attention sur la respiration. Quand l'alarme sonne — le son doux « zen » est idéal — terminez calmement, en respirant trois fois de plus avant d'ouvrir les yeux.",
+	},
+	{
+		q: 'Quelle est la meilleure durée pour méditer ?',
+		a: "Pour débuter, 5 à 10 minutes suffisent à faire la différence. Avec la pratique, 15 à 20 minutes. Vous ajustez la durée dans les paramètres et pouvez utiliser les minuteurs prêts à l'emploi de 5, 10 et 20 minutes.",
+	},
+	{
+		q: "Quel son d'alarme utiliser pour méditer ?",
+		a: "Le son « zen » a été conçu pour être doux et ne pas surprendre à la fin de la pratique. Le « chime » fonctionne aussi très bien : un seul et paisible tintement. Vous pouvez aussi utiliser la vibration du téléphone à la place du son.",
+	},
+	{
+		q: "Qu'est-ce que la méditation guidée ?",
+		a: "La méditation guidée consiste à pratiquer en suivant des indications par étapes — respiration, corps, son — plutôt que de décider sur le moment. Ici, vous assemblez une séquence guidée avec vos propres étapes en mode séquences, avec des alertes douces à chaque changement.",
+	},
+	{
+		q: 'Comment méditer seul à la maison ?',
+		a: "Choisissez un endroit calme, asseyez-vous le dos droit, les mains posées et les yeux fermés. Réglez 10 minutes sur ce minuteur de méditation, choisissez le son zen et observez la respiration jusqu'au tintement doux. Sans pression : le minuteur s'occupe du temps à votre place.",
+	},
+	{
+		q: 'Le minuteur de méditation fonctionne-t-il avec le téléphone verrouillé ?',
+		a: "Oui. Le temps est calculé par l'horloge du système, donc le décompte reste juste même avec l'écran verrouillé. Si vous préférez suivre, activez le mode focus en plein écran avec un grand cadran paisible.",
+	},
+];
+---
+<ToolPage
+	title="Méditation en ligne — minuteur avec sons doux (5, 10 et 20 min)"
+	description="Minuteur de méditation en ligne avec sons doux : méditez 5, 10 ou 20 minutes sans surveiller le temps. Gratuit, fonctionne hors ligne et avec un plein écran apaisant."
+	path="/meditacao/"
+	heading="Méditation"
+	sub="Un moment rien que pour vous. Réglez la durée, asseyez-vous et laissez l'alarme douce annoncer la fin."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Méditation' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Méditer demande de ne pas surveiller le temps. Ce minuteur de méditation s'en charge : vous choisissez la durée,
+		appuyez sur <strong>Démarrer</strong> et vous concentrez sur la respiration. À la fin, un son calme — nous
+		recommandons le son <strong>« zen »</strong> — annonce la fin, et l'écran peut aussi vibrer doucement.
+	</p>
+	<h2>Comment méditer avec le minuteur</h2>
+	<ul>
+		<li>Choisissez <strong><a href="/fr/temporizador/10-minutos/">10 minutes</a></strong> (ou réglez entre 1 et 20 minutes).</li>
+		<li>Appuyez sur <strong>Démarrer</strong> et fermez les yeux.</li>
+		<li>Choisissez le son <strong>zen</strong> dans les paramètres pour un tintement plus doux.</li>
+		<li>Utilisez le <strong>mode focus</strong> (« Plein écran ») pour un cadran plus grand et sans distraction.</li>
+	</ul>
+	<h2>Méditation avec minuteur au quotidien</h2>
+	<p>
+		Un <strong>minuteur de méditation</strong> transforme la pratique en quelque chose de simple : choisissez
+		<a href="/fr/temporizador/5-minutos/">5 minutes</a>, <a href="/fr/temporizador/10-minutos/">10</a> ou
+		<a href="/fr/temporizador/15-minutos/">15</a> et laissez le temps passer. Il fonctionne comme une
+		<strong>cloche zen</strong> : silencieuse pendant la pratique, douce au moment de revenir. Ce minuteur de
+		méditation en ligne est gratuit, fonctionne hors ligne et affiche un cadran beau et apaisant — parfait pour
+		méditer sur mobile, à la maison ou au bureau.
+	</p>
+	<h2>Conseils pour débuter</h2>
+	<p>
+		Ne vous mettez pas la pression : commencer par <a href="/fr/temporizador/5-minutos/">5 minutes</a> de silence
+		compte déjà. Vous voulez une lecture plus complète sur la pratique ? Consultez la
+		<a href="/fr/temporizador-para-meditacao/">page dédiée à la méditation</a>. Vous préférez une pratique guidée ?
+		Montez une <a href="/fr/sequencias/">séquence</a> avec des étapes de respiration et de courtes pauses.
+	</p>
+	<h2>Méditation guidée et sons pour méditer</h2>
+	<p>
+		Toute pratique n'est pas silencieuse : la <strong>méditation guidée</strong> vous conduit par étapes — corps,
+		respiration, son — et aide les débutants à ne pas se perdre dans les pensées. Sur ce site, la forme guidée est le
+		mode <a href="/fr/sequencias/">séquences</a> : assemblez des étapes de respiration ou de relaxation avec les
+		durées de votre choix, et l'application prévient en douceur à chaque changement. Le minuteur de méditation de
+		cette page, lui, s'occupe de la pratique libre : choisissez parmi les <strong>sons de méditation</strong> zen,
+		cloche et carillon, réglez le volume et méditez les yeux fermés jusqu'au tintement.
+	</p>
+	<h2>Méditer avec le téléphone sans se distraire</h2>
+	<p>
+		Quand la méditation a lieu sur mobile, le secret est de ne pas laisser l'écran capter votre attention. Utilisez le
+		<strong>mode focus</strong> (plein écran) pour ne voir que le grand cadran apaisant, ou verrouillez l'appareil : le
+		temps reste juste car il est calculé par l'horloge du système, et l'alarme zen sonne à l'heure exacte. Éteindre
+		les notifications avant de commencer vaut aussi le coup. Ainsi, une <strong>méditation en ligne</strong> de
+		quelques minutes vaut une vraie pause — sans l'heure en tête, sans hâte à revenir.
+	</p>
+	<h2>Questions fréquentes</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

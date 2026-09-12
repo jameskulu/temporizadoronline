@@ -1,0 +1,58 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { getMinutePages } from '../../../i18n/utils';
+import { faqJsonLd } from '../../../data/site';
+
+const minutePages = getMinutePages('ja');
+
+const faqs = [
+	{
+		q: 'オリジナルのタイマーを作るには？',
+		a: 'このページの設定フィールドを使います：時間、分、秒の指示計で、数秒から24時間まで設定できます。',
+	},
+	{
+		q: '時間が終わるとどうなりますか？',
+		a: 'アラームが鳴ります（5種類の音と音量から選択可能）。画面にサインが表示され、スマホではバイブレーションも動作。必要なら、タイマーは延長時間も数え続けます。',
+	},
+];
+---
+<ToolPage
+	title="オンラインタイマー — 無料のカウントダウンタイマー"
+	description="1分から60分まで、または自由な時間でカウントダウンできるオンラインタイマー。正確で無料、オフライン対応、登録不要。"
+	path="/temporizador/"
+	heading="タイマー"
+	sub="シンプルで正確なカウントダウンタイマー。時間を設定して開始すれば、終了の合図を正確に受け取れます。"
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		上のタイマーをあらゆるカウントダウンに使えます：<strong>勉強、レシピ、会議、仮眠、
+		トレーニング</strong>など、きちんとしたアラームが必要な場面なら何でも。下の既成タイマーを選ぶか、自由に設定してください。
+	</p>
+	<h2>時間別の既成タイマー</h2>
+	<div class="grid-cols flex flex-wrap gap-2 mb-8" style="margin-bottom:2rem">
+		{
+			minutePages.map((m) => (
+				<a href={`/ja/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes}分</a>
+			))
+		}
+	</div>
+	<h2>使い方のヒント</h2>
+	<ul>
+		<li><strong>フォーカスモード：</strong><kbd>F</kbd>キーで周りを隠し、時計だけを表示します。</li>
+		<li><strong>ゼロを超えて継続：</strong>「ゼロを超えて継続」にチェックを入れると、延長時間も測れます（キッチンで便利）。</li>
+		<li><strong>時間を無駄にしない：</strong>タイマーはシステム時計を使うため、バックグラウンドでも正確です。</li>
+	</ul>
+	<h2>よくある質問</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

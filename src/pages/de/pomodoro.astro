@@ -1,0 +1,97 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Was ist die Pomodoro-Methode?',
+		a: 'Die Pomodoro-Methode ist eine Zeitmanagement-Technik von Francesco Cirillo: Arbeiten Sie in 25-Minuten-Fokusblöcken, machen Sie eine kurze Pause von 5 Minuten und nach jeweils 4 Blöcken eine lange Pause von 15 Minuten. Ziel ist es, die Konzentration auf eine einzige Aufgabe zu halten und danach zu erholen.',
+	},
+	{
+		q: 'Wie funktioniert der Online-Pomodoro-Timer?',
+		a: 'Der Pomodoro-Timer oben ist bereits nach dem klassischen Muster vorkonfiguriert: 25 Minuten Fokus, 5 Minuten kurze Pause und 15 Minuten lange Pause nach jeweils 4 Zyklen. Die App spielt bei jedem Phasenwechsel einen Ton und schreitet selbstständig durch die Zyklen – Sie müssen sich nur konzentrieren.',
+	},
+	{
+		q: 'Ist der Online-Pomodoro-Timer kostenlos?',
+		a: 'Ja, zu 100 % kostenlos und ohne Anmeldung. Alle Funktionen sind freigeschaltet: einstellbare Zeiten, Klänge, Vibration, Fokus-Modus im Vollbild und die Zyklus-Anzeige am Zifferblatt.',
+	},
+	{
+		q: 'Spielt der Online-Pomodoro-Timer in jeder Phase einen Ton?',
+		a: 'Ja. Sie wählen zwischen 5 Alarmklängen und können die Vibration auf dem Handy aktivieren. Bei jedem Phasenwechsel – Ende des Fokus, Ende der Pause, lange Pause – meldet sich der Pomodoro-Timer mit Ton sofort.',
+	},
+	{
+		q: 'Kann ich die Pomodoro-Zeiten ändern?',
+		a: 'Ja: Passen Sie Fokus, kurze Pause, lange Pause und die Anzahl der Zyklen in den Einstellungen an. Sie können die Phasen auch automatisch fortschreiten lassen oder manuell überspringen. Manche bevorzugen 50 Minuten Fokus für tiefe Arbeit.',
+	},
+	{
+		q: 'Funktioniert der Online-Pomodoro-Timer auf dem Handy?',
+		a: 'Er funktioniert in jedem Browser, ohne Installation. Legen Sie den Shortcut auf dem Startbildschirm ab, um den Online-Pomodoro-Timer wie eine App zu öffnen – er zählt auch bei gesperrtem Handy weiter.',
+	},
+	{
+		q: 'Wofür ist der Pomodoro-Fokus gut?',
+		a: 'Der Online-Fokus-Pomodoro hilft beim achtsamen Lernen und Arbeiten: Wer weiß, dass der Block 25 Minuten dauert, lässt das Gehirn entspannen und sich ganz der Aufgabe widmen. Genutzt wird er von Studierenden, Programmierern, Autoren und allen, die Konzentration brauchen.',
+	},
+	{
+		q: 'Wie viele Zyklen sollte ich vor der langen Pause machen?',
+		a: 'Der Standard der Pomodoro-Technik ist eine lange Pause von 15 Minuten nach jeweils 4 Zyklen. In den Einstellungen können Sie je nach Rhythmus und Länge Ihrer Sitzung auf 2, 3 oder mehr Zyklen umstellen.',
+	},
+];
+---
+<ToolPage
+	title="Online-Pomodoro-Timer – mit Ton und Fokus-Modus"
+	description="Online-Pomodoro-Timer: 25 Minuten Fokus mit kurzen und langen Pausen, Ton in jeder Phase und Fokus-Modus. Die Pomodoro-Methode im Browser, ohne Installation."
+	path="/pomodoro/"
+	heading="Pomodoro online"
+	sub="25 Minuten Fokus, kurze Pause und lange Pause – mit Klanghinweisen und Zyklus-Kontrolle."
+	initial={JSON.stringify({ mode: 'pomodoro' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Die Pomodoro-Methode ist eine der meistgenutzten Techniken zum <a href="/de/temporizador-para-estudos/">Lernen</a>
+		und für tiefe Arbeit. Der Timer oben ist bereits nach dem klassischen Muster vorkonfiguriert:
+		<strong>25 Minuten Fokus</strong>, <strong>kurze Pause</strong> und <strong>lange Pause</strong>. Drücken Sie
+		Start und konzentrieren Sie sich auf eine einzige Aufgabe, bis der Alarm ertönt.
+	</p>
+	<h2>So verwenden Sie den Pomodoro-Timer</h2>
+	<ul>
+		<li><strong>Fokus:</strong> Arbeiten Sie ungestört bis zum Ende des Blocks (Standard: <a href="/de/temporizador/25-minutos/">25 Minuten</a>).</li>
+		<li><strong>Kurze Pause:</strong> <a href="/de/temporizador/5-minutos/">5 Minuten</a> zum Dehnen, Trinken und Entspannen der Augen.</li>
+		<li><strong>Lange Pause:</strong> Alle 4 Zyklen eine <a href="/de/temporizador/15-minutos/">15-minütige</a> Erholungsphase.</li>
+		<li><strong>Zyklen:</strong> Legen Sie fest, wie viele Blöcke Sie bis zur langen Pause absolvieren möchten.</li>
+	</ul>
+	<h2>Warum einen Online-Pomodoro nutzen</h2>
+	<p>
+		Eine <strong>Pomodoro-Uhr online</strong> macht die Pomodoro-Methode automatisch: Sie müssen im Kopf nicht
+		mistoppen, Zeiten notieren oder abrufen, wann die Pause endet. Dieser <strong>Online-Pomodoro-Timer</strong>
+		übernimmt den Rhythmus und zeigt den Fortschritt der Zyklen am Zifferblatt. Er funktioniert wie eine
+		<strong>Pomodoro-Stoppuhr online</strong> in der Hosentasche – am Computer, auf dem Handy oder im Vollbild.
+	</p>
+	<p>
+		Die <strong>Pomodoro-Methode online</strong> passt gut in eine Lernroutine: Fokus-Block, kurze Pause,
+		wiederholen. Nach einem Vierer-Zyklus gönnen Sie sich die lange Pause, um wirklich zu erholen. Wer einen
+		<strong>einfacheren Online-Pomodoro-Timer</strong> sucht, findet auf dieser Seite auch den normalen Countdown,
+		die <a href="/de/cronometro/">Stoppuhr</a> und die <a href="/de/temporizador/">Timer für 5, 10 und 15 Minuten</a> –
+		alles an einem Ort.
+	</p>
+	<h2>Pomodoro mit Ton und Fokus-Modus</h2>
+	<p>
+		Der <strong>Pomodoro-Timer mit Ton</strong> meldet jeden Phasenwechsel mit einem von 5 Alarmstilen, mit
+		einstellbarer Lautstärke und Vibration auf dem Handy. Für maximale Konzentration aktivieren Sie den
+		<strong>Fokus-Modus</strong> (Vollbild): Die Uhr wird groß, der Rest der Seite verschwindet und nichts lenkt
+		Sie vom aktuellen Block ab.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

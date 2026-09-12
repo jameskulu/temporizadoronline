@@ -1,0 +1,98 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Cos\'è un timer a intervalli?',
+		a: 'Un timer a intervalli è un cronometro che alterna automaticamente fasi di sforzo e riposo, ripetendole per un certo numero di round. Serve per allenamenti HIIT, tabata, round di combattimento e qualsiasi attività che richieda tempi precisi.',
+	},
+	{
+		q: 'Come si imposta un allenamento a intervalli?',
+		a: 'Definisci i secondi di sforzo (es.: 30), quelli di riposo (es.: 15) e quanti round vuoi fare. Il campo "preparazione" fa un riscaldamento iniziale prima di iniziare. L\'app alterna le fasi da sola e avvisa con un suono.',
+	},
+	{
+		q: 'Qual è la differenza tra HIIT e tabata?',
+		a: 'Il tabata è un formato di HIIT fisso: 20 secondi di sforzo massimo e 10 di riposo, per 8 round (4 minuti in totale). L\'HIIT in generale può avere tempi liberi, come 40×20. Entrambi sono disponibili nei preset dell\'app.',
+	},
+	{
+		q: 'Come calcolare il tempo totale del mio allenamento a intervalli?',
+		a: 'Somma sforzo + riposo e moltiplica per il numero di round. Esempio: 8 round da 40×20 fanno 8 minuti di allenamento. Regola sforzo, riposo e round nelle impostazioni per ottenere intervalli che si adattino al tuo tempo.',
+	},
+	{
+		q: 'Si può vedere l\'avanzamento dei round durante l\'allenamento?',
+		a: 'Sì. Il quadrante mostra il round corrente e la fase (sforzo, riposo o preparazione), aggiornato ogni secondo — una visualizzazione semplice che equivale a graficare gli intervalli del tuo allenamento. A ogni cambio di fase suona un allarme.',
+	},
+	{
+		q: 'Gli intervalli funzionano come cronometro di allenamento?',
+		a: 'Sì. Oltre alle fasi alternate, il timer registra ogni round con precisione, funzionando come un cronometro a intervalli online: sai esattamente quanto è durato ogni sforzo e ogni riposo, senza annotare nulla.',
+	},
+];
+---
+<ToolPage
+	title="Intervalli Online — Timer di Allenamento HIIT e Tabata"
+	description="Timer a intervalli online: sforzo, riposo e round con preparazione e avviso sonoro. Calcola e imposta i tuoi intervalli di allenamento, HIIT e tabata gratis."
+	path="/intervalos/"
+	heading="Intervalli"
+	sub="Alterna automaticamente sforzo e riposo. Imposta il tuo HIIT, il tabata o l'allenamento a round."
+	initial={JSON.stringify({ mode: 'interval' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Gli allenamenti a intervalli funzionano con tempi precisi. Configura <strong>sforzo</strong>, <strong>riposo</strong>,
+		<strong>round</strong> e una <strong>preparazione</strong> opzionale — il timer alterna le fasi da solo, suona a
+		ogni cambio e mostra il round corrente.
+	</p>
+	<h2>Preset pronti</h2>
+	<ul>
+		<li><strong><a href="/it/temporizador-tabata/">Tabata:</a></strong> 20 s di sforzo + 10 s di riposo, 8 round.</li>
+		<li><strong><a href="/it/temporizador-hiit/">HIIT:</a></strong> 40 s di sforzo + 20 s di riposo, 8 round.</li>
+		<li><strong>Boxe:</strong> round da 3 minuti con riposo di 1 minuto.</li>
+		<li><strong>Allenamento:</strong> 45 s di sforzo + 15 s di riposo, 20 round.</li>
+	</ul>
+	<h2>Calcola e imposta i tuoi intervalli</h2>
+	<p>
+		È facile <strong>calcolare gli intervalli online</strong> per il tuo allenamento: scegli quanti secondi di sforzo e di
+		riposo riesci a sostenere, sommali e moltiplicali per i round per conoscere la durata totale. Per
+		<strong>impostare intervalli online</strong> che si adattino alla tua agenda, agisci su sforzo, riposo e
+		numero di round finché il totale coincide con il tempo disponibile — l'app mostra il round corrente e la fase in tempo reale,
+		funzionando anche come <strong>cronometro a intervalli online</strong> per misurare ogni parte dell'allenamento.
+	</p>
+	<h2>Consigli</h2>
+	<ul>
+		<li>Comincia con una <strong>preparazione</strong> da 5 a 10 secondi per posizionarti prima del primo sforzo.</li>
+		<li>Usa la <strong>modalità concentrazione</strong> (schermo intero) per non distogliere lo sguardo durante la serie.</li>
+		<li>Imposta il telefono con lo <strong>schermo sempre acceso</strong> nelle impostazioni per non spegnerlo a metà allenamento.</li>
+	</ul>
+	<h2>Intervalli per ogni allenamento</h2>
+	<p>
+		Non importa se ti alleni in palestra, a casa o all'aperto: un <strong>timer a intervalli online</strong>
+		rispetta il tuo piano. Per le serie di forza, usa riposi da <strong>60 a 90 secondi</strong>; per il
+		condizionamento, sforzi da <strong>30 a 45 secondi</strong> con riposi brevi da <strong>15 e 20 secondi</strong>. L'
+		app mostra il tempo di ogni fase in tempo reale, così <strong>imposti gli intervalli online</strong> senza
+		cronometrare a mente — basta seguire il quadrante e il suono. Se l'obiettivo è misurare tratti liberi o confrontare i round,
+		funziona anche come un <strong>cronometro con intervalli online</strong>: parte, si ferma, registra e ripete
+		quante volte serve.
+	</p>
+	<h2>Visualizza l'avanzamento di ogni round</h2>
+	<p>
+		In pratica, il quadrante è già il tuo grafico: a ogni secondo, l'orologio avanza insieme al round corrente, mostrando se
+		sei in sforzo, riposo o preparazione. È il modo più semplice di <strong>graficare gli intervalli online</strong>
+		durante l'allenamento — senza carta e senza fogli di calcolo. E poiché ogni cambio di fase emette un avviso sonoro, non devi nemmeno
+		guardare lo schermo per sapere quando iniziare e quando fermarti.
+	</p>
+	<h2>Domande frequenti</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

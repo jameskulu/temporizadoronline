@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'HIITとは何ですか？',
+		a: 'HIIT（高强度インターバルトレーニング）は、短い全力努力と休憩を交互に繰り返すトレーニング法です。代表的な例として、40秒の努力と20秒の休憩をラウンド形式で行うものがあります。',
+	},
+	{
+		q: 'HIITセッションはどのくらいかかりますか？',
+		a: 'クラシックな8ラウンド40×20で約8分間（準備は含みません）。もっと短いもの（タバタスタイルの4分間）でも効果は十分です。',
+	},
+];
+---
+<ToolPage
+	title="HIITタイマー — 40×20のトレーニング用"
+	description="無料のHIITタイマー：40秒の努力、20秒の休憩、8ラウンド、準備付き。器具不要でどこでもトレーニングできる。"
+	path="/temporizador-hiit/"
+	heading="HIITタイマー"
+	sub="40秒の全力努力、20秒の休息。8ラウンド、準備時間付き。"
+	initial={JSON.stringify({ mode: 'interval', workSec: 40, restSec: 20, rounds: 8, prepareSec: 5, label: 'HIIT' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		このHIITタイマーは<strong>40秒の努力</strong>と<strong>20秒の休憩</strong>を
+		<strong>8ラウンド</strong>繰り返し、最初のスプリント前に5秒の準備時間を設けています。フェーズが切り替わるたびに
+		音が鳴り、リズムをガイドします。
+	</p>
+	<h2>始める方法</h2>
+	<ul>
+		<li><strong>努力フェーズ</strong>では、そのラウンドで維持できる限り全力を出しましょう。</li>
+		<li><strong>休憩フェーズ</strong>では歩いたり、呼吸を整えたりします。</li>
+		<li>時間を見過ぎないよう、<strong>フォーカスモード</strong>（全画面）を使いましょう。</li>
+	</ul>
+	<p>
+		もっと短い時間を探している方は、<a href="/ja/temporizador-tabata/">タバタ</a>（4分間）か、設定でラウンド数を
+		調整してください。
+	</p>
+	<h2>よくある質問</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

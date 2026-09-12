@@ -1,0 +1,95 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { getMinutePages } from '../../../i18n/utils';
+import { faqJsonLd } from '../../../data/site';
+
+interface Props {
+	minutes: number;
+	label: string;
+	slugLabel: string;
+	initial: string;
+}
+
+export function getStaticPaths() {
+	return getMinutePages('en').map((p) => {
+		const initial = JSON.stringify({ seconds: p.minutes * 60, mode: 'timer', label: p.label });
+		return {
+			params: { slug: p.slug },
+			props: { minutes: p.minutes, label: p.label, slugLabel: p.slug, initial },
+		};
+	});
+}
+
+const { minutes, label, slugLabel, initial } = Astro.props;
+
+const hourWord = minutes === 60 ? 'hour' : 'minutes';
+const faqs = [
+	{
+		q: `What is a ${label.toLowerCase()} used for?`,
+		a: `For any task that lasts about ${minutes} ${hourWord}: study focus, a break, physical prep, cooking recipes or a short activity. Start now, without setting anything up.`,
+	},
+	{
+		q: 'Can I use other times?',
+		a: 'Yes — the app lets you configure any duration, from seconds up to 24 hours, in addition to all the ready-made times on this page.',
+	},
+];
+---
+<ToolPage
+	title={`${label} — free online timer`}
+	description={`${label} with a sound alarm, second-level precision and focus mode. Fast, free and works offline — no download needed.`}
+	path={`/temporizador/${slugLabel}/`}
+	heading={label}
+	sub={`A timer pre-set for ${minutes} ${hourWord}. Press start and focus on what matters.`}
+	initial={initial}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		This <strong>{label.toLowerCase()}</strong> starts pre-set for <strong>{minutes} {hourWord}</strong>. Click Start
+		or press <kbd>Space</kbd>. When it ends, an alarm plays, the screen flashes and you decide whether you want to
+		keep counting the extra time.
+	</p>
+	<h2>How the {minutes}-minute timer works</h2>
+	<ul>
+		<li><strong>Precision:</strong> countdown based on the system clock, reliable even when switching tabs.</li>
+		<li><strong>Alarm:</strong> pick your favorite sound and adjust the volume in the settings.</li>
+		<li><strong>Focus mode:</strong> press <kbd>F</kbd> for fullscreen with the big clock.</li>
+		<li><strong>Ready link:</strong> share this {label.toLowerCase()} with a link or a QR code.</li>
+	</ul>
+	<h2>Ideas for using {minutes} minutes</h2>
+	<p>
+		For short <a href="/en/temporizador-para-estudos/">study</a> blocks, as a warm-up in
+		<a href="/en/temporizador-para-exercicios/">workouts</a>, as an interval in
+		<a href="/en/temporizador-para-cozinha/">recipes</a> or as a mini
+		<a href="/en/temporizador-para-meditacao/">meditation session</a>.
+	</p>
+	<h2>Other ready-made times</h2>
+	<p>
+		The same dial, already set for other durations — pick yours and start:
+	</p>
+	<div class="flex flex-wrap gap-2 mb-4">
+		{
+			getMinutePages('en').filter((p) => p.minutes !== minutes).map((m) => (
+				<a href={`/en/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} min</a>
+			))
+		}
+	</div>
+	<p>
+		For full cycles with automatic breaks, use the <a href="/en/pomodoro/">pomodoro</a>; to measure how long something
+		takes, the <a href="/en/cronometro/">stopwatch</a>; for workouts with effort and rest, the
+		<a href="/en/intervalos/">intervals</a>, the <a href="/en/temporizador-hiit/">HIIT</a> or the
+		<a href="/en/temporizador-tabata/">tabata</a>.
+	</p>
+	<h2>Frequently asked questions</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

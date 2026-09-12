@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+
+interface Props {
+	error: unknown;
+}
+
+const { error } = Astro.props as Props;
+const safeMessage =
+	error instanceof Error && typeof error.message === 'string'
+		? error.message.slice(0, 200)
+		: '';
+---
+
+<Base
+	title="Erreur sur le serveur — Temporizador Online"
+	description="Une erreur inattendue s'est produite sur le Temporizador Online. Réessayez dans un instant ou continuez à utiliser le minuteur, le chronomètre ou le pomodoro."
+	path="/500/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			500
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			Quelque chose s'est mal passé sur le serveur
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			Une erreur inattendue est survenue au chargement de cette page. Rechargez dans un instant ou
+			utilisez l'un des outils ci-dessous pour ne pas perdre le rythme.
+		</p>
+
+		{
+			safeMessage && (
+				<div
+					class="mt-4 max-w-lg rounded-xl border px-4 py-3 text-sm break-words"
+					style="border-color: var(--color-border); color: var(--color-ink-muted)"
+				>
+					{safeMessage}
+				</div>
+			)
+		}
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/fr/" class="chip chip-link">Accueil</a>
+			<a href="/fr/temporizador/" class="chip chip-link">Minuteur</a>
+			<a href="/fr/cronometro/" class="chip chip-link">Chronomètre</a>
+			<a href="/fr/pomodoro/" class="chip chip-link">Pomodoro</a>
+			<a href="/fr/intervalos/" class="chip chip-link">Intervalles</a>
+			<a href="/fr/sequencias/" class="chip chip-link">Séquences</a>
+		</div>
+
+		<a
+			href="/fr/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			Utiliser le minuteur maintenant
+		</a>
+	</main>
+</Base>

@@ -1,0 +1,49 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is the best time to study?',
+		a: 'The pomodoro technique uses 25 minute blocks with 5 minute breaks. Many prefer 50 minutes for longer reading. Start with 25 and adjust according to your concentration.',
+	},
+	{
+		q: 'How do I use the timer while studying?',
+		a: 'Pick a time, set a single task and start. When the alarm rings, note your progress and take the break. Do not switch tasks inside the same block.',
+	},
+];
+---
+<ToolPage
+	title="Study Timer — Focus Techniques"
+	description="Study timer with the pomodoro technique and focus blocks. Learn to use your time in your favor and boost your concentration."
+	path="/temporizador-para-estudos/"
+	heading="Study Timer"
+	sub="Focus split into blocks with breaks: the simplest way to study without burning out."
+	initial={JSON.stringify({ seconds: 1500, mode: 'timer', label: 'Study' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Studying with a timer brings two advantages: you <strong>know there is an end</strong> (your brain relaxes) and you
+		build a <strong>rhythm of breaks</strong>. The 25 minute block is already set — press Start.
+	</p>
+	<h2>Routine suggestions</h2>
+	<ul>
+		<li><strong><a href="/en/temporizador/25-minutos/">Full focus (25 min):</a></strong> a block of attention just for the current subject.</li>
+		<li><strong><a href="/en/temporizador/5-minutos/">5 minute break:</a></strong> stand up, hydrate, stretch.</li>
+		<li><strong><a href="/en/temporizador/15-minutos/">Review (15 min):</a></strong> review your notes with a short timer, from the end to the beginning.</li>
+	</ul>
+	<p>
+		Prefer to block the whole time? Use the <a href="/en/pomodoro/">online pomodoro</a> for full cycles with automatic
+		long breaks.
+	</p>
+	<h2>Frequently asked questions</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

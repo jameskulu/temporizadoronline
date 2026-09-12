@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '타이머로 명상하려면 어떻게 하나요?',
+		a: '5분이나 10분을 정하고 바르고 편안하게 앉아 시작한 뒤 호흡에 집중하세요. 알람이 울리면 자리에서 서두르지 않고 마무리하세요.',
+	},
+	{
+		q: '명상에는 어떤 알람 소리가 좋나요?',
+		a: '"젠" 소리는 연습이 끝날 때 놀라지 않도록 부드럽게 설계되었습니다. "차임"도 좋습니다. 한 번의 조용한 울림입니다.',
+	},
+];
+---
+<ToolPage
+	title="명상용 타이머 — 시계 걱정 없이 집중"
+	description="부드러운 소리를 갖춘 5/10/20분 명상 타이머. 시간 지켜보기나 시간 걱정 없이 명상하세요."
+	path="/temporizador-para-meditacao/"
+	heading="명상용 타이머"
+	sub="10분 동안 무료로 호흡하세요. 부드러운 소리가 정확한 때에 불러 줍니다."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: '명상' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		명상의 가장 큰 적은 시계를 보는 것입니다. 이 타이머가 해결합니다. <strong>10분을 선택</strong>하고
+		시작을 누른 뒤 부드러운 소리가 알릴 때까지 호흡을 관찰하세요. 끝나면 잠시 더 앉은 채로 있다가 눈을
+		뜨세요.
+	</p>
+	<h2>빠른 의식</h2>
+	<ul>
+		<li>척추를 펴고 손을 올린 채 앉으세요.</li>
+		<li>설정에서 소리를 <strong>젠</strong>으로 바꾸세요.</li>
+		<li>시작하고 천천히 들이쉬고 내쉬는 것에 집중하세요.</li>
+		<li>소리가 나면 세 번 더 들이쉬고 마무리하세요.</li>
+	</ul>
+	<p>
+		단계별 가이드 명상이 필요하다면 <a href="/ko/meditacao/">명상 페이지</a>와
+		<a href="/ko/sequencias/">시퀀스</a>를 보세요.
+	</p>
+	<h2>자주 묻는 질문</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

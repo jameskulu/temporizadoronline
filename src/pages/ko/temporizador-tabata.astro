@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '타바타란 무엇인가요?',
+		a: '타바타는 짧은 인터벌 운동입니다. 최대 강도 20초 + 휴식 10초를 8번 반복해 총 4분. 짧지만 성격상 강도가 높습니다.',
+	},
+	{
+		q: '타바타에는 장비가 필요한가요?',
+		a: '아닙니다. 맨몸 운동(스쿼트, 점핑잭, 줄넘기, 마운틴 클라이머)으로 충분합니다. 동작을 하나 고르고 리듬을 따라가며 쉬는 시간에 호흡을 되돌리세요.',
+	},
+];
+---
+<ToolPage
+	title="타바타 타이머 — 20×10, 4분"
+	description="무료 타바타 타이머: 20초 운동, 10초 휴식, 8라운드 = 4분. 어디서든 할 수 있는 빠른 운동."
+	path="/temporizador-tabata/"
+	heading="타바타 타이머"
+	sub="20초 운동, 10초 휴식, 8라운드. 딱 4분."
+	initial={JSON.stringify({ mode: 'interval', workSec: 20, restSec: 10, rounds: 8, prepareSec: 3, label: '타바타' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		타바타는 <strong>4분</strong>입니다. <strong>20초 운동</strong>과 <strong>10초 휴식</strong>을
+		8라운드 하면 됩니다. 이 타이머에는 첫 스프린트 전 자세를 잡을 3초 준비가 이미 들어 있습니다.
+		단계가 바뀔 때마다 소리가 납니다.
+	</p>
+	<h2>운동 방법</h2>
+	<ul>
+		<li>시작 전에 맨몸 동작을 하나 고르세요.</li>
+		<li>20초 운동에서는 리듬을 유지할 수 있는 최대 강도로 하세요.</li>
+		<li>10초 휴식에서는 자세를 잡고 호흡을 되돌리세요.</li>
+		<li>끝났나요? 잘 쉬세요 — 세션은 짧지만 강도가 높습니다.</li>
+	</ul>
+	<p>
+		더 긴 세트를 원한다면 <a href="/ko/temporizador-hiit/">40×20 HIIT 타이머</a>를 보거나
+		<a href="/ko/intervalos/">인터벌</a>에서 나만의 구간을 만드세요.
+	</p>
+	<h2>자주 묻는 질문</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

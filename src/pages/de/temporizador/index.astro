@@ -1,0 +1,57 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { faqJsonLd } from '../../../data/site';
+import { getMinutePages } from '../../../i18n/utils';
+
+const faqs = [
+	{
+		q: 'Wie erstelle ich einen eigenen Timer?',
+		a: 'Nutzen Sie das Konfigurationsfeld der Seite: stellen Sie Stunden, Minuten und Sekunden für Ihren Timer ein – von wenigen Sekunden bis zu 24 Stunden.',
+	},
+	{
+		q: 'Was passiert, wenn die Zeit abgelaufen ist?',
+		a: 'Ein Alarm ertönt (Sie wählen zwischen 5 Klängen und der Lautstärke), der Bildschirm gibt ein Signal, das Handy vibriert und – wenn Sie möchten – zählt der Timer die zusätzliche Zeit weiter.',
+	},
+];
+---
+<ToolPage
+	title="Online-Timer – kostenloser Countdown"
+	description="Online-Timer mit Countdown von 1 bis 60 Minuten oder individueller Zeit. Präzise, kostenlos, funktioniert offline und ohne Anmeldung."
+	path="/temporizador/"
+	heading="Timer"
+	sub="Einfacher und präziser Countdown. Stellen Sie die Zeit ein, starten Sie und bleiben Sie entspannt: Der Hinweis kommt genau im richtigen Moment."
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Nutzen Sie den Timer oben für jeden Countdown: <strong>Lernen, Rezepte, Besprechungen, Nickerchen,
+		Training</strong> – alles, was einen feinen Alarm braucht. Wählen Sie unten eine fertige Zeit oder stellen Sie
+		Ihre eigene ein.
+	</p>
+	<h2>Fertige Timer nach Dauer</h2>
+	<div class="grid-cols flex flex-wrap gap-2 mb-8" style="margin-bottom:2rem">
+		{
+			getMinutePages('de').map((p) => (
+				<a href={`/de/temporizador/${p.slug}/`} class="chip chip-link">{p.minutes} Min.</a>
+			))
+		}
+	</div>
+	<h2>Nutzungstipps</h2>
+	<ul>
+		<li><strong>Fokus-Modus:</strong> Drücken Sie <kbd>F</kbd>, um alles auszublenden und nur die Uhr zu sehen.</li>
+		<li><strong>Nach Null weiterzählen:</strong> Haken Sie „Nach Null weiterzählen“ an, um auch die zusätzliche Zeit zu messen (praktisch in der Küche).</li>
+		<li><strong>Ohne Zeitverlust:</strong> Der Timer nutzt die Systemuhr – er funktioniert auch im Hintergrund.</li>
+	</ul>
+	<h2>Häufig gestellte Fragen</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

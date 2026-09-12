@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'タバタとは何ですか？',
+		a: 'タバタは短時間のインターバルトレーニングです：20秒の全力運動と10秒の休憩を8回繰り返し、合計4分。短い時間ですが、非常に効果的です。',
+	},
+	{
+		q: 'タバタに器具は必要ですか？',
+		a: 'いいえ。体重を使った運動（スクワット、ジャンプスカル、縄跳び、マウンテンクライマーなど）で十分機能します。一つの種目を選んでリズムに合わせ、休憩時間に回復しましょう。',
+	},
+];
+---
+<ToolPage
+	title="タバタタイマー — 20×10で4分間のトレーニング"
+	description="無料のタバタタイマー：20秒の運動、10秒の休憩、8ラウンド＝4分間。どこでもできる短時間のトレーニング。"
+	path="/temporizador-tabata/"
+	heading="タバタタイマー"
+	sub="20秒の努力、10秒の休憩、8ラウンド。4分ぴったり。"
+	initial={JSON.stringify({ mode: 'interval', workSec: 20, restSec: 10, rounds: 8, prepareSec: 3, label: 'タバタ' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		タバタは<strong>4分間</strong>で、<strong>20秒の全力運動</strong>と<strong>10秒の休憩</strong>を
+		<strong>8ラウンド</strong>繰り返します。このタイマーには最初のスプリント前の構え時間として3秒の準備期間が
+		含まれています。フェーズが切り替わるたびに音が鳴ります。
+	</p>
+	<h2>始め方</h2>
+	<ul>
+		<li>開始前に体重を使った運動を一つ決めましょう。</li>
+		<li>20秒の努力時間は、限界まで追いかけるように。</li>
+		<li>10秒の休憩はしっかり立って息を整えます。</li>
+		<li>終わったらゆっくり休んでください——短い時間ですが、非常に集中する種目です。</li>
+	</ul>
+	<p>
+		もっと長いセットを探している方は、<a href="/ja/temporizador-hiit/">HIIT 40×20タイマー</a>、または
+		<a href="/ja/intervalos/">インターバル</a>で独自の設定をどうぞ。
+	</p>
+	<h2>よくある質問</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

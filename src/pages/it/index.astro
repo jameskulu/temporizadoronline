@@ -1,0 +1,238 @@
+---
+import Base from '../../layouts/Base.astro';
+import TimerApp from '../../components/TimerApp.astro';
+import ToolsGrid from '../../components/ToolsGrid.astro';
+import { faqJsonLd, webAppJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Cos\'è un timer online?',
+		a: 'Un timer online è un conto alla rovescia che funziona direttamente nel browser, senza bisogno di scaricare o installare nulla. Il Timer Online funziona anche offline: apri la pagina una volta e continua a essere utile anche senza internet.',
+	},
+	{
+		q: 'Come si usa il timer online?',
+		a: 'Scegli minuti e secondi sul quadrante, premi Avvia e attendi che suoni l\'allarme. Per passare a un\'altra funzione — cronometro, pomodoro, intervalli, meditazione o sequenze — basta toccare la scheda in cima al quadrante, senza ricaricare la pagina.',
+	},
+	{
+		q: 'Come fare un conto alla rovescia di 10, 5 o 15 minuti?',
+		a: 'Ci sono versioni pronte con un clic: timer online da 10 minuti, da 5 minuti e da 15 minuti, oltre a durate da 1 a 60 minuti. Regola la durata sul quadrante oppure usa le scorciatoie di durata per iniziare prima.',
+	},
+	{
+		q: 'Posso usare il timer online per il pomodoro?',
+		a: 'Sì. La modalità pomodoro è già configurata con il metodo classico: 25 minuti di concentrazione, pausa breve di 5 e pausa lunga di 15 (ogni 4 cicli). L\'app suona a ogni cambio di fase e fa avanzare i cicli da sola.',
+	},
+	{
+		q: 'Si possono usare più timer contemporaneamente?',
+		a: 'Sì. Tocca "Nuovo timer" per aggiungerne quanti ne servono — ognuno con la propria configurazione, tempo e suono, alternando tra le schede in alto. È quello che chiamiamo timer multiplo online.',
+	},
+	{
+		q: 'Il timer continua a contare se cambio scheda o blocco lo schermo?',
+		a: 'Sì. Il timer e il cronometro si basano sull\'orologio del sistema, non su fotogrammi animati: anche in secondo piano o con il telefono bloccato, il tempo viene calcolato correttamente quando torni.',
+	},
+	{
+		q: 'Il timer online è gratuito? Serve la registrazione?',
+		a: 'È al 100% gratuito e senza registrazione. Tutte le funzioni — conto alla rovescia, cronometro, pomodoro, intervalli, meditazione e sequenze — sono sbloccate e senza limiti di utilizzo.',
+	},
+	{
+		q: 'Il timer online funziona sul telefono?',
+		a: 'Funziona in qualsiasi browser, sul telefono e sul computer. È installabile (PWA): puoi aggiungerlo alla schermata iniziale e aprirlo come un app, sempre senza installare nulla dallo store.',
+	},
+];
+---
+<Base
+	title="Timer Online — Conto alla rovescia, Pomodoro e Cronometro gratis"
+	description="Timer online gratuito: conto alla rovescia da 5, 10 e 15 minuti, pomodoro, cronometro e intervalli. Bello, veloce, funziona offline e senza registrazione."
+	path="/"
+	jsonLd={[webAppJsonLd('it'), faqJsonLd(faqs)]}
+>
+	<div class="mx-auto max-w-5xl px-4 pt-10 pb-20">
+		<section class="text-center mb-8 hero-mesh">
+			<p class="eyebrow mb-3">Timer Online</p>
+			<h1 class="text-4xl md:text-5xl font-semibold tracking-tight">Timer Online</h1>
+			<p class="mt-3 text-lg" style="color:var(--color-body)">
+				Cronometro, pomodoro, intervalli e conto alla rovescia senza installare nulla.
+			</p>
+			<div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-[13px]" style="color:var(--color-body)">
+				<span class="chip">100% gratuito</span>
+				<span class="chip">Senza registrazione</span>
+				<span class="chip">Funziona offline</span>
+				<span class="chip">Installabile (PWA)</span>
+			</div>
+		</section>
+
+		<section class="app-card rounded-[16px] p-4 md:p-8 mb-14">
+			<TimerApp scope="full" />
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Strumenti</p>
+			<h2 class="text-2xl font-semibold mb-3">Timer online per qualsiasi esigenza</h2>
+			<p class="lead">
+				Conto alla rovescia per studio, allenamento, cucina, riunioni e meditazione — tutto in un'unica pagina, con
+				design pulito e veloce. Scegli un tipo di timer qui sotto oppure configura il tuo subito sopra.
+			</p>
+			<p class="lead">
+				Hai un uso specifico? Ci sono versioni pronte per lo <a href="/it/temporizador-para-estudos/">studio</a>,
+				l'<a href="/it/temporizador-para-exercicios/">allenamento</a>, la <a href="/it/temporizador-para-cozinha/">cucina</a>,
+				la <a href="/it/temporizador-para-meditacao/">meditazione</a>, il <a href="/it/temporizador-hiit/">HIIT</a> e il
+				<a href="/it/temporizador-tabata/">tabata</a>.
+			</p>
+			<ToolsGrid />
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Cos'è il timer online</h2>
+			<p>
+				Il <strong>timer online</strong> è un <strong>timer a conto alla rovescia online</strong> che funziona direttamente nel
+				browser: un conto alla rovescia con allarme sonoro, gestito dall'orologio del sistema. Scegli la
+				durata in minuti e secondi, premi Avvia e l'app fa il resto — suona, vibra e può continuare a contare
+				i minuti extra dopo lo zero. Poiché tutto accade nel browser, basta digitare "timer online" su
+				Google o aprire il collegamento salvato per iniziare; niente download, registrazione o installazione.
+			</p>
+			<p>
+				A differenza di un semplice orologio, funge da <strong>orologio timer online</strong> per il tuo
+				quotidiano: uovo in cucina, pausa in allenamento, esame, riunione da 15 minuti o allarme per l'intervallo di
+				studio. La precisione viene dall'orologio del sistema, quindi niente ritardi né "scatti" dello schermo —
+				il tempo resta corretto anche cambiando scheda o bloccando il telefono.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Conto alla rovescia per ogni durata</h2>
+			<p>
+				La modalità predefinita è il <strong>timer online regressivo</strong>: l'orologio parte dal valore scelto e
+				conta fino a zero. Per andare più veloci, usa le scorciatoie pronte — <a href="/it/temporizador/5-minutos/">5
+				minuti</a>, <a href="/it/temporizador/10-minutos/">10 minuti</a>, <a
+				href="/it/temporizador/15-minutos/">15 minuti</a>, <a href="/it/temporizador/25-minutos/">25 minuti</a>, <a
+				href="/it/temporizador/30-minutos/">30 minuti</a> e <a href="/it/temporizador/60-minutos/">60 minuti</a> —
+				oppure regola il quadrante per qualsiasi secondo, da 1 secondo a ore. Per sforzi brevi, come i
+				<strong>40 secondi</strong> dell'allenamento a intervalli, il <a href="/it/temporizador-hiit/">HIIT</a> è già
+				pronto.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Pomodoro, cronometro e intervalli nello stesso luogo</h2>
+			<p>
+				Questo è un <strong>timer online pomodoro</strong> completo: il metodo pomodoro organizza concentrazione e pause
+				in cicli e questa app avanza automaticamente tra concentrazione, pausa breve e pausa lunga. Funziona anche come
+				<strong>cronometro timer online</strong>: basta cambiare scheda per il cronometro e misurare il tempo di
+				qualsiasi attività, con segnalazione dei giri. E per gli allenamenti, gli <a href="/it/intervalos/">intervalli</a>
+				alternano sforzo e riposo da soli, con preset di <a href="/it/temporizador-tabata/">tabata</a> e
+				HIIT.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Un timer online bello e semplice</h2>
+			<p>
+				Abbiamo cercato di rendere questo <strong>timer online bello</strong> e con un aspetto
+				<strong>raffinato</strong>: numeri grandi, font elegante, modalità scura automatica e niente
+				inquinamento visivo — solo l'orologio e ciò che conta. Nella <strong>modalità concentrazione</strong> (schermo intero), il quadrante
+				diventa ancora più grande, ideale per studiare, meditare o seguire serie senza distrazioni. Mentre altre opzioni
+				si contendono l'attenzione, qui guardi il tempo e basta.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Timer multiplo online: più timer alla volta</h2>
+			<p>
+				Devi seguire riso, forno e tè contemporaneamente? La funzione <strong>"Nuovo timer"</strong>
+				trasforma questa pagina in un <strong>timer multiplo online</strong>: ogni timer ha la sua scheda,
+				configurazione e suono, e tutti girano in parallelo. È perfetto per le cucine, le aule e qualsiasi routine
+				con più di un conteggio contemporaneo.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Funzionalità che fanno la differenza</h2>
+			<ul class="list list-checks">
+				<li><strong>Preciso tra le schede:</strong> il timer usa l'orologio del sistema — non perdi secondi cambiando scheda o bloccando lo schermo.</li>
+				<li><strong>Modalità concentrazione:</strong> schermo intero con orologio grande per non distrarti.</li>
+				<li><strong>Suoni e vibrazione:</strong> allarme in 5 stili, con volume regolabile e vibrazione sul telefono.</li>
+				<li><strong>Condividi il tuo timer:</strong> invia un link già configurato o un codice QR per aprirlo sul telefono.</li>
+				<li><strong>Pomodoro:</strong> <a href="/it/pomodoro/">cicli di concentrazione e pausa</a> che avanzano da soli.</li>
+				<li><strong>Cronometro:</strong> <a href="/it/cronometro/">conta il tempo che passa e segna i giri</a>.</li>
+				<li><strong>Intervalli e allenamento:</strong> <a href="/it/intervalos/">HIIT</a>, <a href="/it/temporizador-tabata/">tabata</a> e <a href="/it/temporizador-hiit/">40×20</a> pronti.</li>
+				<li><strong>Scorciatoie da tastiera:</strong> Spazio avvia/pausa, R azzera, F schermo intero, M silenzia.</li>
+				<li><strong>Modalità scura automatica:</strong> segue il tema del tuo sistema.</li>
+			</ul>
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Dubbi</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Domande frequenti</h2>
+			<div class="faq">
+				{faqs.map((f) => (
+					<div class="faq-item">
+						<h3 class="faq-q">{f.q}</h3>
+						<p class="faq-a">{f.a}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.app-card {
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.article h2 {
+		line-height: 1.25;
+	}
+	.lead {
+		font-size: 16px;
+		color: var(--color-body);
+		margin-bottom: 1rem;
+	}
+	.article p {
+		color: var(--color-body);
+		margin-bottom: 0.8rem;
+		line-height: 1.6;
+	}
+	.article a {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.article a:hover {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		list-style: none;
+		padding-left: 0;
+	}
+	.list-checks li {
+		position: relative;
+		padding-left: 28px;
+		color: var(--color-body);
+	}
+	.list-checks li strong {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+	.list-checks li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 5px;
+		width: 17px;
+		height: 15px;
+		border-radius: 4px;
+		background:
+			linear-gradient(135deg, transparent 55%, var(--color-link) 50%) -1px 5px no-repeat,
+			linear-gradient(45deg, transparent 45%, var(--color-link) 45%) 5px -2px no-repeat;
+		background-size: 9px 9px;
+		width: 18px;
+		height: 18px;
+	}
+	.faq {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+	.faq-item {
+		padding: 14px 16px;
+		border-radius: 12px;
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.faq-q {
+		font-size: 15px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+	.faq-a {
+		font-size: 14px;
+		color: var(--color-body);
+	}
+</style>

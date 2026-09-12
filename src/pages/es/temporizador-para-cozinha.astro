@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '¿Cuál es el mejor temporizador para cocina?',
+		a: 'Cualquier tiempo funciona: lo importante es tener un aviso claro y poder dejarlo contando en segundo plano. Este timer suena, vibra y además puede seguir contando los minutos extra después del cero.',
+	},
+	{
+		q: '¿Puedo usar varios timers en la cocina?',
+		a: 'Sí. Con "Nuevo timer" creas timers separados para cada comida al mismo tiempo — ideal cuando el arroz, el horno y el té terminan en minutos distintos.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador para cocina — recetas en su punto"
+	description="Timer de cocina online: huevo, arroz, horno y té. Aviso sonoro, tiempo extra y varios timers al mismo tiempo. Gratis y funciona sin conexión."
+	path="/temporizador-para-cozinha/"
+	heading="Temporizador para cocina"
+	sub="Fiel con el arroz, esencial con el horno y el huevo. Sin quedarte pegada a la cocina."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Cocina' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Cocinar es cronometrar: <strong>un minuto</strong> para el té, <strong>5</strong> para los vegetales, <strong>10</strong>
+		para las pastas, <strong>15</strong> para los horneados pequeños. Configura, deja el móvil sobre la encimera y
+		recibe el aviso a tiempo. Marca "Continuar después del cero" para medir también el reposo de la masa.
+	</p>
+	<h2>Los tiempos más usados</h2>
+	<ul>
+		<li><strong><a href="/es/temporizador/1-minuto/">1 min</a></strong> — huevo tibio, salsa en el fuego, té filtrado.</li>
+		<li><strong><a href="/es/temporizador/5-minutos/">5 min</a></strong> — arroz blanco corto, vegetales al vapor, café colado.</li>
+		<li><strong><a href="/es/temporizador/10-minutos/">10 min</a></strong> — pastas frescas, huevo mollet, legumbres.</li>
+		<li><strong><a href="/es/temporizador/15-minutos/">15</a>–<a href="/es/temporizador/30-minutos/">30 min</a></strong> — horneados, risottos y postres en bloque.</li>
+	</ul>
+	<p>
+		Usa el <strong>modo enfoque</strong> (pantalla completa) para ver el reloj grande y también el <a href="/es/cronometro/">cronómetro</a>
+		para registrar el tiempo de tus recetas.
+	</p>
+	<h2>Preguntas frecuentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

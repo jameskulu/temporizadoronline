@@ -1,0 +1,100 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: "Qu'est-ce qu'un chronomètre en ligne ?",
+		a: "Un chronomètre en ligne compte le temps qui s'écoule depuis le départ — contrairement au minuteur, qui fait un compte à rebours jusqu'à zéro. Il sert à mesurer des activités, des courses, des jeux, des épreuves et des tâches, avec marquage des tours.",
+	},
+	{
+		q: 'Quelle est la différence entre un chronomètre et un minuteur ?',
+		a: "Le minuteur (aussi appelé compte à rebours en ligne) descend jusqu'à zéro et prévient avec une alarme. Le chronomètre part de zéro et compte vers le haut. Pour les tâches avec limite de temps, utilisez le minuteur ; pour mesurer combien de temps prend une activité, utilisez le chronomètre.",
+	},
+	{
+		q: 'Le chronomètre en ligne marque-t-il les tours ?',
+		a: "Oui. En mode chronomètre, il y a le bouton « Tour » : chaque pression enregistre le temps de ce tour dans la liste, toujours avec le plus récent en haut, pendant que le chronomètre continue de tourner en arrière-plan. Le bouton « Réinitialiser » remet tout à zéro.",
+	},
+	{
+		q: "Le chronomètre continue-t-il de tourner si je change d'onglet ?",
+		a: "Oui. Le chronomètre s'appuie sur l'horloge du système, pas sur des images animées : même en arrière-plan, avec l'onglet réduit ou le téléphone verrouillé, le temps est additionné correctement quand vous revenez.",
+	},
+	{
+		q: 'Peut-on utiliser le chronomètre en ligne en plein écran ?',
+		a: "Oui. Utilisez le mode focus (raccourci F au clavier) : le chronomètre passe en plein écran, devient bien grand et masque le reste de la page. Idéal pour suivre des épreuves, des séances et des présentations sans distraction.",
+	},
+	{
+		q: 'Comment utiliser le chronomètre en ligne pour étudier ?',
+		a: "Servez-vous-en pour mesurer le temps passé sur chaque question ou chapitre, chronométrer des tours de révision ou contrôler le temps des épreuves blanches. Pour des blocs d'étude avec pauses, combinez-le avec le pomodoro ou les minuteurs prêts à l'emploi.",
+	},
+	{
+		q: 'Le chronomètre en ligne est-il gratuit ?',
+		a: "Oui, 100 % gratuit et sans inscription, avec toutes les fonctions disponibles : tours, temps total, mode focus, sons et vibrations. Il fonctionne aussi hors ligne, directement dans le navigateur.",
+	},
+];
+---
+<ToolPage
+	title="Chronomètre en ligne gratuit — avec plein écran et compte à rebours"
+	description="Chronomètre en ligne gratuit : compte les secondes, minutes et heures avec précision, marque les tours et propose un mode plein écran. Fonctionne hors ligne, sans inscription et sur mobile."
+	path="/cronometro/"
+	heading="Chronomètre"
+	sub="Compte le temps correctement : précis dès le départ. Appuyez sur Démarrer et foncez vers ce que vous mesurez."
+	initial={JSON.stringify({ mode: 'stopwatch' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Le chronomètre ci-dessus est tenu par l'horloge du système : il continue de compter même si vous changez d'onglet,
+		verrouillez l'écran ou ouvrez une autre application. En revenant, le temps est correctement enregistré.
+	</p>
+	<h2>Pourquoi utiliser un chronomètre</h2>
+	<ul>
+		<li><strong><a href="/fr/temporizador-para-exercicios/">Exercices :</a></strong> mesurer une série, le repos ou la course du jour.</li>
+		<li><strong>Épreuves et concours :</strong> contrôle exact du temps par question ou de l'épreuve complète.</li>
+		<li><strong>Jeux de société :</strong> un tour-minute équitable pour tous.</li>
+		<li><strong>Tests et processus :</strong> savoir exactement combien de temps prend une chose.</li>
+	</ul>
+	<h2>Quelle est la différence entre un chronomètre et un minuteur ?</h2>
+	<p>
+		Le <a href="/fr/temporizador/">minuteur</a> fait un compte à rebours et prévient quand il atteint zéro — certains
+		appellent cela un <strong>chronomètre en ligne inversé</strong>. Le chronomètre fait l'inverse : il part de zéro et
+		compte vers le haut. Pour les tâches à durée limitée, utilisez le minuteur ; pour mesurer combien de temps prend
+		une activité, utilisez le chronomètre.
+	</p>
+	<h2>Comment utiliser le chronomètre en ligne</h2>
+	<p>
+		C'est simple : ouvrez la page, touchez <strong>Démarrer</strong> et suivez les secondes, minutes et heures défiler
+		avec précision. Ce <strong>chronomètre en ligne gratuit</strong> continue de compter même si vous réduisez le
+		navigateur, verrouillez le téléphone ou changez d'onglet — le temps est tenu par l'horloge du système. Quand vous
+		devez mesurer deux ou plusieurs portions de la même activité, touchez <strong>Tour</strong> autant de fois que vous
+		voulez : chaque marquage est enregistré dans une liste, avec le plus récent en haut. C'est terminé ? Touchez
+		<strong>Réinitialiser</strong> pour tout remettre à zéro et recommencer. Peu de boutons, exactement comme un bon
+		chronomètre doit être.
+	</p>
+	<h2>Études, épreuves et plein écran</h2>
+	<p>
+		Le <strong>chronomètre en ligne pour étudier</strong> est un allié à la maison comme en classe : mesurez le temps
+		de chaque question, contrôlez les épreuves blanches et entraînez-vous à répartir vos minutes. Activez le
+		<strong>mode plein écran</strong> (F au clavier) pour suivre le temps de loin, sans vous rapprocher du téléphone.
+		Le design épuré et le grand cadran rendent aussi le <strong>chronomètre en ligne</strong> agréable à utiliser au
+		quotidien.
+	</p>
+	<p>
+		Si vous êtes arrivé ici en cherchant « chronomètre en ligne », celui-ci fonctionne immédiatement :
+		<strong>gratuit</strong>, sans téléchargement, sans inscription, sur ordinateur comme sur mobile. Touchez Démarrer
+		et le chronomètre en ligne se lance — avec sonorisation et vibrations facultatives à la fin de chaque mesure.
+	</p>
+	<h2>Questions fréquentes</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

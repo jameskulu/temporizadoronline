@@ -1,0 +1,100 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Wie meditiere ich mit einem Timer?',
+		a: 'Stellen Sie 5 oder 10 Minuten ein, setzen Sie sich aufrecht und bequem hin, drücken Sie auf Start und halten Sie die Aufmerksamkeit auf den Atem. Wenn der Alarm ertönt – am besten mit dem sanften „Zen“-Klang – beenden Sie die Praxis ruhig und atmen Sie noch dreimal, bevor Sie die Augen öffnen.',
+	},
+	{
+		q: 'Wie lange sollte man meditieren?',
+		a: 'Für Einsteiger machen schon 5 bis 10 Minuten einen Unterschied. Mit Übung sind es 15 bis 20 Minuten. Sie stellen die Zeit in den Einstellungen ein und können die fertigen Timer für 5, 10 und 20 Minuten nutzen.',
+	},
+	{
+		q: 'Welchen Alarmton sollte ich zum Meditieren wählen?',
+		a: 'Der Klang „Zen“ wurde so gestaltet, dass er sanft ist und am Ende der Praxis nicht erschreckt. Auch „Chime“ funktioniert gut: ein einziger ruhiger Ton. Statt des Tons können Sie auch die Vibration des Handys verwenden.',
+	},
+	{
+		q: 'Was ist geführte Meditation?',
+		a: 'Geführte Meditation heißt, einer Schritt-für-Schritt-Anleitung zu folgen – Atem, Körper, Klang – statt selbst zu entscheiden. Hier gestalten Sie im Sequenzen-Modus eine eigene geführte Sequenz mit Schritten und sanften Hinweisen bei jedem Wechsel.',
+	},
+	{
+		q: 'Wie meditiere ich allein zu Hause?',
+		a: 'Wählen Sie einen ruhigen Ort, setzen Sie sich mit aufrechter Wirbelsäule, gestützten Händen und geschlossenen Augen hin. Stellen Sie 10 Minuten in diesem Meditations-Timer ein, wählen Sie den Zen-Klang und beobachten Sie den Atem bis zum sanften Ton. Ohne Eile: Der Timer übernimmt die Zeit für Sie.',
+	},
+	{
+		q: 'Funktioniert der Meditations-Timer bei gesperrtem Handy?',
+		a: 'Ja. Die Zeit wird von der Systemuhr berechnet, sodass das Zifferblatt auch bei gesperrtem Bildschirm korrekt bleibt. Wenn Sie mitlesen möchten, aktivieren Sie den Fokus-Modus im Vollbild mit der großen, ruhigen Uhr.',
+	},
+];
+---
+<ToolPage
+	title="Online-Meditation – Timer mit sanften Klängen (5, 10 und 20 Minuten)"
+	description="Meditations-Timer online mit sanften Klängen: Meditieren Sie 5, 10 oder 20 Minuten, ohne auf die Zeit zu achten. Kostenlos, offline und mit ruhigem Vollbild."
+	path="/meditacao/"
+	heading="Meditation"
+	sub="Eine Zeit nur für dich. Dauer festlegen, hinsetzen und den sanften Alarm das Ende ankündigen lassen."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Meditation' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Beim Meditieren darf man nicht auf die Uhr schauen. Dieser Meditations-Timer übernimmt das: Sie wählen die
+		Dauer, drücken auf <strong>Start</strong> und konzentrieren sich auf den Atem. Am Ende kündigt ein ruhiger Klang –
+		wir empfehlen den <strong>„Zen“</strong>-Klang – das Ende an, und der Bildschirm kann sanft vibrieren.
+	</p>
+	<h2>So meditieren Sie mit dem Timer</h2>
+	<ul>
+		<li>Wählen Sie <strong><a href="/de/temporizador/10-minutos/">10 Minuten</a></strong> (oder stellen Sie 1 bis 20 Minuten ein).</li>
+		<li>Drücken Sie <strong>Start</strong> und schließen Sie die Augen.</li>
+		<li>Wählen Sie in den Einstellungen den Klang <strong>Zen</strong> für einen sanfteren Ton.</li>
+		<li>Nutzen Sie den <strong>Fokus-Modus</strong> („Vollbild“) für ein größeres Zifferblatt ohne Ablenkung.</li>
+	</ul>
+	<h2>Meditation mit Timer im Alltag</h2>
+	<p>
+		Ein <strong>Meditations-Timer</strong> macht das Meditieren einfach: Wählen Sie <a href="/de/temporizador/5-minutos/">5 Minuten</a>,
+		<a href="/de/temporizador/10-minutos/">10</a> oder <a href="/de/temporizador/15-minutos/">15</a> und lassen Sie
+		die Zeit laufen. Er funktioniert wie eine <strong>Zen-Uhr</strong>: still während der Praxis, sanft beim
+		Zurückkommen. Dieser Meditations-Timer ist kostenlos, funktioniert offline und hat ein schönes, ruhiges
+		Zifferblatt – perfekt für Meditation auf dem Handy, zu Hause oder im Büro.
+	</p>
+	<h2>Tipps für Einsteiger</h2>
+	<p>
+		Machen Sie sich keinen Druck: Schon <a href="/de/temporizador/5-minutos/">5 ruhige Minuten</a> zählen.
+		Eine ausführlichere Anleitung finden Sie auf der <a href="/de/temporizador-para-meditacao/">eigenen Seite
+		zur Meditation</a>. Bevorzugen Sie geführte Praxis? Bauen Sie eine <a href="/de/sequencias/">Sequenz</a> mit
+		Atemphasen und kurzen Pausen auf.
+	</p>
+	<h2>Geführte Meditation und Klänge zum Meditieren</h2>
+	<p>
+		Nicht jede Praxis ist still: Die <strong>geführte Meditation</strong> führt Sie durch Schritte – Körper, Atem,
+		Klang – und hilft Einsteigern, sich nicht in Gedanken zu verlieren. Auf dieser Website ist die geführte Form der
+		<a href="/de/sequencias/">Sequenzen</a>-Modus: Bauen Sie Atem- oder Entspannungsphasen mit den gewünschten Zeiten
+		auf, und die App meldet jeden Wechsel sanft. Der Meditations-Timer auf dieser Seite betreut die freie Praxis:
+		Sie wählen zwischen den <strong>Meditationsklängen</strong> Zen, Glockenspiel und Klingel, stellen die Lautstärke
+		ein und meditieren mit geschlossenen Augen bis zum Ton.
+	</p>
+	<h2>Mit dem Handy meditieren, ohne sich ablenken zu lassen</h2>
+	<p>
+		Wenn die Meditation auf dem Handy stattfindet, darf der Bildschirm nicht die Aufmerksamkeit stehlen. Nutzen Sie
+		den <strong>Fokus-Modus</strong> (Vollbild), um nur die große, ruhige Uhr zu sehen, oder sperren Sie das Gerät:
+		Die Zeit bleibt korrekt, weil sie von der Systemuhr berechnet wird, und am Ende ertönt der Zen-Alarm zur
+		richtigen Zeit. Es lohnt sich außerdem, die Benachrichtigungen vorher stummzuschalten. So wirkt eine
+		<strong>Online-Meditation</strong> von wenigen Minuten wie eine vollständige Pause – ohne Uhr im Kopf und ohne
+		Eile, zurückzukehren.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

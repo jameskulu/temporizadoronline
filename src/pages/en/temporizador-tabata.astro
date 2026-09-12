@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is tabata?',
+		a: 'Tabata is a short interval workout: 20 seconds of maximum effort and 10 of rest, repeated 8 times — 4 minutes in total. Though short, it is intense.',
+	},
+	{
+		q: 'Do I need equipment for tabata?',
+		a: 'No. Bodyweight exercises (squats, jumping jacks, jump rope, mountain climbers) work very well. Pick a movement, follow the rhythm and rest in the intervals.',
+	},
+];
+---
+<ToolPage
+	title="Tabata Timer — 20×10 in 4 Minutes"
+	description="Free tabata timer: 20 seconds of effort, 10 of rest, 8 rounds = 4 minutes. A fast workout you can do anywhere."
+	path="/temporizador-tabata/"
+	heading="Tabata Timer"
+	sub="20 s effort, 10 s rest, 8 rounds. Exactly four minutes."
+	initial={JSON.stringify({ mode: 'interval', workSec: 20, restSec: 10, rounds: 8, prepareSec: 3, label: 'Tabata' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Tabata takes <strong>4 minutes</strong> with 8 rounds of <strong>20 seconds of effort</strong> and
+		<strong>10 of rest</strong>. This timer comes with 3 seconds of prep so you can position yourself before the
+		first sprint. A sound plays at every change.
+	</p>
+	<h2>How to do it</h2>
+	<ul>
+		<li>Pick a bodyweight movement before you start.</li>
+		<li>In the 20 s effort, keep the highest pace you can sustain.</li>
+		<li>In the 10 s rest, stay firm and catch your breath.</li>
+		<li>Done? Rest well — the session is short, but intense.</li>
+	</ul>
+	<p>
+		Want longer rounds? See the <a href="/en/temporizador-hiit/">HIIT 40×20 timer</a> or build your own interval in
+		<a href="/en/intervalos/">intervals</a>.
+	</p>
+	<h2>Frequently asked questions</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

@@ -1,0 +1,100 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Was ist eine Online-Stoppuhr?',
+		a: 'Eine Online-Stoppuhr zählt die Zeit, die seit dem Start vergangen ist – anders als der Timer, der einen Countdown bis Null macht. Sie dient zum Messen von Aktivitäten, Läufen, Spielen, Prüfungen und Aufgaben, mit Rundenmarkierung.',
+	},
+	{
+		q: 'Was ist der Unterschied zwischen Stoppuhr und Timer?',
+		a: 'Der Timer (auch rückwärts zählende Online-Stoppuhr genannt) läuft bis Null herunter und meldet sich mit einem Alarm. Die Stoppuhr startet bei Null und zählt nach oben. Für Aufgaben mit Zeitlimit nutzen Sie den Timer; um zu messen, wie lange etwas dauert, die Stoppuhr.',
+	},
+	{
+		q: 'Kann die Online-Stoppuhr Runden markieren?',
+		a: 'Ja. Im Stoppuhr-Modus gibt es den Button „Runde“: Jeder Tipp registriert die Zeit dieser Runde in der Liste, immer mit der neuesten oben, während die Stoppuhr im Hintergrund weiterläuft. „Zurücksetzen“ bringt alles auf Null.',
+	},
+	{
+		q: 'Läuft die Stoppuhr weiter, wenn ich die Registerkarte wechsle?',
+		a: 'Ja. Die Stoppuhr basiert auf der Systemuhr und nicht auf Animations-Frames: Auch im Hintergrund, mit minimiertem Tab oder gesperrtem Handy wird die Zeit bei der Rückkehr korrekt weitergezählt.',
+	},
+	{
+		q: 'Kann ich die Online-Stoppuhr im Vollbild nutzen?',
+		a: 'Ja. Nutzen Sie den Fokus-Modus (Kürzel F auf der Tastatur): Die Uhr wechselt ins Vollbild, wird sehr groß und blendet den Rest der Seite aus. Ideal, um Prüfungen, Trainings und Präsentationen ohne Ablenkung zu verfolgen.',
+	},
+	{
+		q: 'Wie nutze ich die Online-Stoppuhr zum Lernen?',
+		a: 'Nutzen Sie sie, um zu messen, wie lange Sie an jeder Aufgabe oder jedem Kapitel sitzen, Runden für Wiederholungen zu stoppen oder die Zeit von Probeprüfungen zu kontrollieren. Für Lernblöcke mit Pausen kombinieren Sie sie mit Pomodoro oder den fertigen Timern.',
+	},
+	{
+		q: 'Ist die Online-Stoppuhr kostenlos?',
+		a: 'Ja, zu 100 % kostenlos und ohne Anmeldung, mit allen Funktionen: Runden, Gesamtzeit, Fokus-Modus, Klänge und Vibration. Sie funktioniert auch offline, direkt im Browser.',
+	},
+];
+---
+<ToolPage
+	title="Kostenlose Online-Stoppuhr – mit Vollbild und Countdown"
+	description="Kostenlose Online-Stoppuhr: zählt Sekunden, Minuten und Stunden präzise, markiert Runden und hat einen Vollbild-Modus. Funktioniert offline, ohne Anmeldung und auf dem Handy."
+	path="/cronometro/"
+	heading="Stoppuhr"
+	sub="Zählt die Zeit richtig: präzise ab dem Start. Drücken Sie auf Start – und los geht es mit dem, was Sie messen wollen."
+	initial={JSON.stringify({ mode: 'stopwatch' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Die Stoppuhr oben wird von der Systemuhr gesteuert: Sie zählt weiter, auch wenn Sie die Registerkarte wechseln,
+		den Bildschirm sperren oder eine andere App öffnen. Bei der Rückkehr ist die Zeit korrekt angezeigt.
+	</p>
+	<h2>Wofür Sie eine Stoppuhr nutzen</h2>
+	<ul>
+		<li><strong><a href="/de/temporizador-para-exercicios/">Training:</a></strong> Sätze, Erholungsphasen oder den Lauf von heute messen.</li>
+		<li><strong>Prüfungen und Klausuren:</strong> die Zeit einer Aufgabe oder der gesamten Prüfung exakt kontrollieren.</li>
+		<li><strong>Gesellschaftsspiele:</strong> faire Zugzeiten für alle.</li>
+		<li><strong>Tests und Abläufe:</strong> genau wissen, wie lange etwas dauert.</li>
+	</ul>
+	<h2>Was ist der Unterschied zwischen Stoppuhr und Timer?</h2>
+	<p>
+		Der <a href="/de/temporizador/">Timer</a> macht einen Countdown und signalisiert, wenn er bei Null ankommt –
+		manche nennen das eine <strong>rückwärts zählende Online-Stoppuhr</strong>. Die Stoppuhr macht das Gegenteil:
+		sie startet bei Null und zählt nach oben. Für Aufgaben mit Zeitlimit nehmen Sie den Timer; zum Messen, wie
+		lange etwas dauert, die Stoppuhr.
+	</p>
+	<h2>So verwenden Sie die Online-Stoppuhr</h2>
+	<p>
+		Ganz einfach: Öffnen Sie die Seite, tippen Sie auf <strong>Start</strong> und beobachten Sie, wie Sekunden,
+		Minuten und Stunden präzise zusammenkommen. Diese <strong>kostenlose Online-Stoppuhr</strong> zählt weiter,
+		auch wenn Sie den Browser minimieren, das Handy sperren oder den Tab wechseln – die Zeit stammt von der Systemuhr.
+		Wenn Sie zwei oder mehr Abschnitte derselben Aktivität messen möchten, tippen Sie so oft Sie wollen auf
+		<strong>Runde</strong>: Jede Markierung landet in einer Liste, die neueste oben. Fertig? Tippen Sie auf
+		<strong>Zurücksetzen</strong>, um alles auf Null zu bringen und neu zu beginnen. Wenige Buttons, genau wie es
+		sich für eine gute Stoppuhr gehört.
+	</p>
+	<h2>Lernen, Prüfungen und Vollbild</h2>
+	<p>
+		Die <strong>Stoppuhr fürs Lernen</strong> ist ein Helfer zu Hause und in der Schule: Messen Sie die Zeit für
+		jede Aufgabe, kontrollieren Sie Testläufe und trainieren Sie Ihre Zeiteinteilung. Aktivieren Sie den
+		<strong>Vollbild-Modus</strong> (F auf der Tastatur), um die Zeit aus der Ferne im Blick zu behalten, ohne zum
+		Handy greifen zu müssen. Das klare Design und das große Zifferblatt machen die <strong>ästhetische
+		Online-Stoppuhr</strong> im Alltag angenehm zu bedienen.
+	</p>
+	<p>
+		Wenn Sie über Google eine „Online-Stoppuhr“ gesucht haben, funktioniert diese hier sofort: <strong>kostenlos</strong>,
+		ohne Download, ohne Anmeldung, am Computer oder auf dem Handy. Tippen Sie auf Start und die Online-Stoppuhr
+		läuft – mit optionalen Klängen und Vibration am Ende jeder Messung.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

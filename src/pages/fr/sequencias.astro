@@ -1,0 +1,104 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: "Qu'est-ce qu'une séquence de minuteur ?",
+		a: "Une séquence est une liste d'étapes avec leurs propres durées, chacune avec un nom et un son. L'application joue une alerte sonore à chaque changement d'étape et avance toute seule — idéal pour les séances guidées, les routines ou les activités en blocs.",
+	},
+	{
+		q: 'À quoi sert un minuteur de séquences ?',
+		a: "Il sert à tout ce qui a plusieurs parties : échauffement + exercice + repos, blocs d'étude avec pauses, routine d'étirements, pratique de méditation guidée ou cuisine en plusieurs étapes. Chaque étape sonne quand elle se termine et la suivante démarre toute seule.",
+	},
+	{
+		q: 'Puis-je enregistrer et répéter une séquence ?',
+		a: "Oui : modifiez les étapes, ajustez les noms, durées et sons, puis utilisez le bouton « Utiliser la séquence ». Tant que la page reste sur votre appareil, votre séquence est enregistrée pour la répéter autant de fois que vous voulez.",
+	},
+	{
+		q: 'Peut-on changer le son de chaque étape ?',
+		a: "Oui. Chaque étape peut avoir son propre son parmi les 5 styles d'alarme disponibles, ou aucun. Ainsi, vous savez au tintement quelle partie de la routine est terminée, sans regarder l'écran.",
+	},
+	{
+		q: 'La séquence aide-t-elle dans les séances guidées ?',
+		a: "Oui. Montez une séance guidée par étapes — échauffement de 5 minutes, blocs d'exercice, repos et étirements — et l'application règle toute la routine, en annonçant chaque changement. C'est comme avoir un coach du temps à l'écran.",
+	},
+	{
+		q: "Comment monter une routine d'étude en blocs ?",
+		a: "Créez des blocs d'étude de 25 minutes alternés avec des pauses de 5 et une pause longue de 15. L'application prévient quand chaque bloc se termine et lance déjà le suivant automatiquement — la méthode pomodoro au format séquence.",
+	},
+];
+---
+<ToolPage
+	title="Séquences de minuteur — étapes et alertes automatiques"
+	description="Montez des séquences de minuteur avec des étapes, des noms et des sons propres. Séances guidées, routines d'étude et pratiques en blocs avec alertes automatiques."
+	path="/sequencias/"
+	heading="Séquences"
+	sub="Combinez des étapes avec des durées et des sons propres. L'application avance toute seule et prévient à chaque changement."
+	initial={JSON.stringify({ mode: 'sequence' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Une <strong>séquence de minuteur</strong> est parfaite quand une routine a plusieurs parties : échauffement +
+		exercice + repos, blocs d'étude avec pauses, ou une pratique guidée. Touchez
+		<strong>« Configurer la séquence »</strong>, ajoutez des étapes avec nom, durée et son, et l'application fait
+		sonner la cloche à chaque changement.
+	</p>
+	<h2>Exemples de séquences de minuteur</h2>
+	<ul>
+		<li><strong>Séance complète :</strong> échauffement (5 min), 2 blocs d'exercice (3 min) et relaxation.</li>
+		<li><strong>Concentration en blocs :</strong> étude (25 min), pause (5 min), étude (25 min) et pause longue (15 min).</li>
+		<li><strong>Respiration guidée :</strong> inspirez, retenez et relâchez — en étapes de quelques secondes.</li>
+	</ul>
+	<h2>Minuteur de séquences pour les routines</h2>
+	<p>
+		Un <strong>minuteur de séquences</strong> transforme toute routine en un flux automatique avec des
+		<strong>étapes minutées</strong> et des <strong>alarmes en cascade</strong> : chaque étape se termine, son son
+		retentit et la suivante démarre à l'heure — sans que vous ayez à toucher quoi que ce soit. Vous voulez une
+		pratique de <a href="/fr/temporizador-para-meditacao/">méditation guidée</a>, une
+		<a href="/fr/temporizador-para-exercicios/">séance en blocs</a> ou la routine d'<a
+		href="/fr/temporizador-para-estudos/">étude</a> avec pauses ? Montez des exemples de séquence en quelques minutes
+		et répétez quand vous voulez. Pour des cycles simples de concentration et de pause, le <a href="/fr/pomodoro/">pomodoro</a>
+		suffit ; pour plusieurs parties avec leurs propres alertes, la séquence est l'outil idéal.
+	</p>
+	<h2>Comment monter la vôtre</h2>
+	<ul>
+		<li>Ouvrez <strong>« Configurer la séquence »</strong>.</li>
+		<li>Touchez <strong>« Ajouter une étape »</strong> et donnez un nom, une durée et un son à chaque partie.</li>
+		<li>Réordonnez ou supprimez les étapes avec les flèches et la corbeille.</li>
+		<li>Touchez <strong>« Utiliser la séquence »</strong> et démarrez.</li>
+	</ul>
+	<h2>Conseils pour bien construire vos séquences</h2>
+	<p>
+		Commencez petit : trois à cinq étapes suffisent pour la plupart des routines. Donnez des <strong>noms clairs</strong>
+		à chaque partie (« échauffement », « série 1 », « repos ») pour suivre au son, et choisissez une
+		<strong>alarme de séquence</strong> différente pour les étapes importantes — vous saurez ce qui a changé sans
+		regarder l'écran. Dans les <strong>routines minutées</strong>, préférez des durées entières (5, 10, 15 minutes) ;
+		pour les étapes courtes, utilisez des secondes.
+	</p>
+	<h2>Séquences pour étudier, s'entraîner et pratiquer</h2>
+	<p>
+		Ce <strong>minuteur de séquences</strong> brille dans trois situations. Pour <a
+		href="/fr/temporizador-para-estudos/">étudier</a>, monter des blocs de concentration de 25 minutes avec des pauses
+		de 5 et une longue de 15 transforme la séance en flux continu, sans toucher au minuteur. À l'<a
+		href="/fr/temporizador-para-exercicios/">entraînement</a>, une séquence guidée avec échauffement, exercice et
+		étirements règle toute la routine avec des alertes. Dans la pratique guidée, c'est le format parfait pour la <a
+		href="/fr/temporizador-para-meditacao/">méditation</a> par étapes. Dans tous les cas, les <strong>alarmes en
+		cascade</strong> maintiennent votre rythme pendant que l'application avance toute seule — et le résultat enregistré
+		peut être répété quand vous voulez.
+	</p>
+	<h2>Questions fréquentes</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

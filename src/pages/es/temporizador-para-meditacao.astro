@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '¿Cómo meditar con un temporizador?',
+		a: 'Define 5 o 10 minutos, siéntate erguido y cómodo, inicia y mantén la atención en la respiración. Cuando suene la alarma, cierra el momento con calma — sin prisa por salir de la posición.',
+	},
+	{
+		q: '¿Qué sonido de alarma usar para la meditación?',
+		a: 'El sonido "zen" fue diseñado para ser suave y no asustar al final de la práctica. El "chime" también funciona bien: un toque único y tranquilo.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador para meditación — práctica sin reloj"
+	description="Timer de meditación de 5/10/20 minutos con sonidos suaves. Medita sin vigilar el tiempo y sin preocuparte por la hora."
+	path="/temporizador-para-meditacao/"
+	heading="Temporizador para meditación"
+	sub="Diez minutos respirando, gratis. El sonido suave te llama en el momento justo."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Meditación' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		El mayor enemigo de la meditación es mirar el reloj. Este timer lo resuelve: <strong>elige 10 minutos</strong>,
+		pulsa Iniciar y observa la respiración hasta que el sonido suave avise. Al final, quédate un instante más
+		sentado y solo entonces abre los ojos.
+	</p>
+	<h2>Ritual rápido</h2>
+	<ul>
+		<li>Siéntate con la columna alargada y las manos apoyadas.</li>
+		<li>Cambia el sonido a <strong>zen</strong> en la configuración.</li>
+		<li>Inicia y enfócate en inspirar y expirar con calma.</li>
+		<li>Al sonar, respira tres veces más y cierra.</li>
+	</ul>
+	<p>
+		¿Quieres meditar con etapas guiadas? Mira <a href="/es/meditacao/">la página de meditación</a> y las
+		<a href="/es/sequencias/">secuencias</a>.
+	</p>
+	<h2>Preguntas frecuentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

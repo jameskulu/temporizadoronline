@@ -1,27 +1,31 @@
 ---
-import { TOOL_LINKS, MINUTE_PAGES } from '../data/site';
+import { getLangFromUrl, useTranslations, localPath, getMinutePages } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const minutes = getMinutePages(lang);
 ---
 <section class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mt-8">
 	{
-		TOOL_LINKS.map((t) => (
-			<a href={t.path} class="tool-card">
-				<span class="tool-name">{t.label}</span>
-				<span class="tool-hint">{t.hint}</span>
+		t.toolLinks.map((tool) => (
+			<a href={localPath(lang, tool.path)} class="tool-card">
+				<span class="tool-name">{tool.label}</span>
+				<span class="tool-hint">{tool.hint}</span>
 			</a>
 		))
 	}
 </section>
 
 <section class="mt-10">
-	<div class="eyebrow mb-3">Temporizadores por duração</div>
-	<h2 class="text-xl font-semibold mb-2">Contagens regressivas prontas</h2>
+	<div class="eyebrow mb-3">{t.tools.readyEyebrow}</div>
+	<h2 class="text-xl font-semibold mb-2">{t.tools.readyTitle}</h2>
 	<p class="text-sm mb-3" style="color:var(--color-body)">
-		Escolha o tempo — e comece.
+		{t.tools.readySub}
 	</p>
 	<div class="flex flex-wrap gap-2">
 		{
-			MINUTE_PAGES.map((m) => (
-				<a href={`/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} min</a>
+			minutes.map((m) => (
+				<a href={localPath(lang, `/temporizador/${m.slug}/`)} class="chip chip-link">{m.minutes} {t.tools.min}</a>
 			))
 		}
 	</div>

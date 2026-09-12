@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getLangFromUrl } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
 
 interface Props {
 	title: string;
@@ -14,8 +16,32 @@ interface Props {
 
 const { heading, sub, updated } = Astro.props;
 
+const lang = getLangFromUrl(Astro.url);
+
+const UPDATED_LABEL: Record<Lang, string> = {
+	pt: 'Última atualização',
+	en: 'Last updated',
+	es: 'Última actualización',
+	ja: '最終更新日',
+	fr: 'Dernière mise à jour',
+	de: 'Zuletzt aktualisiert',
+	ko: '최종 수정',
+	it: 'Ultimo aggiornamento',
+};
+
+const LOCALE: Record<Lang, string> = {
+	pt: 'pt-BR',
+	en: 'en-US',
+	es: 'es-ES',
+	ja: 'ja-JP',
+	fr: 'fr-FR',
+	de: 'de-DE',
+	ko: 'ko-KR',
+	it: 'it-IT',
+};
+
 const formattedUpdated = updated
-	? new Date(`${updated}T00:00:00`).toLocaleDateString('pt-BR', {
+	? new Date(`${updated}T00:00:00`).toLocaleDateString(LOCALE[lang], {
 			day: 'numeric',
 			month: 'long',
 			year: 'numeric',
@@ -35,7 +61,7 @@ const formattedUpdated = updated
 			{
 				formattedUpdated && (
 					<p class="mt-3 text-[13px]" style="color: var(--color-ink-muted)">
-						Última atualização:{' '}
+						{UPDATED_LABEL[lang]}:{' '}
 						<time datetime={updated}>{formattedUpdated}</time>
 					</p>
 				)

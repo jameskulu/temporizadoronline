@@ -1,0 +1,49 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '勉強に適した時間はどのくらい？',
+		a: 'ポモドーロ・テクニックでは25分の集中ブロックと5分の休憩を使います。長めの読書には50分を好む人も。まずは25分から始めて、自分の集中力に合わせて調整しましょう。',
+	},
+	{
+		q: '勉強でタイマーを使うには？',
+		a: '時間を選び、作業を一つ決めて開始します。アラームが鳴ったら進捗をメモして休憩しましょう。同じブロック内で作業を切り替えないのがコツです。',
+	},
+];
+---
+<ToolPage
+	title="勉強タイマー — 集中力のテクニック"
+	description="ポモドーロ・テクニックと集中ブロックを使える勉強用タイマー。時間を味方につける方法を学び、集中力を高めましょう。"
+	path="/temporizador-para-estudos/"
+	heading="勉強タイマー"
+	sub="休憩付きの集中ブロック：疲れずに勉強する最もシンプルな方法。"
+	initial={JSON.stringify({ seconds: 1500, mode: 'timer', label: '勉強' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		タイマーを使って勉強する利点は二つあります：<strong>終わりが分かる</strong>ため脳がリラックスし、
+		<strong>休憩のリズム</strong>が生まれます。25分の集中ブロックはすでに設定済み——スタートを押してください。
+	</p>
+	<h2>ルーティン例</h2>
+	<ul>
+		<li><strong><a href="/ja/temporizador/25-minutos/">フル集中（25分）：</a></strong>今の科目に全注意を向ける1ブロック。</li>
+		<li><strong><a href="/ja/temporizador/5-minutos/">5分の休憩：</a></strong>立ち上がり、水分補給し、体を伸ばしましょう。</li>
+		<li><strong><a href="/ja/temporizador/15-minutos/">復習（15分）：</a></strong>短いタイマーで、ノートを後ろから順に見返して復習。</li>
+	</ul>
+	<p>
+		時間をまとめてブロック化したいなら、<a href="/ja/pomodoro/">オンラインポモドーロ</a>で自動の長い休憩つきフルサイクルを
+		どうぞ。
+	</p>
+	<h2>よくある質問</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

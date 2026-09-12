@@ -1,0 +1,58 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { faqJsonLd } from '../../../data/site';
+import { getMinutePages } from '../../../i18n/utils';
+
+const MINUTES = getMinutePages('it');
+
+const faqs = [
+	{
+		q: 'Come creare un timer personalizzato?',
+		a: 'Usa il campo di configurazione della pagina: indicatore di ore, minuti e secondi per il tuo timer — da pochi secondi fino a 24 ore.',
+	},
+	{
+		q: 'Cosa succede quando il tempo termina?',
+		a: 'Suona un allarme (puoi scegliere tra 5 suoni e il volume), lo schermo dà un segnale, il telefono vibra e, se vuoi, il timer continua a contare il tempo extra.',
+	},
+];
+---
+<ToolPage
+	title="Timer online — conto alla rovescia gratuito"
+	description="Timer online con conto alla rovescia da 1 a 60 minuti o con tempo personalizzato. Preciso, gratuito, funziona offline e senza registrazione."
+	path="/temporizador/"
+	heading="Timer"
+	sub="Conto alla rovescia semplice e preciso. Imposta il tempo, avvia e stai tranquillo: l'avviso arriva al momento giusto."
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Usa il timer qui sopra per qualsiasi conto alla rovescia: <strong>studio, ricette, riunioni, pisolini,
+		allenamento</strong> — tutto ciò che richiede un allarme preciso. Scegli un tempo pronto qui sotto o configura il tuo.
+	</p>
+	<h2>Timer pronti per durata</h2>
+	<div class="grid-cols flex flex-wrap gap-2 mb-8" style="margin-bottom:2rem">
+		{
+			MINUTES.map((m) => (
+				<a href={`/it/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} {m.minutes === 1 ? 'minuto' : 'minuti'}</a>
+			))
+		}
+	</div>
+	<h2>Consigli d'uso</h2>
+	<ul>
+		<li><strong>Modalità concentrazione:</strong> premi <kbd>F</kbd> per nascondere tutto e vedere solo l'orologio.</li>
+		<li><strong>Continua dopo lo zero:</strong> spunta "Continua a contare dopo lo zero" per misurare anche il tempo extra (utile in cucina).</li>
+		<li><strong>Senza perdere tempo:</strong> il timer usa l'orologio del sistema — funziona anche in secondo piano.</li>
+	</ul>
+	<h2>Domande frequenti</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

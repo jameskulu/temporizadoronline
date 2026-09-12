@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Wie meditiere ich mit einem Timer?',
+		a: 'Stellen Sie 5 oder 10 Minuten ein, setzen Sie sich aufrecht und bequem hin, starten Sie und halten Sie die Aufmerksamkeit auf den Atem. Wenn der Alarm ertönt, beenden Sie den Moment in Ruhe – ohne Eile, die Position zu verlassen.',
+	},
+	{
+		q: 'Welchen Alarmton nutze ich für die Meditation?',
+		a: 'Der Klang „Zen“ wurde so gestaltet, dass er sanft ist und am Ende der Praxis nicht erschreckt. Auch „Chime“ funktioniert gut: ein einziger ruhiger Ton.',
+	},
+];
+---
+<ToolPage
+	title="Timer für Meditation – achtsam, ohne auf die Uhr zu schauen"
+	description="Meditations-Timer für 5/10/20 Minuten mit sanften Klängen. Meditieren Sie, ohne die Zeit zu bewachen und ohne auf die Uhr zu achten."
+	path="/temporizador-para-meditacao/"
+	heading="Timer für Meditation"
+	sub="Zehn Minuten achtsames Atmen, kostenlos. Der sanfte Klang ruft Sie zur richtigen Zeit."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Meditation' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Der größte Feind der Meditation ist der Blick auf die Uhr. Dieser Timer löst das: <strong>Wählen Sie
+		10 Minuten</strong>, drücken Sie auf Start und beobachten Sie den Atem, bis der sanfte Klang es meldet.
+		Am Ende bleiben Sie noch einen Moment sitzen und öffnen erst dann die Augen.
+	</p>
+	<h2>Kurzes Ritual</h2>
+	<ul>
+		<li>Setzen Sie sich mit gestreckter Wirbelsäule hin, die Hände abgelegt.</li>
+		<li>Stellen Sie in den Einstellungen den Klang auf <strong>Zen</strong> um.</li>
+		<li>Starten Sie und atmen Sie ruhig ein und aus.</li>
+		<li>Beim Ton atmen Sie noch dreimal und schließen ab.</li>
+	</ul>
+	<p>
+		Sie möchten mit geführten Schritten meditieren? Sehen Sie sich <a href="/de/meditacao/">die
+		Meditationsseite</a> und die <a href="/de/sequencias/">Sequenzen</a> an.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Was ist Tabata?',
+		a: 'Tabata ist ein kurzes Intervalltraining: 20 Sekunden maximale Belastung und 10 Sekunden Pause, 8 Mal wiederholt – insgesamt 4 Minuten. Trotz seiner Kürze ist es intensiv.',
+	},
+	{
+		q: 'Brauche ich Ausrüstung für Tabata?',
+		a: 'Nein. Übungen mit dem eigenen Körpergewicht (Kniebeugen, Jumping Jacks, Seilspringen, Mountain Climbers) funktionieren sehr gut. Wählen Sie eine Bewegung, folgen Sie dem Rhythmus und erholen Sie sich in den Pausen.',
+	},
+];
+---
+<ToolPage
+	title="Tabata-Timer – 20×10 in 4 Minuten"
+	description="Kostenloser Tabata-Timer: 20 Sekunden Belastung, 10 Sekunden Pause, 8 Runden = 4 Minuten. Schnelles Training, das Sie überall machen können."
+	path="/temporizador-tabata/"
+	heading="Tabata-Timer"
+	sub="20 Sekunden Belastung, 10 Sekunden Pause, 8 Runden. Punktgenau vier Minuten."
+	initial={JSON.stringify({ mode: 'interval', workSec: 20, restSec: 10, rounds: 8, prepareSec: 3, label: 'Tabata' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Tabata dauert <strong>4 Minuten</strong> mit 8 Runden aus <strong>20 Sekunden Belastung</strong> und
+		<strong>10 Sekunden Pause</strong>. Dieser Timer startet mit 3 Sekunden Vorbereitung, damit Sie sich vor dem
+		ersten Sprint positionieren können. Jeder Wechsel wird mit einem Ton gemeldet.
+	</p>
+	<h2>So machen Sie es</h2>
+	<ul>
+		<li>Wählen Sie vor dem Start eine Übung mit dem Körpergewicht.</li>
+		<li>In den 20 s der Belastung halten Sie das Tempo, das Sie möglichst gut durchhalten.</li>
+		<li>In den 10 s der Pause bleiben Sie aufrecht und holen Luft.</li>
+		<li>Fertig? Erholen Sie sich gut – die Sitzung ist kurz, aber intensiv.</li>
+	</ul>
+	<p>
+		Möchten Sie längere Serien? Schauen Sie sich den <a href="/de/temporizador-hiit/">HIIT-Timer 40×20</a> an oder
+		stellen Sie Ihr eigenes Intervall unter <a href="/de/intervalos/">Intervalle</a> ein.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

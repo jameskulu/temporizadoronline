@@ -1,0 +1,97 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is an online stopwatch?',
+		a: 'An online stopwatch counts the time that passes since you started — unlike a timer, which counts down to zero. It is for measuring activities, races, games, exams and tasks, with lap marking.',
+	},
+	{
+		q: 'What is the difference between a stopwatch and a timer?',
+		a: 'A timer (also called a reverse online stopwatch) counts down to zero and alerts you with an alarm. A stopwatch starts at zero and counts up. For tasks with a time limit, use the timer; to measure how long something takes, use the stopwatch.',
+	},
+	{
+		q: 'Does the online stopwatch record laps?',
+		a: 'Yes. In stopwatch mode there is a "Lap" button: each tap records that lap\'s time in the list, always with the most recent on top, while the stopwatch keeps running in the background. The "Reset" button clears everything.',
+	},
+	{
+		q: 'Does the stopwatch keep counting if I switch tabs?',
+		a: 'Yes. The stopwatch is based on the system clock, not on animation frames: even in the background, with the tab minimized or your phone locked, the time is added up correctly when you come back.',
+	},
+	{
+		q: 'Can I use the online stopwatch in fullscreen?',
+		a: 'Yes. Use focus mode (the F shortcut on the keyboard): the clock goes fullscreen, gets really big and hides the rest of the page. It is ideal for following exams, workouts and presentations without distraction.',
+	},
+	{
+		q: 'How do I use the online stopwatch to study?',
+		a: 'Use it to measure how long you take on each question or chapter, time review rounds or control the clock in mock exams. For study blocks with breaks, combine it with the pomodoro or the ready-made timers.',
+	},
+	{
+		q: 'Is the online stopwatch free?',
+		a: 'Yes, 100% free and with no sign-up, with every feature unlocked: laps, total time, focus mode, sounds and vibration. It also works offline, right in the browser.',
+	},
+];
+---
+<ToolPage
+	title="Free Online Stopwatch — Fullscreen and Countdown Timer"
+	description="Free online stopwatch: counts seconds, minutes and hours with precision, records laps and has fullscreen mode. Works offline, without sign-up and on your phone."
+	path="/cronometro/"
+	heading="Stopwatch"
+	sub="Counts time the right way: accurately after you start. Press Start and get after whatever you are timing."
+	initial={JSON.stringify({ mode: 'stopwatch' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		The stopwatch above is kept by the system clock: it keeps counting even if you switch tabs, lock the screen
+		or open another app. When you come back, the time is correctly marked.
+	</p>
+	<h2>What to use a stopwatch for</h2>
+	<ul>
+		<li><strong><a href="/en/temporizador-para-exercicios/">Exercise:</a></strong> time your set, your rest or today's run.</li>
+		<li><strong>Exams and entrance tests:</strong> exact control of the time per question or the whole test.</li>
+		<li><strong>Board games:</strong> a fair turn clock for everyone.</li>
+		<li><strong>Tests and processes:</strong> know exactly how long something takes.</li>
+	</ul>
+	<h2>What is the difference between a stopwatch and a timer?</h2>
+	<p>
+		The <a href="/en/temporizador/">timer</a> counts down and alerts you when it reaches zero — some call this a
+		<strong>reverse online stopwatch</strong>. The stopwatch does the opposite: it starts at zero and counts up. For
+		tasks with a time limit, use the timer; to measure how long something takes, use the stopwatch.
+	</p>
+	<h2>How to use the online stopwatch</h2>
+	<p>
+		It is simple: open the page, tap <strong>Start</strong> and watch seconds, minutes and hours adding up with
+		precision. This <strong>free online stopwatch</strong> keeps counting even if you minimize the browser, lock your
+		phone or switch tabs — the time is kept by the system clock. When you need to time two or more stretches of the
+		same activity, tap <strong>Lap</strong> as many times as you like: each mark is recorded in a list, with the most
+		recent on top. Done? Tap <strong>Reset</strong> to clear everything and start over. Few buttons, exactly how a good
+		stopwatch should be.
+	</p>
+	<h2>Study, exams and fullscreen</h2>
+	<p>
+		The <strong>online stopwatch for study</strong> is an ally at home and in the classroom: time each question,
+		control mock exams and train your minute distribution. Turn on <strong>fullscreen mode</strong> (F on the
+		keyboard) to follow the time from afar, without huddling over your phone. The clean design and the big dial also
+		make the <strong>aesthetic online stopwatch</strong> pleasant to use every day.
+	</p>
+	<p>
+		If you came from Google looking for "online stopwatch", this one works immediately: <strong>free</strong>, no
+		download, no sign-up, on your computer or your phone. Tap Start and the online stopwatch is already running — with
+		optional sound and vibration at the end of each measurement.
+	</p>
+	<h2>Frequently asked questions</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

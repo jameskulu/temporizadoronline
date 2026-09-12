@@ -1,0 +1,95 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { faqJsonLd } from '../../../data/site';
+import { getMinutePages } from '../../../i18n/utils';
+
+interface Props {
+	minutes: number;
+	label: string;
+	slugLabel: string;
+	initial: string;
+}
+
+export function getStaticPaths() {
+	const pages = getMinutePages('it');
+	return pages.map((p) => {
+		const initial = JSON.stringify({ seconds: p.minutes * 60, mode: 'timer', label: p.label });
+		return {
+			params: { slug: p.slug },
+			props: { minutes: p.minutes, label: p.label, slugLabel: p.slug, initial },
+		};
+	});
+}
+
+const { minutes, label, slugLabel, initial } = Astro.props;
+
+const hourWord = minutes === 60 ? 'ora' : minutes === 1 ? 'minuto' : 'minuti';
+const faqs = [
+	{
+		q: `${label} a cosa serve?`,
+		a: `Per qualsiasi attività che duri circa ${minutes} ${hourWord}: concentrazione di studio, pausa, preparazione fisica, cottura di ricette o un'attività breve. Inizia subito, senza configurare nulla.`,
+	},
+	{
+		q: 'Posso usare altri tempi?',
+		a: 'Sì — l\'app permette di configurare qualsiasi durata, da secondi fino a 24 ore, oltre a tutti i tempi pronti di questa pagina.',
+	},
+];
+---
+<ToolPage
+	title={`${label} — timer online gratuito`}
+	description={`${label} con sveglia sonora, precisione al secondo e modalità concentrazione. Veloce, gratuito e funziona offline — senza bisogno di scaricare nulla.`}
+	path={`/temporizador/${slugLabel}/`}
+	heading={label}
+	sub={`Un timer già pronto per ${minutes} ${hourWord}. Premi Avvia e concentrati su ciò che conta.`}
+	initial={initial}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Questo <strong>{label.toLowerCase()}</strong> inizia già configurato per <strong>{minutes} {hourWord}</strong>.
+		Premi Avvia o usa il tasto <kbd>Spazio</kbd>. Quando termina, suona un allarme, lo schermo lampeggia e tu decidi se
+		continuare a contare il tempo extra.
+	</p>
+	<h2>Come funziona il timer di {minutes} {hourWord}</h2>
+	<ul>
+		<li><strong>Precisione:</strong> conteggio basato sull'orologio del sistema, affidabile anche cambiando scheda.</li>
+		<li><strong>Allarme:</strong> scegli il suono preferito e regola il volume nelle impostazioni.</li>
+		<li><strong>Modalità concentrazione:</strong> premi <kbd>F</kbd> per lo schermo intero con l'orologio grande.</li>
+		<li><strong>Link pronto:</strong> condividi questo {label.toLowerCase()} con un link o un codice QR.</li>
+	</ul>
+	<h2>Idee d'uso di {minutes} {hourWord}</h2>
+	<p>
+		Per lo <a href="/it/temporizador-para-estudos/">studio</a> in blocchi brevi, come riscaldamento negli
+		<a href="/it/temporizador-para-exercicios/">allenamenti</a>, come intervallo nelle <a href="/it/temporizador-para-cozinha/">ricette</a>
+		o come mini <a href="/it/temporizador-para-meditacao/">sessione di meditazione</a>.
+	</p>
+	<h2>Altri tempi pronti</h2>
+	<p>
+		Lo stesso quadrante, già configurato per altre durate — scegli la tua e inizia:
+	</p>
+	<div class="flex flex-wrap gap-2 mb-4">
+		{
+			getMinutePages('it').filter((p) => p.minutes !== minutes).map((m) => (
+				<a href={`/it/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} min</a>
+			))
+		}
+	</div>
+	<p>
+		Per cicli completi con pause automatiche, usa il <a href="/it/pomodoro/">pomodoro</a>; per misurare quanto dura qualcosa,
+		il <a href="/it/cronometro/">cronometro</a>; per allenamenti con sforzo e riposo, gli
+		<a href="/it/intervalos/">intervalli</a>, il <a href="/it/temporizador-hiit/">HIIT</a> o il
+		<a href="/it/temporizador-tabata/">tabata</a>.
+	</p>
+	<h2>Domande frequenti</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

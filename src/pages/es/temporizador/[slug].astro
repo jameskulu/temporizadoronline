@@ -1,0 +1,94 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { faqJsonLd } from '../../../data/site';
+import { getMinutePages } from '../../../i18n/utils';
+
+interface Props {
+	minutes: number;
+	label: string;
+	slugLabel: string;
+	initial: string;
+}
+
+export function getStaticPaths() {
+	return getMinutePages('es').map((p) => {
+		const initial = JSON.stringify({ seconds: p.minutes * 60, mode: 'timer', label: p.label });
+		return {
+			params: { slug: p.slug },
+			props: { minutes: p.minutes, label: p.label, slugLabel: p.slug, initial },
+		};
+	});
+}
+
+const { minutes, label, slugLabel, initial } = Astro.props;
+
+const hourWord = minutes === 60 ? 'hora' : 'minutos';
+const faqs = [
+	{
+		q: `¿Para qué sirve el ${label.toLowerCase()}?`,
+		a: `Para cualquier tarea que dure alrededor de ${minutes === 60 ? '1 hora' : `${minutes} ${hourWord}`}: foco de estudio, descanso, preparación física, cocción de recetas o una actividad corta. Empieza ahora, sin configurar nada.`,
+	},
+	{
+		q: '¿Puedo usar otros tiempos?',
+		a: 'Sí: la app permite configurar cualquier duración, desde segundos hasta 24 horas, además de todos los tiempos listos de esta página.',
+	},
+];
+---
+<ToolPage
+	title={`${label} — temporizador online gratis`}
+	description={`${label} con alarma sonora, precisión de segundos y modo enfoque. Rápido, gratuito y funciona sin conexión — sin necesidad de descargar nada.`}
+	path={`/temporizador/${slugLabel}/`}
+	heading={label}
+	sub={`Un temporizador ya preparado para ${minutes === 60 ? '1 hora' : `${minutes} ${hourWord}`}. Pulsa Iniciar y concéntrate en lo que importa.`}
+	initial={initial}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Este <strong>{label.toLowerCase()}</strong> comienza ya configurado para <strong>{minutes === 60 ? '1 hora' : `${minutes} ${hourWord}`}</strong>.
+		Haz clic en Iniciar o pulsa <kbd>Espacio</kbd>. Cuando termine, suena una alarma, la pantalla parpadea y tú
+		decides si quieres seguir contando el tiempo extra.
+	</p>
+	<h2>Cómo funciona el temporizador de {minutes === 60 ? '1 hora' : `${minutes} minutos`}</h2>
+	<ul>
+		<li><strong>Precisión:</strong> conteo basado en el reloj del sistema, confiable incluso al cambiar de pestaña.</li>
+		<li><strong>Alarma:</strong> elige el sonido que prefieras y ajusta el volumen en la configuración.</li>
+		<li><strong>Modo enfoque:</strong> pulsa <kbd>F</kbd> para pantalla completa con el reloj grande.</li>
+		<li><strong>Enlace listo:</strong> comparte este {label.toLowerCase()} con un enlace o código QR.</li>
+	</ul>
+	<h2>Ideas de uso de {minutes === 60 ? '1 hora' : `${minutes} minutos`}</h2>
+	<p>
+		Para <a href="/es/temporizador-para-estudos/">estudios</a> en bloques cortos, como calentamiento en
+		<a href="/es/temporizador-para-exercicios/">entrenamientos</a>, como intervalo de <a href="/es/temporizador-para-cozinha/">recetas</a>
+		o como una mini <a href="/es/temporizador-para-meditacao/">sesión de meditación</a>.
+	</p>
+	<h2>Otros tiempos listos</h2>
+	<p>
+		El mismo marcador, ya configurado para otras duraciones: elige el tuyo y empieza:
+	</p>
+	<div class="flex flex-wrap gap-2 mb-4">
+		{
+			getMinutePages('es').filter((p) => p.minutes !== minutes).map((m) => (
+				<a href={`/es/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} min</a>
+			))
+		}
+	</div>
+	<p>
+		Para ciclos completos con pausas automáticas, usa el <a href="/es/pomodoro/">pomodoro</a>; para medir cuánto
+		tarda algo, el <a href="/es/cronometro/">cronómetro</a>; para entrenamientos con esfuerzo y descanso, los
+		<a href="/es/intervalos/">intervalos</a>, el <a href="/es/temporizador-hiit/">HIIT</a> o el
+		<a href="/es/temporizador-tabata/">tabata</a>.
+	</p>
+	<h2>Preguntas frecuentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

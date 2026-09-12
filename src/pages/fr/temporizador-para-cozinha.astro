@@ -1,0 +1,52 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: "Quel est le meilleur minuteur de cuisine ?",
+		a: "Toute durée convient : l'essentiel est d'avoir une alerte claire et de pouvoir laisser compter en arrière-plan. Ce minuteur sonne, vibre et peut même continuer de compter les minutes supplémentaires après zéro.",
+	},
+	{
+		q: 'Peut-on utiliser plusieurs minuteurs en cuisine ?',
+		a: "Oui. Avec « Nouveau minuteur », vous créez des minuteurs séparés pour chaque plat en même temps — pratique quand le riz, le four et le thé finissent à des minutes différentes.",
+	},
+];
+---
+<ToolPage
+	title="Minuteur de cuisine — des recettes au bon timing"
+	description="Minuteur de cuisine en ligne : œuf, riz, four et thé. Alerte sonore, temps supplémentaire et plusieurs minuteurs à la fois. Gratuit et fonctionne hors ligne."
+	path="/temporizador-para-cozinha/"
+	heading="Minuteur de cuisine"
+	sub="Précieux pour le riz, essentiel pour le four et pour l'œuf. Sans rester collé à la cuisinière."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Cuisine' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Cuisiner, c'est chronométrer : <strong>une minute</strong> pour le thé, <strong>5</strong> pour les légumes,
+		<strong>10</strong> pour les pâtes, <strong>15</strong> pour les petites cuissons. Réglez, posez le téléphone sur
+		le plan de travail et recevez l'alerte à l'heure. Cochez « Continuer après zéro » pour mesurer aussi le repos de
+		la pâte.
+	</p>
+	<h2>Les durées les plus utilisées</h2>
+	<ul>
+		<li><strong><a href="/fr/temporizador/1-minuto/">1 min</a></strong> — œuf à la coque, sauce sur le feu, thé filtré.</li>
+		<li><strong><a href="/fr/temporizador/5-minutos/">5 min</a></strong> — riz blanc court, légumes vapeur, café filtré.</li>
+		<li><strong><a href="/fr/temporizador/10-minutos/">10 min</a></strong> — pâtes fraîches, œuf mollet, légumineuses.</li>
+		<li><strong><a href="/fr/temporizador/15-minutos/">15</a>–<a href="/fr/temporizador/30-minutos/">30 min</a></strong> — plats au four, risottos et desserts en bloc.</li>
+	</ul>
+	<p>
+		Utilisez le <strong>mode focus</strong> (plein écran) pour voir un grand cadran, et pourquoi pas le
+		<a href="/fr/cronometro/">chronomètre</a> pour enregistrer le temps de vos recettes.
+	</p>
+	<h2>Questions fréquentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

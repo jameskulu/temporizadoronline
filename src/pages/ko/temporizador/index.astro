@@ -1,0 +1,58 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { faqJsonLd } from '../../../data/site';
+import { getMinutePages } from '../../../i18n/utils';
+
+const minutePages = getMinutePages('ko');
+
+const faqs = [
+	{
+		q: '나만의 타이머는 어떻게 만들 수 있나요?',
+		a: '페이지의 설정 항목을 사용하세요. 시·분·초 표시를 조절해 몇 초부터 24시간까지 원하는 시간을 지정할 수 있습니다.',
+	},
+	{
+		q: '시간이 끝나면 어떻게 되나요?',
+		a: '알람이 울립니다(5가지 소리와 볼륨 중에서 선택). 화면에 신호가 표시되고 휴대폰은 진동하며, 원하면 0 이후에도 추가 시간을 계속 측정할 수 있습니다.',
+	},
+];
+---
+<ToolPage
+	title="온라인 타이머 — 무료 카운트다운 타이머"
+	description="1분부터 60분 또는 원하는 시간까지 카운트다운할 수 있는 온라인 타이머. 정확하고 무료이며, 오프라인에서도 작동하고 회원가입이 필요 없습니다."
+	path="/temporizador/"
+	heading="타이머"
+	sub="간단하고 정확한 카운트다운. 시간을 설정하고 시작하면 정확한 때에 알림이 옵니다."
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		위의 타이머는 모든 카운트다운에 사용할 수 있습니다: <strong>공부, 레시피, 회의, 낮잠,
+		운동</strong> — 정확한 알람이 필요한 모든 곳. 아래에서 준비된 시간을 고르거나 직접 설정하세요.
+	</p>
+	<h2>시간별 준비된 타이머</h2>
+	<div class="grid-cols flex flex-wrap gap-2 mb-8" style="margin-bottom:2rem">
+		{
+			minutePages.map((m) => (
+				<a href={`/ko/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes}분</a>
+			))
+		}
+	</div>
+	<h2>사용 팁</h2>
+	<ul>
+		<li><strong>집중 모드:</strong> <kbd>F</kbd>를 누르면 나머지를 숨기고 시계만 보여 줍니다.</li>
+		<li><strong>0 이후에도 계속:</strong> "0 이후에도 계속 측정"을 체크하면 추가 시간도 잽니다(주방에 유용).</li>
+		<li><strong>시간을 잃지 않음:</strong> 시스템 시계 기반이라 백그라운드에서도 정확히 작동합니다.</li>
+	</ul>
+	<h2>자주 묻는 질문</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

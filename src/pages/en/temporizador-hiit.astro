@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is HIIT?',
+		a: 'HIIT (high-intensity interval training) alternates short bursts of maximum effort with rest. A common example: 40 seconds of effort and 20 of rest, repeated in rounds.',
+	},
+	{
+		q: 'How long does a HIIT session last?',
+		a: 'A classic session with 8 rounds of 40×20 lasts about 8 minutes, not counting the prep. Shorter workouts (4 minutes, tabata style) also deliver great results.',
+	},
+];
+---
+<ToolPage
+	title="HIIT Timer — 40×20 Ready to Train"
+	description="Free HIIT timer: 40 seconds of effort, 20 of rest, 8 rounds with prep. Train anywhere without equipment and without an app."
+	path="/temporizador-hiit/"
+	heading="HIIT Timer"
+	sub="Maximum effort for 40 seconds, breathe for 20. Eight rounds with prep included."
+	initial={JSON.stringify({ mode: 'interval', workSec: 40, restSec: 20, rounds: 8, prepareSec: 5, label: 'HIIT' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		This HIIT timer alternates <strong>40 seconds of effort</strong> and <strong>20 of rest</strong> for
+		<strong>8 rounds</strong>, with 5 seconds of prep before the first sprint. The rhythm is guided by the sound at
+		every phase change.
+	</p>
+	<h2>How to follow</h2>
+	<ul>
+		<li>In the <strong>effort</strong> phase, give the maximum you can keep up for the round.</li>
+		<li>In the <strong>rest</strong> phase, walk or recover your breathing.</li>
+		<li>Use <strong>focus mode</strong> (fullscreen) so you do not watch the time the whole time.</li>
+	</ul>
+	<p>
+		Short on time? Try the <a href="/en/temporizador-tabata/">tabata</a> (4 minutes) or adjust the rounds in the
+		settings.
+	</p>
+	<h2>Frequently asked questions</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

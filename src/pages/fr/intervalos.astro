@@ -1,0 +1,100 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: "Qu'est-ce qu'un minuteur d'intervalles ?",
+		a: "Un minuteur d'intervalles est une minuterie qui alterne automatiquement entre des phases d'effort et de repos, répétées sur un nombre de tours. Il sert pour les entraînements HIIT, le tabata, les rounds de combat et toute activité qui demande des temps précis.",
+	},
+	{
+		q: 'Comment monter un entraînement par intervalles ?',
+		a: "Définissez les secondes d'effort (ex. : 30), celles de repos (ex. : 15) et le nombre de tours souhaité. Le champ « Préparation » compte un échauffement initial avant le départ. L'application alterne les phases toute seule et prévient avec un son.",
+	},
+	{
+		q: 'Quelle est la différence entre HIIT et tabata ?',
+		a: "Le tabata est un format de HIIT fixe : 20 secondes d'effort maximal et 10 de repos, sur 8 tours (4 minutes au total). Le HIIT en général peut utiliser des temps libres, comme 40×20. Les deux sont disponibles dans les préréglages de l'application.",
+	},
+	{
+		q: 'Comment calculer le temps total de mon entraînement fractionné ?',
+		a: "Additionnez effort + repos et multipliez par le nombre de tours. Exemple : 8 tours de 40×20 donnent 8 minutes d'entraînement. Ajustez effort, repos et tours dans les paramètres pour obtenir des intervalles qui tiennent dans votre emploi du temps.",
+	},
+	{
+		q: "Peut-on voir la progression des tours pendant l'entraînement ?",
+		a: "Oui. Le cadran affiche le tour en cours et la phase (effort, repos ou préparation), mise à jour à chaque seconde — une visualisation simple qui revient à tracer les intervalles de votre entraînement. À chaque changement de phase, un son retentit.",
+	},
+	{
+		q: "Les intervalles fonctionnent-ils comme un chronomètre d'entraînement ?",
+		a: "Oui. En plus des phases alternées, le minuteur enregistre chaque tour avec précision, fonctionnant comme un chronomètre d'intervalles en ligne : vous savez exactement combien de temps a duré chaque effort et chaque repos, sans rien noter.",
+	},
+];
+---
+<ToolPage
+	title="Intervalles en ligne — minuteur d'entraînement HIIT et tabata"
+	description="Minuteur d'intervalles en ligne : effort, repos et tours avec échauffement et alerte sonore. Calculez et définissez vos intervalles d'entraînement, HIIT et tabata gratuits."
+	path="/intervalos/"
+	heading="Intervalles"
+	sub="Alterne effort et repos automatiquement. Montez votre HIIT, votre tabata ou votre entraînement en rounds."
+	initial={JSON.stringify({ mode: 'interval' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Les entraînements fractionnés reposent sur des temps précis. Configurez l'<strong>effort</strong>, le
+		<strong>repos</strong>, les <strong>tours</strong> et une <strong>préparation</strong> facultative — le minuteur
+		alterne les phases tout seul, joue un son à chaque changement et affiche le tour en cours.
+	</p>
+	<h2>Préréglages prêts à l'emploi</h2>
+	<ul>
+		<li><strong><a href="/fr/temporizador-tabata/">Tabata :</a></strong> 20 s d'effort + 10 s de repos, 8 tours.</li>
+		<li><strong><a href="/fr/temporizador-hiit/">HIIT :</a></strong> 40 s d'effort + 20 s de repos, 8 tours.</li>
+		<li><strong>Boxe :</strong> des rounds de 3 minutes avec 1 minute de repos.</li>
+		<li><strong>Entraînement :</strong> 45 s d'effort + 15 s de repos, 20 tours.</li>
+	</ul>
+	<h2>Calculez et définissez vos intervalles</h2>
+	<p>
+		Il est facile de <strong>calculer vos intervalles en ligne</strong> pour votre entraînement : choisissez combien de
+		secondes d'effort et de repos vous pouvez tenir, additionnez-les puis multipliez par les tours pour connaître la
+		durée totale. Pour <strong>définir des intervalles en ligne</strong> adaptés à votre emploi du temps, jouez sur
+		l'effort, le repos et le nombre de tours jusqu'à ce que le total corresponde au temps disponible — l'application
+		affiche le tour en cours et la phase en temps réel, fonctionnant aussi comme un <strong>chronomètre d'intervalles
+		en ligne</strong> pour mesurer chaque partie de la séance.
+	</p>
+	<h2>Conseils</h2>
+	<ul>
+		<li>Commencez par une <strong>préparation</strong> de 5 à 10 secondes pour vous placer avant le premier effort.</li>
+		<li>Utilisez le <strong>mode focus</strong> (plein écran) pour ne pas quitter l'exercice des yeux.</li>
+		<li>Gardez l'écran du téléphone <strong>allumé</strong> dans les paramètres pour qu'il ne s'éteigne pas en plein entraînement.</li>
+	</ul>
+	<h2>Des intervalles pour chaque entraînement</h2>
+	<p>
+		Peu importe où vous vous entraînez — salle, maison ou extérieur — un <strong>minuteur d'intervalles en ligne</strong>
+		respecte votre plan. Pour les séries de force, utilisez des repos de <strong>60 à 90 secondes</strong> ; pour le
+		cardio, des efforts de <strong>30 à 45 secondes</strong> avec des repos courts de <strong>15 et 20</strong>.
+		L'application affiche le temps de chaque phase en temps réel, alors vous <strong>définissez vos intervalles en
+		ligne</strong> sans chronométrer dans votre tête — il suffit de suivre le cadran et le son. Si l'objectif est de
+		mesurer des segments libres ou de comparer vos tours, il fonctionne aussi comme un <strong>chronomètre
+		d'intervalles en ligne</strong> : il démarre, stoppe, enregistre et répète autant de fois que nécessaire.
+	</p>
+	<h2>Visualisez la progression de chaque tour</h2>
+	<p>
+		En pratique, le cadran est déjà votre graphique : à chaque seconde, le compteur avance avec le tour en cours,
+		montrant si vous êtes en effort, en repos ou en préparation. C'est la façon la plus simple de <strong>suivre vos
+		intervalles en ligne</strong> pendant la séance — sans papier ni feuille de calcul. Et comme chaque changement de
+		phase émet une alerte sonore, vous n'avez même pas besoin de regarder l'écran pour savoir quand commencer et quand
+		vous arrêter.
+	</p>
+	<h2>Questions fréquentes</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

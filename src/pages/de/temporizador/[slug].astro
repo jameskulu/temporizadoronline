@@ -1,0 +1,95 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { faqJsonLd } from '../../../data/site';
+import { getMinutePages } from '../../../i18n/utils';
+
+interface Props {
+	minutes: number;
+	label: string;
+	slugLabel: string;
+	initial: string;
+}
+
+export function getStaticPaths() {
+	return getMinutePages('de').map((p) => {
+		const initial = JSON.stringify({ seconds: p.minutes * 60, mode: 'timer', label: p.label });
+		return {
+			params: { slug: p.slug },
+			props: { minutes: p.minutes, label: p.label, slugLabel: p.slug, initial },
+		};
+	});
+}
+
+const { minutes, label, slugLabel, initial } = Astro.props;
+
+const unitWord = minutes === 60 ? 'Stunde' : minutes === 1 ? 'Minute' : 'Minuten';
+const faqs = [
+	{
+		q: `Wofür ist der ${label} geeignet?`,
+		a: `Für alle Aufgaben, die etwa ${minutes} ${unitWord} dauern: Lernphasen, Pausen, Workouts, das Garen von Rezepten oder kurze Aktivitäten. Starten Sie jetzt, ganz ohne etwas einzustellen.`,
+	},
+	{
+		q: 'Kann ich auch andere Zeiten einstellen?',
+		a: 'Ja – die App erlaubt jede beliebige Dauer, von Sekunden bis 24 Stunden, zusätzlich zu allen fertigen Zeiten auf dieser Seite.',
+	},
+];
+---
+<ToolPage
+	title={`${label} – kostenloser Online-Timer`}
+	description={`${label} mit Alarmton, sekundengenauer Präzision und Fokus-Modus. Schnell, kostenlos und offline nutzbar – ganz ohne Download.`}
+	path={`/temporizador/${slugLabel}/`}
+	heading={label}
+	sub={`Ein Timer, der bereits auf ${minutes} ${unitWord} voreingestellt ist. Drücken Sie Start und konzentrieren Sie sich auf das Wesentliche.`}
+	initial={initial}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Dieser <strong>{label}</strong> startet bereits mit <strong>{minutes} {unitWord}</strong> vorkonfiguriert.
+		Klicken Sie auf Start oder drücken Sie die <kbd>Leertaste</kbd>. Ist die Zeit abgelaufen, ertönt ein Alarm,
+		der Bildschirm blinkt und Sie entscheiden, ob Sie die zusätzliche Zeit weiterzählen möchten.
+	</p>
+	<h2>So funktioniert der {label}</h2>
+	<ul>
+		<li><strong>Präzision:</strong> Zählung auf Basis der Systemuhr, zuverlässig auch beim Wechseln der Registerkarte.</li>
+		<li><strong>Alarm:</strong> Wählen Sie Ihren bevorzugten Klang und stellen Sie die Lautstärke in den Einstellungen ein.</li>
+		<li><strong>Fokus-Modus:</strong> Drücken Sie <kbd>F</kbd> für Vollbild mit großer Uhr.</li>
+		<li><strong>Fertiger Link:</strong> Teilen Sie den {label} per Link oder QR-Code.</li>
+	</ul>
+	<h2>Wofür Sie {minutes} {unitWord} nutzen können</h2>
+	<p>
+		Für kurze <a href="/de/temporizador-para-estudos/">Lernblöcke</a>, als Aufwärmphase im
+		<a href="/de/temporizador-para-exercicios/">Training</a>, als Zwischenschritt bei
+		<a href="/de/temporizador-para-cozinha/">Rezepten</a> oder als kurze
+		<a href="/de/temporizador-para-meditacao/">Meditationseinheit</a>.
+	</p>
+	<h2>Weitere fertige Zeiten</h2>
+	<p>
+		Dasselbe Zifferblatt, bereits für andere Dauern eingerichtet – wählen Sie Ihre Zeit und legen Sie los:
+	</p>
+	<div class="flex flex-wrap gap-2 mb-4">
+		{
+			getMinutePages('de').filter((p) => p.minutes !== minutes).map((m) => (
+				<a href={`/de/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} Min.</a>
+			))
+		}
+	</div>
+	<p>
+		Für komplette Zyklen mit automatischen Pausen nutzen Sie den <a href="/de/pomodoro/">Pomodoro</a>; um zu messen,
+		wie lange etwas dauert, die <a href="/de/cronometro/">Stoppuhr</a>; für Training mit Belastung und Erholung die
+		<a href="/de/intervalos/">Intervalle</a>, den <a href="/de/temporizador-hiit/">HIIT-Timer</a> oder
+		<a href="/de/temporizador-tabata/">Tabata</a>.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

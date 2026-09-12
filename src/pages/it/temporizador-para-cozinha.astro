@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Qual è il miglior timer per la cucina?',
+		a: 'Qualsiasi durata va bene: l\'importante è un avviso chiaro e poterlo lasciare a contare in secondo piano. Questo timer suona, vibra e può anche continuare a contare i minuti extra dopo lo zero.',
+	},
+	{
+		q: 'Si possono usare più timer in cucina?',
+		a: 'Sì. Con "Nuovo timer" crei timer separati per ogni pietanza contemporaneamente — utile quando riso, forno e tè terminano in momenti diversi.',
+	},
+];
+---
+<ToolPage
+	title="Timer per cucina — ricette al punto giusto"
+	description="Timer da cucina online: uovo, riso, forno e tè. Avviso sonoro, tempo extra e più timer contemporaneamente. Gratuito e funziona offline."
+	path="/temporizador-para-cozinha/"
+	heading="Timer per cucina"
+	sub="Fondamentale per il riso, essenziale per il forno e l'uovo. Senza stare incollati ai fornelli."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Cucina' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Cucinare è cronometrare: <strong>un minuto</strong> per il tè, <strong>5</strong> per le verdure, <strong>10</strong>
+		per la pasta, <strong>15</strong> per i piccoli arrosti. Imposta, lascia il telefono sul piano e ricevi l'avviso al
+		momento giusto. Spunta "Continua a contare dopo lo zero" per misurare anche il riposo dell'impasto.
+	</p>
+	<h2>Tempi più usati</h2>
+	<ul>
+		<li><strong><a href="/it/temporizador/1-minuto/">1 min</a></strong> — uovo alla coque, salsa sul fuoco, tè filtrato.</li>
+		<li><strong><a href="/it/temporizador/5-minutos/">5 min</a></strong> — riso bianco a cottura breve, verdure al vapore, caffè filtrato.</li>
+		<li><strong><a href="/it/temporizador/10-minutos/">10 min</a></strong> — pasta fresca, uovo alla mollette, legumi.</li>
+		<li><strong><a href="/it/temporizador/15-minutos/">15</a>–<a href="/it/temporizador/30-minutos/">30 min</a></strong> — arrosti, risotti e dessert in blocco.</li>
+	</ul>
+	<p>
+		Usa la <strong>modalità concentrazione</strong> (schermo intero) per vedere l'orologio grande; c'è anche il <a href="/it/cronometro/">cronometro</a>
+		per registrare il tempo delle tue ricette.
+	</p>
+	<h2>Domande frequenti</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

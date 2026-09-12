@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'キッチンに最適なタイマーは？',
+		a: 'どんな時間でも機能しますが、明確なアラームとバックグラウンドでの継続が重要です。このタイマーは音が鳴り、バイブレーションにも対応し、ゼロを過ぎても延長時間を数え続けられます。',
+	},
+	{
+		q: 'キッチンで複数のタイマーを使えますか？',
+		a: 'はい。「新しいタイマー」を使えば、ご飯、オーブン、お茶のように終了時間が異なる複数のタイマーを同時に作れます。',
+	},
+];
+---
+<ToolPage
+	title="料理タイマー — レシピをベストな状態で"
+	description="オンラインの料理タイマー：ゆで卵、ご飯、オーブン、お茶。音の合図、延長時間、複数タイマー対応。無料でオフライン動作。"
+	path="/temporizador-para-cozinha/"
+	heading="料理タイマー"
+	sub="ご飯には必需品、オーブンとゆで卵には欠かせません。コンロに張り付かなくてもOK。"
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: '料理' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		料理とは時間計測です：お茶に<strong>1分</strong>、野菜に<strong>5分</strong>、パスタに<strong>10分</strong>、
+		小さめの焼き料理に<strong>15分</strong>。時間を設定してスマホをカウンターに置き、合図を受け取りましょう。
+		「ゼロを超えて継続」にチェックを入れると、生地の休ませ時間も測れます。
+	</p>
+	<h2>よく使う時間</h2>
+	<ul>
+		<li><strong><a href="/ja/temporizador/1-minuto/">1分</a></strong>——スプーンで食べる卵、コンロのソース、茶こしのお茶。</li>
+		<li><strong><a href="/ja/temporizador/5-minutos/">5分</a></strong>——短粒の白米、蒸し野菜、ドリップコーヒー。</li>
+		<li><strong><a href="/ja/temporizador/10-minutos/">10分</a></strong>——生パスタ、半熟卵、豆類。</li>
+		<li><strong><a href="/ja/temporizador/15-minutos/">15分</a>〜<a href="/ja/temporizador/30-minutos/">30分</a></strong>——焼き料理、リゾット、デザートの固まり。</li>
+	</ul>
+	<p>
+		<strong>フォーカスモード</strong>（全画面）で大きな時計を見ながら、レシピの記録には<a href="/ja/cronometro/">ストップウォッチ</a>
+		もご利用いただけます。
+	</p>
+	<h2>よくある質問</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

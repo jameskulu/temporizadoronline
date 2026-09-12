@@ -1,0 +1,49 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'HIIT란 무엇인가요?',
+		a: 'HIIT(고강도 인터벌 트레이닝)는 최대 강도의 짧은 운동과 휴식을 번갈아 합니다. 흔한 예는 40초 운동 + 20초 휴식의 라운드 반복입니다.',
+	},
+	{
+		q: 'HIIT 세션은 얼마나 걸리나요?',
+		a: '40×20을 8라운드 하는 고전 세션은 준비를 빼고 약 8분입니다. 더 짧은 운동(타바타 스타일 4분)도 효과가 좋습니다.',
+	},
+];
+---
+<ToolPage
+	title="HIIT 타이머 — 당장 운동할 수 있는 40×20"
+	description="무료 HIIT 타이머: 40초 운동, 20초 휴식, 준비를 포함한 8라운드. 장비와 앱 없이 어디서든 운동하세요."
+	path="/temporizador-hiit/"
+	heading="HIIT 타이머"
+	sub="40초 최대 운동, 20초 호흡. 준비를 포함한 8라운드."
+	initial={JSON.stringify({ mode: 'interval', workSec: 40, restSec: 20, rounds: 8, prepareSec: 5, label: 'HIIT' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		이 HIIT 타이머는 <strong>40초 운동</strong>과 <strong>20초 휴식</strong>을 <strong>8라운드</strong>
+		반복하며, 첫 스프린트 전 5초 준비가 들어 있습니다. 단계가 바뀔 때마다 소리가 리듬을 안내합니다.
+	</p>
+	<h2>진행 방식</h2>
+	<ul>
+		<li><strong>운동</strong> 단계에서는 이번 라운드를 버틸 최대 강도로 하세요.</li>
+		<li><strong>휴식</strong> 단계에서는 걷거나 호흡을 되돌리세요.</li>
+		<li><strong>집중 모드</strong>(전체 화면)로 시간을 계속 보지 않아도 되게 하세요.</li>
+	</ul>
+	<p>
+		시간이 부족한가요? <a href="/ko/temporizador-tabata/">타바타</a>(4분)를 시도하거나 설정에서 라운드를
+		조절하세요.
+	</p>
+	<h2>자주 묻는 질문</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

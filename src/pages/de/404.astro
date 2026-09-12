@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+	title="Seite nicht gefunden – Online-Timer"
+	description="Diese Seite gibt es beim Online-Timer nicht. Nutzen Sie weiterhin den Timer, die Stoppuhr, Pomodoro oder die Intervalle."
+	path="/404/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			404
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			Seite nicht gefunden
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			Die eingegebene Adresse existiert nicht oder wurde verschoben. Wie wäre es, mit einem der
+			Werkzeuge unten zur Arbeit zurückzukehren?
+		</p>
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/de/" class="chip chip-link">Start</a>
+			<a href="/de/temporizador/" class="chip chip-link">Timer</a>
+			<a href="/de/cronometro/" class="chip chip-link">Stoppuhr</a>
+			<a href="/de/pomodoro/" class="chip chip-link">Pomodoro</a>
+			<a href="/de/intervalos/" class="chip chip-link">Intervalle</a>
+			<a href="/de/meditacao/" class="chip chip-link">Meditation</a>
+			<a href="/de/sequencias/" class="chip chip-link">Sequenzen</a>
+		</div>
+
+		<a
+			href="/de/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			Timer jetzt verwenden
+		</a>
+	</main>
+</Base>

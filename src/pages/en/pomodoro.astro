@@ -1,0 +1,96 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'What is the pomodoro method?',
+		a: 'The pomodoro method is a time management technique created by Francesco Cirillo: work in 25 minute focus blocks, take a 5 minute short break and, every 4 blocks, a 15 minute long break. The goal is to keep concentration on a single task and rest afterwards.',
+	},
+	{
+		q: 'How does the online pomodoro timer work?',
+		a: 'The online pomodoro above comes pre-configured with the classic pattern: 25 minutes of focus, 5 of short break and 15 of long break every 4 cycles. The app plays a sound at each phase change and advances the cycles on its own — you just focus.',
+	},
+	{
+		q: 'Is the online pomodoro free?',
+		a: 'Yes, 100% free and with no sign-up. Every feature is unlocked: adjustable times, sounds, vibration, fullscreen focus mode and cycle progress on the dial.',
+	},
+	{
+		q: 'Does the online pomodoro play a sound at every phase?',
+		a: 'Yes. You choose among 5 alarm sounds and can turn on phone vibration. At every phase change — end of focus, end of break, long break — the online pomodoro with sound alerts you on the spot.',
+	},
+	{
+		q: 'Can I change the pomodoro times?',
+		a: 'Yes: adjust the focus, short break, long break and the number of cycles in the settings. You can also let the phases advance on their own or skip them manually. Some prefer 50 minutes of focus for deep work.',
+	},
+	{
+		q: 'Does the online pomodoro work on mobile?',
+		a: 'It works in any browser, without installing anything. Save the shortcut on your home screen to open the pomodoro online timer like an app — it also keeps counting with your phone locked.',
+	},
+	{
+		q: 'What is the focus pomodoro for?',
+		a: 'The focus pomodoro online helps you study and work mindfully: knowing the block lasts 25 minutes lets your brain relax and commit to the task. It is used by students, programmers, writers and anyone who needs concentration.',
+	},
+	{
+		q: 'How many cycles should I do before the long break?',
+		a: 'The standard of the pomodoro technique is a 15 minute long break every 4 cycles. In the settings you can adjust it to 2, 3 or more cycles, depending on your pace and the size of your session.',
+	},
+];
+---
+<ToolPage
+	title="Free Online Pomodoro — Timer with Sound and Focus Mode"
+	description="Free online pomodoro: 25 minute timer with short and long breaks, sound at each phase and focus mode. The pomodoro technique in the browser, without installing."
+	path="/pomodoro/"
+	heading="Pomodoro Timer"
+	sub="25 minutes of focus, a short break and a long break — with sound alerts and cycle control."
+	initial={JSON.stringify({ mode: 'pomodoro' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		The pomodoro method is one of the most used techniques for <a href="/en/temporizador-para-estudos/">study</a> and
+		deep work. The timer above comes pre-configured in the classic pattern: <strong>25 minutes of focus</strong>,
+		<strong>short break</strong> and <strong>long break</strong>. Press Start and focus on a single task until the
+		alarm plays.
+	</p>
+	<h2>How to use the pomodoro timer</h2>
+	<ul>
+		<li><strong>Focus:</strong> work without interruptions until the end of the block (default <a href="/en/temporizador/25-minutos/">25 min</a>).</li>
+		<li><strong>Short break:</strong> <a href="/en/temporizador/5-minutos/">5 minutes</a> to stretch, drink water and rest your eyes.</li>
+		<li><strong>Long break:</strong> every 4 cycles, <a href="/en/temporizador/15-minutos/">15 minutes</a> of longer rest.</li>
+		<li><strong>Cycles:</strong> set how many blocks you want until a long break.</li>
+	</ul>
+	<h2>Why use an online pomodoro</h2>
+	<p>
+		A <strong>pomodoro online clock</strong> turns the pomodoro technique into something automatic: you do not need to
+		time it in your head, jot down schedules or remember when the break ends. This <strong>pomodoro online timer</strong>
+		handles the rhythm and still shows the cycle progress on the dial. It works like a <strong>pomodoro online
+		stopwatch</strong> in your pocket — on your computer, your phone or in fullscreen.
+	</p>
+	<p>
+		The <strong>pomodoro online technique</strong> pairs well with a study routine: focus block, short break, repeat.
+		When you finish a cycle of four, enjoy the long break and truly rest. If you prefer a simpler
+		<strong>pomodoro online timer</strong>, this site also has the plain countdown timer, the
+		<a href="/en/cronometro/">stopwatch</a> and the <a href="/en/temporizador/">5, 10 and 15 minute timers</a> — all on
+		a single page.
+	</p>
+	<h2>Pomodoro with sound and focus mode</h2>
+	<p>
+		The <strong>online pomodoro with sound</strong> alerts you at every phase change among 5 alarm styles, with
+		adjustable volume and phone vibration. To maximize concentration, turn on <strong>focus mode</strong> (fullscreen):
+		the clock gets big, the rest of the page disappears and nothing pulls your attention from the current block.
+	</p>
+	<h2>Frequently asked questions</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

@@ -2,6 +2,10 @@
 import Base from '../layouts/Base.astro';
 import TimerApp from '../components/TimerApp.astro';
 import ToolsGrid from '../components/ToolsGrid.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 interface Props {
 	title: string;
@@ -35,7 +39,7 @@ const { heading, sub, initial } = Astro.props;
 			<slot />
 		</section>
 
-		<h2 class="text-2xl font-semibold mt-12 mb-4">Mais ferramentas de tempo</h2>
+		<h2 class="text-2xl font-semibold mt-12 mb-4">{t.moreTools}</h2>
 		<ToolsGrid />
 	</article>
 </Base>

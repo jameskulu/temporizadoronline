@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '운동할 때 타이머는 어떻게 쓰나요?',
+		a: '세트 사이 휴식(30~90초)을 재고, 각 운동 시간을 조절하며, 전체 운동 시간을 재는 데 씁니다. 쉬는 동안 휴대폰 타이머를 보면 휴식이 늘어지지 않습니다.',
+	},
+	{
+		q: '운동 중 집중 모드란 무엇인가요?',
+		a: '집중 모드는 시계를 전체 화면으로 키우고 페이지의 나머지를 숨겨 시간을 크게 보여 줍니다. 방해 없이 세트를 지켜볼 때 좋습니다.',
+	},
+];
+---
+<ToolPage
+	title="운동용 타이머 — 세트와 휴식 시간"
+	description="세트와 휴식을 관리하는 운동 타이머: 30~90초 휴식, 인터벌, 전체 운동까지. 무료이며 오프라인에서도 작동합니다."
+	path="/temporizador-para-exercicios/"
+	heading="운동용 타이머"
+	sub="세트 사이 휴식을 컨트롤해 운동 감각을 식히지 마세요."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: '운동' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		좋은 운동의 비결은 종종 <strong>휴식</strong>에 있습니다. 너무 길면 늘어지고, 너무 짧으면 회복되지
+		않습니다. 30초 또는 60초 타이머는 모든 휴식이 같도록 보장합니다.
+	</p>
+	<h2>시간 제안</h2>
+	<ul>
+		<li><strong>가벼운 휴식(30초)</strong> — 지구력 및 유연성 세트.</li>
+		<li><strong>기본 휴식(60초)</strong> — 일반적인 근력 운동.</li>
+		<li><strong>긴 휴식(90초)</strong> — 무거운 중량과 복합 운동.</li>
+	</ul>
+	<p>
+		운동과 휴식을 자동으로 번갈아 하는 운동은 <a href="/ko/intervalos/">인터벌 타이머</a>에서
+		<a href="/ko/temporizador-hiit/">HIIT</a>와 <a href="/ko/temporizador-tabata/">타바타</a> 프리셋을
+		사용하세요.
+	</p>
+	<h2>자주 묻는 질문</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Wie nutze ich einen Timer beim Training?',
+		a: 'Verwenden Sie ihn, um die Pausen zwischen Sätzen zu messen (30 bis 90 Sekunden), die Dauer jeder Übung zu kontrollieren oder die komplette Einheit zu stoppen. In den Pausen hilft das Handy in der Hand, die Erholung nicht auszudehnen.',
+	},
+	{
+		q: 'Was ist der Fokus-Modus während des Trainings?',
+		a: 'Der Fokus-Modus bringt die Uhr ins Vollbild, blendet den Rest der Seite aus und zeigt die Zeit sehr groß – ideal, um die Serie ohne Ablenkung im Blick zu behalten.',
+	},
+];
+---
+<ToolPage
+	title="Timer für das Training – Sätze und Pausen"
+	description="Trainings-Timer zur Kontrolle von Sätzen und Pausen: Erholung von 30 bis 90 Sekunden, Intervalle und komplette Einheiten. Kostenlos und offline."
+	path="/temporizador-para-exercicios/"
+	heading="Timer für das Training"
+	sub="Kontrollieren Sie die Pausen zwischen den Sätzen und lassen Sie das Training nicht abkühlen."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Training' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Der Schlüssel zu gutem Training liegt oft in der <strong>Pause</strong>: Zu lang verzögert, zu kurz erholt
+		nicht. Ein Timer für 30 oder 60 Sekunden stellt sicher, dass jede Pause gleich lang ist.
+	</p>
+	<h2>Zeitvorschläge</h2>
+	<ul>
+		<li><strong>Leichte Erholung (30 s)</strong> – Ausdauer- und Mobilitätsserien.</li>
+		<li><strong>Standardpause (60 s)</strong> – klassisches Krafttraining.</li>
+		<li><strong>Längere Pause (90 s)</strong> – schwere Gewichte und Verbundübungen.</li>
+	</ul>
+	<p>
+		Für Training mit automatischem Wechsel von Belastung und Erholung nutzen Sie den
+		<a href="/de/intervalos/">Intervall-Timer</a> mit Presets für <a href="/de/temporizador-hiit/">HIIT</a> und
+		<a href="/de/temporizador-tabata/">Tabata</a>.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

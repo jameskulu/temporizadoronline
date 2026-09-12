@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '¿Cómo usar un timer en los ejercicios?',
+		a: 'Úsalo para medir el descanso entre series (de 30 a 90 segundos), controlar el tiempo de cada ejercicio o cronometrar todo el entrenamiento. Durante las pausas, tener el móvil a mano ayuda a no alargar el descanso.',
+	},
+	{
+		q: '¿Qué es el modo enfoque durante el entrenamiento?',
+		a: 'El modo enfoque lleva el reloj a pantalla completa, oculta el resto de la página y deja el tiempo bien grande — ideal para vigilar la serie sin distracción.',
+	},
+];
+---
+<ToolPage
+	title="Temporizador para ejercicios — series y descansos"
+	description="Timer de entrenamiento para controlar series y descansos: descanso de 30 a 90 segundos, intervalos y entrenamientos completos. Gratis y funciona sin conexión."
+	path="/temporizador-para-exercicios/"
+	heading="Temporizador para ejercicios"
+	sub="Controla el descanso entre series y no dejes que el entrenamiento se enfríe."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Ejercicios' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		El secreto de un buen entrenamiento está muchas veces en el <strong>descanso</strong>: una serie demasiado larga
+		retrasa y demasiado corta no recupera. Un timer de 30 o 60 segundos garantiza que cada pausa sea igual.
+	</p>
+	<h2>Sugerencias de tiempos</h2>
+	<ul>
+		<li><strong>Descanso ligero (30 s)</strong> — series de resistencia y movilidad.</li>
+		<li><strong>Descanso estándar (60 s)</strong> — musculación convencional.</li>
+		<li><strong>Descanso mayor (90 s)</strong> — cargas pesadas y ejercicios compuestos.</li>
+	</ul>
+	<p>
+		Para entrenamientos que alternan esfuerzo y descanso automáticamente, usa el <a href="/es/intervalos/">timer de
+		intervalos</a> con los presets de <a href="/es/temporizador-hiit/">HIIT</a> y <a
+		href="/es/temporizador-tabata/">tabata</a>.
+	</p>
+	<h2>Preguntas frecuentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

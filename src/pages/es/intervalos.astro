@@ -1,0 +1,99 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: '¿Qué es un contador de intervalos?',
+		a: 'Un contador de intervalos es un timer que alterna automáticamente entre fases de esfuerzo y descanso, repitiendo durante un número de rondas. Sirve para entrenamientos HIIT, tabata, rounds de lucha y cualquier actividad que necesite tiempos precisos.',
+	},
+	{
+		q: '¿Cómo armar un entrenamiento de intervalos?',
+		a: 'Define los segundos de esfuerzo (ej.: 30), los de descanso (ej.: 15) y cuántas rondas quieres hacer. El campo "preparación" hace una cuenta de calentamiento inicial antes de empezar. La app alterna las fases sola y avisa con sonido.',
+	},
+	{
+		q: '¿Cuál es la diferencia entre HIIT y tabata?',
+		a: 'Tabata es un formato de HIIT fijo: 20 segundos de esfuerzo máximo y 10 de descanso, en 8 rondas (4 minutos en total). El HIIT en general puede tener tiempos libres, como 40×20. Ambos están disponibles en los presets de la app.',
+	},
+	{
+		q: '¿Cómo calcular el tiempo total de mi entrenamiento por intervalos?',
+		a: 'Suma esfuerzo + descanso y multiplica por el número de rondas. Ejemplo: 8 rondas de 40×20 dan 8 minutos de entrenamiento. Ajusta esfuerzo, descanso y rondas en la configuración para determinar intervalos que quepan en tu tiempo.',
+	},
+	{
+		q: '¿Puedo ver el progreso de las rondas durante el entrenamiento?',
+		a: 'Sí. El marcador muestra la ronda actual y la fase (esfuerzo, descanso o preparación), actualizada cada segundo — una visualización simple que equivale a graficar los intervalos de tu entrenamiento. En cada cambio de fase suena un aviso.',
+	},
+	{
+		q: '¿Intervalos funciona como cronómetro de entrenamiento?',
+		a: 'Sí. Además de las fases alternadas, el timer registra cada ronda con precisión, funcionando como un cronómetro de intervalos online: sabes exactamente cuánto duró cada esfuerzo y cada descanso, sin anotar nada.',
+	},
+];
+---
+<ToolPage
+	title="Intervalos Online — Contador de Entrenamiento HIIT y Tabata"
+	description="Temporizador de intervalos online: esfuerzo, descanso y rondas con preparación y aviso sonoro. Calcula y determina tus intervalos de entrenamiento, HIIT y tabata gratis."
+	path="/intervalos/"
+	heading="Intervalos"
+	sub="Alterna esfuerzo y descanso automáticamente. Arma tu HIIT, tabata o entrenamiento de rounds."
+	initial={JSON.stringify({ mode: 'interval' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Los entrenamientos por intervalos funcionan con tiempos precisos. Configura <strong>esfuerzo</strong>,
+		<strong>descanso</strong>, <strong>rondas</strong> y una <strong>preparación</strong> opcional — el timer
+		alterna las fases solo, suena en cada cambio y muestra la ronda actual.
+	</p>
+	<h2>Presets listos</h2>
+	<ul>
+		<li><strong><a href="/es/temporizador-tabata/">Tabata:</a></strong> 20 s de esfuerzo + 10 s de descanso, 8 rondas.</li>
+		<li><strong><a href="/es/temporizador-hiit/">HIIT:</a></strong> 40 s de esfuerzo + 20 s de descanso, 8 rondas.</li>
+		<li><strong>Boxeo:</strong> rounds de 3 minutos con descanso de 1 minuto.</li>
+		<li><strong>Entrenamiento:</strong> 45 s de esfuerzo + 15 s de descanso, 20 rondas.</li>
+	</ul>
+	<h2>Calcula y determina tus intervalos</h2>
+	<p>
+		Es fácil <strong>calcular intervalos online</strong> para tu entrenamiento: elige cuántos segundos de esfuerzo y
+		de descanso puedes mantener, súmalos y multiplica por las rondas para saber la duración total. Para
+		<strong>determinar intervalos online</strong> que se ajusten a tu agenda, mueve el esfuerzo, el descanso y el
+		número de rondas hasta que el total coincida con el tiempo disponible — la app muestra la ronda actual y la fase
+		en tiempo real, funcionando también como un <strong>cronómetro de intervalos online</strong> para medir cada
+		parte del entrenamiento.
+	</p>
+	<h2>Consejos</h2>
+	<ul>
+		<li>Empieza con una <strong>preparación</strong> de 5 a 10 segundos para posicionarte antes del primer esfuerzo.</li>
+		<li>Usa el <strong>modo enfoque</strong> (pantalla completa) para no apartar la mirada durante la serie.</li>
+		<li>Deja el móvil con la <strong>pantalla encendida</strong> en la configuración para que no se apague a mitad del entrenamiento.</li>
+	</ul>
+	<h2>Intervalos para cada entrenamiento</h2>
+	<p>
+		No importa si entrenas en el gimnasio, en casa o en la calle: un <strong>contador de intervalos online</strong>
+		respeta tu plan. Para series de fuerza, usa descansos de <strong>60 a 90 segundos</strong>; para
+		acondicionamiento, esfuerzos de <strong>30 a 45 segundos</strong> con descansos cortos de <strong>15 y 20</strong>.
+		La app muestra el tiempo de cada fase en tiempo real, así que <strong>determinas intervalos online</strong> sin
+		cronometrar en tu cabeza — solo sigues el marcador y el sonido. Si el objetivo es medir tramos libres o comparar
+		rondas, también funciona como un <strong>cronómetro con intervalos online</strong>: empieza, para, registra y
+		repite las veces que necesites.
+	</p>
+	<h2>Visualiza el progreso de cada ronda</h2>
+	<p>
+		En la práctica, el marcador ya es tu gráfico: cada segundo, el reloj avanza junto con la ronda actual, mostrando
+		si estás en esfuerzo, descanso o preparación. Es la manera más simple de <strong>graficar intervalos online</strong>
+		durante el entrenamiento — sin papel y sin planilla. Y como cada cambio de fase emite un aviso sonoro, ni
+		siquiera necesitas mirar la pantalla para saber cuándo empezar y cuándo parar.
+	</p>
+	<h2>Preguntas frecuentes</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

@@ -1,0 +1,105 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Was ist eine Timer-Sequenz?',
+		a: 'Eine Sequenz ist eine Liste von Schritten mit eigenen Dauern, jeweils mit Name und Klang. Die App spielt bei jedem Schrittwechsel einen Hinweis und schreitet automatisch fort – ideal für geführte Trainings, Abläufe oder Aktivitäten in Blöcken.',
+	},
+	{
+		q: 'Wofür ist ein Sequenz-Timer gut?',
+		a: 'Für alles mit mehreren Teilen: Aufwärmen + Übung + Pause, Lernblöcke mit Pausen, Dehnroutine, geführte Meditationspraxis oder ein Rezept in Schritten. Jeder Schritt klingelt am Ende, und der nächste beginnt von selbst.',
+	},
+	{
+		q: 'Kann ich eine Sequenz speichern und wiederholen?',
+		a: 'Ja: Bearbeiten Sie die Schritte, passen Sie Namen, Zeiten und Klänge an und nutzen Sie den Button „Sequenz verwenden“. Solange die Seite auf Ihrem Gerät vorhanden ist, bleibt Ihre Sequenz gespeichert und beliebig oft wiederholbar.',
+	},
+	{
+		q: 'Kann ich den Klang jedes Schritts ändern?',
+		a: 'Ja. Jeder Schritt kann einen eigenen Klang aus den 5 verfügbaren Alarmstilen haben – oder gar keinen. So erkennen Sie am Ton, welcher Teil der Routine beendet ist, ohne auf den Bildschirm zu schauen.',
+	},
+	{
+		q: 'Helfen Sequenzen beim geführten Training?',
+		a: 'Auf jeden Fall. Bauen Sie ein geführtes Training in Schritten auf – 5 Minuten Aufwärmen, Übungsblöcke, Pause und Dehnen – und die App leitet die gesamte Routine und meldet jeden Wechsel. Das ist, als hätten Sie einen Zeit-Trainer auf dem Bildschirm.',
+	},
+	{
+		q: 'Wie baue ich eine Lernroutine in Blöcken auf?',
+		a: 'Erstellen Sie 25-minütige Lernschritte im Wechsel mit 5-minütigen Pausen und einer langen Pause von 15 Minuten. Die App meldet das Ende jedes Blocks und startet automatisch den nächsten – die Pomodoro-Methode als Sequenz.',
+	},
+];
+---
+<ToolPage
+	title="Timer-Sequenzen – Schritte und automatische Hinweise"
+	description="Bauen Sie Timer-Sequenzen mit eigenen Schritten, Namen und Klängen. Geführtes Training, Lernroutinen und Übungen in Blöcken mit automatischen Hinweisen."
+	path="/sequencias/"
+	heading="Sequenzen"
+	sub="Kombinieren Sie Schritte mit eigenen Dauern und Klängen. Die App schreitet automatisch voran und meldet jeden Wechsel."
+	initial={JSON.stringify({ mode: 'sequence' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Eine <strong>Timer-Sequenz</strong> ist perfekt, wenn eine Routine aus mehreren Teilen besteht: Aufwärmen +
+		Übung + Pause, Lernblöcke mit Pausen oder eine geführte Praxis. Tippen Sie auf
+		<strong>„Sequenz konfigurieren“</strong>, fügen Sie Schritte mit Name, Zeit und Klang hinzu, und die App
+		lautet bei jedem Wechsel.
+	</p>
+	<h2>Beispiele für Timer-Sequenzen</h2>
+	<ul>
+		<li><strong>Komplettes Training:</strong> Aufwärmen (5 Min.), 2 Übungsblöcke (3 Min.) und Entspannung.</li>
+		<li><strong>Fokus in Blöcken:</strong> Lernen (25 Min.), Pause (5 Min.), Lernen (25 Min.) und lange Pause (15 Min.).</li>
+		<li><strong>Geführte Atmung:</strong> einatmen, halten und ausatmen – in Sekundenschritten.</li>
+	</ul>
+	<h2>Sequenz-Timer für Routinen</h2>
+	<p>
+		Ein <strong>Sequenz-Timer</strong> verwandelt jede Routine in einen automatischen Ablauf mit
+		<strong>Timer-Schritten</strong> und <strong>Alarmen in Reihe</strong>: Jeder Schritt endet, sein Klang ertönt
+		und der nächste beginnt sofort – ganz ohne Tippen. Sie wünschen sich eine <a
+		href="/de/temporizador-para-meditacao/">geführte Meditation</a>, ein <a
+		href="/de/temporizador-para-exercicios/">Training in Blöcken</a> oder die
+		<a href="/de/temporizador-para-estudos/">Lernroutine</a> mit Pausen? Bauen Sie in wenigen Minuten
+		Beispiel-Sequenzen auf und wiederholen Sie sie nach Belieben. Für einfache Fokus-Pause-Zyklen reicht der
+		<a href="/de/pomodoro/">Pomodoro</a>; für mehrere Teile mit eigenen Hinweisen ist die Sequenz das richtige
+		Werkzeug.
+	</p>
+	<h2>So bauen Sie Ihre eigene</h2>
+	<ul>
+		<li>Öffnen Sie <strong>„Sequenz konfigurieren“</strong>.</li>
+		<li>Tippen Sie auf <strong>„Schritt hinzufügen“</strong> und geben Sie jedem Teil einen Namen, eine Zeit und einen Klang.</li>
+		<li>Sortieren Sie Schritte um oder entfernen Sie sie mit den Pfeilen und dem Papierkorb.</li>
+		<li>Tippen Sie auf <strong>„Sequenz verwenden“</strong> und starten Sie.</li>
+	</ul>
+	<h2>Tipps für gute Sequenzen</h2>
+	<p>
+		Fangen Sie klein an: Drei bis fünf Schritte lösen die meisten Routinen. Geben Sie jedem Teil <strong>klare
+		Namen</strong> („Aufwärmen“, „Satz 1“, „Pause“), um am Ton mitzukommen, und wählen Sie einen <strong>abweichenden
+		Sequenz-Alarm</strong> für die wichtigsten Schritte – so wissen Sie, was sich geändert hat, ohne hinzusehen.
+		Bei <strong>Timer-Routinen</strong> bevorzugen Sie ganze Zeiten (5, 10, 15 Minuten); bei kurzen Schritten
+		verwenden Sie Sekunden.
+	</p>
+	<h2>Sequenzen für Lernen, Training und Praxis</h2>
+	<p>
+		Dieser <strong>Sequenz-Timer</strong> glänzt in drei Situationen. Beim <a
+		href="/de/temporizador-para-estudos/">Lernen</a> macht der Aufbau aus 25-Minuten-Fokusblöcken mit 5-Minuten-Pausen
+		und einer 15-minütigen langen Pause aus der Sitzung einen kontinuierlichen Ablauf, ohne dass Sie an der Uhr
+		drehen. Beim <a href="/de/temporizador-para-exercicios/">Training</a> leitet eine geführte Sequenz mit Aufwärmen,
+		Übung und Dehnen die ganze Routine mit Hinweisen. In der geführten Praxis ist es das perfekte Format für die
+		<a href="/de/temporizador-para-meditacao/">Meditation</a> in Schritten. In allen Fällen halten die
+		<strong>Alarme in Reihe</strong> Sie im Rhythmus, während die App selbstständig voranschreitet – und das
+		gespeicherte Ergebnis lässt sich jederzeit wiederholen.
+	</p>
+	<h2>Häufig gestellte Fragen</h2>
+	{faqs.map((f) => (
+		<div class="faq-item">
+			<h3 class="faq-q">{f.q}</h3>
+			<p class="faq-a">{f.a}</p>
+		</div>
+	))}
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

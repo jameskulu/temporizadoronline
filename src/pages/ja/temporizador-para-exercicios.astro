@@ -1,0 +1,49 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'トレーニングでタイマーを使うには？',
+		a: 'セット間の休憩（30〜90秒）の計測、各エクササイズの時間管理、トレーニング全体の計時に使えます。休憩中にタイマーを持っておくと、休憩が長引くのを防げます。',
+	},
+	{
+		q: 'トレーニング中のフォーカスモードとは？',
+		a: 'フォーカスモードは時間を全画面表示にし、ページの他の部分を隠して数字を大きく見せる機能です。気が散らずにセットを見守るのに最適です。',
+	},
+];
+---
+<ToolPage
+	title="トレーニングタイマー — セットと休憩の管理"
+	description="セットと休憩を管理するトレーニング用タイマー：30〜90秒のダウンヒル、インターバル、フルトレーニング。無料でオフライン対応。"
+	path="/temporizador-para-exercicios/"
+	heading="トレーニングタイマー"
+	sub="セット間の休憩を管理し、トレーニングの熱を冷まさない。"
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'トレーニング' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		良いトレーニングの秘訣は、しばしば<strong>休憩</strong>にあります：長すぎるとペースが落ち、短すぎると回復できません。
+		30秒または60秒のタイマーがあれば、毎回同じ休憩を守れます。
+	</p>
+	<h2>時間の目安</h2>
+	<ul>
+		<li><strong>軽めの休憩（30秒）</strong>——持久力系やモビリティのセット向き。</li>
+		<li><strong>標準の休憩（60秒）</strong>——通常の筋トレ向き。</li>
+		<li><strong>長めの休憩（90秒）</strong>——高重量・複合種目向き。</li>
+	</ul>
+	<p>
+		努力と休憩を自動で交互に繰り返すトレーニングには、<a href="/ja/intervalos/">インターバルタイマー</a>と
+		<a href="/ja/temporizador-hiit/">HIIT</a>、<a href="/ja/temporizador-tabata/">タバタ</a>のプリセットを使いましょう。
+	</p>
+	<h2>よくある質問</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

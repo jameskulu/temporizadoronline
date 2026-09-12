@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+	title="Pagina non trovata — Timer Online"
+	description="Questa pagina non esiste su Timer Online. Continua a usare il timer, il cronometro, il pomodoro o gli intervalli."
+	path="/404/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			404
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			Pagina non trovata
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			L'indirizzo inserito non esiste o è stato spostato. Vuoi riprendere con uno degli
+			strumenti qui sotto?
+		</p>
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/it/" class="chip chip-link">Home</a>
+			<a href="/it/temporizador/" class="chip chip-link">Timer</a>
+			<a href="/it/cronometro/" class="chip chip-link">Cronometro</a>
+			<a href="/it/pomodoro/" class="chip chip-link">Pomodoro</a>
+			<a href="/it/intervalos/" class="chip chip-link">Intervalli</a>
+			<a href="/it/meditacao/" class="chip chip-link">Meditazione</a>
+			<a href="/it/sequencias/" class="chip chip-link">Sequenze</a>
+		</div>
+
+		<a
+			href="/it/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			Usa il timer ora
+		</a>
+	</main>
+</Base>

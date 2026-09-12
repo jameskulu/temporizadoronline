@@ -1,0 +1,240 @@
+---
+import Base from '../../layouts/Base.astro';
+import TimerApp from '../../components/TimerApp.astro';
+import ToolsGrid from '../../components/ToolsGrid.astro';
+import { SITE_NAME, SITE_TAGLINE, faqJsonLd, webAppJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'Was ist ein Online-Timer?',
+		a: 'Ein Online-Timer ist ein Countdown, der direkt im Browser läuft – ganz ohne Download oder Installation. Der Online-Timer funktioniert auch offline: Sie öffnen die Seite einmal und sie bleibt auch ohne Internet nützlich.',
+	},
+	{
+		q: 'Wie verwende ich den Online-Timer?',
+		a: 'Wählen Sie Minuten und Sekunden am Zifferblatt, drücken Sie auf Start und warten Sie auf den Alarmton. Zum Wechseln der Werkzeuge – Stoppuhr, Pomodoro, Intervalle, Meditation oder Sequenzen – tippen Sie einfach oben auf die jeweilige Registerkarte, ohne die Seite neu zu laden.',
+	},
+	{
+		q: 'Wie starte ich einen 10-, 5- oder 15-Minuten-Countdown?',
+		a: 'Es gibt fertige Versionen mit nur einem Klick: einen Online-Timer für 10 Minuten, einen für 5 Minuten und einen für 15 Minuten sowie Dauern von 1 bis 60 Minuten. Stellen Sie die Dauer am Zifferblatt ein oder nutzen Sie die Schnellstart-Verknüpfungen, um schneller zu beginnen.',
+	},
+	{
+		q: 'Kann ich den Online-Timer für Pomodoro nutzen?',
+		a: 'Ja. Der Pomodoro-Modus ist nach der klassischen Methode vorkonfiguriert: 25 Minuten Fokus, kurze Pause von 5 und lange Pause von 15 Minuten (alle 4 Zyklen). Die App spielt bei jedem Phasenwechsel einen Ton und schreitet automatisch durch die Zyklen.',
+	},
+	{
+		q: 'Kann ich mehrere Timer gleichzeitig verwenden?',
+		a: 'Ja. Tippen Sie auf „Neuer Timer“, um so viele hinzuzufügen, wie Sie brauchen – jeder mit eigener Konfiguration, eigener Zeit und eigenem Klang, erreichbar über die Registerkarten oben. Das nennen wir einen Online-Mehrfach-Timer.',
+	},
+	{
+		q: 'Läuft der Timer weiter, wenn ich die Registerkarte wechsle oder den Bildschirm sperre?',
+		a: 'Ja. Timer und Stoppuhr basieren auf der Systemuhr und nicht auf animierten Frames: Auch im Hintergrund oder bei gesperrtem Handy wird die Zeit bei der Rückkehr korrekt berechnet.',
+	},
+	{
+		q: 'Ist der Online-Timer wirklich kostenlos? Muss ich mich anmelden?',
+		a: 'Er ist zu 100 % kostenlos und ohne Anmeldung. Alle Funktionen – Countdown, Stoppuhr, Pomodoro, Intervalle, Meditation und Sequenzen – sind freigeschaltet und unbegrenzt nutzbar.',
+	},
+	{
+		q: 'Funktioniert der Online-Timer auf dem Handy?',
+		a: 'Er funktioniert in jedem Browser, auf dem Handy und am Computer. Er ist installierbar (PWA): Sie können ihn zum Startbildschirm hinzufügen und wie eine App öffnen – ganz ohne Installation über einen Store.',
+	},
+];
+---
+<Base
+	title="Online-Timer – Countdown, Pomodoro und Stoppuhr kostenlos"
+	description="Kostenloser Online-Timer: Countdown für 5, 10 und 15 Minuten, Pomodoro, Stoppuhr und Intervalle. Schön, schnell, funktioniert offline und ohne Anmeldung."
+	path="/"
+	jsonLd={[webAppJsonLd('de'), faqJsonLd(faqs)]}
+>
+	<div class="mx-auto max-w-5xl px-4 pt-10 pb-20">
+		<section class="text-center mb-8 hero-mesh">
+			<p class="eyebrow mb-3">Online-Timer</p>
+			<h1 class="text-4xl md:text-5xl font-semibold tracking-tight">{SITE_NAME}</h1>
+			<p class="mt-3 text-lg" style="color:var(--color-body)">
+				{SITE_TAGLINE}
+			</p>
+			<div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-[13px]" style="color:var(--color-body)">
+				<span class="chip">100 % kostenlos</span>
+				<span class="chip">Ohne Anmeldung</span>
+				<span class="chip">Funktioniert offline</span>
+				<span class="chip">Installierbar (PWA)</span>
+			</div>
+		</section>
+
+		<section class="app-card rounded-[16px] p-4 md:p-8 mb-14">
+			<TimerApp scope="full" />
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Werkzeuge</p>
+			<h2 class="text-2xl font-semibold mb-3">Online-Timer für alles, was Sie brauchen</h2>
+			<p class="lead">
+				Countdowns zum Lernen, fürs Training, für die Küche, für Besprechungen und die Meditation – alles auf
+				einer Seite, mit klarem und schnellem Design. Wählen Sie unten einen Timertyp aus oder stellen Sie Ihren
+				Eigenen gleich oben ein.
+			</p>
+			<p class="lead">
+				Sie brauchen einen bestimmten Zweck? Es gibt fertige Versionen fürs <a href="/de/temporizador-para-estudos/">Lernen</a>,
+				<a href="/de/temporizador-para-exercicios/">Training</a>, <a href="/de/temporizador-para-cozinha/">Kochen</a>,
+				<a href="/de/temporizador-para-meditacao/">Meditation</a>, <a href="/de/temporizador-hiit/">HIIT</a> und
+				<a href="/de/temporizador-tabata/">Tabata</a>.
+			</p>
+			<ToolsGrid />
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Was ist ein Online-Timer</h2>
+			<p>
+				Der <strong>Online-Timer</strong> ist ein <strong>Online-Countdown-Timer</strong>, der direkt im Browser
+				läuft: ein Countdown mit Alarmton, der von der Systemuhr gesteuert wird. Sie wählen die Dauer in Minuten
+				und Sekunden, drücken auf Start und die App erledigt den Rest – sie spielt einen Ton, vibriert und kann
+				nach dem Nullpunkt sogar die zusätzlichen Minuten weiterzählen. Da alles im Browser passiert, genügt
+				„Online-Timer“ bei Google oder ein gespeicherter Shortcut, um zu starten; es gibt weder Download noch
+				Anmeldung oder Installation.
+			</p>
+			<p>
+				Anders als eine gewöhnliche Uhr dient er als <strong>Online-Timer</strong> für Ihren Alltag: das Ei in der
+				Küche, die Pause im Training, die Prüfung, eine 15-minütige Besprechung oder der Wecker für die
+				Lernpause. Die Präzision stammt von der Systemuhr, also keine Verspätungen und kein Flackern des
+				Bildschirms – die Zeit bleibt auch beim Wechseln der Registerkarte oder bei gesperrtem Handy korrekt.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Countdown für jede Dauer</h2>
+			<p>
+				Der Standardmodus ist der <strong>Countdown-Online-Timer</strong>: Die Uhr beginnt beim gewählten Wert
+				und zählt bis Null herunter. Für den schnelleren Einstieg nutzen Sie die fertigen Verknüpfungen –
+				<a href="/de/temporizador/5-minutos/">5 Minuten</a>, <a href="/de/temporizador/10-minutos/">10 Minuten</a>,
+				<a href="/de/temporizador/15-minutos/">15 Minuten</a>, <a href="/de/temporizador/25-minutos/">25 Minuten</a>,
+				<a href="/de/temporizador/30-minutos/">30 Minuten</a> und <a href="/de/temporizador/60-minutos/">60 Minuten</a> –
+				oder stellen Sie das Zifferblatt auf jede beliebige Sekunde ein, von 1 Sekunde bis zu Stunden. Für kurze
+				Belastungen wie die <strong>40 Sekunden</strong> des Intervalltrainings ist der <a href="/de/temporizador-hiit/">HIIT-Timer</a>
+				bereits fertig eingerichtet.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Pomodoro, Stoppuhr und Intervalle an einem Ort</h2>
+			<p>
+				Dies ist ein vollwertiger <strong>Online-Pomodoro-Timer</strong>: Die Pomodoro-Methode organisiert Fokus
+				und Pausen in Zyklen, und diese App wechselt automatisch zwischen Fokus, kurzer Pause und langer Pause.
+				Sie funktioniert auch als <strong>Online-Stoppuhr</strong>: Wechseln Sie einfach die Registerkarte zur
+				Stoppuhr und messen Sie die Zeit jeder Aktivität mit Rundenmarkierung. Und fürs Training lassen die
+				<a href="/de/intervalos/">Intervalle</a> Belastung und Erholung selbstständig abwechseln, mit Presets für
+				<a href="/de/temporizador-tabata/">Tabata</a> und HIIT.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Ein schöner, einfacher Online-Timer</h2>
+			<p>
+				Wir wollten diesen <strong>Online-Timer schön</strong> und mit einem <strong>ästhetischen</strong> Look
+				gestalten: große Ziffern, eine elegante Schrift, automatischer Dunkelmodus und keine visuelle Unruhe –
+				nur die Uhr und das Wesentliche. Im <strong>Fokus-Modus</strong> (Vollbild) wird das Zifferblatt noch
+				größer, ideal zum Lernen, Meditieren oder zum ungestörten Verfolgen von Serien. Während andere Optionen
+				um Aufmerksamkeit buhlen, schauen Sie hier einfach auf die Zeit – und fertig.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Online-Mehrfach-Timer: mehrere Timer gleichzeitig</h2>
+			<p>
+				Sie müssen Reis, Ofen und Tee zur selben Zeit im Blick behalten? Mit <strong>„Neuer Timer“</strong>
+				wird diese Seite zu einem <strong>Online-Mehrfach-Timer</strong>: Jeder Timer hat seine eigene
+				Registerkarte, Konfiguration und seinen eigenen Klang, und alle laufen parallel. Perfekt für Küchen,
+				Klassenzimmer und jede Routine mit mehreren gleichzeitigen Countdowns.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Features, die den Unterschied machen</h2>
+			<ul class="list list-checks">
+				<li><strong>Präzise zwischen Registerkarten:</strong> Der Timer nutzt die Systemuhr – Sie verlieren keine Sekunden beim Tabwechsel oder gesperrten Bildschirm.</li>
+				<li><strong>Fokus-Modus:</strong> Vollbild mit großer Uhr, damit Sie nicht abgelenkt werden.</li>
+				<li><strong>Klänge und Vibration:</strong> Alarm in 5 Stilen, mit einstellbarer Lautstärke und Vibration auf dem Handy.</li>
+				<li><strong>Timer teilen:</strong> Senden Sie einen bereits konfigurierten Link oder einen QR-Code zum Öffnen auf dem Handy.</li>
+				<li><strong>Pomodoro:</strong> <a href="/de/pomodoro/">Fokus- und Pausen-Zyklen</a>, die selbstständig weiterschalten.</li>
+				<li><strong>Stoppuhr:</strong> <a href="/de/cronometro/">verstrichene Zeit messen und Runden markieren</a>.</li>
+				<li><strong>Intervalle und Training:</strong> <a href="/de/intervalos/">HIIT</a>, <a href="/de/temporizador-tabata/">Tabata</a> und <a href="/de/temporizador-hiit/">40×20</a> fertig.</li>
+				<li><strong>Tastaturkürzel:</strong> Leertaste startet/pausiert, R setzt zurück, F wechselt auf Vollbild, M schaltet stumm.</li>
+				<li><strong>Automatischer Dunkelmodus:</strong> passt sich dem Thema Ihres Systems an.</li>
+			</ul>
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Fragen</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Häufig gestellte Fragen</h2>
+			<div class="faq">
+				{faqs.map((f) => (
+					<div class="faq-item">
+						<h3 class="faq-q">{f.q}</h3>
+						<p class="faq-a">{f.a}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.app-card {
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.article h2 {
+		line-height: 1.25;
+	}
+	.lead {
+		font-size: 16px;
+		color: var(--color-body);
+		margin-bottom: 1rem;
+	}
+	.article p {
+		color: var(--color-body);
+		margin-bottom: 0.8rem;
+		line-height: 1.6;
+	}
+	.article a {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.article a:hover {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		list-style: none;
+		padding-left: 0;
+	}
+	.list-checks li {
+		position: relative;
+		padding-left: 28px;
+		color: var(--color-body);
+	}
+	.list-checks li strong {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+	.list-checks li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 5px;
+		width: 17px;
+		height: 15px;
+		border-radius: 4px;
+		background:
+			linear-gradient(135deg, transparent 55%, var(--color-link) 50%) -1px 5px no-repeat,
+			linear-gradient(45deg, transparent 45%, var(--color-link) 45%) 5px -2px no-repeat;
+		background-size: 9px 9px;
+		width: 18px;
+		height: 18px;
+	}
+	.faq {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+	.faq-item {
+		padding: 14px 16px;
+		border-radius: 12px;
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.faq-q {
+		font-size: 15px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+	.faq-a {
+		font-size: 14px;
+		color: var(--color-body);
+	}
+</style>

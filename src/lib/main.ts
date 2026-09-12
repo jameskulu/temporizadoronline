@@ -1,6 +1,9 @@
 /** Client bootstrap: reads the island root and creates the app. */
 import { App, applyHtmlTheme } from './app';
+import { setStrings } from './strings';
 import type { Initial } from './types';
+import { getLangFromPath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
 
 type Scope = 'full' | 'compact';
 
@@ -23,6 +26,9 @@ export function boot(): void {
 		}
 		const rawScope = root.getAttribute('data-scope');
 		if (rawScope === 'compact') scope = 'compact';
+
+		const lang = (root.getAttribute('data-lang') as Lang | null) ?? getLangFromPath(window.location.pathname);
+		setStrings(lang);
 
 		applyHtmlTheme();
 		new App(root, { initial, scope });

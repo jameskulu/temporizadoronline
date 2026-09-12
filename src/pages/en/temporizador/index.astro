@@ -1,0 +1,58 @@
+---
+import ToolPage from '../../../components/ToolPage.astro';
+import { getMinutePages } from '../../../i18n/utils';
+import { faqJsonLd } from '../../../data/site';
+
+const pages = getMinutePages('en');
+
+const faqs = [
+	{
+		q: 'How do I create a custom timer?',
+		a: 'Use the settings field on this page: hour, minute and second indicators for your timer — from a few seconds up to 24 hours.',
+	},
+	{
+		q: 'What happens when the time is up?',
+		a: 'An alarm plays (you choose among 5 sounds and the volume), the screen gives a signal, your phone vibrates and, if you want, the timer keeps counting the extra time.',
+	},
+];
+---
+<ToolPage
+	title="Online Timer — free countdown"
+	description="Online timer with countdown from 1 to 60 minutes or custom time. Accurate, free, works offline and without sign-up."
+	path="/temporizador/"
+	heading="Timer"
+	sub="A simple, accurate countdown. Set the time, start and relax: the alert arrives right on time."
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Use the timer above for any countdown: <strong>study, recipes, meetings, naps, workouts</strong> — anything that
+		needs a precise alarm. Pick a ready-made time below or configure your own.
+	</p>
+	<h2>Ready-made timers by duration</h2>
+	<div class="grid-cols flex flex-wrap gap-2 mb-8" style="margin-bottom:2rem">
+		{
+			pages.map((m) => (
+				<a href={`/en/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} minutes</a>
+			))
+		}
+	</div>
+	<h2>Usage tips</h2>
+	<ul>
+		<li><strong>Focus mode:</strong> press <kbd>F</kbd> to hide everything and only see the clock.</li>
+		<li><strong>Continue after zero:</strong> tick "Continue after zero" to also measure the extra time (handy in the kitchen).</li>
+		<li><strong>No lost time:</strong> the timer uses the system clock — it works even in the background.</li>
+	</ul>
+	<h2>Frequently asked questions</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+	.chip-link {
+		text-decoration: none;
+	}
+</style>

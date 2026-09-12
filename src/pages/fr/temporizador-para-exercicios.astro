@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: "Comment utiliser un minuteur pendant l'exercice ?",
+		a: "Utilisez-le pour mesurer le repos entre les séries (30 à 90 secondes), contrôler le temps de chaque exercice ou chronométrer toute la séance. Pendant les pauses, garder le téléphone en main aide à ne pas allonger le repos.",
+	},
+	{
+		q: "Qu'est-ce que le mode focus pendant l'entraînement ?",
+		a: "Le mode focus fait passer le minuteur en plein écran, masque le reste de la page et affiche un temps bien grand — idéal pour suivre la série sans distraction.",
+	},
+];
+---
+<ToolPage
+	title="Minuteur pour exercices — séries et repos"
+	description="Minuteur d'entraînement pour contrôler séries et repos : repos de 30 à 90 secondes, intervalles et séances complètes. Gratuit et fonctionne hors ligne."
+	path="/temporizador-para-exercicios/"
+	heading="Minuteur pour exercices"
+	sub="Contrôlez le repos entre les séries et ne laissez pas l'entraînement refroidir."
+	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Exercices' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Le secret d'une bonne séance tient souvent au <strong>repos</strong> : une pause trop longue retarde, trop courte
+		ne récupère pas. Un minuteur de 30 ou 60 secondes garantit que chaque pause est identique.
+	</p>
+	<h2>Suggestions de durées</h2>
+	<ul>
+		<li><strong>Repos léger (30 s)</strong> — séries d'endurance et de mobilité.</li>
+		<li><strong>Repos standard (60 s)</strong> — musculation classique.</li>
+		<li><strong>Repos plus long (90 s)</strong> — charges lourdes et mouvements composés.</li>
+	</ul>
+	<p>
+		Pour des séances qui alternent effort et repos automatiquement, utilisez le
+		<a href="/fr/intervalos/">minuteur d'intervalles</a> avec ses préréglages <a href="/fr/temporizador-hiit/">HIIT</a>
+		et <a href="/fr/temporizador-tabata/">tabata</a>.
+	</p>
+	<h2>Questions fréquentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

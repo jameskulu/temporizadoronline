@@ -1,0 +1,51 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: 'How do I meditate with a timer?',
+		a: 'Set 5 or 10 minutes, sit upright and comfortable, start and keep your attention on your breath. When the alarm plays, close the moment — without rushing to leave the position.',
+	},
+	{
+		q: 'Which alarm sound should I use for meditation?',
+		a: 'The "zen" sound was designed to be soft and not startle you at the end of the practice. The "chime" also works well: a single, calm ring.',
+	},
+];
+---
+<ToolPage
+	title="Meditation Timer — Focus Without Watching the Clock"
+	description="5/10/20 minute meditation timer with soft sounds. Meditate without watching the time or worrying about the hour."
+	path="/temporizador-para-meditacao/"
+	heading="Meditation Timer"
+	sub="Ten minutes of breathing, for free. The soft sound calls you at the right time."
+	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Meditation' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		The biggest enemy of meditation is looking at the clock. This timer solves it: <strong>pick 10 minutes</strong>,
+		press Start and watch your breath until the soft sound alerts you. At the end, stay seated for one more moment and
+		only then open your eyes.
+	</p>
+	<h2>Quick ritual</h2>
+	<ul>
+		<li>Sit with an elongated spine, hands resting.</li>
+		<li>Switch the sound to <strong>zen</strong> in the settings.</li>
+		<li>Start and focus on breathing in and out calmly.</li>
+		<li>When it rings, breathe three more times and close the session.</li>
+	</ul>
+	<p>
+		Want to meditate with guided steps? See <a href="/en/meditacao/">the meditation page</a> and the
+		<a href="/en/sequencias/">sequences</a>.
+	</p>
+	<h2>Frequently asked questions</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>

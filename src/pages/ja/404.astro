@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+	title="ページが見つかりません — オンラインタイマー"
+	description="このページはオンラインタイマーには存在しません。タイマー、ストップウォッチ、ポモドーロ、インターバルのいずれかを引き続きご利用いただけます。"
+	path="/404/"
+	robots="noindex, follow"
+>
+	<main class="mx-auto max-w-3xl px-4 pt-24 pb-24 md:pt-32">
+		<div
+			class="text-6xl font-bold tracking-tight md:text-7xl"
+			style="color: var(--color-accent)"
+		>
+			404
+		</div>
+		<h1 class="mt-4 text-2xl font-semibold tracking-tight" style="color: var(--color-ink)">
+			ページが見つかりません
+		</h1>
+		<p class="mt-3 max-w-lg leading-relaxed" style="color: var(--color-ink-muted)">
+			入力されたアドレスは存在しないか、移動した可能性があります。下のツールから、作業に戻ってみませんか？
+		</p>
+
+		<div class="mt-8 flex flex-wrap gap-2">
+			<a href="/ja/" class="chip chip-link">ホーム</a>
+			<a href="/ja/temporizador/" class="chip chip-link">タイマー</a>
+			<a href="/ja/cronometro/" class="chip chip-link">ストップウォッチ</a>
+			<a href="/ja/pomodoro/" class="chip chip-link">ポモドーロ</a>
+			<a href="/ja/intervalos/" class="chip chip-link">インターバル</a>
+			<a href="/ja/meditacao/" class="chip chip-link">瞑想</a>
+			<a href="/ja/sequencias/" class="chip chip-link">シーケンス</a>
+		</div>
+
+		<a
+			href="/ja/temporizador/"
+			class="mt-10 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold no-underline transition-transform active:scale-[0.98]"
+			style="background: var(--color-accent); color: var(--color-inverse)"
+		>
+			今すぐタイマーを使う
+		</a>
+	</main>
+</Base>

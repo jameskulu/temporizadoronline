@@ -1,0 +1,242 @@
+---
+import Base from '../../layouts/Base.astro';
+import TimerApp from '../../components/TimerApp.astro';
+import ToolsGrid from '../../components/ToolsGrid.astro';
+import { SITE_NAME, faqJsonLd, webAppJsonLd } from '../../data/site';
+
+const tagline = 'Compte à rebours, chronomètre, pomodoro et intervalles sans rien installer.';
+
+const faqs = [
+	{
+		q: "Qu'est-ce qu'un minuteur en ligne ?",
+		a: "Un minuteur en ligne est un compte à rebours qui tourne directement dans le navigateur, sans rien télécharger ni installer. Le Temporizador Online fonctionne aussi hors ligne : ouvrez la page une fois et elle reste utile même sans internet.",
+	},
+	{
+		q: 'Comment utiliser le minuteur en ligne ?',
+		a: "Choisissez les minutes et secondes sur le cadran, appuyez sur Démarrer et attendez que l'alarme sonne. Pour changer d'outil — chronomètre, pomodoro, intervalles, méditation ou séquences — touchez simplement l'onglet en haut du cadran, sans recharger la page.",
+	},
+	{
+		q: 'Comment faire un compte à rebours de 10, 5 ou 15 minutes ?',
+		a: "Il existe des versions prêtes en un clic : minuteur en ligne de 10 minutes, de 5 minutes et de 15 minutes, ainsi que des durées de 1 à 60 minutes. Ajustez la durée sur le cadran ou utilisez les raccourcis de durée pour démarrer plus vite.",
+	},
+	{
+		q: 'Puis-je utiliser le minuteur en ligne pour le pomodoro ?',
+		a: "Oui. Le mode pomodoro est configuré selon la méthode classique : 25 minutes de concentration, pause courte de 5 minutes et pause longue de 15 (tous les 4 cycles). L'application joue un son à chaque changement de phase et fait progresser les cycles toute seule.",
+	},
+	{
+		q: 'Peut-on utiliser plusieurs minuteurs en même temps ?',
+		a: "Oui. Touchez « Nouveau minuteur » pour en ajouter autant que nécessaire — chacun avec sa propre configuration, son temps et son son, en passant d'un onglet à l'autre en haut. C'est ce que nous appelons le multi minuteur en ligne.",
+	},
+	{
+		q: "Le minuteur continue-t-il de tourner si je change d'onglet ou verrouille l'écran ?",
+		a: "Oui. Le minuteur et le chronomètre s'appuient sur l'horloge du système, pas sur des images animées : même en arrière-plan ou avec le téléphone verrouillé, le temps est calculé correctement quand vous revenez.",
+	},
+	{
+		q: 'Le minuteur en ligne est-il gratuit ? Faut-il créer un compte ?',
+		a: "Il est 100 % gratuit et sans inscription. Toutes les fonctions — compte à rebours, chronomètre, pomodoro, intervalles, méditation et séquences — sont disponibles sans limite d'utilisation.",
+	},
+	{
+		q: 'Le minuteur en ligne fonctionne-t-il sur mobile ?',
+		a: "Il fonctionne dans tous les navigateurs, sur téléphone comme sur ordinateur. Il est installable (PWA) : vous pouvez l'ajouter à l'écran d'accueil et l'ouvrir comme une application, toujours sans rien installer depuis une boutique.",
+	},
+];
+---
+<Base
+	title="Minuteur en ligne — compte à rebours, pomodoro et chronomètre gratuits"
+	description="Minuteur en ligne gratuit : compte à rebours de 5, 10 et 15 minutes, pomodoro, chronomètre et intervalles. Joli, rapide, fonctionne hors ligne et sans inscription."
+	path="/"
+	jsonLd={[webAppJsonLd('fr'), faqJsonLd(faqs)]}
+>
+	<div class="mx-auto max-w-5xl px-4 pt-10 pb-20">
+		<section class="text-center mb-8 hero-mesh">
+			<p class="eyebrow mb-3">Minuteur en ligne</p>
+			<h1 class="text-4xl md:text-5xl font-semibold tracking-tight">{SITE_NAME}</h1>
+			<p class="mt-3 text-lg" style="color:var(--color-body)">
+				{tagline}
+			</p>
+			<div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-[13px]" style="color:var(--color-body)">
+				<span class="chip">100 % gratuit</span>
+				<span class="chip">Sans inscription</span>
+				<span class="chip">Fonctionne hors ligne</span>
+				<span class="chip">Installable (PWA)</span>
+			</div>
+		</section>
+
+		<section class="app-card rounded-[16px] p-4 md:p-8 mb-14">
+			<TimerApp scope="full" />
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Outils</p>
+			<h2 class="text-2xl font-semibold mb-3">Un minuteur en ligne pour tout ce qu'il vous faut</h2>
+			<p class="lead">
+				Des comptes à rebours pour les études, les exercices, la cuisine, les réunions et la méditation — tout en
+				une seule page, avec un design propre et rapide. Choisissez un type de minuteur ci-dessous ou configurez le
+				vôtre juste au-dessus.
+			</p>
+			<p class="lead">
+				Besoin d'un usage précis ? Des versions prêtes à l'emploi existent pour les
+				<a href="/fr/temporizador-para-estudos/">études</a>, les <a href="/fr/temporizador-para-exercicios/">exercices</a>,
+				la <a href="/fr/temporizador-para-cozinha/">cuisine</a>, la <a href="/fr/temporizador-para-meditacao/">méditation</a>,
+				le <a href="/fr/temporizador-hiit/">HIIT</a> et le <a href="/fr/temporizador-tabata/">tabata</a>.
+			</p>
+			<ToolsGrid />
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Qu'est-ce que le minuteur en ligne</h2>
+			<p>
+				Le <strong>minuteur en ligne</strong> est un <strong>compte à rebours</strong> qui tourne directement dans
+				le navigateur : un compte à rebours avec alarme sonore, maintenu par l'horloge du système. Vous choisissez
+				la durée en minutes et en secondes, appuyez sur Démarrer et l'application fait le reste — elle sonne, vibre
+				et peut continuer de compter les minutes supplémentaires après zéro. Comme tout se passe dans le
+				navigateur, il suffit de taper « minuteur en ligne » sur un moteur de recherche ou d'ouvrir le raccourci
+				enregistré pour commencer ; pas de téléchargement, d'inscription ni d'installation.
+			</p>
+			<p>
+				Contrairement à une horloge ordinaire, il sert de <strong>minuteur en ligne pour votre quotidien</strong> :
+				l'œuf dans la cuisine, le repos à l'entraînement, une épreuve de concours, une réunion de 15 minutes ou
+				l'alarme de la pause d'étude. La précision vient de l'horloge du système, donc ni retard ni scintillement
+				d'écran — le temps reste exact même en changeant d'onglet ou en verrouillant le téléphone.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Un compte à rebours pour toutes les durées</h2>
+			<p>
+				Le mode par défaut est le <strong>compte à rebours en ligne</strong> : l'horloge démarre à la valeur choisie
+				et descend jusqu'à zéro. Pour aller plus vite, utilisez les raccourcis prêts à l'emploi — <a
+				href="/fr/temporizador/5-minutos/">5 minutes</a>, <a href="/fr/temporizador/10-minutos/">10 minutes</a>, <a
+				href="/fr/temporizador/15-minutos/">15 minutes</a>, <a href="/fr/temporizador/25-minutos/">25 minutes</a>, <a
+				href="/fr/temporizador/30-minutos/">30 minutes</a> et <a href="/fr/temporizador/60-minutos/">60 minutes</a> —
+				ou réglez le cadran sur n'importe quelle durée, d'1 seconde à plusieurs heures. Pour les efforts courts,
+				comme les <strong>40 secondes</strong> de l'entraînement fractionné, le <a href="/fr/temporizador-hiit/">HIIT</a>
+				est déjà prêt.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Pomodoro, chronomètre et intervalles au même endroit</h2>
+			<p>
+				Voici un <strong>minuteur pomodoro en ligne</strong> complet : la méthode pomodoro organise concentration et
+				pauses en cycles, et cette application passe automatiquement de la concentration à la pause courte puis à
+				la pause longue. Elle fait aussi office de <strong>chronomètre en ligne</strong> : changez simplement
+				d'onglet pour le chronomètre et mesurez le temps de n'importe quelle activité, avec marquage des tours. Et
+				pour l'entraînement, les <a href="/fr/intervalos/">intervalles</a> alternent effort et repos tout seuls,
+				avec des préréglages de <a href="/fr/temporizador-tabata/">tabata</a> et de HIIT.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Un minuteur en ligne beau et simple</h2>
+			<p>
+				Nous avons voulu un <strong>minuteur en ligne</strong> au design <strong>épuré</strong> : chiffres bien
+				visibles, typographie élégante, mode sombre automatique et aucune pollution visuelle — rien que le cadran
+				et l'essentiel. En <strong>mode focus</strong> (plein écran), l'affichage s'agrandit encore, idéal pour
+				étudier, méditer ou suivre des séries sans distraction. Là où d'autres options se disputent votre
+				attention, ici vous regardez le temps, c'est tout.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Multi minuteur en ligne : plusieurs minuteurs à la fois</h2>
+			<p>
+				Besoin de surveiller le riz, le four et le thé en même temps ? La fonction
+				<strong>« Nouveau minuteur »</strong> transforme cette page en <strong>multi minuteur en ligne</strong> :
+				chaque minuteur a son onglet, sa configuration et son son, et tous tournent en parallèle. C'est parfait
+				pour les cuisines, les salles de classe et toute routine qui a besoin de plusieurs décomptes à la fois.
+			</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Des fonctions qui font la différence</h2>
+			<ul class="list list-checks">
+				<li><strong>Précis d'un onglet à l'autre :</strong> le minuteur utilise l'horloge du système — vous ne perdez pas de secondes en changeant d'onglet ou en verrouillant l'écran.</li>
+				<li><strong>Mode focus :</strong> plein écran avec un grand cadran pour ne pas vous distraire.</li>
+				<li><strong>Sons et vibrations :</strong> alarme en 5 styles, volume réglable et vibrations sur mobile.</li>
+				<li><strong>Partagez votre minuteur :</strong> envoyez un lien déjà configuré ou un QR code à ouvrir sur votre téléphone.</li>
+				<li><strong>Pomodoro :</strong> des <a href="/fr/pomodoro/">cycles de concentration et de pause</a> qui avancent tout seuls.</li>
+				<li><strong>Chronomètre :</strong> <a href="/fr/cronometro/">comptez le temps qui passe et marquez des tours</a>.</li>
+				<li><strong>Intervalles et entraînement :</strong> <a href="/fr/intervalos/">HIIT</a>, <a href="/fr/temporizador-tabata/">tabata</a> et <a href="/fr/temporizador-hiit/">40×20</a> prêts à l'emploi.</li>
+				<li><strong>Raccourcis clavier :</strong> Espace pour démarrer/mettre en pause, R pour réinitialiser, F pour le plein écran, M pour couper le son.</li>
+				<li><strong>Mode sombre automatique :</strong> suit le thème de votre système.</li>
+			</ul>
+		</section>
+
+		<section class="article">
+			<p class="eyebrow mb-3">Questions</p>
+			<h2 class="text-2xl font-semibold mt-12 mb-3">Questions fréquentes</h2>
+			<div class="faq">
+				{faqs.map((f) => (
+					<div class="faq-item">
+						<h3 class="faq-q">{f.q}</h3>
+						<p class="faq-a">{f.a}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.app-card {
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.article h2 {
+		line-height: 1.25;
+	}
+	.lead {
+		font-size: 16px;
+		color: var(--color-body);
+		margin-bottom: 1rem;
+	}
+	.article p {
+		color: var(--color-body);
+		margin-bottom: 0.8rem;
+		line-height: 1.6;
+	}
+	.article a {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.article a:hover {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		list-style: none;
+		padding-left: 0;
+	}
+	.list-checks li {
+		position: relative;
+		padding-left: 28px;
+		color: var(--color-body);
+	}
+	.list-checks li strong {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+	.list-checks li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 5px;
+		width: 17px;
+		height: 15px;
+		border-radius: 4px;
+		background:
+			linear-gradient(135deg, transparent 55%, var(--color-link) 50%) -1px 5px no-repeat,
+			linear-gradient(45deg, transparent 45%, var(--color-link) 45%) 5px -2px no-repeat;
+		background-size: 9px 9px;
+		width: 18px;
+		height: 18px;
+	}
+	.faq {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+	.faq-item {
+		padding: 14px 16px;
+		border-radius: 12px;
+		background: var(--color-canvas-elevated);
+		border: 1px solid var(--color-hairline);
+		box-shadow: var(--shadow-whisper);
+	}
+	.faq-q {
+		font-size: 15px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+	.faq-a {
+		font-size: 14px;
+		color: var(--color-body);
+	}
+</style>

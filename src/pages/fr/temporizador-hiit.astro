@@ -1,0 +1,50 @@
+---
+import ToolPage from '../../components/ToolPage.astro';
+import { faqJsonLd } from '../../data/site';
+
+const faqs = [
+	{
+		q: "Qu'est-ce que le HIIT ?",
+		a: "Le HIIT (entraînement fractionné de haute intensité) alterne de courtes rafales d'effort maximal avec du repos. Exemple courant : 40 secondes d'effort et 20 de repos, répétées par tours.",
+	},
+	{
+		q: 'Combien de temps dure une séance de HIIT ?',
+		a: "Une séance classique de 8 tours de 40×20 dure environ 8 minutes, sans compter la préparation. Des séances plus courtes (4 minutes, façon tabata) donnent aussi d'excellents résultats.",
+	},
+];
+---
+<ToolPage
+	title="Minuteur HIIT — 40×20 prêt à vous entraîner"
+	description="Minuteur HIIT gratuit : 40 secondes d'effort, 20 de repos, 8 tours avec échauffement. Entraînez-vous n'importe où, sans matériel et sans application."
+	path="/temporizador-hiit/"
+	heading="Minuteur HIIT"
+	sub="Effort maximal pendant 40 secondes, soufflez pendant 20. Huit tours avec échauffement inclus."
+	initial={JSON.stringify({ mode: 'interval', workSec: 40, restSec: 20, rounds: 8, prepareSec: 5, label: 'HIIT' })}
+	jsonLd={faqJsonLd(faqs)}
+>
+	<p class="article-lead">
+		Ce minuteur HIIT alterne <strong>40 secondes d'effort</strong> et <strong>20 de repos</strong> sur
+		<strong>8 tours</strong>, avec 5 secondes de préparation avant le premier sprint. Le rythme est guidé par le son à
+		chaque changement de phase.
+	</p>
+	<h2>Comment suivre</h2>
+	<ul>
+		<li>En phase d'<strong>effort</strong>, donnez le maximum que vous pouvez tenir sur le tour.</li>
+		<li>En phase de <strong>repos</strong>, marchez ou reprenez votre respiration.</li>
+		<li>Utilisez le <strong>mode focus</strong> (plein écran) pour ne pas regarder l'heure tout le temps.</li>
+	</ul>
+	<p>
+		Vous avez moins de temps ? Essayez le <a href="/fr/temporizador-tabata/">tabata</a> (4 minutes) ou ajustez les
+		tours dans les paramètres.
+	</p>
+	<h2>Questions fréquentes</h2>
+	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
+	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+</ToolPage>
+
+<style>
+	.article-lead {
+		font-size: 16px;
+		margin-bottom: 1rem;
+	}
+</style>
