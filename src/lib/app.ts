@@ -14,12 +14,10 @@ import {
 	savePrefs,
 	loadCustomPresets,
 	saveCustomPresets,
-	loadSession,
 	saveSession,
 	getTheme,
 	setTheme,
 } from './storage';
-import type { SessionState } from './storage';
 import { STR, MODE_NAMES, SOUND_NAMES, DISPLAY_NAMES, THEME_NAMES } from './strings';
 import { QUICK_PRESETS, CATEGORIES } from './presets';
 import type { LaunchPreset } from './presets';
@@ -53,8 +51,6 @@ interface Card {
 }
 
 type Scope = 'full' | 'compact';
-
-const SESSION_MARKER = '__session__';
 
 /** Dedicated page for each mode, used when the mode segment changes "page" behavior. */
 const MODE_PATHS: Partial<Record<Mode, string>> = {
@@ -148,7 +144,6 @@ export class App {
 
 	private resolveInitial(pageInitial?: Initial): Initial {
 		const params = new URLSearchParams(location.search);
-		const hasParams = [...params.keys()].length > 0;
 		const merged: Initial = {};
 		if (pageInitial) Object.assign(merged, pageInitial);
 
@@ -188,14 +183,6 @@ export class App {
 			}
 		}
 
-		if (!hasParams && !pageInitial) {
-			const s = loadSession();
-			if (s) {
-				const marker = {} as Initial;
-				(marker as unknown as Record<string, unknown>)[SESSION_MARKER] = s;
-				return marker;
-			}
-		}
 		return merged;
 	}
 
@@ -218,36 +205,6 @@ export class App {
 	}
 
 	private createCard(initial?: Initial): void {
-		const session = (initial as unknown as Record<string, unknown>)[SESSION_MARKER] as SessionState | undefined;
-		if (session) {
-			const cfg = configFromInitial({ mode: session.config.mode });
-			Object.assign(cfg, session.config);
-			const eng = new TimerEngine(cfg);
-			if (session.state === 'running' || session.state === 'paused') {
-				const ph = eng.machine.initial(cfg);
-				if (session.round && ph.totalRounds) ph.round = session.round;
-				if (session.stepIndex >= 0) ph.stepIndex = session.stepIndex;
-				const wasRunning = session.state === 'running';
-				const elapsedPhase = ph.isElapsed;
-				const saved = Math.max(0, session.remainingSec);
-				if (wasRunning) {
-					// The snapshot may be stale (saved at last start/pause event), so
-					// recompute what's actually left on the wall clock since then.
-					const wallDelta = (Date.now() - session.savedAt) / 1000;
-					const remaining = elapsedPhase
-						? Math.floor(saved + wallDelta)
-						: Math.max(0, Math.ceil(saved - wallDelta));
-					if (elapsedPhase) ph.elapsedBase = remaining;
-					eng.restore(ph, 'paused', remaining);
-					eng.start();
-				} else {
-					if (elapsedPhase) ph.elapsedBase = saved;
-					eng.restore(ph, 'paused', saved);
-				}
-			}
-			this.addCard(eng, this.labelFor(cfg));
-			return;
-		}
 		const cfg = configFromInitial(initial ?? {});
 		const eng = new TimerEngine(cfg);
 		eng.autoAdvance = this.prefs.autoAdvance;
@@ -499,9 +456,9 @@ export class App {
 		const isElapsedFamily = eng.config.mode === 'stopwatch';
 
 		const primary = (label: string, icon: string, act: string): string =>
-			`<button type="button" class="btn-primary min-w-[11rem]" data-act="${act}">${icon}${label}</button>`;
-		const chip = (act: string, label: string, icon = '', extra = ''): string =>
-			`<button type="button" class="btn-chip" data-act="${act}" ${extra}>${icon}${label}</button>`;
+			`<button type="button" class="btn-primary" data-act="${act}">${icon}${label}</button>`;
+		const square = (act: string, label: string, icon: string): string =>
+			`<button type="button" class="icon-btn" data-act="${act}" title="${label}" aria-label="${label}">${icon}</button>`;
 
 		let main: string;
 		if (st === 'running') main = primary(STR.pause, I.pause, 'toggle');
@@ -511,14 +468,19 @@ export class App {
 
 		const parts = [main];
 		if (isElapsedFamily) {
-			parts.push(chip('lap', STR.lap, I.flag));
+			parts.push(square('lap', STR.lap, I.flag));
 		} else {
-			parts.push(chip('add', '1 min', I.plus));
-			parts.push(chip('sub', '1 min', I.minus));
+			parts.push(
+				`<span class="t-stepper" role="group" aria-label="±1 min">
+					<button type="button" class="t-step" data-act="sub" title="${esc(STR.subMinute)}" aria-label="${esc(STR.subMinute)}">${I.minus}</button>
+					<span class="t-step-label" aria-hidden="true">1 min</span>
+					<button type="button" class="t-step" data-act="add" title="${esc(STR.addMinute)}" aria-label="${esc(STR.addMinute)}">${I.plus}</button>
+				</span>`,
+			);
 		}
-		if (canAdvance) parts.push(chip('skip', STR.skip, I.skip));
-		parts.push(chip('reset', STR.reset, I.reset));
-		parts.push(chip('fs', STR.fullscreen, I.expand));
+		if (canAdvance) parts.push(square('skip', STR.skip, I.skip));
+		parts.push(square('reset', STR.reset, I.reset));
+		parts.push(square('fs', STR.fullscreen, I.expand));
 
 		el.innerHTML = parts.join('');
 	}
@@ -667,7 +629,7 @@ export class App {
 		];
 
 		el.innerHTML = `<div class="config-wrap">
-			<button type="button" class="btn-chip ml-auto" data-act="cfg-toggle" aria-expanded="${open}">${I.gear}<span>${STR.configButton}</span></button>
+			<button type="button" class="icon-btn ml-auto" data-act="cfg-toggle" aria-expanded="${open}" aria-label="${esc(STR.configButton)}" title="${esc(STR.configButton)}">${I.gear}</button>
 			<div class="config-panel rounded-[18px] p-4 mt-2 flex flex-col gap-3" id="config-panel" ${open ? '' : 'hidden'}>
 				${rows.join('')}
 			</div>
@@ -743,7 +705,7 @@ export class App {
 		const theme = this.prefs.theme;
 		const isDark = document.documentElement.classList.contains('dark');
 		el.innerHTML = `<div class="flex items-center justify-between gap-2">
-			<a href="/" class="text-sm font-semibold no-underline" style="color:var(--color-ink)">${esc(STR.appName)}</a>
+			<a href="/" class="text-[13px] font-medium no-underline" style="color:var(--color-body)">${esc(STR.appName)}</a>
 			<div class="flex items-center gap-1">
 				<button type="button" class="icon-btn" data-act="live" aria-label="${STR.live}" title="${STR.live}" aria-pressed="${this.live ? 'true' : 'false'}" ${this.live ? 'style="color:var(--color-accent)"' : ''}>${I.live}</button>
 				<button type="button" class="icon-btn" data-act="help" aria-label="${STR.help}" title="${STR.keyboardHint}">${I.help}</button>
