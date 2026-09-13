@@ -268,6 +268,8 @@ export class TimerEngine {
 		} else {
 			ph.remainingSec = Math.max(0, Math.round(ph.remainingSec) + deltaSec);
 		}
+		// Keep the total in sync so progress stays relative to the adjusted time.
+		ph.durationSec = Math.max(0, ph.durationSec + deltaSec);
 		this.emit({ type: 'tick', totalSec: this.totalSec() });
 	}
 

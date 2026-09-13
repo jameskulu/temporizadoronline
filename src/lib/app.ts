@@ -96,6 +96,8 @@ export class App {
 	private display: Display;
 	private configOpen = false;
 	private raf = 0;
+	private frameW = 0;
+	private frameH = 0;
 	private recentKeys: string[] = [];
 	private customPresets: PresetItem[] = [];
 	private sessionTimer = 0;
@@ -379,12 +381,18 @@ export class App {
 		const ph = card.engine.phase;
 		if (ph.isElapsed) return null;
 		if (ph.durationSec <= 0) return 0;
-		return clamp(ph.remainingSec / ph.durationSec, 0, 1);
+		// Remaining is derived from anchorTs while running (tick() only emits),
+		// so read it continuously to get a real-time fraction.
+		const remaining = ph.anchorTs
+			? ph.remainingSec - (performance.now() - ph.anchorTs) / 1000
+			: ph.remainingSec;
+		return clamp(remaining / ph.durationSec, 0, 1);
 	}
 
 	private renderDisplay(): void {
 		const card = this.card();
 		if (!card) return;
+		this.renderFrame();
 		const viewer = this.isLiveViewer();
 		if (viewer) {
 			const v = this.liveView();
@@ -405,6 +413,53 @@ export class App {
 			running: card.engine.state === 'running',
 			initial: card.engine.state === 'idle',
 		});
+	}
+
+	/** Fullscreen presentation: a square frame around the timer that drains
+	 * with elapsed time (remaining fraction shown as border). */
+	private renderFrame(): void {
+		const hero = byId('t-hero');
+		const svg = byId('t-frame') as SVGSVGElement | null;
+		if (!hero || !svg) return;
+		if (!fs.isPresenting()) {
+			svg.classList.remove('t-frame-on');
+			return;
+		}
+		svg.classList.add('t-frame-on');
+
+		const pad = 6;
+		const rx = 16;
+		const sw = 4;
+		const track = svg.querySelector<SVGRectElement>('rect.t-frame-track');
+		const fill = svg.querySelector<SVGRectElement>('rect.t-frame-fill');
+		if (!track || !fill) return;
+
+		const w = hero.clientWidth;
+		const h = hero.clientHeight;
+		const x = pad + sw / 2;
+		const y = pad + sw / 2;
+		const cw = Math.max(0, w - pad * 2 - sw);
+		const ch = Math.max(0, h - pad * 2 - sw);
+
+		if (w !== this.frameW || h !== this.frameH) {
+			this.frameW = w;
+			this.frameH = h;
+			svg.setAttribute('width', String(w));
+			svg.setAttribute('height', String(h));
+			for (const r of [track, fill]) {
+				r.setAttribute('x', String(x));
+				r.setAttribute('y', String(y));
+				r.setAttribute('width', String(cw));
+				r.setAttribute('height', String(ch));
+			}
+			const perimeter = 2 * (cw + ch) - 8 * rx + 2 * Math.PI * rx;
+			track.setAttribute('stroke-dasharray', String(Math.round(perimeter)));
+			fill.setAttribute('stroke-dasharray', String(Math.round(perimeter)));
+		}
+
+		const frac = clamp(this.fraction() ?? 1, 0, 1);
+		const perimeter = 2 * (cw + ch) - 8 * rx + 2 * Math.PI * rx;
+		fill.setAttribute('stroke-dashoffset', String(perimeter * (1 - frac)));
 	}
 
 	private renderPhase(): void {
@@ -757,6 +812,8 @@ export class App {
 					this.renderDisplay();
 					this.renderPhase();
 					this.renderTabTitles();
+				} else {
+					this.renderFrame();
 				}
 				if (running > 0) this.raf = requestAnimationFrame(loop);
 			};
@@ -1091,6 +1148,7 @@ case 'mode': {
 				break;
 			case 'fs':
 				void fs.toggle();
+				this.renderFrame();
 				break;
 			case 'mute':
 				this.prefs.muted = !this.prefs.muted;
@@ -1952,6 +2010,10 @@ case 'theme': {
 			<div id="t-chrome"></div>
 			<div id="t-tabs"></div>
 			<div class="flex flex-col items-center gap-2" id="t-hero">
+				<svg id="t-frame" class="t-frame" aria-hidden="true">
+					<rect class="t-frame-track" rx="16"/>
+					<rect class="t-frame-fill" rx="16"/>
+				</svg>
 				<div id="t-phase" class="min-h-[1.6rem] flex items-center gap-2 flex-wrap justify-center"></div>
 				<div id="t-display" class="w-full flex justify-center"></div>
 				<div id="t-controls" class="flex flex-wrap items-center justify-center gap-3"></div>
@@ -2083,6 +2145,7 @@ case 'theme': {
 			this.addTimeActive(-60);
 		} else if (k === 'f') {
 			void fs.toggle();
+			this.renderFrame();
 		} else if (k === 'm') {
 			this.prefs.muted = !this.prefs.muted;
 			sound.setMuted(this.prefs.muted);

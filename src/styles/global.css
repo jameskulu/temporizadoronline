@@ -668,16 +668,45 @@ body.t-present .site-content {
 }
 body.t-present .t-hero,
 body.t-present #t-hero {
-	padding-top: 2vh;
+	padding: clamp(32px, 5vh, 56px) clamp(32px, 6vw, 72px);
+	min-height: min(48vh, 500px);
+	justify-content: center;
 }
 body.t-present .card-app {
-	max-width: min(92vw, 760px);
+	max-width: min(96vw, 920px);
 }
 body.t-present #t-app {
 	background: var(--color-canvas);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+/* Square countdown frame — visible in fullscreen, drains with the timer */
+#t-hero {
+	position: relative;
+}
+.t-frame {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+.t-frame-on {
+	opacity: 1;
+}
+.t-frame-track {
+	fill: none;
+	stroke: var(--color-hairline);
+	stroke-width: 4;
+}
+.t-frame-fill {
+	fill: none;
+	stroke: var(--color-accent);
+	stroke-width: 4;
+	stroke-linecap: round;
 }
 
 dialog {
