@@ -259,6 +259,60 @@ body {
 		white-space: nowrap;
 	}
 
+	/* Fast, viewport-clamped tooltips — rendered on <body> by src/lib/ui/tip.ts
+	   from `data-tip` attributes (replaces slow native title tooltips). */
+	.tip {
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 100;
+		max-width: min(260px, calc(100vw - 16px));
+		padding: 6px 10px;
+		border-radius: var(--radius-sm);
+		background-color: #111;
+		color: #fff;
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 1.4;
+		text-align: center;
+		white-space: normal;
+		box-shadow: var(--shadow-floating);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition:
+			opacity 70ms ease,
+			transform 70ms ease,
+			visibility 0s linear 100ms;
+	}
+	.tip-start {
+		transform: translateY(-3px);
+	}
+	.tip-visible {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+		transition:
+			opacity 70ms ease,
+			transform 70ms ease,
+			visibility 0s;
+	}
+	.tip-arrow {
+		position: absolute;
+		left: 50%;
+		width: 0;
+		height: 0;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+	}
+	.tip-arrow {
+		border-bottom: 5px solid #111;
+	}
+	.tip-above .tip-arrow {
+		border-bottom: none;
+		border-top: 5px solid #111;
+	}
+
 	/* Segmented control — toolbar for mode switching */
 	.seg {
 		@apply inline-flex items-center rounded-full;

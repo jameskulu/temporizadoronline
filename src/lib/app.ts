@@ -447,7 +447,7 @@ export class App {
 		const card = this.card();
 		if (!card) return;
 		if (this.isLiveViewer()) {
-			el.innerHTML = `<span class="chip chip-inactive" title="${esc(STR.liveRoleViewer)}">${I.live}<span class="flex-1">${esc(STR.liveRoleViewer)}</span></span>`;
+			el.innerHTML = `<span class="chip chip-inactive" data-tip="${esc(STR.liveRoleViewer)}">${I.live}<span class="flex-1">${esc(STR.liveRoleViewer)}</span></span>`;
 			return;
 		}
 		const eng = card.engine;
@@ -458,7 +458,7 @@ export class App {
 		const primary = (label: string, icon: string, act: string): string =>
 			`<button type="button" class="btn-primary" data-act="${act}">${icon}${label}</button>`;
 		const square = (act: string, label: string, icon: string): string =>
-			`<button type="button" class="icon-btn" data-act="${act}" title="${label}" aria-label="${label}">${icon}</button>`;
+			`<button type="button" class="icon-btn" data-act="${act}" data-tip="${label}" aria-label="${label}">${icon}</button>`;
 
 		let main: string;
 		if (st === 'running') main = primary(STR.pause, I.pause, 'toggle');
@@ -472,9 +472,9 @@ export class App {
 		} else {
 			parts.push(
 				`<span class="t-stepper" role="group" aria-label="±1 min">
-					<button type="button" class="t-step" data-act="sub" title="${esc(STR.subMinute)}" aria-label="${esc(STR.subMinute)}">${I.minus}</button>
+					<button type="button" class="t-step" data-act="sub" data-tip="${esc(STR.subMinute)}" aria-label="${esc(STR.subMinute)}">${I.minus}</button>
 					<span class="t-step-label" aria-hidden="true">1 min</span>
-					<button type="button" class="t-step" data-act="add" title="${esc(STR.addMinute)}" aria-label="${esc(STR.addMinute)}">${I.plus}</button>
+					<button type="button" class="t-step" data-act="add" data-tip="${esc(STR.addMinute)}" aria-label="${esc(STR.addMinute)}">${I.plus}</button>
 				</span>`,
 			);
 		}
@@ -606,7 +606,7 @@ export class App {
 		}
 
 		const flag = (key: string, label: string, checked: boolean, tip: string): string =>
-			`<label class="flex items-center gap-2 text-sm" title="${tip}">
+			`<label class="flex items-center gap-2 text-sm" data-tip="${tip}">
 				<input type="checkbox" class="accent-[var(--color-accent)]" data-flag="${key}" ${checked ? 'checked' : ''}/>
 				<span>${label}</span>
 			</label>`;
@@ -629,7 +629,7 @@ export class App {
 		];
 
 		el.innerHTML = `<div class="config-wrap">
-			<button type="button" class="icon-btn ml-auto" data-act="cfg-toggle" aria-expanded="${open}" aria-label="${esc(STR.configButton)}" title="${esc(STR.configButton)}">${I.gear}</button>
+			<button type="button" class="icon-btn ml-auto" data-act="cfg-toggle" aria-expanded="${open}" aria-label="${esc(STR.configButton)}" data-tip="${esc(STR.configButton)}">${I.gear}</button>
 			<div class="config-panel rounded-[18px] p-4 mt-2 flex flex-col gap-3" id="config-panel" ${open ? '' : 'hidden'}>
 				${rows.join('')}
 			</div>
@@ -690,7 +690,7 @@ export class App {
 					<div class="flex flex-wrap gap-2">${cat.items
 						.map(
 							(it, i) =>
-								`<button type="button" class="cat-btn" data-act="cat" data-c="${esc(cat.name)}" data-i="${i}" title="${esc(it.hint ?? '')}">${esc(it.label)}</button>`,
+								`<button type="button" class="cat-btn" data-act="cat" data-c="${esc(cat.name)}" data-i="${i}"${it.hint ? ` data-tip="${esc(it.hint)}"` : ''}>${esc(it.label)}</button>`,
 						)
 						.join('')}</div>
 				</section>`,
@@ -707,10 +707,10 @@ export class App {
 		el.innerHTML = `<div class="flex items-center justify-between gap-2">
 			<a href="/" class="text-[13px] font-medium no-underline" style="color:var(--color-body)">${esc(STR.appName)}</a>
 			<div class="flex items-center gap-1">
-				<button type="button" class="icon-btn" data-act="live" aria-label="${STR.live}" title="${STR.live}" aria-pressed="${this.live ? 'true' : 'false'}" ${this.live ? 'style="color:var(--color-accent)"' : ''}>${I.live}</button>
-				<button type="button" class="icon-btn" data-act="help" aria-label="${STR.help}" title="${STR.keyboardHint}">${I.help}</button>
-				<button type="button" class="icon-btn" data-act="mute" aria-label="${muted ? STR.unmute : STR.mute}">${muted ? I.muted : I.volume}</button>
-				<button type="button" class="icon-btn" data-act="theme" aria-label="Mudar tema" title="${STR.themeSetting}: ${THEME_NAMES[theme]}">${isDark ? I.sun : I.moon}</button>
+				<button type="button" class="icon-btn" data-act="live" aria-label="${STR.live}" data-tip="${esc(STR.live)}" aria-pressed="${this.live ? 'true' : 'false'}" ${this.live ? 'style="color:var(--color-accent)"' : ''}>${I.live}</button>
+				<button type="button" class="icon-btn" data-act="help" aria-label="${STR.help}" data-tip="${esc(STR.help)}">${I.help}</button>
+				<button type="button" class="icon-btn" data-act="mute" aria-label="${muted ? STR.unmute : STR.mute}" data-tip="${esc(muted ? STR.unmute : STR.mute)}">${muted ? I.muted : I.volume}</button>
+				<button type="button" class="icon-btn" data-act="theme" aria-label="Mudar tema" data-tip="${esc(`${STR.themeSetting}: ${THEME_NAMES[theme]}`)}">${isDark ? I.sun : I.moon}</button>
 			</div>
 		</div>`;
 	}

@@ -1,4 +1,4 @@
-﻿---
+---
 import { SITE_NAME } from '../data/site';
 import { getLangFromUrl, useTranslations, localPath } from '../i18n/utils';
 
@@ -11,7 +11,7 @@ const footer = t.footer;
 <footer class="site-footer">
 	<div class="mx-auto max-w-page px-4 py-8 border-t" style="border-color:var(--color-hairline)">
 		<div class="flex flex-col md:flex-row items-center justify-between gap-3 text-[13px]" style="color:var(--color-body)">
-			<p>Â© {year} {SITE_NAME} â€” {footer.tagline}</p>
+			<p>© {year} {SITE_NAME} — {footer.tagline}</p>
 			<nav class="flex flex-wrap items-center justify-center gap-4">
 				<a href={localPath(lang, '/temporizador/')} class="f-link">{nav.temporizador}</a>
 				<a href={localPath(lang, '/pomodoro/')} class="f-link">{nav.pomodoro}</a>

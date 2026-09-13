@@ -1,5 +1,6 @@
 /** Client bootstrap: reads the island root and creates the app. */
 import { App, applyHtmlTheme } from './app';
+import { initTip } from './ui/tip';
 import { setStrings } from './strings';
 import type { Initial } from './types';
 import { getLangFromPath } from '../i18n/utils';
@@ -31,6 +32,7 @@ export function boot(): void {
 		setStrings(lang);
 
 		applyHtmlTheme();
+		initTip();
 		new App(root, { initial, scope });
 		registerServiceWorker();
 	});
