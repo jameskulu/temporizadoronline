@@ -75,7 +75,7 @@ export const MINUTE_PAGES: Array<{ minutes: number; slug: string; label: string 
 ];
 
 export const TOOL_LINKS: Array<{ path: string; label: string; hint: string }> = [
-	{ path: '/temporizador/', label: 'Temporizador', hint: 'Contagem regressiva simples' },
+	{ path: '/', label: 'Temporizador', hint: 'Contagem regressiva simples' },
 	{ path: '/cronometro/', label: 'Cronômetro', hint: 'Conta o tempo com voltas' },
 	{ path: '/pomodoro/', label: 'Pomodoro', hint: 'Foco com pausas' },
 	{ path: '/intervalos/', label: 'Intervalos', hint: 'HIIT, tabata e treino' },

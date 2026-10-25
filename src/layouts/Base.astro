@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_NAME, canonical } from '../data/site';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { LANGS, langTags, ogLocales, defaultLang } from '../i18n/ui';
 import type { Lang } from '../i18n/ui';
 import '../styles/global.css';
@@ -14,16 +14,22 @@ interface Props {
 	path: string;
 	ogImage?: string;
 	robots?: string;
+	hreflang?: boolean;
 	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const { title, description, path, jsonLd } = Astro.props;
 const lang: Lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const url = canonical(path, lang);
 const robots = Astro.props.robots ?? 'index, follow';
+const hreflang = Astro.props.hreflang ?? true;
 const noindex = robots === 'noindex, follow' || robots === 'noindex';
 const ogImage = Astro.props.ogImage ?? '/icons/icon-512.png';
 const imageUrl = ogImage.startsWith('http') ? ogImage : canonical(ogImage);
+const isRedirectedTimerPage = path === '/temporizador/';
+const alternateLangs = isRedirectedTimerPage ? LANGS.filter((l) => l !== 'pt') : LANGS;
+const alternatePath = isRedirectedTimerPage ? '/' : path;
 ---
 <!doctype html>
 <html lang={langTags[lang]}>
@@ -42,12 +48,12 @@ const imageUrl = ogImage.startsWith('http') ? ogImage : canonical(ogImage);
 			rel="stylesheet"
 		/>
 		{
-			!noindex && (
+			!noindex && hreflang && (
 				<>
-					{LANGS.map((l) => (
-						<link rel="alternate" hreflang={langTags[l]} href={canonical(path, l)} />
+					{alternateLangs.map((l) => (
+						<link rel="alternate" hreflang={langTags[l]} href={canonical(alternatePath, l)} />
 					))}
-					<link rel="alternate" hreflang="x-default" href={canonical(path, defaultLang)} />
+					<link rel="alternate" hreflang="x-default" href={canonical(alternatePath, defaultLang)} />
 				</>
 			)
 		}
@@ -90,8 +96,9 @@ const imageUrl = ogImage.startsWith('http') ? ogImage : canonical(ogImage);
 		</script>
 	</head>
 	<body>
+		<a class="skip-link" href="#main-content">{t.skipLink}</a>
 		<Header />
-		<main class="min-h-[70vh]">
+		<main id="main-content" class="min-h-[70vh]">
 			<slot />
 		</main>
 		<Footer />

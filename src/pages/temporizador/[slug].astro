@@ -1,10 +1,9 @@
 ---
 import ToolPage from '../../components/ToolPage.astro';
-import { MINUTE_PAGES, faqJsonLd } from '../../data/site';
+import { MINUTE_PAGES } from '../../data/site';
 
 interface Props {
 	minutes: number;
-	label: string;
 	slugLabel: string;
 	initial: string;
 }
@@ -14,72 +13,65 @@ export function getStaticPaths() {
 		const initial = JSON.stringify({ seconds: p.minutes * 60, mode: 'timer', label: p.label });
 		return {
 			params: { slug: p.slug },
-			props: { minutes: p.minutes, label: p.label, slugLabel: p.slug, initial },
+			props: { minutes: p.minutes, slugLabel: p.slug, initial },
 		};
 	});
 }
 
-const { minutes, label, slugLabel, initial } = Astro.props;
-
-const hourWord = minutes === 60 ? 'hora' : 'minutos';
-const faqs = [
-	{
-		q: `${label} serve para quê?`,
-		a: `Para qualquer tarefa que dure cerca de ${minutes} ${hourWord}: foco de estudos, pausa, preparo físico, cozimento de receitas ou uma atividade curta. Comece agora, sem configurar nada.`,
-	},
-	{
-		q: 'Posso usar outros tempos?',
-		a: 'Sim — o app permite configurar qualquer duração, de segundos até 24 horas, além de todos os tempos prontos desta página.',
-	},
-];
+const { minutes, slugLabel, initial } = Astro.props;
+const duration = minutes === 60 ? '1 hora' : `${minutes} ${minutes === 1 ? 'minuto' : 'minutos'}`;
+const displayDuration = minutes === 60 ? '1 Hora' : `${minutes} ${minutes === 1 ? 'Minuto' : 'Minutos'}`;
+const title = `Temporizador de ${displayDuration} com Alarme | Grátis`;
+const description = `Temporizador de ${duration} com alarme sonoro. Inicie quando quiser, pause, reinicie, teste o som ou use a tela cheia.`;
+const examples: Record<number, string> = {
+	1: 'Use um minuto para marcar uma pausa curta ou acompanhar uma tarefa rápida.',
+	3: 'Use três minutos para cronometrar uma tarefa breve ou uma pausa entre atividades.',
+	5: 'Use cinco minutos para uma pausa curta, preparar uma bebida ou marcar uma tarefa rápida.',
+	10: 'Use dez minutos para uma pausa, uma revisão breve ou uma tarefa com horário definido.',
+	15: 'Use quinze minutos para revisar anotações, fazer uma pausa ou acompanhar uma atividade curta.',
+	20: 'Use vinte minutos para reservar um bloco de trabalho ou acompanhar uma tarefa sem pressa.',
+	25: 'Use vinte e cinco minutos para uma sessão individual de foco; para ciclos automáticos, abra o Pomodoro.',
+	30: 'Use trinta minutos para organizar uma sessão de trabalho, uma reunião ou uma tarefa doméstica.',
+	45: 'Use quarenta e cinco minutos para reservar um bloco de trabalho ou estudo.',
+	60: 'Use uma hora para acompanhar uma sessão longa ou dividir uma atividade em blocos menores.',
+};
 ---
 <ToolPage
-	title={`${label} — temporizador online grátis`}
-	description={`${label} com alarme sonoro, precisão de segundos e modo foco. Rápido, gratuito e funciona offline — sem precisar baixar nada.`}
+	title={title}
+	description={description}
 	path={`/temporizador/${slugLabel}/`}
-	heading={label}
-	sub={`Um timer já preparado para ${minutes} ${hourWord}. Aperte iniciar e concentre-se no que importa.`}
+	heading={title.replace(' | Grátis', '')}
+	sub={`Contagem regressiva configurada para ${duration}. Ela só começa quando você toca em Iniciar.`}
 	initial={initial}
-	jsonLd={faqJsonLd(faqs)}
 >
 	<p class="article-lead">
-		Este <strong>{label.toLowerCase()}</strong> começa já configurado para <strong>{minutes} {hourWord}</strong>.
-		Clique em Iniciar ou pressione <kbd>Espaço</kbd>. Quando acabar, toca um alarme, a tela pisca e você decide se
-		quer continuar contando o tempo extra.
+		O mostrador já está ajustado para <strong>{duration}</strong>, mas permanece parado até você iniciar. Não é
+		necessário configurar o tempo novamente.
 	</p>
-	<h2>Como funciona o timer de {minutes} minutos</h2>
+	<h2>Como usar</h2>
 	<ul>
-		<li><strong>Precisão:</strong> contagem baseada no relógio do sistema, confiável mesmo trocando de aba.</li>
-		<li><strong>Alarme:</strong> escolha o som preferido e ajuste o volume nas configurações.</li>
-		<li><strong>Modo foco:</strong> pressione <kbd>F</kbd> para tela cheia com o relógio grande.</li>
-		<li><strong>Link pronto:</strong> compartilhe este {label.toLowerCase()} com um link ou QR code.</li>
+		<li>Toque em <strong>Iniciar</strong> para começar a contagem.</li>
+		<li>Use <strong>Pausar</strong> e <strong>Retomar</strong> para interromper e continuar.</li>
+		<li>Toque em <strong>Reiniciar</strong> para voltar ao tempo inicial.</li>
+		<li>Use o botão <strong>Tela cheia</strong> para ampliar o mostrador.</li>
+		<li>Toque em <strong>Testar som</strong> para conferir o áudio antes de começar.</li>
 	</ul>
-	<h2>Ideias de uso de {minutes} minutos</h2>
+	<h2>Uma ideia para {duration}</h2>
+	<p>{examples[minutes] ?? `Use ${duration} para reservar um período definido para a sua tarefa.`}</p>
 	<p>
-		Para <a href="/temporizador-para-estudos/">estudos</a> em blocos curtos, como aquecimento em
-		<a href="/temporizador-para-exercicios/">treinos</a>, como intervalo de <a href="/temporizador-para-cozinha/">receitas</a>
-		ou como um mini <a href="/temporizador-para-meditacao/">sessão de meditação</a>.
+		Para escolher outro tempo, use o <a href="/">temporizador online</a> ou selecione uma duração abaixo:
 	</p>
-	<h2>Outros tempos prontos</h2>
-	<p>
-		O mesmo mostrador, já configurado para outras durações — escolha a sua e comece:
-	</p>
-	<div class="flex flex-wrap gap-2 mb-4">
+	<nav class="flex flex-wrap gap-2 mb-4" aria-label="Outras durações">
 		{
 			MINUTE_PAGES.filter((p) => p.minutes !== minutes).map((m) => (
-				<a href={`/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes} min</a>
+				<a href={`/temporizador/${m.slug}/`} class="chip chip-link">{m.minutes === 60 ? '1 hora' : `${m.minutes} min`}</a>
 			))
 		}
-	</div>
+	</nav>
 	<p>
-		Para ciclos completos com pausas automáticas, use o <a href="/pomodoro/">pomodoro</a>; para medir quanto algo
-		demora, o <a href="/cronometro/">cronômetro</a>; para treinos com esforço e descanso, os
-		<a href="/intervalos/">intervalos</a>, o <a href="/temporizador-hiit/">HIIT</a> ou o
-		<a href="/temporizador-tabata/">tabata</a>.
+		Para ciclos automáticos, veja o <a href="/pomodoro/">Pomodoro</a>. Para contar o tempo para cima, use o
+		<a href="/cronometro/">cronômetro</a>.
 	</p>
-	<h2>Perguntas frequentes</h2>
-	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
-	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
 </ToolPage>
 
 <style>

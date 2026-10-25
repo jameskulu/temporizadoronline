@@ -9,23 +9,22 @@ const faqs = [
 	},
 	{
 		q: 'Qual som de alarme usar para meditação?',
-		a: 'O som “zen” foi desenhado para ser suave e não assustar no fim da prática. O “chime” também funciona bem: um toque único e tranquilo.',
+		a: 'Você pode escolher o som “zen” ou “chime” nas configurações e testar o volume antes de iniciar.',
 	},
 ];
 ---
 <ToolPage
-	title="Temporizador para meditação — preste atenção sem relógio"
-	description="Timer de meditação de 5/10/20 minutos com sons suaves. Medite sem vigiar o tempo e sem se preocupar com a hora."
+	title="Temporizador para Meditação com Alarme | Grátis"
+	description="Configure uma contagem para sua prática de meditação, escolha um som e teste o volume antes de iniciar."
 	path="/temporizador-para-meditacao/"
 	heading="Temporizador para meditação"
-	sub="Dez minutos respirando, de graça. O som suave te chama na hora certa."
+	sub="Uma contagem regressiva para sua prática, com duração e som configuráveis."
 	initial={JSON.stringify({ mode: 'meditation', seconds: 600, label: 'Meditação' })}
 	jsonLd={faqJsonLd(faqs)}
 >
 	<p class="article-lead">
-		O maior inimigo da meditação é olhar para o relógio. Este timer resolve: <strong>escolha 10 minutos</strong>,
-		aperte Iniciar e observe a respiração até o som suave avisar. No fim, fique mais um instante sentado e só então
-		abra os olhos.
+		O temporizador abre configurado para <strong>10 minutos</strong> e aguarda você tocar em Iniciar. Ajuste a
+		duração e teste o som nas configurações antes de começar.
 	</p>
 	<h2>Ritual rápido</h2>
 	<ul>

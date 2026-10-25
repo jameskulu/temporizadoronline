@@ -83,7 +83,7 @@ const pt: AppStrings = {
 	start: 'Iniciar',
 	pause: 'Pausar',
 	resume: 'Retomar',
-	reset: 'Redefinir',
+	reset: 'Reiniciar',
 	restart: 'Recomeçar',
 	stopwatch: 'Cronômetro',
 	lap: 'Volta',

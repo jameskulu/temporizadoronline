@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+import { blogArticles } from '../../data/blog';
+---
+
+<Base
+	title="Blog sobre Temporizadores, Estudos e Organização do Tempo"
+	description="Guias práticos em português sobre temporizadores, Pomodoro, estudos, cozinha e intervalos. Aprenda a escolher e configurar a ferramenta certa."
+	path="/blog/"
+	hreflang={false}
+>
+	<div class="mx-auto max-w-page px-4 pt-10 pb-20">
+		<header class="blog-hero">
+			<p class="eyebrow">Guias práticos</p>
+			<h1>Blog sobre tempo e temporizadores</h1>
+			<p class="intro">
+				Ideias claras para organizar sessões de estudo, trabalho, preparo de receitas e intervalos.
+				Cada guia explica como usar as ferramentas sem prometer resultados iguais para todo mundo.
+			</p>
+		</header>
+
+		<section class="post-grid" aria-label="Artigos do blog">
+			{blogArticles.map((post) => (
+				<article class="post-card">
+					<p class="post-category">{post.category} · {post.readingTime} min de leitura</p>
+					<h2><a href={`/blog/${post.slug}/`}>{post.title}</a></h2>
+					<p>{post.description}</p>
+					<a class="read-more" href={`/blog/${post.slug}/`} aria-label={`Ler: ${post.title}`}>
+						Ler artigo <span aria-hidden="true">→</span>
+					</a>
+				</article>
+			))}
+		</section>
+	</div>
+</Base>
+
+<style>
+	.blog-hero {
+		max-width: 760px;
+		margin: 0 auto 2.5rem;
+		text-align: center;
+	}
+	.eyebrow,
+	.post-category {
+		color: var(--color-link-deep);
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+	}
+	h1 {
+		margin-top: 0.6rem;
+		font-size: clamp(2rem, 5vw, 3rem);
+		font-weight: 650;
+		line-height: 1.12;
+		letter-spacing: -0.035em;
+	}
+	.intro {
+		margin: 1rem auto 0;
+		max-width: 650px;
+		color: var(--color-body);
+		font-size: 1.08rem;
+		line-height: 1.65;
+	}
+	.post-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	.post-card {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		min-height: 230px;
+		padding: 1.35rem;
+		border: 1px solid var(--color-hairline);
+		border-radius: 16px;
+		background: var(--color-canvas-elevated);
+		box-shadow: var(--shadow-whisper);
+	}
+	.post-category {
+		margin-bottom: 0.75rem;
+		letter-spacing: 0;
+	}
+	.post-card h2 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		line-height: 1.3;
+	}
+	.post-card h2 a {
+		color: var(--color-ink);
+		text-decoration: none;
+	}
+	.post-card h2 a:hover,
+	.read-more:hover {
+		color: var(--color-link-deep);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.post-card > p:not(.post-category) {
+		margin-top: 0.6rem;
+		color: var(--color-body);
+		font-size: 0.95rem;
+		line-height: 1.6;
+	}
+	.read-more {
+		margin-top: auto;
+		padding-top: 1rem;
+		color: var(--color-link);
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-decoration: none;
+	}
+	@media (max-width: 640px) {
+		.blog-hero {
+			text-align: left;
+			margin-bottom: 1.75rem;
+		}
+		.post-grid {
+			grid-template-columns: 1fr;
+		}
+		.post-card {
+			min-height: 0;
+		}
+	}
+</style>

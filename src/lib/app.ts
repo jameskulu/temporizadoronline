@@ -37,6 +37,7 @@ import {
 } from './share';
 import * as live from './rt';
 import type { PresetItem } from './types';
+import { getLangFromPath } from '../i18n/utils';
 
 export interface AppOptions {
 	initial?: Initial;
@@ -54,7 +55,7 @@ type Scope = 'full' | 'compact';
 
 /** Dedicated page for each mode, used when the mode segment changes "page" behavior. */
 const MODE_PATHS: Partial<Record<Mode, string>> = {
-	timer: '/temporizador/',
+	timer: '/',
 	stopwatch: '/cronometro/',
 	pomodoro: '/pomodoro/',
 	interval: '/intervalos/',
@@ -64,6 +65,13 @@ const MODE_PATHS: Partial<Record<Mode, string>> = {
 
 function currentPagePath(): string {
 	return location.pathname.endsWith('/') ? location.pathname : `${location.pathname}/`;
+}
+
+function localizedModePath(mode: Mode): string | undefined {
+	const path = MODE_PATHS[mode];
+	if (!path) return undefined;
+	const lang = getLangFromPath(location.pathname);
+	return lang === 'pt' ? path : `/${lang}${path}`;
 }
 
 export function configFromInitial(ini: Initial): TimerConfig {
@@ -534,8 +542,11 @@ export class App {
 			);
 		}
 		if (canAdvance) parts.push(square('skip', STR.skip, I.skip));
-		parts.push(square('reset', STR.reset, I.reset));
-		parts.push(square('fs', STR.fullscreen, I.expand));
+		parts.push(`<button type="button" class="btn-chip" data-act="reset">${I.reset}${esc(STR.reset)}</button>`);
+		parts.push(`<button type="button" class="btn-chip" data-act="fs">${I.expand}${esc(STR.fullscreen)}</button>`);
+		if (!isElapsedFamily) {
+			parts.push(`<button type="button" class="btn-chip" data-act="sound-test">${I.bell}${esc(STR.soundTest)}</button>`);
+		}
 
 		el.innerHTML = parts.join('');
 	}
@@ -757,15 +768,12 @@ export class App {
 		const el = byId('t-chrome');
 		if (!el) return;
 		const muted = this.prefs.muted;
-		const theme = this.prefs.theme;
-		const isDark = document.documentElement.classList.contains('dark');
 		el.innerHTML = `<div class="flex items-center justify-between gap-2">
 			<a href="/" class="text-[13px] font-medium no-underline" style="color:var(--color-body)">${esc(STR.appName)}</a>
 			<div class="flex items-center gap-1">
 				<button type="button" class="icon-btn" data-act="live" aria-label="${STR.live}" data-tip="${esc(STR.live)}" aria-pressed="${this.live ? 'true' : 'false'}" ${this.live ? 'style="color:var(--color-accent)"' : ''}>${I.live}</button>
 				<button type="button" class="icon-btn" data-act="help" aria-label="${STR.help}" data-tip="${esc(STR.help)}">${I.help}</button>
 				<button type="button" class="icon-btn" data-act="mute" aria-label="${muted ? STR.unmute : STR.mute}" data-tip="${esc(muted ? STR.unmute : STR.mute)}">${muted ? I.muted : I.volume}</button>
-				<button type="button" class="icon-btn" data-act="theme" aria-label="Mudar tema" data-tip="${esc(`${STR.themeSetting}: ${THEME_NAMES[theme]}`)}">${isDark ? I.sun : I.moon}</button>
 			</div>
 		</div>`;
 	}
@@ -947,7 +955,7 @@ export class App {
 					.join('')}
 				</tbody>
 			</table>
-			<p class="text-xs text-muted mt-4">${STR.appName} funciona offline. Instale como aplicativo pelo menu do navegador.</p>
+			<p class="text-xs text-muted mt-4">O suporte offline depende dos arquivos já armazenados pelo navegador. A disponibilidade da instalação varia conforme o navegador.</p>
 		</div>`;
 		this.openDialog('dlg-help');
 	}
@@ -1058,7 +1066,7 @@ export class App {
 		switch (act) {
 case 'mode': {
 			const mode = el.dataset.mode as Mode;
-			const target = MODE_PATHS[mode];
+	const target = localizedModePath(mode);
 			if (target && currentPagePath() !== target) {
 				window.location.assign(target);
 				break;
@@ -1156,16 +1164,6 @@ case 'mode': {
 				savePrefs(this.prefs);
 				this.renderChrome();
 				break;
-case 'theme': {
-			const isDark = document.documentElement.classList.contains('dark');
-			const next = isDark ? 'light' : 'dark';
-			this.prefs.theme = next;
-			this.applyTheme(next);
-			savePrefs(this.prefs);
-			this.renderChrome();
-			this.renderConfig();
-			break;
-		}
 			case 'cfg-toggle':
 				this.configOpen = !this.configOpen;
 				this.renderConfig();
@@ -2033,6 +2031,14 @@ case 'theme': {
 
 	private install(): void {
 		const root = this.root;
+
+		document.addEventListener('site-theme-change', (event: Event) => {
+			const theme = (event as CustomEvent<'light' | 'dark'>).detail;
+			this.prefs.theme = theme;
+			savePrefs(this.prefs);
+			this.renderChrome();
+			this.renderConfig();
+		});
 
 		root.addEventListener('click', (e: Event) => {
 			const t = e.target as HTMLElement;

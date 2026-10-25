@@ -2,17 +2,29 @@
 import { SITE_NAME } from '../data/site';
 import { getLangFromUrl, useTranslations, localPath } from '../i18n/utils';
 import LangSwitch from '../components/LangSwitch.astro';
+import type { Lang } from '../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const themeLabels: Record<Lang, { dark: string; light: string }> = {
+	pt: { dark: 'Ativar modo escuro', light: 'Ativar modo claro' },
+	en: { dark: 'Enable dark mode', light: 'Enable light mode' },
+	es: { dark: 'Activar modo oscuro', light: 'Activar modo claro' },
+	ja: { dark: 'ダークモードを有効にする', light: 'ライトモードを有効にする' },
+	fr: { dark: 'Activer le mode sombre', light: 'Activer le mode clair' },
+	de: { dark: 'Dunkelmodus aktivieren', light: 'Hellmodus aktivieren' },
+	ko: { dark: '다크 모드 켜기', light: '라이트 모드 켜기' },
+	it: { dark: 'Attiva modalità scura', light: 'Attiva modalità chiara' },
+};
 
 const navLinks = [
-	{ path: '/temporizador/', label: t.nav.temporizador },
+	{ path: lang === 'pt' ? '/' : '/temporizador/', label: t.nav.temporizador },
 	{ path: '/cronometro/', label: t.nav.cronometro },
 	{ path: '/pomodoro/', label: t.nav.pomodoro },
 	{ path: '/intervalos/', label: t.nav.intervalos },
 	{ path: '/meditacao/', label: t.nav.meditacao },
 	{ path: '/sequencias/', label: t.nav.sequencias },
+	...(lang === 'pt' ? [{ path: '/blog/', label: 'Blog' }] : []),
 ];
 ---
 <header class="site-header">
@@ -28,6 +40,18 @@ const navLinks = [
 				))}
 			</nav>
 			<LangSwitch />
+			<button
+				type="button"
+				class="theme-toggle"
+				data-theme-toggle
+				data-dark-label={themeLabels[lang].dark}
+				data-light-label={themeLabels[lang].light}
+				aria-label={themeLabels[lang].dark}
+				title={themeLabels[lang].dark}
+			>
+				<svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+				<svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+			</button>
 			<details class="mobile-menu md:hidden">
 				<summary class="mobile-burger" aria-label="Menu" aria-haspopup="true">
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -50,6 +74,35 @@ const navLinks = [
 	}
 	.h-link:hover {
 		color: var(--color-link-deep);
+	}
+
+	.theme-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		flex: none;
+		border: 1px solid var(--color-hairline);
+		border-radius: 10px;
+		background: var(--color-canvas-elevated);
+		color: var(--color-ink);
+		cursor: pointer;
+		transition: background-color 0.16s, color 0.16s, border-color 0.16s;
+	}
+	.theme-toggle:hover {
+		background: var(--color-canvas-muted);
+	}
+	.theme-toggle:focus-visible {
+		outline: 2px solid var(--color-link);
+		outline-offset: 2px;
+	}
+	.sun-icon,
+	:global(.dark) .moon-icon {
+		display: none;
+	}
+	:global(.dark) .sun-icon {
+		display: block;
 	}
 
 	.mobile-menu {
@@ -103,3 +156,27 @@ const navLinks = [
 		color: var(--color-ink);
 	}
 </style>
+
+<script>
+	import { setTheme } from '../lib/storage';
+
+	const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+	if (button) {
+		const updateThemeButton = () => {
+			const dark = document.documentElement.classList.contains('dark');
+			const label = dark ? button.dataset.lightLabel : button.dataset.darkLabel;
+			button.setAttribute('aria-label', label ?? '');
+			button.title = label ?? '';
+		};
+
+		updateThemeButton();
+		button.addEventListener('click', () => {
+			const dark = document.documentElement.classList.contains('dark');
+			const theme = dark ? 'light' : 'dark';
+			setTheme(theme);
+			document.documentElement.classList.toggle('dark', theme === 'dark');
+			updateThemeButton();
+			document.dispatchEvent(new CustomEvent('site-theme-change', { detail: theme }));
+		});
+	}
+</script>

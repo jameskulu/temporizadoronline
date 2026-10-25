@@ -5,36 +5,36 @@ import { faqJsonLd } from '../data/site';
 const faqs = [
 	{
 		q: 'Qual o melhor tempo para estudar?',
-		a: 'A técnica pomodoro usa blocos de 25 minutos com pausas de 5. Muitos preferem 50 minutos para leitura mais longa. Comece com 25 e ajuste conforme sua concentração.',
+		a: 'Não há uma duração única para todas as tarefas. Esta página começa em 25 minutos; ajuste o tempo conforme o que pretende fazer.',
 	},
 	{
 		q: 'Como usar o timer nos estudos?',
-		a: 'Escolha um tempo, defina uma única tarefa e inicie. Quando o alarme tocar, anote o progresso e faça a pausa. Não troque de tarefa dentro do mesmo bloco.',
+		a: 'Escolha uma matéria ou tarefa, inicie a contagem e pause ou reinicie quando precisar. Para alternar automaticamente entre foco e pausas, use o Pomodoro.',
 	},
 ];
 ---
 <ToolPage
-	title="Temporizador para estudos — técnicas de foco"
-	description="Temporizador de estudos com técnica pomodoro e blocos de foco. Aprenda a usar o tempo a seu favor e aumente a concentração."
+	title="Temporizador para Estudos de 25 Minutos | Grátis"
+	description="Inicie uma sessão de estudos com 25 minutos já configurados. Ajuste a duração ou escolha o Pomodoro para ciclos e pausas automáticos."
 	path="/temporizador-para-estudos/"
 	heading="Temporizador para estudos"
-	sub="Foco dividido em blocos com pausas: o jeito mais simples de estudar sem se cansar."
+	sub="Uma sessão individual de 25 minutos, sem alternância automática de fases."
 	initial={JSON.stringify({ seconds: 1500, mode: 'timer', label: 'Estudos' })}
 	jsonLd={faqJsonLd(faqs)}
 >
 	<p class="article-lead">
-		Estudar com um timer traz duas vantagens: você <strong>sabe que há um fim</strong> (o cérebro relaxa) e cria um
-		<strong>ritmo de pausas</strong>. O bloco de 25 minutos já está configurado — aperte Iniciar.
+		O temporizador abre configurado para <strong>25 minutos</strong> e fica parado até você tocar em Iniciar.
+		Use-o para uma sessão única; ele não troca automaticamente para uma pausa nem registra um histórico de estudo.
 	</p>
-	<h2>Sugestões de rotina</h2>
+	<h2>Escolha a ferramenta para a sua sessão</h2>
 	<ul>
-		<li><strong><a href="/temporizador/25-minutos/">Foco total (25 min):</a></strong> um bloco de atenção só para a matéria atual.</li>
-		<li><strong><a href="/temporizador/5-minutos/">Pausa de 5 min:</a></strong> levante-se, hidrate-se, estique.</li>
-		<li><strong><a href="/temporizador/15-minutos/">Revisão (15 min):</a></strong> revise anotações com um timer curto, do fim para o começo.</li>
+		<li><strong><a href="/temporizador/25-minutos/">25 minutos:</a></strong> mantenha a duração inicial ou ajuste para a matéria escolhida.</li>
+		<li><strong><a href="/temporizador/5-minutos/">5 minutos:</a></strong> abra uma contagem separada para uma pausa curta.</li>
+		<li><strong><a href="/temporizador/15-minutos/">15 minutos:</a></strong> escolha um bloco mais curto para revisão ou leitura.</li>
 	</ul>
 	<p>
-		Prefere bloquear o tempo inteiro? Use o <a href="/pomodoro/">pomodoro online</a> para ciclos completos com
-		pausas longas automáticas.
+		Se quiser ciclos automáticos de foco e pausa, abra o <a href="/pomodoro/">temporizador Pomodoro</a>. Ele tem
+		tempos configuráveis e mostra o ciclo atual.
 	</p>
 	<h2>Perguntas frequentes</h2>
 	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>

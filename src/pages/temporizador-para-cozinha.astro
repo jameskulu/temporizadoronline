@@ -4,28 +4,27 @@ import { faqJsonLd } from '../data/site';
 
 const faqs = [
 	{
-		q: 'Qual o melhor temporizador para cozinha?',
-		a: 'Qualquer tempo funcione: o importante é ter aviso claro e poder deixar contando em segundo plano. Este timer toca, vibra e ainda pode continuar contando os minutos extras após o zero.',
+		q: 'Como escolher um tempo para cozinhar?',
+		a: 'Defina a duração indicada pela sua receita e teste o som antes de começar. A reprodução do alarme pode depender das configurações do aparelho.',
 	},
 	{
 		q: 'Dá para usar vários timers na cozinha?',
-		a: 'Sim. Com “Novo timer” você cria timers separados para cada refeição ao mesmo tempo — bom quando arroz, forno e chá terminam em minutos diferentes.',
+		a: 'Sim. Use “Novo timer” para criar contagens separadas quando diferentes receitas precisarem de horários distintos.',
 	},
 ];
 ---
 <ToolPage
 	title="Temporizador para cozinha — receitas no ponto"
-	description="Timer de cozinha online: ovo, arroz, forno e chá. Aviso sonoro, tempo extra e vários timers ao mesmo tempo. Grátis e funciona offline."
+	description="Temporizador para acompanhar o tempo de preparo de receitas. Configure a duração, teste o alarme sonoro e use em tela cheia."
 	path="/temporizador-para-cozinha/"
 	heading="Temporizador para cozinha"
-	sub="Imóvel para o arroz, essencial para o forno e ovo. Sem colar no fogão."
+	sub="Acompanhe o tempo de preparo sem precisar ficar olhando para o relógio."
 	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Cozinha' })}
 	jsonLd={faqJsonLd(faqs)}
 >
 	<p class="article-lead">
-		Cozinhar é cronometrar: <strong>um minuto</strong> para o chá, <strong>5</strong> para vegetais, <strong>10</strong>
-		para massas, <strong>15</strong> para assados pequenos. Configure, deixe o celular na bancada e receba o aviso na
-		hora. Marque “Continuar após o zero” para também medir o repouso da massa.
+		Escolha uma duração adequada à receita, teste o som e inicie a contagem. Ative “Continuar após o zero” nas
+		configurações se quiser acompanhar também o tempo decorrido depois que a contagem terminar.
 	</p>
 	<h2>Tempos mais usados</h2>
 	<ul>
@@ -35,8 +34,8 @@ const faqs = [
 		<li><strong><a href="/temporizador/15-minutos/">15</a>–<a href="/temporizador/30-minutos/">30 min</a></strong> — assados, risotos e sobremesas em bloco.</li>
 	</ul>
 	<p>
-		Use o <strong>modo foco</strong> (tela cheia) para ver o relógio grande e também quer <a href="/cronometro/">cronômetro</a>
-		para registrar o tempo das suas receitas.
+		Use <strong>Tela cheia</strong> para ampliar o mostrador. Para medir o tempo decorrido em uma receita, abra o
+		<a href="/cronometro/">cronômetro</a>.
 	</p>
 	<h2>Perguntas frequentes</h2>
 	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>

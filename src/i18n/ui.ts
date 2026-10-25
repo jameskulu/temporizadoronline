@@ -67,6 +67,7 @@ export interface UiDict {
 	noscript: string;
 	moreTools: string;
 	langLabel: string;
+	skipLink: string;
 	tools: {
 		readyEyebrow: string;
 		readyTitle: string;
@@ -91,7 +92,7 @@ const uiPt: UiDict = {
 		sequencias: 'Sequências',
 	},
 	footer: {
-		tagline: 'timer rápido, bonito e que funciona offline.',
+		tagline: 'timer simples e rápido, direto no navegador.',
 		about: 'Sobre',
 		contact: 'Contato',
 		privacy: 'Política de Privacidade',
@@ -100,6 +101,7 @@ const uiPt: UiDict = {
 	noscript: 'Ative o JavaScript para usar o temporizador. Enquanto isso, veja as sugestões de tempo abaixo.',
 	moreTools: 'Mais ferramentas de tempo',
 	langLabel: 'Idioma',
+	skipLink: 'Pular para o conteúdo',
 	tools: {
 		readyEyebrow: 'Temporizadores por duração',
 		readyTitle: 'Contagens regressivas prontas',
@@ -113,7 +115,7 @@ const uiPt: UiDict = {
 	minutePageLabel: (minutes: number) =>
 		minutes === 60 ? 'Temporizador de 1 hora' : `Temporizador de ${minutes} minutos`,
 	toolLinks: [
-		{ path: '/temporizador/', label: 'Temporizador', hint: 'Contagem regressiva simples' },
+		{ path: '/', label: 'Temporizador', hint: 'Contagem regressiva simples' },
 		{ path: '/cronometro/', label: 'Cronômetro', hint: 'Conta o tempo com voltas' },
 		{ path: '/pomodoro/', label: 'Pomodoro', hint: 'Foco com pausas' },
 		{ path: '/intervalos/', label: 'Intervalos', hint: 'HIIT, tabata e treino' },
@@ -147,6 +149,7 @@ const uiEn: UiDict = {
 	noscript: 'Enable JavaScript to use the timer. Meanwhile, check the ready-made time suggestions below.',
 	moreTools: 'More time tools',
 	langLabel: 'Language',
+	skipLink: 'Skip to content',
 	tools: {
 		readyEyebrow: 'Timers by duration',
 		readyTitle: 'Ready-made countdowns',
@@ -194,6 +197,7 @@ const uiEs: UiDict = {
 	noscript: 'Activa JavaScript para usar el temporizador. Mientras tanto, mira las sugerencias de tiempo de abajo.',
 	moreTools: 'Más herramientas de tiempo',
 	langLabel: 'Idioma',
+	skipLink: 'Saltar al contenido',
 	tools: {
 		readyEyebrow: 'Temporizadores por duración',
 		readyTitle: 'Cuentas regresivas listas',
@@ -241,6 +245,7 @@ const uiJa: UiDict = {
 	noscript: 'タイマーを使用するにはJavaScriptを有効にしてください。その間、下の時間の提案をご覧ください。',
 	moreTools: 'その他の時間ツール',
 	langLabel: '言語',
+	skipLink: '本文へスキップ',
 	tools: {
 		readyEyebrow: '時間ごとのタイマー',
 		readyTitle: 'すぐ使えるカウントダウン',
@@ -288,6 +293,7 @@ const uiFr: UiDict = {
 	noscript: 'Activez JavaScript pour utiliser le minuteur. En attendant, consultez les suggestions de temps ci-dessous.',
 	moreTools: "Plus d'outils de temps",
 	langLabel: 'Langue',
+	skipLink: 'Aller au contenu',
 	tools: {
 		readyEyebrow: 'Minuteurs par durée',
 		readyTitle: 'Comptes à rebours prêts',
@@ -335,6 +341,7 @@ const uiDe: UiDict = {
 	noscript: 'Aktivieren Sie JavaScript, um den Timer zu nutzen. In der Zwischenzeit finden Sie unten Zeitvorschläge.',
 	moreTools: 'Weitere Zeittools',
 	langLabel: 'Sprache',
+	skipLink: 'Zum Inhalt springen',
 	tools: {
 		readyEyebrow: 'Timer nach Dauer',
 		readyTitle: 'Fertige Countdowns',
@@ -382,6 +389,7 @@ const uiKo: UiDict = {
 	noscript: '타이머를 사용하려면 JavaScript를 활성화하세요. 그동안 아래 시간 제안을 확인하세요.',
 	moreTools: '더 많은 시간 도구',
 	langLabel: '언어',
+	skipLink: '본문으로 건너뛰기',
 	tools: {
 		readyEyebrow: '시간별 타이머',
 		readyTitle: '바로 쓰는 카운트다운',
@@ -429,6 +437,7 @@ const uiIt: UiDict = {
 	noscript: 'Attiva JavaScript per usare il timer. Nel frattempo, guarda i suggerimenti di tempo qui sotto.',
 	moreTools: 'Altri strumenti per il tempo',
 	langLabel: 'Lingua',
+	skipLink: 'Vai al contenuto',
 	tools: {
 		readyEyebrow: 'Timer per durata',
 		readyTitle: 'Conto alla rovescia pronti',

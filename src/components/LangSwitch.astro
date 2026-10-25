@@ -4,6 +4,8 @@ import { languages, LANGS } from '../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
 const current = stripLang(Astro.url.pathname);
+const timerHome = current === '/temporizador/';
+const blogPage = current === '/blog/' || current.startsWith('/blog/');
 ---
 <details class="lang-switch" data-tip={languages[lang]}>
 	<summary class="lang-trigger" aria-label="Language / Idioma">
@@ -13,7 +15,7 @@ const current = stripLang(Astro.url.pathname);
 	<div class="lang-menu">
 		{LANGS.map((l) => (
 			<a
-				href={localPath(l, current)}
+				href={localPath(l, blogPage && l !== 'pt' ? '/' : timerHome && l === 'pt' ? '/' : current)}
 				lang={l === 'pt' ? 'pt-BR' : l}
 				class:list={['lang-link', { 'lang-active': l === lang }]}
 			>

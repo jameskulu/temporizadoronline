@@ -10,7 +10,13 @@ const t = useTranslations(lang);
 const initial = Astro.props.initial;
 const scope = Astro.props.scope ?? 'full';
 ---
-<div id="t-app" data-scope={scope} data-lang={lang} data-initial={initial ?? ''} class="relative">
+<div
+	id="t-app"
+	data-scope={scope}
+	data-lang={lang}
+	data-initial={initial ?? ''}
+	class:list={['relative', scope === 'full' ? 'min-h-[48rem] md:min-h-[38rem]' : 'min-h-[24rem]']}
+>
 	<noscript>
 		<div class="text-center text-sm rounded-[18px] p-4" style="background:var(--color-canvas-muted);color:var(--color-ink-secondary)">
 			{t.noscript}

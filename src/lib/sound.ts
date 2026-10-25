@@ -14,7 +14,7 @@ function ensureCtx(): AudioContext | null {
 		if (!AC) return null;
 		ctx = new AC();
 		master = ctx.createGain();
-		master.gain.value = 0;
+		master.gain.value = 1;
 		master.connect(ctx.destination);
 	}
 	if (ctx.state === 'suspended') void ctx.resume();

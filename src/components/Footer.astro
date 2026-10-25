@@ -13,12 +13,13 @@ const footer = t.footer;
 		<div class="flex flex-col md:flex-row items-center justify-between gap-3 text-[13px]" style="color:var(--color-body)">
 			<p>© {year} {SITE_NAME} — {footer.tagline}</p>
 			<nav class="flex flex-wrap items-center justify-center gap-4">
-				<a href={localPath(lang, '/temporizador/')} class="f-link">{nav.temporizador}</a>
+				<a href={localPath(lang, lang === 'pt' ? '/' : '/temporizador/')} class="f-link">{nav.temporizador}</a>
 				<a href={localPath(lang, '/pomodoro/')} class="f-link">{nav.pomodoro}</a>
 				<a href={localPath(lang, '/cronometro/')} class="f-link">{nav.cronometro}</a>
 				<a href={localPath(lang, '/intervalos/')} class="f-link">{nav.intervalos}</a>
 				<a href={localPath(lang, '/meditacao/')} class="f-link">{nav.meditacao}</a>
 				<a href={localPath(lang, '/sequencias/')} class="f-link">{nav.sequencias}</a>
+				{lang === 'pt' && <a href="/blog/" class="f-link">Blog</a>}
 			</nav>
 		</div>
 		<div class="mt-4 pt-4 border-t" style="border-color:var(--color-hairline)">
