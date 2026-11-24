@@ -122,7 +122,6 @@ export class App {
 	private lastSentPkg = '';
 	private liveLost = false;
 	private liveLostHandled = false;
-	private liveReloadCountdown = 3;
 	private liveReloadTimer: number | null = null;
 
 	constructor(root: HTMLElement, opts: AppOptions = {}) {
@@ -1235,6 +1234,10 @@ case 'mode': {
 			case 'live-reload':
 				location.reload();
 				break;
+			case 'live-dismiss':
+				this.liveLost = false;
+				this.renderLiveLost();
+				break;
 			case 'notif':
 				void notify.askPermission().then((ok) => {
 					if (ok) this.prefs.notifyEnabled = true;
@@ -1350,7 +1353,7 @@ case 'mode': {
 		}
 	}
 
-	private joinLive(roomId: string): void {
+	private joinLive(roomId: string, initialRole: live.LiveRole = 'viewer'): void {
 		if (this.live) return;
 		this.liveLostHandled = false;
 		if (this.liveReloadTimer !== null) {
@@ -1358,6 +1361,7 @@ case 'mode': {
 			this.liveReloadTimer = null;
 		}
 		this.updateLiveUrl(roomId);
+		this.liveRole = initialRole;
 		this.livePkg = null;
 		this.liveMembers = 0;
 		this.liveAlertedEnd = 0;
@@ -1399,10 +1403,11 @@ case 'mode': {
 			onHostLost: () => {
 				this.handleTimerLost('hostlost');
 			},
-		});
+		}, initialRole);
 		this.live = room;
 		room.connect();
 		this.renderChrome();
+		this.renderControls();
 	}
 
 	private startLiveRoom(): void {
@@ -1410,7 +1415,7 @@ case 'mode': {
 			this.openLiveDialog();
 			return;
 		}
-		this.joinLive(live.genRoomId());
+		this.joinLive(live.genRoomId(), 'host');
 		this.openLiveDialog();
 	}
 
@@ -1578,13 +1583,6 @@ case 'mode': {
 
 		this.closeDialogs();
 
-		try {
-			sound.play('beep');
-			sound.playCue('down');
-		} catch {
-			/* sound failed / muted */
-		}
-
 		notify.vibrate([300, 150, 300]);
 
 		notify.notifyWhenHidden({
@@ -1592,44 +1590,18 @@ case 'mode': {
 			body: STR.liveLostHint,
 		});
 
-		if (notify.notificationsGranted() && !document.hidden) {
-			try {
-				new Notification(STR.liveLost, {
-					body: STR.liveLostHint,
-					icon: '/icons/icon-192.png',
-					tag: 'temporizador-lost',
-				});
-			} catch {
-				/* ignore */
-			}
-		}
-
 		this.live?.close();
+		this.live = null;
+		this.updateLiveUrl(null);
+		this.liveRole = 'viewer';
+		this.livePkg = null;
+		this.liveStatus = 'idle';
 
-		try {
-			sessionStorage.setItem('temporizador_lost_notice', '1');
-		} catch {
-			/* ignore */
-		}
-
-		this.liveReloadCountdown = 3;
 		this.renderLiveLost();
-
-		if (this.liveReloadTimer !== null) {
-			clearInterval(this.liveReloadTimer);
-		}
-		this.liveReloadTimer = window.setInterval(() => {
-			this.liveReloadCountdown--;
-			if (this.liveReloadCountdown <= 0) {
-				if (this.liveReloadTimer !== null) {
-					clearInterval(this.liveReloadTimer);
-					this.liveReloadTimer = null;
-				}
-				location.reload();
-			} else {
-				this.renderLiveLost();
-			}
-		}, 1000);
+		this.renderChrome();
+		this.renderControls();
+		this.renderDisplay();
+		this.renderPhase();
 	}
 
 	private renderLiveLost(): void {
@@ -1645,14 +1617,15 @@ case 'mode': {
 					<div class="min-w-0">
 						<p class="font-semibold text-sm sm:text-base text-[var(--color-text)] flex items-center gap-2">
 							<span>${esc(STR.liveLost)}</span>
-							<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-red-500/10 text-red-500 border border-red-500/20">${this.liveReloadCountdown}s</span>
 						</p>
 						<p class="text-xs sm:text-sm text-muted truncate sm:whitespace-normal">${esc(STR.liveLostHint)}</p>
 					</div>
 				</div>
-				<button type="button" class="btn-primary whitespace-nowrap text-xs sm:text-sm shrink-0 flex items-center gap-1.5 px-3 py-2" data-act="live-reload">
-					${I.reset}<span>${esc(STR.liveReload)} (${this.liveReloadCountdown}s)</span>
-				</button>
+				<div class="flex items-center gap-2 shrink-0">
+					<button type="button" class="btn-primary whitespace-nowrap text-xs sm:text-sm flex items-center gap-1.5 px-3 py-2" data-act="live-dismiss">
+						${I.check}<span>OK</span>
+					</button>
+				</div>
 			</div>`;
 		}
 	}

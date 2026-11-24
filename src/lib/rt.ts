@@ -77,11 +77,12 @@ export class LiveRoom {
 	private retries = 0;
 	private closed = false;
 	/** Consecutive failed reconnects before giving up and reporting 'lost'. */
-	maxRetries = 3;
+	maxRetries = 2;
 
-	constructor(roomId: string, events: LiveEvents = {}) {
+	constructor(roomId: string, events: LiveEvents = {}, initialRole: LiveRole = 'viewer') {
 		this.roomId = roomId;
 		this.events = events;
+		this.role = initialRole;
 	}
 
 	connect(): void {
@@ -90,19 +91,23 @@ export class LiveRoom {
 			window.addEventListener('offline', this.onOffline);
 		}
 		this.events.onStatus?.(this.retries ? 'reconnecting' : 'connecting');
-		const ws = new WebSocket(`${rtBase()}/room/${this.roomId}`);
-		this.ws = ws;
-		ws.addEventListener('open', () => {
-			this.connected = true;
-			this.retries = 0;
-			this.events.onStatus?.('open');
-			this.startPing();
-		});
-		ws.addEventListener('message', (e) => this.onMessage(e.data));
-		ws.addEventListener('close', () => this.onClose());
-		ws.addEventListener('error', () => {
-			/* a close event always follows */
-		});
+		try {
+			const ws = new WebSocket(`${rtBase()}/room/${this.roomId}`);
+			this.ws = ws;
+			ws.addEventListener('open', () => {
+				this.connected = true;
+				this.retries = 0;
+				this.events.onStatus?.('open');
+				this.startPing();
+			});
+			ws.addEventListener('message', (e) => this.onMessage(e.data));
+			ws.addEventListener('close', () => this.onClose());
+			ws.addEventListener('error', () => {
+				/* a close event always follows */
+			});
+		} catch {
+			this.onClose();
+		}
 	}
 
 	private onOffline = (): void => {
