@@ -14,15 +14,17 @@ interface Props {
 	heading: string;
 	sub: string;
 	initial?: string;
+	robots?: string;
 	jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { heading, sub, initial } = Astro.props;
+const { heading, sub, initial, robots } = Astro.props;
 ---
 <Base
 	title={Astro.props.title}
 	description={Astro.props.description}
 	path={Astro.props.path}
+	robots={robots}
 	jsonLd={Astro.props.jsonLd}
 >
 	<article class="mx-auto max-w-page px-4 pt-10 pb-20">

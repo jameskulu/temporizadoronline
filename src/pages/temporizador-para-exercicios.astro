@@ -5,11 +5,19 @@ import { faqJsonLd } from '../data/site';
 const faqs = [
 	{
 		q: 'Como usar um timer nos exercícios?',
-		a: 'Use-o para medir o descanso entre séries, controlar a duração de um exercício ou cronometrar uma sessão.',
+		a: 'Use-o para medir o descanso entre séries, controlar a duração de um exercício isométrico ou cronometrar blocos de treino.',
 	},
 	{
 		q: 'O que é o modo foco durante o treino?',
-		a: 'Use o botão Tela cheia para ampliar o mostrador; a disponibilidade depende do navegador e do aparelho.',
+		a: 'Use o botão Tela cheia para ampliar o mostrador no aparelho apoiado no chão ou suporte de academia, facilitando a visualização à distância.',
+	},
+	{
+		q: 'Qual o tempo de descanso ideal entre séries de musculação?',
+		a: 'Para hipertrofia e resistência muscular, pausas de 45 a 90 segundos costumam ser ideais. Para treinos de força máxima e cargas elevadas, intervalos de 2 a 3 minutos ajudam na recuperação total do ATP.',
+	},
+	{
+		q: 'Este temporizador funciona para prancha ou exercícios isométricos?',
+		a: 'Sim, basta ajustar o mostrador para 30, 45 ou 60 segundos e iniciar. O alarme sonoro sinaliza quando você pode encerrar o esforço.',
 	},
 ];
 ---
@@ -18,27 +26,27 @@ const faqs = [
 	description="Temporizador para marcar descansos entre séries ou a duração de um exercício. Ajuste o tempo e inicie quando estiver pronto."
 	path="/temporizador-para-exercicios/"
 	heading="Temporizador para exercícios"
-	sub="Controle o descanso entre séries e não deixe o treino esfriar."
-	initial={JSON.stringify({ seconds: 600, mode: 'timer', label: 'Exercícios' })}
+	sub="Controle o descanso entre séries e mantenha a intensidade do seu treino."
+	initial={JSON.stringify({ seconds: 60, mode: 'timer', label: 'Exercícios' })}
 	jsonLd={faqJsonLd(faqs)}
 >
 	<p class="article-lead">
-		Use uma contagem regressiva para marcar o descanso entre séries. O tempo inicial é de dez minutos e pode ser
-		ajustado no mostrador antes de iniciar.
+		Use esta contagem regressiva para controlar com exatidão suas pausas de recuperação muscular. O tempo inicial vem preparado para <strong>60 segundos</strong> e pode ser facilmente ajustado antes de iniciar.
 	</p>
-	<h2>Sugestões de tempo</h2>
+	<h2>Guia de tempos de descanso por objetivo</h2>
 	<ul>
-		<li><strong>Descanso leve (30 s)</strong> — séries de resistência e mobilidade.</li>
-		<li><strong>Descanso padrão (60 s)</strong> — musculação convencional.</li>
-		<li><strong>Descanso maior (90 s)</strong> — cargas pesadas e compostos.</li>
+		<li><strong>Descanso Curto (30 a 45 s):</strong> Indicado para circuitos metabólicos, queima calórica, mobilidade e exercícios de resistência.</li>
+		<li><strong>Descanso Moderado (60 a 90 s):</strong> Padrão clássico de hipertrofia muscular e condicionamento físico geral.</li>
+		<li><strong>Descanso Longo (2 a 3 min):</strong> Recomendado para levantamento de peso, agachamentos pesados, supino e recuperação neuromuscular completa.</li>
 	</ul>
+	<h2>Treinos intervalados avançados</h2>
 	<p>
-		Para treinos que alternam esforço e descanso automaticamente, use o <a href="/intervalos/">timer de intervalos</a>
-		com presets de <a href="/temporizador-hiit/">HIIT</a> e <a href="/temporizador-tabata/">tabata</a>.
+		Se você pratica exercícios com alternância automática entre séries de tiro e descanso sem precisar encostar na tela a cada série, utilize nosso <a href="/intervalos/">temporizador de intervalos</a> ou as rotinas prontas de <a href="/temporizador-hiit/">HIIT</a> e <a href="/temporizador-tabata/">Tabata</a>.
 	</p>
 	<h2>Perguntas frequentes</h2>
-	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
-	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+	{faqs.map((f) => (
+		<div class="faq-item"><h3 class="faq-q">{f.q}</h3><p class="faq-a">{f.a}</p></div>
+	))}
 </ToolPage>
 
 <style>

@@ -11,6 +11,14 @@ const faqs = [
 		q: 'Como usar o timer nos estudos?',
 		a: 'Escolha uma matéria ou tarefa, inicie a contagem e pause ou reinicie quando precisar. Para alternar automaticamente entre foco e pausas, use o Pomodoro.',
 	},
+	{
+		q: 'Qual a diferença entre este temporizador e a técnica Pomodoro?',
+		a: 'O temporizador para estudos é uma contagem contínua simples e personalizável para quem prefere cronometrar blocos flexíveis (ex: 25, 45 ou 60 minutos) sem interrupções automáticas forçadas.',
+	},
+	{
+		q: 'Como organizar sessões longas de revisão?',
+		a: 'A recomendação de especialistas em produtividade é trabalhar em blocos de 50 minutos de estudo intenso seguidos de 10 minutos de intervalo de descanso visual e hidratação.',
+	},
 ];
 ---
 <ToolPage
@@ -26,19 +34,26 @@ const faqs = [
 		O temporizador abre configurado para <strong>25 minutos</strong> e fica parado até você tocar em Iniciar.
 		Use-o para uma sessão única; ele não troca automaticamente para uma pausa nem registra um histórico de estudo.
 	</p>
-	<h2>Escolha a ferramenta para a sua sessão</h2>
-	<ul>
-		<li><strong><a href="/temporizador/25-minutos/">25 minutos:</a></strong> mantenha a duração inicial ou ajuste para a matéria escolhida.</li>
-		<li><strong><a href="/temporizador/5-minutos/">5 minutos:</a></strong> abra uma contagem separada para uma pausa curta.</li>
-		<li><strong><a href="/temporizador/15-minutos/">15 minutos:</a></strong> escolha um bloco mais curto para revisão ou leitura.</li>
-	</ul>
+	<h2>Como maximizar seu rendimento nos estudos</h2>
 	<p>
-		Se quiser ciclos automáticos de foco e pausa, abra o <a href="/pomodoro/">temporizador Pomodoro</a>. Ele tem
-		tempos configuráveis e mostra o ciclo atual.
+		Manter a concentração por longos períodos exige disciplina e uma divisão inteligente de energia. Ao limitar o estudo a um intervalo definido, você reduz a fadiga mental e combate a procrastinação.
+	</p>
+	<ul>
+		<li><strong>Blocos de Foco Clássicos (25 min):</strong> Ideal para leitura concentrada, resolução de exercícios pontuais ou resumos rápidos.</li>
+		<li><strong>Blocos Profundos (50 min):</strong> Recomendado para matérias complexas que demandam imersão prolongada (ex: programação, exatas ou redação acadêmica).</li>
+		<li><strong>Revisões Ativas (15 min):</strong> Perfeito para método de repetição espaçada, revisão de flashcards ou mapas conceituais.</li>
+	</ul>
+	<h2>Dicas para evitar distrações</h2>
+	<p>
+		Antes de dar play no cronômetro, silencie notificações do celular, mantenha água por perto e deixe à mão apenas os materiais necessários para a sessão atual. Use o modo de <strong>Tela Cheia</strong> para focar unicamente na contagem regressiva.
+	</p>
+	<p>
+		Se você busca ciclos automáticos com avisos sonoros de descanso curto e longo, experimente nosso <a href="/pomodoro/">temporizador Pomodoro</a>.
 	</p>
 	<h2>Perguntas frequentes</h2>
-	<div class="faq-item"><h3 class="faq-q">{faqs[0].q}</h3><p class="faq-a">{faqs[0].a}</p></div>
-	<div class="faq-item"><h3 class="faq-q">{faqs[1].q}</h3><p class="faq-a">{faqs[1].a}</p></div>
+	{faqs.map((f) => (
+		<div class="faq-item"><h3 class="faq-q">{f.q}</h3><p class="faq-a">{f.a}</p></div>
+	))}
 </ToolPage>
 
 <style>

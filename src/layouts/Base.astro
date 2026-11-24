@@ -27,9 +27,6 @@ const hreflang = Astro.props.hreflang ?? true;
 const noindex = robots === 'noindex, follow' || robots === 'noindex';
 const ogImage = Astro.props.ogImage ?? '/icons/icon-512.png';
 const imageUrl = ogImage.startsWith('http') ? ogImage : canonical(ogImage);
-const isRedirectedTimerPage = path === '/temporizador/';
-const alternateLangs = isRedirectedTimerPage ? LANGS.filter((l) => l !== 'pt') : LANGS;
-const alternatePath = isRedirectedTimerPage ? '/' : path;
 ---
 <!doctype html>
 <html lang={langTags[lang]}>
@@ -50,10 +47,10 @@ const alternatePath = isRedirectedTimerPage ? '/' : path;
 		{
 			!noindex && hreflang && (
 				<>
-					{alternateLangs.map((l) => (
-						<link rel="alternate" hreflang={langTags[l]} href={canonical(alternatePath, l)} />
+					{LANGS.map((l) => (
+						<link rel="alternate" hreflang={langTags[l]} href={canonical(path, l)} />
 					))}
-					<link rel="alternate" hreflang="x-default" href={canonical(alternatePath, defaultLang)} />
+					<link rel="alternate" hreflang="x-default" href={canonical(path, defaultLang)} />
 				</>
 			)
 		}

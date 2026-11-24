@@ -1,4 +1,4 @@
-﻿---
+---
 import { SITE_NAME } from '../data/site';
 import { getLangFromUrl, useTranslations, localPath } from '../i18n/utils';
 import LangSwitch from '../components/LangSwitch.astro';
@@ -18,7 +18,7 @@ const themeLabels: Record<Lang, { dark: string; light: string }> = {
 };
 
 const navLinks = [
-	{ path: lang === 'pt' ? '/' : '/temporizador/', label: t.nav.temporizador },
+	{ path: '/', label: t.nav.temporizador },
 	{ path: '/cronometro/', label: t.nav.cronometro },
 	{ path: '/pomodoro/', label: t.nav.pomodoro },
 	{ path: '/intervalos/', label: t.nav.intervalos },

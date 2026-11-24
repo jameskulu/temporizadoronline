@@ -163,7 +163,7 @@ const uiEn: UiDict = {
 	minutePageLabel: (minutes: number) =>
 		minutes === 60 ? '1 Hour Timer' : `${minutes} Minute Timer`,
 	toolLinks: [
-		{ path: '/temporizador/', label: 'Timer', hint: 'Simple countdown' },
+		{ path: '/', label: 'Timer', hint: 'Simple countdown' },
 		{ path: '/cronometro/', label: 'Stopwatch', hint: 'Counts time with laps' },
 		{ path: '/pomodoro/', label: 'Pomodoro', hint: 'Focus with breaks' },
 		{ path: '/intervalos/', label: 'Intervals', hint: 'HIIT, tabata and training' },
@@ -211,7 +211,7 @@ const uiEs: UiDict = {
 	minutePageLabel: (minutes: number) =>
 		minutes === 60 ? 'Temporizador de 1 hora' : `Temporizador de ${minutes} minutos`,
 	toolLinks: [
-		{ path: '/temporizador/', label: 'Temporizador', hint: 'Cuenta regresiva simple' },
+		{ path: '/', label: 'Temporizador', hint: 'Cuenta regresiva simple' },
 		{ path: '/cronometro/', label: 'Cronómetro', hint: 'Cuenta el tiempo con vueltas' },
 		{ path: '/pomodoro/', label: 'Pomodoro', hint: 'Enfoque con pausas' },
 		{ path: '/intervalos/', label: 'Intervalos', hint: 'HIIT, tabata y entrenamiento' },
@@ -259,7 +259,7 @@ const uiJa: UiDict = {
 	minutePageLabel: (minutes: number) =>
 		minutes === 60 ? '1時間タイマー' : `${minutes}分タイマー`,
 	toolLinks: [
-		{ path: '/temporizador/', label: 'タイマー', hint: 'シンプルなカウントダウン' },
+		{ path: '/', label: 'タイマー', hint: 'シンプルなカウントダウン' },
 		{ path: '/cronometro/', label: 'ストップウォッチ', hint: 'ラップ付きで時間を計測' },
 		{ path: '/pomodoro/', label: 'ポモドーロ', hint: '休憩付きの集中' },
 		{ path: '/intervalos/', label: 'インターバル', hint: 'HIIT、タバタ、トレーニング' },
@@ -307,7 +307,7 @@ const uiFr: UiDict = {
 	minutePageLabel: (minutes: number) =>
 		minutes === 60 ? 'Minuteur de 1 heure' : `Minuteur de ${minutes} minutes`,
 	toolLinks: [
-		{ path: '/temporizador/', label: 'Minuteur', hint: 'Compte à rebours simple' },
+		{ path: '/', label: 'Minuteur', hint: 'Compte à rebours simple' },
 		{ path: '/cronometro/', label: 'Chronomètre', hint: "Compte le temps avec des tours" },
 		{ path: '/pomodoro/', label: 'Pomodoro', hint: 'Concentration avec pauses' },
 		{ path: '/intervalos/', label: 'Intervalles', hint: 'HIIT, tabata et entraînement' },
@@ -355,7 +355,7 @@ const uiDe: UiDict = {
 	minutePageLabel: (minutes: number) =>
 		minutes === 60 ? '1-Stunden-Timer' : `${minutes}-Minuten-Timer`,
 	toolLinks: [
-		{ path: '/temporizador/', label: 'Timer', hint: 'Einfacher Countdown' },
+		{ path: '/', label: 'Timer', hint: 'Einfacher Countdown' },
 		{ path: '/cronometro/', label: 'Stoppuhr', hint: 'Zeit mit Runden messen' },
 		{ path: '/pomodoro/', label: 'Pomodoro', hint: 'Fokus mit Pausen' },
 		{ path: '/intervalos/', label: 'Intervalle', hint: 'HIIT, Tabata und Training' },
@@ -403,7 +403,7 @@ const uiKo: UiDict = {
 	minutePageLabel: (minutes: number) =>
 		minutes === 60 ? '1시간 타이머' : `${minutes}분 타이머`,
 	toolLinks: [
-		{ path: '/temporizador/', label: '타이머', hint: '간단한 카운트다운' },
+		{ path: '/', label: '타이머', hint: '간단한 카운트다운' },
 		{ path: '/cronometro/', label: '스톱워치', hint: '랩으로 시간 측정' },
 		{ path: '/pomodoro/', label: '포모도로', hint: '휴식과 함께하는 집중' },
 		{ path: '/intervalos/', label: '인터벌', hint: 'HIIT, 타바타, 운동' },
@@ -451,7 +451,7 @@ const uiIt: UiDict = {
 	minutePageLabel: (minutes: number) =>
 		minutes === 60 ? 'Timer di 1 ora' : `Timer di ${minutes} minuti`,
 	toolLinks: [
-		{ path: '/temporizador/', label: 'Timer', hint: 'Conto alla rovescia semplice' },
+		{ path: '/', label: 'Timer', hint: 'Conto alla rovescia semplice' },
 		{ path: '/cronometro/', label: 'Cronometro', hint: 'Conta il tempo con i giri' },
 		{ path: '/pomodoro/', label: 'Pomodoro', hint: 'Concentrazione con pause' },
 		{ path: '/intervalos/', label: 'Intervalli', hint: 'HIIT, tabata e allenamento' },
