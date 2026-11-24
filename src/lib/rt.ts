@@ -59,11 +59,11 @@ export function genRoomId(len = 5): string {
 	return out;
 }
 
-/** Local dev talks to a local wrangler instance; production uses rt.<sitedomain>. */
+/** Local dev talks to a local wrangler instance; production uses the deployed Cloudflare Worker relay. */
 function rtBase(): string {
 	const host = typeof location !== 'undefined' ? location.hostname : 'localhost';
 	if (host === 'localhost' || host === '127.0.0.1') return 'ws://localhost:8787';
-	return `wss://rt.${new URL(SITE_URL).host}`;
+	return 'wss://temporizador-rt.square-spiral.workers.dev';
 }
 
 export class LiveRoom {
